@@ -23,18 +23,19 @@
 }
 
 
-.App-header {
+.App-splash {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: rgb(54, 148, 255);
+  color: rgb(28,57,136,255);
+  font-family: times;
 }
 
-.App-link {
-  color: #61dafb;
+.App p {
+  color: rgb(28,57,136,255);
 }
 
 @keyframes App-logo-spin {

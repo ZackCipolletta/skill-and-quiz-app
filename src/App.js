@@ -4,19 +4,16 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-splash">
+        <h1>
+          Skill and Quiz  {/* Google web font 'Anton' */}
+        </h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Your own quiz app
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div><button>Login</button> <button>SignUp</button></div>
+      </div>
+      
     </div>
   );
 }
