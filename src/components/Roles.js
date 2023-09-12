@@ -1,9 +1,9 @@
 
-import '.SignUp-SignIn.css';
+import './Components.css';
 import React from 'react';
 import { Button, AppBar, Toolbar, Typography } from '@mui/material';
 
-function App() {
+function Role() {
   return (
     <div className="App">
       <AppBar position="static">
@@ -27,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default Role;

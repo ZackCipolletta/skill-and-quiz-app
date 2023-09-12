@@ -1,5 +1,6 @@
 
-import './SignUp-SignIn.css';
+// import './SignUp-SignIn.css';
+import '../components/Components.css';
 import React from 'react';
 import {
   Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box,
