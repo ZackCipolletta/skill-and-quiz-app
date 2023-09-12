@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+  background-image: url('../img/SignUp-SignIn-bg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  min-width: 300px;
+  min-height: 250px;
+}
+
+@media (max-width: 600px) {
+  .App {
+    min-width: 400px;
+  }
+}
+
+@media (min-width: 601px) {
+  .App {
+    min-width: 400px;
+  }
+}
+
+.App-splash {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(28, 57, 136, 255);
+  font-family: times;
+}
+
+.App p {
+  color: rgb(28, 57, 136, 255);
+}
+
+Button.button-darkBlue {
+  background-color: rgb(28, 57, 136, 255);
+  color: white;
+  font-weight: 600;
+}
+
+Button.button-lightBlue {
+  background-color: rgb(215,237,255,255);
+  color: rgb(28, 57, 136, 255);
+  font-weight: 600;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
