@@ -30,12 +30,24 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: rgb(28,57,136,255);
+  color: rgb(28, 57, 136, 255);
   font-family: times;
 }
 
 .App p {
-  color: rgb(28,57,136,255);
+  color: rgb(28, 57, 136, 255);
+}
+
+Button.button-darkBlue {
+  background-color: rgb(28, 57, 136, 255);
+  color: white;
+  font-weight: 600;
+}
+
+Button.button-lightBlue {
+  background-color: rgb(215,237,255,255);
+  color: rgb(28, 57, 136, 255);
+  font-weight: 600;
 }
 
 @keyframes App-logo-spin {

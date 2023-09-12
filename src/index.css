@@ -12,4 +12,9 @@ code {
     monospace;
 }
 
+/* overrides the MUI default style which will capitalize all button text */
+.MuiButton-root {
+  text-transform: none !important;
+}
+
 
