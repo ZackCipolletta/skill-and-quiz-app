@@ -48,6 +48,16 @@ Button.button-lightBlue {
   font-weight: 600;
 }
 
+Button.button-black {
+  background-color: rgb(41,41,41,255);
+  color: white;
+  font-weight: 600;
+}
+
+.faded {
+  color: gray !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
