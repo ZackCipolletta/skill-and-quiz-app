@@ -1,27 +1,26 @@
-.App {
+.SignUp-SignIn {
   text-align: center;
   background-image: url('../img/SignUp-SignIn-bg.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
   min-width: 300px;
   min-height: 250px;
 }
 
 @media (max-width: 600px) {
-  .App {
+  .SignUp-SignIn {
     min-width: 400px;
   }
 }
 
 @media (min-width: 601px) {
-  .App {
+  .SignUp-SignIn {
     min-width: 400px;
   }
 }
 
-.App-splash {
+.SignUp-SignIn-splash {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,10 +31,6 @@
   font-family: times;
 }
 
-.App p {
-  color: rgb(28, 57, 136, 255);
-}
-
 Button.button-darkBlue {
   background-color: rgb(28, 57, 136, 255);
   color: white;
@@ -43,27 +38,34 @@ Button.button-darkBlue {
 }
 
 Button.button-lightBlue {
-  background-color: rgb(215,237,255,255);
+  background-color: rgb(215, 237, 255, 255);
   color: rgb(28, 57, 136, 255);
   font-weight: 600;
 }
 
 Button.button-black {
-  background-color: rgb(41,41,41,255);
+  background-color: rgb(41, 41, 41, 255);
   color: white;
+  font-size: 18px;
   font-weight: 600;
+}
+
+.signIn-paper {
+  width: 400px;
+  /* Adjust the width as needed */
+  margin: 0 auto;
+  /* Center the Paper component horizontally */
+  padding: 16px;
+  /* Add padding for spacing */
 }
 
 .faded {
   color: gray !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
 
-  to {
-    transform: rotate(360deg);
-  }
+/* assign the following to the class 'input-field */
+/* this will modify the default MUI behavior of changing the border color to blue for an active (focused) input field */
+.input-field .Mui-focused .MuiOutlinedInput-notchedOutline {  
+  border-color: #53af5b !important;
 }
