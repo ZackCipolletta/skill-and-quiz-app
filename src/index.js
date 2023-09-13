@@ -5,12 +5,12 @@ import './index.css';
 // import SignIn from './SignIn-SignIn/SignIn';
 // import SignUp from './SignIn-SignIn/SignUp';
 import { Login } from '@mui/icons-material';
-import Role from './components/Roles';
+import Dashboard from './components/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Role />
+    <Dashboard />
     {/* <SignUp /> */}
     {/* <SignIn /> */}
   </React.StrictMode>

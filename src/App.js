@@ -20,7 +20,8 @@ function App() {
         </p>
         <div>
           <Button className='button-lightBlue'>Login</Button> <span></span>
-          <Button className='button-darkBlue'>SignUp</Button></div>
+          <Button className='button-darkBlue'>SignUp</Button>
+        </div>
       </div>
 
     </div>
