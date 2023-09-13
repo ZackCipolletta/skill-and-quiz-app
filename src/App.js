@@ -6,7 +6,7 @@ import { Button, AppBar, Toolbar, Typography } from '@mui/material';
 function App() {
   return (
     <div className="App">
-      <AppBar position="static">
+      <AppBar position="static" >
         <Toolbar>
           <Typography variant="h6">My Material-UI App</Typography>
         </Toolbar>

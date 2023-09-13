@@ -6,10 +6,12 @@ import './index.css';
 // import SignUp from './SignIn-SignIn/SignUp';
 import { Login } from '@mui/icons-material';
 import Dashboard from './components/Dashboard';
+import Control from './components/Control';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Control />
     <Dashboard />
     {/* <SignUp /> */}
     {/* <SignIn /> */}
