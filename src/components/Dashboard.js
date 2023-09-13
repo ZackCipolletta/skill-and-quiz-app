@@ -1,7 +1,7 @@
 
 import './Components.css';
 import React from 'react';
-import { Button, AppBar, Toolbar, Typography } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -9,16 +9,20 @@ import AddIcon from '@mui/icons-material/Add';
 function Dashboard() {
   return (
     <>
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1 className='darkBlue-text'>
           Quiz Board  {/* Google web font 'Anton' */}
         </h1>
 
+        <div style={{ display: 'flex', alignItems: 'center' }}>
         <SearchBar />
 
-        <Button className='button-mediumBlue'>
-          <AddIcon /> Create new category
-        </Button>
+        {/* 'ml' does not work here, we must use marginLeft */}
+          <Button className='button-mediumBlue' style={{ marginLeft: '50px' }}>
+            <AddIcon /> Create new category
+          </Button>
+
+        </div>
       </div>
     </>
   );
