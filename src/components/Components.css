@@ -5,21 +5,21 @@
 }
 
 Button.button-darkBlue {
-  background-color: var(--darkBlue);
-  color: white;
+    background-color: var(--darkBlue);
+    color: white;
 }
 
 Button.button-lightBlue {
-  background-color: var(--lightBlue);
-  color: var(--darkBlue);
-  font-weight: 600;
+    background-color: var(--lightBlue);
+    color: var(--darkBlue);
+    font-weight: 600;
 }
 
 Button.button-black {
-  background-color: rgb(41, 41, 41, 255);
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
+    background-color: rgb(41, 41, 41, 255);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 Button.button-mediumBlue {
@@ -28,22 +28,57 @@ Button.button-mediumBlue {
 }
 
 .signIn-paper {
-  width: 400px;
-  /* Adjust the width as needed */
-  margin: 0 auto;
-  /* Center the Paper component horizontally */
-  padding: 16px;
-  /* Add padding for spacing */
+    width: 400px;
+    /* Adjust the width as needed */
+    margin: 0 auto;
+    /* Center the Paper component horizontally */
+    padding: 16px;
+    /* Add padding for spacing */
 }
 
 .faded {
-  color: gray !important;
+    color: gray !important;
+    /*  faded gray color for black button label*/
 }
+
+.SignUp-SignIn {
+    text-align: center;
+    background-image: url('../img/SignUp-SignIn-bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 300px;
+    min-height: 250px;
+}
+
+@media (max-width: 600px) {
+    .SignUp-SignIn {
+        min-width: 400px;
+    }
+}
+
+@media (min-width: 601px) {
+    .SignUp-SignIn {
+        min-width: 400px;
+    }
+}
+
+.SignUp-SignIn-splash {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: var(--darkBlue);
+    font-family: times;
+}
+
 
 /* assign the following to the class 'input-field */
 /* this will modify the default MUI behavior of changing the border color to blue for an active (focused) input field */
-.input-field .Mui-focused .MuiOutlinedInput-notchedOutline {  
-  border-color: #53af5b !important;
+.input-field .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #53af5b !important;
 }
 
 .darkBlue-text {
@@ -56,4 +91,15 @@ Button.button-mediumBlue {
 
 .lightBlue-bg {
     background-color: var(--lightBlue);
+}
+
+.header {
+    background-color: var(--lightBlue);
+    height: 90px;
+}
+
+.Dash-and-Header {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 20px;
 }

@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import useAutocomplete from '@mui/material/useAutocomplete';
 import { autocompleteClasses } from '@mui/material/Autocomplete';
+import './Components.css';
 
 const Search = styled('div')(() => ({
   borderRadius: '5px',
@@ -137,7 +138,7 @@ const SearchBar = ({ value, width, onChange, placeholder, height,
         className={`SearchBarComponent-root ${className ? className : null}`}
       >
         <SearchIconWrapper>
-          <SearchIcon />
+          <SearchIcon className='faded'/>
         </SearchIconWrapper>
         <StyledInputBase
           inputProps={{ ...getInputProps(), onChange: handleChange, value: internalValue }}

@@ -44,7 +44,7 @@ function SignIn() {
                   className='input-field'
                 />
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'large' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'large', marginBottom:'-18px'}}>
                 <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Email</div>
                 <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
               </div>
@@ -60,7 +60,7 @@ function SignIn() {
                   autoFocus
                   className='input-field'
                 />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px', fontSize: 'large' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '7px', fontSize: 'large' }}>
                   <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Password</div>
                   <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
                 </div>

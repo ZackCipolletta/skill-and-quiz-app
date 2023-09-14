@@ -5,14 +5,12 @@ import { Button, AppBar, Toolbar, Typography } from '@mui/material';
 function Header() {
 
   return (
-    <div>
-      {/*The elevation property here removes the default shadow for the MUI AppBar element */}
-      <AppBar position="static" elevation={0}>
-        <Toolbar className='lightBlue-bg' style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div style={{ margin: 0 }}>
+    {/*disableGutters removes the default built in padding for the element*/}
+      <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography className='darkBlue-text' fontWeight='bold' variant="h6">ConnectLink</Typography>
-          <Button className='button-darkBlue'>SignUp</Button>
+          <Button className='button-darkBlue'>Logout</Button>
         </Toolbar>
-      </AppBar>
     </div>
   )
 
