@@ -9,7 +9,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import isEmail from 'validator/lib/isEmail';
 
 
-function SignIn() {
+function SignInTest() {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
 
@@ -38,28 +38,17 @@ function SignIn() {
 
             <Container component="main">
               <CssBaseline />
-              <Box
-                sx={{
-                  marginTop: 8,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <Typography component="h1" variant="h5" align='left' fontWeight={850} sx={{ mb: '20px', mt: -5 }} >
-                  LogIn
-                </Typography>
-
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'large' }}>
-                  <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Email</div>
-                  <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
-                </div>
+              <Box>
+                <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Email</div>
+                <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
                 <Box component="form" noValidate sx={{ mt: -2 }}>
                   <TextField
+                    success
                     margin="normal"
                     required
                     fullWidth
                     id="email"
-                    placeholder="connectlink@gmail.com"
+
                     name="email"
                     autoComplete="email"
                     autoFocus
@@ -74,41 +63,18 @@ function SignIn() {
                             <IconButton edge="end" color="success">
                               <CheckCircleIcon />
                             </IconButton>
-                          )}
+                          )
+                          }
                         </InputAdornment>
                       ),
+                      sx: isValidEmail
+                        ? {
+                          '& fieldset': { borderColor: 'green !important' },
+                          '&:hover fieldset': { borderColor: 'green !important' },
+                        }
+                        : {},
                     }}
                   />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px', fontSize: 'large' }}>
-                    <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Password</div>
-                    <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
-                  </div>
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    placeholder="Placeholder"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    sx={{ mb: -1, mt: -1 }}
-                    className='input-field'
-                  />
-                  <div style={{ textAlign: 'left' }}>
-                    <Link className='faded' href="#" variant="body2" underline="hover">
-                      Forgot Your Password?
-                    </Link>
-                  </div>
-
-                  <Button
-                    type="Continue"
-                    fullWidth
-                    className='button-black'
-                    sx={{ mt: 3, mb: 6 }}
-                  >
-                    Continue
-                  </Button>
                 </Box>
               </Box>
             </Container>
@@ -120,4 +86,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInTest;

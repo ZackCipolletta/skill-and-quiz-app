@@ -1,8 +1,8 @@
 :root {
     --darkBlue: rgb(28, 57, 136, 255);
     --lightBlue: rgb(215, 237, 255, 255);
-    --mediumBlue: rgba(72,139,253,255);
-    --lightGreen: rgba(103,194,124,255);
+    --mediumBlue: rgba(72, 139, 253, 255);
+    --lightGreen: rgba(103, 194, 124, 255);
     --warning: '#ff7a83'
 }
 
