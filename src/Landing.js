@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import { Button, AppBar, Toolbar, Typography } from '@mui/material';
 
-function App() {
+function Landing() {
   return (
     <div className="App">
       <div className="App-splash">
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default Landing;
