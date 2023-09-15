@@ -20,7 +20,6 @@ function SignIn() {
     setIsValidEmail(isEmail(inputEmail));
   };
 
-
   const theme = createTheme({
     palette: {
       success: {
@@ -28,7 +27,6 @@ function SignIn() {
       }
     },
   });
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -59,7 +57,7 @@ function SignIn() {
                     required
                     fullWidth
                     id="email"
-                    placeholder="connectlink@gmail.com"
+
                     name="email"
                     autoComplete="email"
                     autoFocus
@@ -67,6 +65,9 @@ function SignIn() {
                     value={email}
                     // as the email is being entered, call handleEmailChange function which will set the value of email in state and uses the regex to evaluate the inputEmail.
                     onChange={handleEmailChange}
+                    error={!isValidEmail && email !== ''} // Apply error style if email is not valid and not empty
+                    helperText={!isValidEmail && email !== '' ? "Invalid Email" : ""}
+                    label={!isValidEmail && email !== '' ? "Error" : ""}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -75,10 +76,15 @@ function SignIn() {
                               <CheckCircleIcon />
                             </IconButton>
                           )
-                          
-                        }
+                          }
                         </InputAdornment>
                       ),
+                      sx: isValidEmail
+                        ? {
+                          '& fieldset': { borderColor: 'green !important' },
+                          '&:hover fieldset': { borderColor: 'green !important' },
+                        }
+                        : {},
                     }}
                   />
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px', fontSize: 'large' }}>

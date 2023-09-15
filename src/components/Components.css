@@ -83,9 +83,9 @@ Button.button-mediumBlue {
     border-color: var(--lightGreen) !important;
 }
 
-.input-field .Mui-focused .MuiOutlinedInput-notchedOutline {
+/* .input-field .Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: black !important;
-}
+} */
 
 .darkBlue-text {
     color: var(--darkBlue);

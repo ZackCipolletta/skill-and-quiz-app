@@ -20,7 +20,6 @@ function SignInTest() {
     setIsValidEmail(isEmail(inputEmail));
   };
 
-
   const theme = createTheme({
     palette: {
       success: {
@@ -28,6 +27,14 @@ function SignInTest() {
       }
     },
   });
+
+  const validPassword = (str) => {
+    if (str.length >= 8) {
+      return true;
+    } else {
+      return false
+    }
+  };
 
 
   return (
@@ -43,7 +50,6 @@ function SignInTest() {
                 <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
                 <Box component="form" noValidate sx={{ mt: -2 }}>
                   <TextField
-                    success
                     margin="normal"
                     required
                     fullWidth
@@ -56,6 +62,9 @@ function SignInTest() {
                     value={email}
                     // as the email is being entered, call handleEmailChange function which will set the value of email in state and uses the regex to evaluate the inputEmail.
                     onChange={handleEmailChange}
+                    error={!isValidEmail && email !== ''} // Apply error style if email is not valid and not empty
+                    helperText={!isValidEmail && email !== '' ? "Invalid Email" : ""}
+                    label={!isValidEmail && email !== '' ? "Error" : ""}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">

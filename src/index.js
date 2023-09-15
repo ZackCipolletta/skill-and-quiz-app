@@ -16,9 +16,9 @@ root.render(
     {/* <App /> */}
     {/* <Control /> */}
     {/*<Dashboard />*/}
-    {/* <SignUp /> */}
+    <SignUp />
     {/* <SignIn /> */}
-    <SignInTest />
+    {/* <SignInTest /> */}
     <EmailValidation />
   </React.StrictMode>
 );
