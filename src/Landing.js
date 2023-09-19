@@ -2,8 +2,23 @@
 import './App.css';
 import React from 'react';
 import { Button, AppBar, Toolbar, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function Landing() {
+
+  const navigate = useNavigate();
+
+const handleLoginButtonClick = () => {
+  navigate('/SignIn')
+  };
+  
+const handleSignUpButtonClick = () => {
+  navigate('/SignUp')
+};
+  
+
   return (
     <div className="App">
       <div className="App-splash">
@@ -14,8 +29,8 @@ function Landing() {
           Your own quiz app
         </p>
         <div>
-          <Button className='button-lightBlue'>Login</Button> <span></span>
-          <Button className='button-darkBlue'>SignUp</Button>
+          <Button className='button-lightBlue' onClick={handleLoginButtonClick}>Login</Button> <span></span>
+          <Button className='button-darkBlue' onClick={handleSignUpButtonClick}>SignUp</Button>
         </div>
       </div>
 

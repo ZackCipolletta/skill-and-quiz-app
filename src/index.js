@@ -20,7 +20,7 @@ root.render(
         {/* <Route path="/" element={<Landing />} /> */}
         {/* <Control /> */}
         {/*<Dashboard />*/}
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/SignIn" element={<SignIn />} />
         {/* <SignUp /> */}
         {/* <SignIn /> */}
