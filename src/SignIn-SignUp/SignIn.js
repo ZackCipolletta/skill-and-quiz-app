@@ -81,8 +81,8 @@ function SignIn() {
                       ),
                       sx: isValidEmail
                         ? {
-                          '& fieldset': { borderColor: 'green !important' },
-                          '&:hover fieldset': { borderColor: 'green !important' },
+                          '& fieldset': { borderColor: theme.palette.valid.main + '!important' },
+                          '&:hover fieldset': { borderColor: theme.palette.valid.main + '!important' },
                         }
                         : {},
                     }}

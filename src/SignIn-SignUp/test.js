@@ -1,36 +1,47 @@
-import './Components.css';
-import React, { useState, useEffect } from "react";
-import {
-  Button, AppBar, Toolbar, Typography, Card, CardMedia,
-  CardContent, CardActions, CardHeader, Box, IconButton
-} from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles'; // Import ThemeProvider
 
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
+// ... (other imports and code)
 
-function QuizBoard() {
+function SignIn() {
+  // ... (other code)
 
   return (
-    <div style={{ paddingTop: '50px' }}>
-      <Card variant="outlined" sx={{ maxWidth: 250, borderRadius: '20px' }}>
-        <CardHeader sx={{ backgroundColor: '#cfd9fa', height: 50 }} />
-        <CardContent>
-
-          <Box sx={{ display: 'flex', alignItems: 'center' }} >
-            <Typography>
-              Science
-            </Typography>
-            <div style={{ marginLeft: 'auto' }}>
-              <IconButton sx={{ width: '1px', padding: 1 }} className='IconButton'><StarOutlineOutlinedIcon /></IconButton>
-              <IconButton sx={{ width: '1px', padding: 1 }}><DeleteForeverOutlinedIcon /></IconButton>
-            </div>
-          </Box>
-          
-        </CardContent>
-      </Card>
-    </div >
+    <ThemeProvider theme={theme}> {/* Wrap your component with ThemeProvider */}
+      <div className="SignUp-SignIn">
+        {/* ... (rest of your component code) */}
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          placeholder="Placeholder"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          className='input-field'
+          // ... (other props)
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                {isValidEmail && (
+                  <IconButton edge="end" color="valid"> {/* Use "valid" as the color */}
+                    <CheckCircleIcon />
+                  </IconButton>
+                )}
+              </InputAdornment>
+            ),
+            sx: isValidEmail
+              ? {
+                '& fieldset': { borderColor: theme.palette.valid.main + ' !important' }, // Use the custom "valid" color
+                '&:hover fieldset': { borderColor: theme.palette.valid.main + ' !important' }, // Use the custom "valid" color
+              }
+              : {},
+          }}
+        />
+        {/* ... (rest of your component code) */}
+      </div>
+    </ThemeProvider>
   );
-
 }
 
-export default QuizBoard;
+export default SignIn;
