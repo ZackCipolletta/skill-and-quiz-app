@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url('./img/Quiz-splash-page.png');
+  background-image: url('../../public/img/Quiz-splash-page.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

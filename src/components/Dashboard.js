@@ -1,5 +1,5 @@
 
-import './Components.css';
+import '../Styles/Components.css';
 import React from 'react';
 import { Button } from '@mui/material';
 import SearchBar from './SearchBar';

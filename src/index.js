@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './Styles/index.css'
 import Landing from './Landing';
 import SignIn from './SignIn-SignUp/SignIn';
 import SignUp from './SignIn-SignUp/SignUp';

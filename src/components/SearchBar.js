@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import useAutocomplete from '@mui/material/useAutocomplete';
 import { autocompleteClasses } from '@mui/material/Autocomplete';
-import './Components.css';
+import '../Styles/Components.css';
 
 const Search = styled('div')(() => ({
   borderRadius: '5px',

@@ -1,6 +1,6 @@
 
 // import './SignUp-SignIn.css';
-import '../components/Components.css';
+import '../Styles/Components.css';
 import React, { useState } from 'react';
 import {
   Button, CssBaseline, TextField, Box, Typography, Container,

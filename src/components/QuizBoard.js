@@ -1,4 +1,4 @@
-import './Components.css';
+import '../Styles/Components.css';
 import React, {  } from "react";
 import {
   Typography, Card, 
@@ -6,7 +6,9 @@ import {
 } from '@mui/material';
 
 
-import { PiTagChevronThin, PiTrashThin } from 'react-icons/pi';
+import { PiTagChevronThin, PiTrashThin, PiTagChevronFill } from 'react-icons/pi';
+
+// PiTagChevronFill will be colored gold and used to signify a 'favorite' category
 
 export default function QuizBoard() {
 

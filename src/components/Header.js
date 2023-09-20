@@ -1,4 +1,4 @@
-import './Components.css';
+import '../Styles/Components.css';
 import React, {  } from "react";
 import { Button, Toolbar, Typography } from '@mui/material';
 
