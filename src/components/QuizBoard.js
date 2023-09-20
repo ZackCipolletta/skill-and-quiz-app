@@ -22,7 +22,7 @@ function QuizBoard() {
   return (
     <ThemeProvider theme={theme}>
       <div style={{ paddingTop: '50px' }}>
-        <Card variant="outlined" sx={{ maxWidth: 235, borderRadius: '20px' }}>
+        <Card  sx={{ maxWidth: 235, borderRadius: '20px', ':hover': { boxShadow: 5 } }} >
           {/* borderRadius controls how roudned the corners are */}
           <CardHeader sx={{ backgroundColor: '#cfd9fa', height: 50 }} />
           <CardContent>
