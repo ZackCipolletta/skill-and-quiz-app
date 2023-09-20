@@ -8,6 +8,8 @@ import {
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 
+import { PiTagChevronThin, PiTrashThin } from 'react-icons/pi';
+
 function QuizBoard() {
 
   const theme = createTheme({
@@ -18,6 +20,7 @@ function QuizBoard() {
     },
   });
 
+  // move card into it's own component, import into QuizBoard and and styling to accommodate multiple cards - 3 across and stacked vertically with appropriate spacing.
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,11 +46,12 @@ function QuizBoard() {
                 Science
               </Typography>
               <div style={{ marginLeft: '80px' }}>
-                <IconButton sx={{ width: "50%" }} >
-                  <StarOutlineOutlinedIcon color='iconOutline' />
+                {/* scale enlarges the icons in both X and Y directions, ScaleY stretches left right  */}
+                <IconButton sx={{ width: "50%", marginLeft: '5px', transform: "rotate(90deg) scale(1.1) scaleY(1.2)" }} >
+                  <PiTagChevronThin color='black' />
                 </IconButton>
-                <IconButton sx={{ width: "50%" }}>
-                  <DeleteForeverOutlinedIcon color='warning' />
+                <IconButton sx={{ width: "50%", marginLeft: '-5px', transform: "scale(1.1) scaleY(1.2)" }}>
+                  <PiTrashThin color='red' />
                 </IconButton>
               </div>
               {/* </CardActions> */}
