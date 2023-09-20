@@ -1,8 +1,8 @@
 import './Components.css';
-import React, { useState, useEffect } from "react";
-import { Button, AppBar, Toolbar, Typography } from '@mui/material';
+import React, {  } from "react";
+import { Button, Toolbar, Typography } from '@mui/material';
 
-function Header() {
+export default function Header() {
 
   return (
     <div style={{ margin: 0 }}>
@@ -16,4 +16,3 @@ function Header() {
 
 }
 
-export default Header;

@@ -3,8 +3,8 @@
 import '../components/Components.css';
 import React, { useState } from 'react';
 import {
-  Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box,
-  Typography, Container, createTheme, InputAdornment, ThemeProvider, AppBar, Toolbar, Paper, IconButton
+  Button, CssBaseline, TextField, Box, Typography, Container,
+  createTheme, InputAdornment, ThemeProvider, Paper, IconButton
 } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -64,15 +64,44 @@ function SignIn() {
                   flexDirection: 'column',
                 }}
               >
-                <Typography component="h1" variant="h5" align='left' fontWeight={850} sx={{ mb: '20px', mt: -5 }} >
+                <Typography
+                  component="h1"
+                  variant="h5"
+                  align='left'
+                  fontWeight={850}
+                  sx={{ mb: '20px', mt: -5 }}
+                >
                   SignUp
                 </Typography>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'large' }}>
-                  <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Name</div>
-                  <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
+                <div
+                  style=
+                  {{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: 'large'
+                  }}>
+                  <div style=
+                    {{
+                      textAlign: 'left',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Name
+                  </div>
+                  <div
+                    className="faded"
+                    style={{ textAlign: 'right' }}
+                  >
+                    Mandatory
+                  </div>
                 </div>
-                <Box component="form" noValidate sx={{ mt: -2 }}>
+                <Box
+                  component="form"
+                  noValidate
+                  sx={{ mt: -2 }}
+                >
                   <TextField
                     margin="normal"
                     required
@@ -100,8 +129,14 @@ function SignIn() {
                         fontWeight: 'bold'
                       }}
                     >
-                      Email</div>
-                    <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
+                      Email
+                    </div>
+                    <div
+                      className="faded"
+                      style={{ textAlign: 'right' }}
+                    >
+                      Mandatory
+                    </div>
                   </div>
                   {/* <Box component="form" noValidate sx={{ mt: -2 }}> */}
                   <TextField
@@ -139,9 +174,31 @@ function SignIn() {
                         : {},
                     }}
                   />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '7px', fontSize: 'large' }}>
-                    <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Password</div>
-                    <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
+                  <div
+                    style=
+                    {{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      marginBottom: '7px',
+                      fontSize: 'large'
+                    }}
+                  >
+                    <div
+                      style=
+                      {{
+                        textAlign: 'left',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      Password
+                    </div>
+                    <div
+                      className="faded"
+                      style={{ textAlign: 'right' }}
+                    >
+                      Mandatory
+                    </div>
                   </div>
                   <TextField
                     margin="normal"

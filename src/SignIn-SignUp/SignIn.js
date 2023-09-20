@@ -2,14 +2,14 @@
 import '../components/Components.css';
 import React, { useState } from 'react';
 import {
-  Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box,
-  Typography, Container, createTheme, ThemeProvider, AppBar, Toolbar, Paper, InputAdornment, IconButton
+  Button, CssBaseline, TextField, Link, Box,
+  Typography, Container, createTheme, ThemeProvider, Paper, InputAdornment, IconButton
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import isEmail from 'validator/lib/isEmail';
 
 
-function SignIn() {
+export default function SignIn() {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
 
@@ -22,7 +22,7 @@ function SignIn() {
 
   const theme = createTheme({
     palette: {
-      success: {
+      valid: {
         main: '#67c27c'
       }
     },
@@ -34,7 +34,7 @@ function SignIn() {
         <div className="SignUp-SignIn-splash">
           <Paper className="signIn-paper">
 
-            <Container component="main">
+            <Container>
               <CssBaseline />
               <Box
                 sx={{
@@ -43,15 +43,45 @@ function SignIn() {
                   flexDirection: 'column',
                 }}
               >
-                <Typography component="h1" variant="h5" align='left' fontWeight={850} sx={{ mb: '20px', mt: -5 }} >
+                <Typography
+                  component="h1"
+                  variant="h5"
+                  align='left'
+                  fontWeight={850}
+                  sx={{ mb: '20px', mt: -5 }}
+                >
                   LogIn
                 </Typography>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'large' }}>
-                  <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Email</div>
-                  <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
+                <div
+                  style=
+                  {{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: 'large'
+                  }}
+                >
+                  <div
+                    style=
+                    {{
+                      textAlign: 'left',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Email
+                  </div>
+                  <div
+                    className="faded"
+                    style={{ textAlign: 'right' }}
+                  >
+                    Mandatory
+                  </div>
                 </div>
-                <Box component="form" noValidate sx={{ mt: -2 }}>
+                <Box
+                  component="form"
+                  noValidate sx={{ mt: -2 }}
+                >
                   <TextField
                     margin="normal"
                     required
@@ -72,7 +102,7 @@ function SignIn() {
                       endAdornment: (
                         <InputAdornment position="end">
                           {isValidEmail && (
-                            <IconButton edge="end" color="success">
+                            <IconButton edge="end" color="valid">
                               <CheckCircleIcon />
                             </IconButton>
                           )
@@ -87,9 +117,28 @@ function SignIn() {
                         : {},
                     }}
                   />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px', fontSize: 'large' }}>
-                    <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Password</div>
-                    <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
+                  <div
+                    style=
+                    {{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      marginBottom: '5px',
+                      fontSize: 'large'
+                    }}
+                  >
+                    <div
+                      style=
+                      {{
+                        textAlign: 'left',
+                        fontWeight: 'bold'
+                      }}>Password</div>
+                    <div
+                      className="faded"
+                      style={{ textAlign: 'right' }}
+                    >
+                      Mandatory
+                    </div>
                   </div>
                   <TextField
                     margin="normal"
@@ -104,7 +153,12 @@ function SignIn() {
                     className='input-field'
                   />
                   <div style={{ textAlign: 'left' }}>
-                    <Link className='faded' href="#" variant="body2" underline="hover">
+                    <Link
+                      className='faded'
+                      href="#"
+                      variant="body2"
+                      underline="hover"
+                    >
                       Forgot Your Password?
                     </Link>
                   </div>
@@ -128,4 +182,3 @@ function SignIn() {
   );
 }
 
-export default SignIn;

@@ -1,16 +1,14 @@
 import './Components.css';
-import React, { useState, useEffect } from "react";
+import React, {  } from "react";
 import {
-  Button, AppBar, Toolbar, Typography, Card, CardMedia,
-  CardContent, CardActions, CardHeader, Box, IconButton, createTheme, ThemeProvider
+  Typography, Card, 
+  CardContent, CardHeader, Box, IconButton, createTheme, ThemeProvider
 } from '@mui/material';
 
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 
 import { PiTagChevronThin, PiTrashThin } from 'react-icons/pi';
 
-function QuizBoard() {
+export default function QuizBoard() {
 
   const theme = createTheme({
     palette: {
@@ -64,8 +62,3 @@ function QuizBoard() {
   );
 
 }
-
-export default QuizBoard;
-
-{/* <Button variant="outlined" class='custom-button' sx={{ width: '1px', padding: 0}} ><StarOutlineOutlinedIcon /></Button> */ }
-{/* <Button variant="outlined" class='custom-button'  sx={{ width: '1px', padding: 0}} ><DeleteForeverOutlinedIcon /></Button> */ }

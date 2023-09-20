@@ -1,12 +1,12 @@
 
 import './Components.css';
 import React from 'react';
-import { Button, Box } from '@mui/material';
+import { Button } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 
 
-function Dashboard() {
+export default function Dashboard() {
   return (
     <div style={{ marginTop:'20px' }} >
       <div style=
@@ -33,5 +33,3 @@ function Dashboard() {
     </div>
   );
 }
-
-export default Dashboard;

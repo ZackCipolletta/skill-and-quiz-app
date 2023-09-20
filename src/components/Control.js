@@ -1,11 +1,10 @@
 import './Components.css';
-import React, { useState, useEffect } from "react";
-import { Button, AppBar, Toolbar, Typography } from '@mui/material';
+import React, {  } from "react";
 import Header from './Header';
 import Dashboard from './Dashboard';
 import QuizBoard from './QuizBoard';
 
-function Control() {
+export default function Control() {
 
   // We may end up having to use state to update a 'CurrentlyVisibleState' which 
   // will dictate what is mounted in Control
@@ -25,5 +24,3 @@ function Control() {
     </>
   );
 }
-
-export default Control;
