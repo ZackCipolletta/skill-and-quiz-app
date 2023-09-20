@@ -15,16 +15,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Landing />
-      <Routes>
+      {/* <Landing /> */}
+      {/* <Routes> */}
         {/* <Route path="/" element={<Landing />} /> */}
-        {/* <Control /> */}
-        {/*<Dashboard />*/}
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/SignIn" element={<SignIn />} />
+      <Control />
+      
+        {/* <Dashboard />  */}
+        {/* <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/SignIn" element={<SignIn />} /> */}
         {/* <SignUp /> */}
         {/* <SignIn /> */}
-      </Routes>
+      {/* </Routes> */}
     </BrowserRouter>
   </React.StrictMode>
 );
