@@ -84,8 +84,22 @@ const isPassword = (str) => {
                   className='input-field'
                 />
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'large', marginBottom: '-18px' }}>
-                  <div style={{ textAlign: 'left', fontWeight: 'bold' }}>Email</div>
+                <div style=
+                  {{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  fontSize: 'large',
+                  marginBottom: '-18px'
+                  }}
+                >
+                  <div style=
+                    {{
+                      textAlign: 'left',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Email</div>
                   <div className="faded" style={{ textAlign: 'right' }}>Mandatory</div>
                 </div>
                 {/* <Box component="form" noValidate sx={{ mt: -2 }}> */}

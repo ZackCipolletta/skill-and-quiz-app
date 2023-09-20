@@ -16,16 +16,32 @@ function QuizBoard() {
         {/* borderRadius controls how roudned the corners are */}
         <CardHeader sx={{ backgroundColor: '#cfd9fa', height: 50 }} />
         <CardContent>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
-            <CardActions sx={{ padding: '0px', marginBottom: '-15px' }}>
-              <Typography /*gutterBottom variant="h5" component="div" */>
-                Science
-              </Typography>
-            
-                <IconButton sx={{ width: '1px', padding: 2 }} className='IconButton'><StarOutlineOutlinedIcon /></IconButton>
-                <IconButton sx={{ width: '1px', padding: 2 }}><DeleteForeverOutlinedIcon /></IconButton>
-              
-            </CardActions>
+          <Box
+            sx=
+            {{
+              display: 'flex',
+              alignItems: 'center',
+              paddingLeft: '5px',
+
+              marginBottom: '-15px',
+              marginTop: '-15px'
+            }}
+          >
+
+            {/* <CardActions sx={{ padding: '0px', marginBottom: '-15px' }}> */}
+            <Typography /*gutterBottom variant="h5" component="div" */>
+              Science
+            </Typography>
+            <div style={{ marginLeft: '95px' }}>
+              <IconButton sx={{ width: "50%" }} >
+                <StarOutlineOutlinedIcon />
+              </IconButton>
+              <IconButton sx={{ width: "50%" }}>
+                <DeleteForeverOutlinedIcon color='warning' />
+              </IconButton>
+            </div>
+            {/* </CardActions> */}
+
           </Box>
         </CardContent>
       </Card>

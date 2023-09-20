@@ -9,7 +9,13 @@ import AddIcon from '@mui/icons-material/Add';
 function Dashboard() {
   return (
     <div style={{ marginTop:'20px' }} >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style=
+        {{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+        }}
+      >
         <h1 className='darkBlue-text'>
           Quiz Board  {/* Google web font 'Anton' */}
         </h1>
