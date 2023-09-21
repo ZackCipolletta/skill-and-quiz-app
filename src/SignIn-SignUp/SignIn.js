@@ -36,12 +36,11 @@ export default function SignIn() {
 
             <Container>
               <CssBaseline />
-              <Box
-                sx={{
-                  marginTop: 8,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
+              <Box sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
               >
                 <Typography
                   component="h1"
@@ -63,8 +62,7 @@ export default function SignIn() {
                   }}
                 >
                   <div
-                    style=
-                    {{
+                    style={{
                       textAlign: 'left',
                       fontWeight: 'bold'
                     }}
@@ -117,22 +115,20 @@ export default function SignIn() {
                         : {},
                     }}
                   />
-                  <div
-                    style=
-                    {{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginBottom: '5px',
-                      fontSize: 'large'
-                    }}
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '5px',
+                    fontSize: 'large'
+                  }}
                   >
-                    <div
-                      style=
-                      {{
-                        textAlign: 'left',
-                        fontWeight: 'bold'
-                      }}>Password</div>
+                    <div style={{
+                      textAlign: 'left',
+                      fontWeight: 'bold'
+                    }}>
+                      Password
+                    </div>
                     <div
                       className="faded"
                       style={{ textAlign: 'right' }}

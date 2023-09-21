@@ -58,12 +58,11 @@ function SignIn() {
 
             <Container component="main">
               <CssBaseline />
-              <Box
-                sx={{
-                  marginTop: 8,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
+              <Box sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
               >
                 <Typography
                   component="h1"
@@ -75,16 +74,14 @@ function SignIn() {
                   SignUp
                 </Typography>
 
-                <div
-                  style=
-                  {{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    fontSize: 'large'
-                  }}>
-                  <div style=
-                    {{
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  fontSize: 'large'
+                }}
+                >
+                  <div style={{
                       textAlign: 'left',
                       fontWeight: 'bold'
                     }}
@@ -115,8 +112,7 @@ function SignIn() {
                     className='input-field'
                   />
 
-                  <div style=
-                    {{
+                  <div style={{
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
@@ -124,8 +120,7 @@ function SignIn() {
                       marginBottom: '-18px'
                     }}
                   >
-                    <div style=
-                      {{
+                    <div style={{
                         textAlign: 'left',
                         fontWeight: 'bold'
                       }}
@@ -176,8 +171,7 @@ function SignIn() {
                     }}
                   />
                   <div
-                    style=
-                    {{
+                    style={{
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
@@ -186,8 +180,7 @@ function SignIn() {
                     }}
                   >
                     <div
-                      style=
-                      {{
+                      style={{
                         textAlign: 'left',
                         fontWeight: 'bold'
                       }}

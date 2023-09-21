@@ -29,8 +29,15 @@ const handleSignUpButtonClick = () => {
           Your own quiz app
         </p>
         <div>
-          <Button className='button-lightBlue' onClick={handleLoginButtonClick}>Login</Button> <span></span>
-          <Button className='button-darkBlue' onClick={handleSignUpButtonClick}>SignUp</Button>
+          <Button className='button-lightBlue'
+            onClick={handleLoginButtonClick}>
+            Login
+          </Button>
+          <span></span>
+          <Button className='button-darkBlue'
+            onClick={handleSignUpButtonClick}>
+            SignUp
+          </Button>
         </div>
       </div>
 
