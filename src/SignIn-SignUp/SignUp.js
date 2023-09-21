@@ -39,14 +39,15 @@ function SignIn() {
     setIsValidPassword(isPassword(inputPassword));
   };
 
-  const isPassword = (str) => {
-    if (str.length >= 8) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  // const isPassword = (str) => {
+  //   if (str.length >= 8) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
+  const isPassword = (str) => str.length >= 8;
 
 
   return (
