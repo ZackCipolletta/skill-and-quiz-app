@@ -11,9 +11,10 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  // border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  borderRadius: '10px'
 };
 
 export default function DeleteCategoryModal(props) {
@@ -31,6 +32,7 @@ export default function DeleteCategoryModal(props) {
         aria-describedby="transition-modal-description"
         open={modalState}
         onClose={props.handleClose}
+        
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -42,10 +44,7 @@ export default function DeleteCategoryModal(props) {
         <Fade in={modalState}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Do you want to delete "{props.selectedCategory}" category?
             </Typography>
             <Button onClick={props.handleClose}>Cancel</Button>
           </Box>
