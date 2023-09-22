@@ -24,23 +24,16 @@ const style = {
 };
 
 export default function CreateNewCategoryModal(props) {
-  const [open, setOpen] = useState(false);
+
   // const handleClose = props.toggle;
-  const [selectedValue, setSelectedValue] = React.useState('a');
+  const [selectedButton, setSelectedButton] = useState(null);
 
   const modalState = props.toggle;
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+  const handleChange = (buttonName) => {
+    setSelectedButton(buttonName);
   };
 
-  const controlProps = (item) => ({
-    checked: selectedValue === item,
-    onChange: handleChange,
-    value: item,
-    name: 'color-radio-button-demo',
-    inputProps: { 'aria-label': item },
-  });
 
   const emptyRoundButtonStyle = {
     borderRadius: '50%', // Makes the button round
@@ -50,7 +43,7 @@ export default function CreateNewCategoryModal(props) {
     margin: 7,
     minWidth: 0, // Ensure a minimum width of 0
     minHeight: 0, // Ensure a minimum height of 0
-    border: '2px solid transparent'
+    border: selectedButton === null ? "2px solid transparent" : "2px solid transparent",
   };
 
   return (
@@ -93,7 +86,7 @@ export default function CreateNewCategoryModal(props) {
                 width: 350
               }}
             />
-
+            {/* {selectedButton.toString()} */}
             <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ mt: 1 }} >
               Select custom colour
             </Typography>
@@ -102,61 +95,69 @@ export default function CreateNewCategoryModal(props) {
             </Typography>
 
             <Box sx={{ my: 2 }}>
-            <Button
-              variant="outlined"
-              style={emptyRoundButtonStyle}
-              sx={{
-              backgroundColor: 'rgba(167,215,249,255)',
-                '&:hover': { 
-                  backgroundColor: 'rgba(167, 215, 249, 1)',
-                  border: '2px solid rgb(62, 167, 242) !important'
-                }
-              }}
-            >
-            </Button>
-            <Button
-              variant="outlined"
-              style={emptyRoundButtonStyle}
-              sx={{
-                backgroundColor: 'rgba(207,217,250,255)',
-                '&:hover': {
+              <Button
+                variant="outlined"
+                style={emptyRoundButtonStyle}
+                sx={{
+                  backgroundColor: 'rgba(167,215,249,255)',
+                  border: selectedButton === 'button1' ? '2px solid rgb(62, 167, 242) !important' : 'transparent',
+                  '&:hover': {
+                    backgroundColor: 'rgba(167, 215, 249, 1)',
+                    border: '2px solid rgb(62, 167, 242) !important'
+                  }
+                }}
+                onClick={() => handleChange('button1')}
+              >
+              </Button>
+              <Button
+                variant="outlined"
+                style={emptyRoundButtonStyle}
+                sx={{
                   backgroundColor: 'rgba(207,217,250,255)',
-                  border: '2px solid rgb(95, 129, 238) !important'
-                }
-              }}
-            >
-            </Button>
+                  border: selectedButton === 'button2' ? '2px solid rgb(207,217,250,255) !important' : 'transparent',
+                  '&:hover': {
+                    backgroundColor: 'rgba(207,217,250,255)',
+                    border: '2px solid rgb(95, 129, 238) !important'
+                  }
+                }}
+                onClick={() => handleChange('button2')}
+              >
+              </Button>
 
-            <Button
-              variant="outlined"
-              style={emptyRoundButtonStyle}
-              sx={{
-                backgroundColor: 'rgb(244,187,199,255)',
-                '&:hover': {
+              <Button
+                variant="outlined"
+                style={emptyRoundButtonStyle}
+                sx={{
                   backgroundColor: 'rgb(244,187,199,255)',
-                  border: '2px solid rgb(228, 87, 117) !important'
-                }
-              }}
-            >
-            </Button>
+                  border: selectedButton === 'button3' ? '2px solid rgb(228, 87, 117) !important' : 'transparent',
+                  '&:hover': {
+                    backgroundColor: 'rgb(244,187,199,255)',
+                    border: '2px solid rgb(228, 87, 117) !important'
+                  }
+                }}
+                onClick={() => handleChange('button3')}
+              >
+              </Button>
 
-            <Button
-              variant="outlined"
-              style={emptyRoundButtonStyle}
-              sx={{
-                backgroundColor: 'rgba(192,248,137,255)',
-                '&:hover': {
+              <Button
+                variant="outlined"
+                style={emptyRoundButtonStyle}
+                sx={{
                   backgroundColor: 'rgba(192,248,137,255)',
-                  border: '2px solid rgb(140, 242, 39) !important'
-                }
-              }}
-            >
-            </Button>
+                  border: selectedButton === 'button4' ? '2px solid rgb(192,248,137,255) !important' : 'transparent',
+                  '&:hover': {
+                    backgroundColor: 'rgba(192,248,137,255)',
+                    border: '2px solid rgb(140, 242, 39) !important'
+                  }
+                }}
+                onClick={() => handleChange('button4')}
+              >
+              </Button>
 
-            <IconButton sx={{ color: 'black', transform: "scale(0.8)" }}>
-              <CgColorPicker />
+              <IconButton sx={{ color: 'black', transform: "scale(0.8)" }}>
+                <CgColorPicker />
               </IconButton>
-              </Box>
+            </Box>
 
             <Box>
               <Button className='button-mediumBlue' onClick={props.handleClose}>Create category</Button>
