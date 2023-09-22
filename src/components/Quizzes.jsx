@@ -1,11 +1,11 @@
 import '../Styles/Components.css';
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
-import CategoryCard from './CategoryCard';
+import QuizCard from './CategoryCard';
 
-const categoriesList = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
+const categoriesList = [{ Name: "Quiz1" }, { Name: "Quiz2" }, { Name: "Quiz3" }];
 
-export default function QuizCategories() {
+export default function Quizzes() {
 
   // move card into it's own component, import into QuizBoard and add styling to accommodate multiple cards - 3 across and stacked vertically with appropriate spacing.
   const gridStyle = {
@@ -19,7 +19,7 @@ export default function QuizCategories() {
     <div style={gridStyle}>
       {categoriesList.map((category, index) => (
 
-        <CategoryCard key={index} category={category.Name} />
+        <QuizCard key={index} category={category.Name} />
       ))}
     </div >
   );

@@ -114,7 +114,7 @@ export default function CreateNewCategoryModal(props) {
                 style={emptyRoundButtonStyle}
                 sx={{
                   backgroundColor: 'rgba(207,217,250,255)',
-                  border: selectedButton === 'button2' ? '2px solid rgb(207,217,250,255) !important' : 'transparent',
+                  border: selectedButton === 'button2' ? '2px solid rgb(95, 129, 238) !important' : 'transparent',
                   '&:hover': {
                     backgroundColor: 'rgba(207,217,250,255)',
                     border: '2px solid rgb(95, 129, 238) !important'
@@ -144,7 +144,7 @@ export default function CreateNewCategoryModal(props) {
                 style={emptyRoundButtonStyle}
                 sx={{
                   backgroundColor: 'rgba(192,248,137,255)',
-                  border: selectedButton === 'button4' ? '2px solid rgb(192,248,137,255) !important' : 'transparent',
+                  border: selectedButton === 'button4' ? '2px solid rgb(140, 242, 39) !important' : 'transparent',
                   '&:hover': {
                     backgroundColor: 'rgba(192,248,137,255)',
                     border: '2px solid rgb(140, 242, 39) !important'

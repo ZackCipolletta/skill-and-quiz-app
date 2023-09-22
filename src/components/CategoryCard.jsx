@@ -10,7 +10,7 @@ import { PiTrashThin, PiTagChevron } from 'react-icons/pi';
 // PiTagChevronFill will be colored gold and used to signify a 'favorite' category
 
 
-export default function QuizCard(props) {
+export default function CategoryCard(props) {
 
   const [modalState, setModalState] = useState(false);
   const [categoryName, setCategoryName] = useState(null);
