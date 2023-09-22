@@ -91,7 +91,8 @@ export default function SignIn() {
                     autoFocus
                     className='input-field'
                     value={email}
-                    // as the email is being entered, call handleEmailChange function which will set the value of email in state and uses the regex to evaluate the inputEmail.
+                    // as the email is being entered, call handleEmailChange function which will set the value 
+                    // of email in state and uses the regex to evaluate the inputEmail.
                     onChange={handleEmailChange}
                     error={!isValidEmail && email !== ''} // Apply error style if email is not valid and not empty
                     helperText={!isValidEmail && email !== '' ? "Invalid Email" : ""}

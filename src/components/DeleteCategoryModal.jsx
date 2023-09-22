@@ -3,6 +3,7 @@ import {
   Backdrop, Box, Modal, Fade,
   Button, Typography
 } from '@mui/material';
+import '../Styles/Components.css';
 
 const style = {
   position: 'absolute',
@@ -51,8 +52,8 @@ export default function DeleteCategoryModal(props) {
               Do you want to delete "{props.selectedCategory}" category?
             </Typography>
             <Box>
-              <Button >Delete</Button>
-              <Button onClick={props.handleClose}>Cancel</Button>
+              <Button className='button-redButton'>Delete</Button>
+              <Button className='button-mediumBlue' onClick={props.handleClose}>Cancel</Button>
             </Box>
           </Box>
         </Fade>
