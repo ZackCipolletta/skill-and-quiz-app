@@ -94,13 +94,14 @@ export default function CreateNewCategoryModal(props) {
               }}
             />
 
-            <Typography id="transition-modal-title" variant="h6" component="h2" >
+            <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ mt: 1 }} >
               Select custom colour
             </Typography>
             <Typography id="transition-modal-title" component="h2" >
               Here are some templates to help you get started
             </Typography>
 
+            <Box sx={{ my: 2 }}>
             <Button
               variant="outlined"
               style={emptyRoundButtonStyle}
@@ -154,7 +155,9 @@ export default function CreateNewCategoryModal(props) {
 
             <IconButton sx={{ color: 'black', transform: "scale(0.8)" }}>
               <CgColorPicker />
-            </IconButton>
+              </IconButton>
+              </Box>
+
             <Box>
               <Button className='button-mediumBlue' onClick={props.handleClose}>Create category</Button>
             </Box>
