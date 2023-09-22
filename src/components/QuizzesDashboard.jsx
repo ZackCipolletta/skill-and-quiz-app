@@ -24,7 +24,7 @@ export default function QuizzesDashboard() {
       }}
       >
         <h1 className='darkBlue-text'>
-          Quiz Board  {/* Google web font 'Anton' */}
+          Quizzes  {/* Google web font 'Anton' */}
         </h1>
 
         <div style={{
