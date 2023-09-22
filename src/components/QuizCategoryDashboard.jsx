@@ -1,12 +1,21 @@
 
 import '../Styles/Components.css';
-import React from 'react';
+import React, { useState } from "react";
 import { Button } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
+import CreateNewCategoryModal from './CreateNewCategoryModal';
 
+export default function QuizCategoryDashboard() {
 
-export default function Dashboard() {
+  const [modalState, setModalState] = useState(false);
+
+  const handleCreateNewCategoryClick = () => {
+    // Handle the click event for the IconButton here
+    // You can add your logic here
+    setModalState(!modalState);
+  };
+
   return (
     <div style={{ marginTop: '20px' }} >
       <div style={{
@@ -29,6 +38,7 @@ export default function Dashboard() {
           <Button
             className='button-mediumBlue'
             style={{ marginLeft: '50px' }}
+            onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
           >
             <AddIcon />
             Create new category
@@ -36,6 +46,10 @@ export default function Dashboard() {
 
         </div>
       </div>
+      <CreateNewCategoryModal
+          toggle={modalState}
+          handleCancel={handleCreateNewCategoryClick}
+        />
     </div>
   );
 }

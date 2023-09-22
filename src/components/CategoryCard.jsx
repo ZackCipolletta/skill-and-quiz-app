@@ -13,7 +13,7 @@ import { PiTrashThin, PiTagChevron } from 'react-icons/pi';
 export default function QuizCard(props) {
 
   const [modalState, setModalState] = useState(false);
-  const [parentName, setParentName] = useState(null);
+  const [categoryName, setCategoryName] = useState(null);
 
   const theme = createTheme({
     palette: {
@@ -31,7 +31,7 @@ export default function QuizCard(props) {
 
     // Handle the click event for the IconButton here
     // You can add your logic here
-    setParentName(props.category)
+    setCategoryName(props.category)
     setModalState(!modalState);
   };
 
@@ -96,7 +96,7 @@ export default function QuizCard(props) {
         <DeleteCategoryModal
           toggle={modalState}
           handleClose={handleDeleteButtonClick}
-          selectedCategory={parentName}
+          selectedCategory={categoryName}
         />
       </Card>
 

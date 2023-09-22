@@ -1,10 +1,9 @@
 import '../Styles/Components.css';
-import React, { } from "react";
+import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
-import QuizCard from './QuizCard';
+import QuizCard from './CategoryCard';
 
-const categoriesList = [ { Name: "Science" }, { Name: "Maths"}, {Name: "English"} ];
-
+const categoriesList = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
 
 export default function QuizBoard() {
 
@@ -17,13 +16,12 @@ export default function QuizBoard() {
   };
 
   return (
-      <div style={gridStyle}>
+    <div style={gridStyle}>
       {categoriesList.map((category, index) => (
-          
+
         <QuizCard key={index} category={category.Name} />
-        ))}
-        
-      </div >
+      ))}
+    </div >
   );
 
 }

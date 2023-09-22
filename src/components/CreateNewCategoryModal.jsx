@@ -1,0 +1,166 @@
+import React, { useState } from "react";
+import {
+  Backdrop, Box, Modal, Fade, TextField,
+  Button, Typography, IconButton, Radio
+} from '@mui/material';
+import '../Styles/Components.css';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { TfiClose } from 'react-icons/tfi';
+import { IoCloseOutline } from 'react-icons/io5';
+import { CgColorPicker } from 'react-icons/cg';
+
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 450,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: '10px',
+};
+
+export default function CreateNewCategoryModal(props) {
+  const [open, setOpen] = useState(false);
+  // const handleClose = props.toggle;
+  const [selectedValue, setSelectedValue] = React.useState('a');
+
+  const modalState = props.toggle;
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const controlProps = (item) => ({
+    checked: selectedValue === item,
+    onChange: handleChange,
+    value: item,
+    name: 'color-radio-button-demo',
+    inputProps: { 'aria-label': item },
+  });
+
+  const emptyRoundButtonStyle = {
+    borderRadius: '50%', // Makes the button round
+    width: '25px', // Adjust the width as needed
+    height: '25px', // Adjust the height as needed
+    padding: 0, // Remove padding
+    margin: 7,
+    minWidth: 0, // Ensure a minimum width of 0
+    minHeight: 0, // Ensure a minimum height of 0
+    border: '2px solid transparent'
+  };
+
+  return (
+    <div>
+      {/* <Button onClick={handleOpen}>Open modal</Button> */}
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={modalState}
+        onClose={props.handleClose}
+
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={modalState}>
+          <Box sx={style}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography id="transition-modal-title" variant="h5" component="h2" >
+                Add name to Quiz Category
+              </Typography>
+              <IconButton sx={{ transform: "scale(0.7)" }} onClick={props.handleCancel}>
+                <TfiClose />
+              </IconButton>
+            </Box>
+            <TextField
+              margin="normal"
+              required
+              width="250"
+              id="QuizName"
+              placeholder="Enter Quiz name"
+              name="QuizName"
+              autoFocus
+              className='input-field'
+              sx={{
+                width: 350
+              }}
+            />
+
+            <Typography id="transition-modal-title" variant="h6" component="h2" >
+              Select custom colour
+            </Typography>
+            <Typography id="transition-modal-title" component="h2" >
+              Here are some templates to help you get started
+            </Typography>
+
+            <Button
+              variant="outlined"
+              style={emptyRoundButtonStyle}
+              sx={{
+              backgroundColor: 'rgba(167,215,249,255)',
+                '&:hover': { 
+                  backgroundColor: 'rgba(167, 215, 249, 1)',
+                  border: '2px solid rgb(62, 167, 242) !important'
+                }
+              }}
+            >
+            </Button>
+            <Button
+              variant="outlined"
+              style={emptyRoundButtonStyle}
+              sx={{
+                backgroundColor: 'rgba(207,217,250,255)',
+                '&:hover': {
+                  backgroundColor: 'rgba(207,217,250,255)',
+                  border: '2px solid rgb(95, 129, 238) !important'
+                }
+              }}
+            >
+            </Button>
+
+            <Button
+              variant="outlined"
+              style={emptyRoundButtonStyle}
+              sx={{
+                backgroundColor: 'rgb(244,187,199,255)',
+                '&:hover': {
+                  backgroundColor: 'rgb(244,187,199,255)',
+                  border: '2px solid rgb(228, 87, 117) !important'
+                }
+              }}
+            >
+            </Button>
+
+            <Button
+              variant="outlined"
+              style={emptyRoundButtonStyle}
+              sx={{
+                backgroundColor: 'rgba(192,248,137,255)',
+                '&:hover': {
+                  backgroundColor: 'rgba(192,248,137,255)',
+                  border: '2px solid rgb(140, 242, 39) !important'
+                }
+              }}
+            >
+            </Button>
+
+            <IconButton sx={{ color: 'black', transform: "scale(0.8)" }}>
+              <CgColorPicker />
+            </IconButton>
+            <Box>
+              <Button className='button-mediumBlue' onClick={props.handleClose}>Create category</Button>
+            </Box>
+          </Box>
+        </Fade>
+      </Modal>
+    </div>
+  );
+}

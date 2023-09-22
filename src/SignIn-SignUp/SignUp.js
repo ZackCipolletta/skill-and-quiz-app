@@ -97,10 +97,9 @@ function SignIn() {
                     margin="normal"
                     required
                     fullWidth
-                    id="email"
+                    id="name"
                     placeholder="Placeholder"
-                    name="email"
-                    autoComplete="email"
+                    name="name"
                     autoFocus
                     className='input-field'
                   />
@@ -136,7 +135,6 @@ function SignIn() {
 
                     name="email"
                     autoComplete="email"
-                    autoFocus
                     className='input-field'
                     value={email}
                     // as the email is being entered, call handleEmailChange function which will set the value 

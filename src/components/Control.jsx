@@ -1,8 +1,8 @@
 import '../Styles/Components.css';
 import React, {  } from "react";
 import Header from './Header';
-import Dashboard from './Dashboard';
-import QuizBoard from './QuizBoard';
+import QuizCategoryDashboard from './QuizCategoryDashboard';
+import QuizBoard from './QuizCategories';
 
 export default function Control() {
 
@@ -15,12 +15,12 @@ export default function Control() {
       <div className="header">
         <div className="Dash-and-Header" >
           <Header /> {/*The Header component will be shown on each page.*/}
-          <Dashboard >
-            {/* Maybe what we need to do is a ternary operator inside of Dashboard to 
+          <QuizCategoryDashboard >
+            {/* Maybe what we need to do is a ternary operator inside of QuizCategoryDashboard to 
             conditionally display the title 'Quiz Board' or 'Quizzes' depending on which is being viewed. 
-            Alternately we pass in a value into Dashboard from either the QuizBoard or
+            Alternately we pass in a value into QuizCategoryDashboard from either the QuizBoard or
             Quizzes component which will then be rendered in a placeholder*/}
-          </Dashboard>
+          </QuizCategoryDashboard>
           <QuizBoard />
         </div>
       </div>
