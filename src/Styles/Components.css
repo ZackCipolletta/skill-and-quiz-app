@@ -3,7 +3,8 @@
     --lightBlue: rgb(215, 237, 255, 255);
     --mediumBlue: rgba(72, 139, 253, 255);
     --lightGreen: rgba(103, 194, 124, 255);
-    --warning: rgba(255,89,100,255)
+    --warning: rgba(255,89,100,255);
+    --darkMediumBlue: rgba(48,86,211,255);
 
 }
 
@@ -32,6 +33,11 @@ Button.button-mediumBlue {
 
 Button.button-redButton {
     background-color: var(--warning);
+    color: white;
+}
+
+Button.button-darkMediumBlue {
+    background-color: var(--darkMediumBlue);
     color: white;
 }
 

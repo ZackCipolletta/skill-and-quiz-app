@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Box, Paper, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Button, Paper, Tabs, Tab, Typography } from '@mui/material';
 import QuizDetails from "./QuizDetails";
-import QuizQuestions from "./QuizQustions";
+import QuizQuestions from "./QuizQuestions";
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -38,12 +38,22 @@ export default function CreateNewQuiz() {
   return (
     <Paper sx={{ marginTop: '50px' }}>
       <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: 1, 
+          borderColor: 'divider'
+        }} >
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="Details" sx={{ textTransform: 'none' }} />
             <Tab label="Questions" sx={{ textTransform: 'none' }} />
             <Tab label="Schedule" sx={{ textTransform: 'none' }} />
           </Tabs>
+          <Box>
+            <Button className="button-darkMediumBlue" sx={{ mr: "20px" }}>Preview</Button>
+            <Button className="button-darkMediumBlue" sx={{ mr: "50px" }}>Publish</Button>
+          </Box>
         </Box>
         <CustomTabPanel value={value} index={0}>
           <QuizDetails />
@@ -54,7 +64,9 @@ export default function CreateNewQuiz() {
         <CustomTabPanel value={value} index={2}>
           Schedule
         </CustomTabPanel>
+
       </Box>
+
     </Paper>
   );
 }

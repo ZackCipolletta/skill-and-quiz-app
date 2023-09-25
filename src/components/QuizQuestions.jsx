@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Paper, Tabs, Tab, Typography, TextField } from '@mui/material';
+import { Box, Button, Paper, Tabs, Tab, Typography, TextField } from '@mui/material';
 import ColorTemplates from './ColorTemplates';
 import '../Styles/Components.css';
 
@@ -11,9 +11,13 @@ export default function QuizQuestions() {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Have Questions Already? Import them!
       </Typography>
-
+      Import using CSV
+      
+      <Typography className='inputLabel' sx={{ mt: 1 }} >
+        Questions
+      </Typography>
       <TextField
-        margin="normal"
+        // margin="normal"
         required
         id="QuizName"
         placeholder="Enter Question"
@@ -27,6 +31,8 @@ export default function QuizQuestions() {
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
       />
+      <Button className='button-mediumBlue' sx={{ ml: 4 }}>Add</Button>
+
       {/* {selectedButton.toString()} */}
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
