@@ -120,3 +120,8 @@ Button.button-redButton {
     /* Your styles here */
     min-width: '-10px' !important;
 }
+
+.MuiTypography-root.inputLabel {
+    font-size: larger;
+    font-weight: 600;
+}

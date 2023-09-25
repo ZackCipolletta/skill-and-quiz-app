@@ -67,7 +67,7 @@ export default function CreateNewCategoryModal(props) {
         <Fade in={modalState}>
           <Box sx={style}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography id="transition-modal-title" variant="h5" component="h2" >
+              <Typography id="transition-modal-title" className='inputLabel' >
                 Add name to Quiz Category
               </Typography>
               <IconButton sx={{ transform: "scale(0.7)" }} onClick={props.handleCancel}>
@@ -86,9 +86,10 @@ export default function CreateNewCategoryModal(props) {
               sx={{
                 width: 350
               }}
+              InputProps={{ sx: { borderRadius: 2 } }}
             />
             {/* {selectedButton.toString()} */}
-            <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ mt: 1 }} >
+            <Typography id="transition-modal-title" className='inputLabel' sx={{ mt: 1 }} >
               Select custom colour
             </Typography>
             <Typography id="transition-modal-title" component="h2" >

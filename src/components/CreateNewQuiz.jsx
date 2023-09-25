@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { Box, Paper, Tabs, Tab, Typography } from '@mui/material';
 import QuizDetails from "./QuizDetails";
+import QuizQuestions from "./QuizQustions";
 
 function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -41,16 +40,16 @@ export default function CreateNewQuiz() {
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Details" />
-            <Tab label="Questions" />
-            <Tab label="Schedule" />
+            <Tab label="Details" sx={{ textTransform: 'none' }} />
+            <Tab label="Questions" sx={{ textTransform: 'none' }} />
+            <Tab label="Schedule" sx={{ textTransform: 'none' }} />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
           <QuizDetails />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          Questions
+          <QuizQuestions />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           Schedule
