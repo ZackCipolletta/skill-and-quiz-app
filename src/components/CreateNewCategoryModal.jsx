@@ -8,6 +8,7 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import { TfiClose } from 'react-icons/tfi';
 import { IoCloseOutline } from 'react-icons/io5';
 import { CgColorPicker } from 'react-icons/cg';
+import ColorTemplates from "./ColorTemplates";
 
 
 
@@ -26,25 +27,25 @@ const style = {
 export default function CreateNewCategoryModal(props) {
 
   // const handleClose = props.toggle;
-  const [selectedButton, setSelectedButton] = useState(null);
+  // const [selectedButton, setSelectedButton] = useState(null);
 
   const modalState = props.toggle;
 
-  const handleChange = (buttonName) => {
-    setSelectedButton(buttonName);
-  };
+  // const handleChange = (buttonName) => {
+  //   setSelectedButton(buttonName);
+  // };
 
 
-  const emptyRoundButtonStyle = {
-    borderRadius: '50%', // Makes the button round
-    width: '25px', // Adjust the width as needed
-    height: '25px', // Adjust the height as needed
-    padding: 0, // Remove padding
-    margin: 7,
-    minWidth: 0, // Ensure a minimum width of 0
-    minHeight: 0, // Ensure a minimum height of 0
-    border: selectedButton === null ? "2px solid transparent" : "2px solid transparent",
-  };
+  // const emptyRoundButtonStyle = {
+  //   borderRadius: '50%', // Makes the button round
+  //   width: '25px', // Adjust the width as needed
+  //   height: '25px', // Adjust the height as needed
+  //   padding: 0, // Remove padding
+  //   margin: 7,
+  //   minWidth: 0, // Ensure a minimum width of 0
+  //   minHeight: 0, // Ensure a minimum height of 0
+  //   border: selectedButton === null ? "2px solid transparent" : "2px solid transparent",
+  // };
 
   return (
     <div>
@@ -94,7 +95,9 @@ export default function CreateNewCategoryModal(props) {
               Here are some templates to help you get started
             </Typography>
 
-            <Box sx={{ my: 2 }}>
+            <ColorTemplates />
+
+            {/* <Box sx={{ my: 2 }}>
               <Button
                 variant="outlined"
                 style={emptyRoundButtonStyle}
@@ -157,7 +160,7 @@ export default function CreateNewCategoryModal(props) {
               <IconButton sx={{ color: 'black', transform: "scale(0.8)" }}>
                 <CgColorPicker />
               </IconButton>
-            </Box>
+            </Box> */}
 
             <Box>
               <Button className='button-mediumBlue' onClick={props.handleClose}>Create category</Button>

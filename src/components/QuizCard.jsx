@@ -66,7 +66,7 @@ export default function CategoryCard(props) {
             <Typography /*gutterBottom variant="h5" component="div" */ sx={{ flex: 1, minWidth: 0 }}>
               {/* By default, flex containers will try to distribute space among their children elements based 
             on their content and available space. When you add content to one child element, it can affect the layout of other child elements. */}
-              {props.quiz.Name} {modalState.toString()}
+              {props.quiz.Name}
             </Typography>
 
             <CardActions style={{ all: "initial" }}>
@@ -103,9 +103,13 @@ export default function CategoryCard(props) {
             <span
               key={index}
               style={{
-                border: '1px solid black',
+                border: '1px solid rgba(103, 194, 124, 255)',
                 padding: '1px',
-                borderRadius: '10px',
+                paddingLeft: '7px',
+                paddingRight: '7px',
+                borderRadius: '15px',
+                color: 'rgba(103, 194, 124, 255)',
+                background: 'rgba(103, 194, 124, .09)',
                 marginRight: '5px', // Add marginRight to create spacing between tags
               }}
             >
