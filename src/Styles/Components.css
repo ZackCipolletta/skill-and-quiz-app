@@ -3,8 +3,8 @@
     --lightBlue: rgb(215, 237, 255, 255);
     --mediumBlue: rgba(72, 139, 253, 255);
     --lightGreen: rgba(103, 194, 124, 255);
-    --warning: rgba(255,89,100,255);
-    --darkMediumBlue: rgba(48,86,211,255);
+    --warning: rgba(255, 89, 100, 255);
+    --darkMediumBlue: rgba(48, 86, 211, 255);
 
 }
 
@@ -130,4 +130,14 @@ Button.button-darkMediumBlue {
 .MuiTypography-root.inputLabel {
     font-size: larger;
     font-weight: 600;
+}
+
+.MuiButton-root {
+    transition: box-shadow 0.3s;
+    /* Remove the single quotes */
+}
+
+.MuiButton-root:hover {
+    background-color: initial !important;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
 }

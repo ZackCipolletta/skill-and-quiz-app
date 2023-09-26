@@ -19,12 +19,12 @@ root.render(
       {/* <Landing /> */}
       {/* <Routes> */}
         {/* <Route path="/" element={<Landing />} /> */}
-      <Control />
+      {/* <Control /> */}
       
         {/* <Dashboard />  */}
         {/* <Route path="/SignUp" element={<SignUp />} />
         <Route path="/SignIn" element={<SignIn />} /> */}
-        {/* <SignUp /> */}
+        <SignUp />
         {/* <SignIn /> */}
         {/* <EmptyRoundButton /> */}
       {/* </Routes> */}
