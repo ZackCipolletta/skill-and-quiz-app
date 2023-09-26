@@ -1,10 +1,19 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Box, Button, Paper, Tabs, Tab, Typography, TextField } from '@mui/material';
+import {
+  Box, Button, Paper, Tabs, Tab, Typography, InputLabel,
+  TextField, FormControl, Select, MenuItem
+} from '@mui/material';
 import ColorTemplates from './ColorTemplates';
 import '../Styles/Components.css';
 
 export default function QuizQuestions() {
+
+  const [answerType, setAnswerType] = useState('');
+
+  const handleChange = (event) => {
+    setAnswerType(event.target.value);
+  };
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -12,7 +21,7 @@ export default function QuizQuestions() {
         Have Questions Already? Import them!
       </Typography>
       Import using CSV
-      
+
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Questions
       </Typography>
@@ -27,37 +36,33 @@ export default function QuizQuestions() {
         height="50px"
         size='small'
         sx={{
-          width: 350
+          width: 550
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
       />
       <Button className='button-mediumBlue' sx={{ ml: 4 }}>Add</Button>
 
-      {/* {selectedButton.toString()} */}
-      <Typography className='inputLabel' sx={{ mt: 1 }} >
-        Select a quiz picture
-      </Typography>
-      <Typography>
-        Or here are some templates to help you get started
-      </Typography>
-      <ColorTemplates />
+      <Box sx={{ ml: -1, mt: 5 }}>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <InputLabel id="demo-select-small-label">Answer Type</InputLabel>
+          <Select
+            value={answerType}
+            label="AnswerType"
+            onChange={handleChange}
+            displayEmpty
+            inputProps={{ 'aria-label': 'Without label' }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={'Single Choice'}>Single Choice</MenuItem>
+            <MenuItem value={'Multiple Choice'}>Multiple Choice</MenuItem>
+            <MenuItem value={'Type in Answer'}>Type in Answer</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
 
-      <Typography className='inputLabel' >
-        Tags
-      </Typography>
-      <TextField
-        margin="normal"
-        required
-        id="QuizName"
-        placeholder="Enter Quiz Name"
-        name="QuizName"
-        autoFocus
-        className='input-field'
-        height="50px"
-        sx={{
-          width: 350
-        }}
-      />
+
     </Box >
   );
 }
