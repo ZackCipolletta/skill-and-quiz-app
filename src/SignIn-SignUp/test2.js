@@ -1,33 +1,34 @@
-import React, { useState } from "react";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React from "react";
+import Header from './Header';
+import CreateNewQuiz from './CreateNewQuiz';
+import { useParams } from 'react-router-dom';
 
-export default function SelectSmall() {
-  const [age, setAge] = useState('');
+export default function Control() {
+  // Access the current route parameters
+  const { page } = useParams();
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  // Conditionally render components based on the route parameter
+  let content;
+  switch (page) {
+    case 'quizzes':
+      content = <CreateNewQuiz />;
+      break;
+    // Add other cases for different route paths and corresponding components
+
+    default:
+      // Handle the default case, e.g., render a not found component
+      content = <NotFoundComponent />;
+      break;
+  }
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel id="demo-select-small-label">Age</InputLabel>
-      <Select
-        labelId="demo-select-small-label"
-        id="demo-select-small"
-        value={answerType}
-        label="answerType"
-        onChange={handleChange}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={10}>tiffy</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
+    <>
+      <div className="header">
+        <div className="Dash-and-Header" >
+          <Header />
+          {content} {/* Render the content based on the route */}
+        </div>
+      </div>
+    </>
   );
 }

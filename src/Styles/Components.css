@@ -24,11 +24,20 @@ Button.button-black {
     color: white;
     font-size: 18px;
     font-weight: 600;
+    &:hover {
+        background-color: rgb(41, 41, 41, 255);
+    }
+    
 }
 
 Button.button-mediumBlue {
     background-color: var(--mediumBlue);
     color: white;
+
+    &:hover {
+        background-color: var(--mediumBlue);
+        /* filter: brightness(90%); */
+    }
 }
 
 Button.button-redButton {
@@ -138,6 +147,5 @@ Button.button-darkMediumBlue {
 }
 
 .MuiButton-root:hover {
-    background-color: initial !important;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
