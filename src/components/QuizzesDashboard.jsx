@@ -4,16 +4,16 @@ import React, { useState } from "react";
 import { Button } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom';
 
 export default function QuizzesDashboard() {
 
-  const [modalState, setModalState] = useState(false);
+  const navigate = useNavigate();
 
-  const handleCreateNewCategoryClick = () => {
-    // Handle the click event for the IconButton here
-    // You can add your logic here
-    setModalState(!modalState);
+  const handleCreateNewQuizClick = () => {
+    navigate('/questions')
   };
+
 
   return (
     <div style={{ marginTop: '20px' }} >
@@ -37,7 +37,7 @@ export default function QuizzesDashboard() {
           <Button
             className='button-mediumBlue'
             style={{ marginLeft: '50px' }}
-            onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
+            onClick={(event) => handleCreateNewQuizClick(event, 'delete')}
           >
             <AddIcon />
             Create new quiz

@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import QuizQuestions from './QuizQuestions';
 
 
-export default function Control( {page} ) {
+export default function Control({ page }) {
 
   // We may end up having to use state to update a 'CurrentlyVisibleState' which
   // will dictate what is mounted in Control
@@ -21,20 +21,29 @@ export default function Control( {page} ) {
 
   switch (page) {
     case 'quizzes':
-      content = <Quizzes />;
+      content =
+        <>
+        <QuizzesDashboard />
+        <Quizzes />
+        </>
+        
       break;
     case 'questions':
       content = <CreateNewQuiz />;
       break;
     case 'categories':
-      content = <QuizCategories />;
+      content =
+        <>
+          <QuizCategoryDashboard />,
+          <QuizCategories />;
+        </>;
       break;
-    
+
     default:
       content = <Header />;
       break;
   }
-  
+
 
   return (
     <>
@@ -42,16 +51,16 @@ export default function Control( {page} ) {
         <div className="Dash-and-Header" >
 
           <Header /> {/*The Header component will be shown on each page.*/}
-              {/* <QuizCategoryDashboard /> */}
-              {/* <QuizzesDashboard /> */}
-              {/* Maybe what we need to do is a ternary operator inside of QuizCategoryDashboard to 
+          {/* <QuizCategoryDashboard /> */}
+          {/* <QuizzesDashboard /> */}
+          {/* Maybe what we need to do is a ternary operator inside of QuizCategoryDashboard to 
             conditionally display the title 'Quiz Board' or 'Quizzes' depending on which is being viewed. 
             Alternately we pass in a value into QuizCategoryDashboard from either the QuizBoard or
             Quizzes component which will then be rendered in a placeholder*/}
-              {/* <Quizzes /> */}
-              {/* <QuizCategories /> */}
-              {content}
-              {/* <CreateNewQuiz /> */}
+          {/* <Quizzes /> */}
+          {/* <QuizCategories /> */}
+          {content}
+          {/* <CreateNewQuiz /> */}
         </div>
       </div>
     </>

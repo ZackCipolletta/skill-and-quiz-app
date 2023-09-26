@@ -11,12 +11,23 @@
 Button.button-darkBlue {
     background-color: var(--darkBlue);
     color: white;
+
+    &:hover {
+        background-color: var(--darkBlue);
+        color: white;
+    }
 }
+
 
 Button.button-lightBlue {
     background-color: var(--lightBlue);
     color: var(--darkBlue);
     font-weight: 600;
+
+    &:hover {
+        background-color: var(--lightBlue);
+        color: var(--darkBlue);
+    }
 }
 
 Button.button-black {
@@ -24,10 +35,10 @@ Button.button-black {
     color: white;
     font-size: 18px;
     font-weight: 600;
+
     &:hover {
         background-color: rgb(41, 41, 41, 255);
     }
-    
 }
 
 Button.button-mediumBlue {
@@ -43,11 +54,21 @@ Button.button-mediumBlue {
 Button.button-redButton {
     background-color: var(--warning);
     color: white;
+
+    &:hover {
+        background-color: var(--warning);
+        color: white;
+    }
 }
 
 Button.button-darkMediumBlue {
     background-color: var(--darkMediumBlue);
     color: white;
+
+    &:hover {
+        background-color: var(--darkMediumBlue);
+        color: white;
+    }
 }
 
 .signIn-paper {

@@ -10,14 +10,14 @@ function Landing() {
 
   const navigate = useNavigate();
 
-const handleLoginButtonClick = () => {
-  navigate('/SignIn')
+  const handleLoginButtonClick = () => {
+    navigate('/SignIn');
   };
-  
-const handleSignUpButtonClick = () => {
-  navigate('/SignUp')
-};
-  
+
+  const handleSignUpButtonClick = () => {
+    navigate('/SignUp');
+  };
+
 
   return (
     <div className="App">
