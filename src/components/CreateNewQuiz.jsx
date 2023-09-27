@@ -45,10 +45,25 @@ export default function CreateNewQuiz() {
           borderBottom: 1, 
           borderColor: 'divider'
         }} >
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Details" sx={{ textTransform: 'none' }} />
-            <Tab label="Questions" sx={{ textTransform: 'none' }} />
-            <Tab label="Schedule" sx={{ textTransform: 'none' }} />
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="Details" sx={{
+              textTransform: 'none',
+              fontWeight: '525',
+              color: '#a2a2a2',
+              fontSize: 'larger'
+            }} />
+            <Tab label="Questions" sx={{
+              textTransform: 'none',
+              fontWeight: '525',
+              color: '#a2a2a2',
+              fontSize: 'larger'
+            }} />
+            <Tab label="Schedule" sx={{
+              textTransform: 'none',
+              fontWeight: '525',
+              color: '#a2a2a2',
+              fontSize: 'larger'
+            }} />
           </Tabs>
           <Box>
             <Button className="button-darkMediumBlue" sx={{ mr: "20px" }}>Preview</Button>

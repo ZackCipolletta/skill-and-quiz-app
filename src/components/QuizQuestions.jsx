@@ -32,8 +32,12 @@ export default function QuizQuestions() {
           p: 0,
           pr: 1,
           borderRadius: '10px',
-          color: 'gray',
-          borderColor: 'black'
+          color: '#a2a2a2',
+          borderColor: '#c4c4c4',
+          '&:hover': {
+            borderColor: 'black',
+            backgroundColor: 'white'
+          }
         }}
       >
         <IconButton>
@@ -45,40 +49,68 @@ export default function QuizQuestions() {
         Questions
       </Typography>
       <TextField
-        // margin="normal"
         required
         id='QuizName'
         placeholder='Enter Question'
         name='QuizName'
-        autoFocus
         className='input-field'
         height='50px'
         size='small'
         sx={{
           width: 550
         }}
-        InputProps={{ sx: { borderRadius: 2 } }}
+        InputProps={{ sx: { borderRadius: 2, borderColor: 'purple !important' } }}
       />
       <Button className='button-mediumBlue' sx={{ ml: 4, }}>Add</Button>
 
       <Box sx={{ mt: 5 }}>
-        <FormControl sx={{ minWidth: 250 }} size='small'>
-          <InputLabel id="select-answer-type">Answer Type</InputLabel>
-          <Select
-
-            labelId='select-answer-type'
-            id='select-answer-type'
-            value={answerType}
-            onChange={handleChange}
-            label='answerType'
+        <FormControl size='small'>
+          <InputLabel id="select-answer-type"
+            sx={{
+              color: "#a2a2a2"
+            }}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={'Single Choice'}>Single Choice</MenuItem>
-            <MenuItem value={'Multiple Choice'}>Multiple Choice</MenuItem>
-            <MenuItem value={'Type in Answer'}>Type in Answer</MenuItem>
-          </Select> <AddBoxOutlinedIcon /> Add another option
+            Answer Type
+          </InputLabel>
+          <div >
+            <Select
+
+              labelId='select-answer-type'
+              id='select-answer-type'
+              value={answerType}
+              onChange={handleChange}
+              label='answerType'
+              sx={{
+                minWidth: 200,
+                mr: 2,
+                borderRadius: 2
+              }}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={'Single Choice'}>Single Choice</MenuItem>
+              <MenuItem value={'Multiple Choice'}>Multiple Choice</MenuItem>
+              <MenuItem value={'Type in Answer'}>Type in Answer</MenuItem>
+            </Select>
+
+            {(answerType === 'Single Choice' || answerType === 'Multiple Choice') && (
+              <>
+                <IconButton>
+                  <AddBoxOutlinedIcon sx={{ color: "rgba(72, 139, 253, 255)" }} />
+                </IconButton>
+                <Typography
+                  component="span"
+                  sx={{
+                    color: '#a2a2a2'
+                  }}>
+                  Add another option
+                </Typography>
+              </>
+            )}
+
+          </div>
+
         </FormControl>
       </Box>
 
