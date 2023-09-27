@@ -14,9 +14,14 @@ import { FaFileCsv } from 'react-icons/fa';
 export default function QuizQuestions() {
 
   const [answerType, setAnswerType] = useState('');
+  const [options, setOptions] = useState(0);
 
   const handleChange = (event) => {
     setAnswerType(event.target.value);
+  };
+
+  const handleAddOptionClick = () => {
+    setOptions(options < 4 ? options + 1 : options);
   };
 
   return (
@@ -97,7 +102,8 @@ export default function QuizQuestions() {
             {(answerType === 'Single Choice' || answerType === 'Multiple Choice') && (
               <>
                 <IconButton>
-                  <AddBoxOutlinedIcon sx={{ color: "rgba(72, 139, 253, 255)" }} />
+                  <AddBoxOutlinedIcon sx={{ color: "rgba(72, 139, 253, 255)" }}
+                    onClick={handleAddOptionClick} />
                 </IconButton>
                 <Typography
                   component="span"
@@ -105,14 +111,34 @@ export default function QuizQuestions() {
                     color: '#a2a2a2'
                   }}>
                   Add another option
+                  {options.toString()}
                 </Typography>
               </>
             )}
-
           </div>
-
         </FormControl>
       </Box>
+
+      {options >= 1 && (
+        <Typography>
+          option 1
+        </Typography>
+      )}
+      {options >= 2 && (
+        <Typography>
+          option 2
+        </Typography>
+      )}
+      {options >= 3 && (
+        <Typography>
+          option 3
+        </Typography>
+      )}
+      {options >= 4 && (
+        <Typography>
+          option 4
+        </Typography>
+      )}
 
 
     </Box >
