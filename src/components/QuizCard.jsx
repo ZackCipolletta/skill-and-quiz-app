@@ -103,12 +103,12 @@ export default function CategoryCard(props) {
             <span
               key={index}
               style={{
-                border: '1px solid rgba(103, 194, 124, 255)',
+                border: '1px solid #67c27c',
                 padding: '1px',
                 paddingLeft: '7px',
                 paddingRight: '7px',
                 borderRadius: '15px',
-                color: 'rgba(103, 194, 124, 255)',
+                color: '#67c27c',
                 background: 'rgba(103, 194, 124, .09)',
                 marginRight: '5px', // Add marginRight to create spacing between tags
               }}

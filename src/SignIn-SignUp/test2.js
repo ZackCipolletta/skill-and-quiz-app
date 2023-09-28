@@ -1,75 +1,76 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
 import {
-  Box, Button, Paper, Tabs, Tab, Typography, InputLabel,
-  TextField, FormControl, Select, MenuItem, IconButton,
+  Box,
+  TextField,
+  Button,
+  Typography,
 } from '@mui/material';
-import ColorTemplates from './ColorTemplates';
-import '../Styles/Components.css';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import { FaFileCsv } from 'react-icons/fa';
-import { TfiClose } from 'react-icons/tfi';
 
-export default function QuizQuestions() {
-  const [answerType, setAnswerType] = useState('');
-  const [options, setOptions] = useState(0);
+export default function QuizDetails() {
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState(''); // State for the new tag input field
 
-  const handleChange = (event) => {
-    setAnswerType(event.target.value);
-  };
-
-  const handleAddOptionClick = () => {
-    if (options < 4) {
-      setOptions(options + 1);
+  const handleAddClick = () => {
+    if (newTag.trim() !== "") {
+      setTags([...tags, newTag]); // Add the new tag to the array
+      setNewTag(""); // Clear the input field
     }
   };
 
-  const handleRemoveClick = () => {
-    if (options > 0) {
-      setOptions(options - 1);
-    }
-  };
-
-  const generateOptionFields = () => {
-    const optionFields = [];
-
-    for (let i = 0; i < options; i++) {
-      const optionPlaceholder = String.fromCharCode(65 + i); // A, B, C, D, ...
-
-      optionFields.push(
-        <Box key={i} sx={{ mt: 1 }}>
-          <TextField
-            required
-            id={`QuizName-Option-${optionPlaceholder}`}
-            placeholder={`Enter Option ${optionPlaceholder}`}
-            name={`QuizName-Option-${optionPlaceholder}`}
-            className='input-field'
-            height='50px'
-            size='small'
-            sx={{
-              width: 200
-            }}
-            InputProps={{ sx: { borderRadius: 2 } }}
-          />
-          {i > 0 && (
-            <IconButton sx={{ transform: "scale(0.5)" }} onClick={handleRemoveClick}>
-              <TfiClose />
-            </IconButton>
-          )}
-        </Box>
-      );
-    }
-
-    return optionFields;
+  const handleRemoveClick = (tagToRemove) => {
+    const updatedTags = tags.filter(tag => tag !== tagToRemove);
+    setTags(updatedTags);
   };
 
   return (
     <Box sx={{ width: '100%' }}>
-      {/* ... Other components */}
-      <Box id='answersList'>
-        {generateOptionFields()}
+      {/* ...other code */}
+      
+      <Typography className='inputLabel'>
+        Tags
+      </Typography>
+      <Box style={{
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        <TextField
+          margin="normal"
+          required
+          id="QuizTags"
+          placeholder="Placeholder"
+          name="QuizTags"
+          autoFocus
+          className='Placeholder'
+          size='small'
+          sx={{
+            width: 250
+          }}
+          InputProps={{
+            sx: { borderRadius: 2 },
+            value: newTag, // Bind the input field value to the state
+            onChange: (e) => setNewTag(e.target.value), // Handle input change
+          }}
+        />
+        <Button
+          className='button-mediumBlue'
+          sx={{ ml: 3 }}
+          onClick={handleAddClick}>
+          Add
+        </Button>
       </Box>
-      {/* ... Other components */}
-    </Box >
+
+      {/* Display the added tags */}
+      {tags.map((tag, index) => (
+        <span key={index} className="tag">
+          {tag}
+          <Button
+            className='button-mediumBlue'
+            sx={{ ml: 1 }}
+            onClick={() => handleRemoveClick(tag)}>
+            Remove
+          </Button>
+        </span>
+      ))}
+    </Box>
   );
 }
