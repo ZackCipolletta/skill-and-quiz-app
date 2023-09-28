@@ -7,16 +7,12 @@ import AddIcon from '@mui/icons-material/Add';
 import CreateNewCategoryModal from './CreateNewCategoryModal';
 import QuizCategories from './QuizCategories';
 
-
-
-
 export default function QuizCategoryDashboard() {
 
   const [modalState, setModalState] = useState(false);
-  // const categoriesArray = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
   const [categoriesArray, setCategoriesArray] = useState([]);
 
-  const categoriesArr = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
+  const categoriesArr = [{ Name: "Science", Color: '#cfd9fa' }, { Name: "Maths", Color: '#67c27c' }, { Name: "English", Color: '#cfd9fa' }];
 
   useEffect(() => {
     setCategoriesArray([...categoriesArray, ...categoriesArr]);
@@ -25,8 +21,6 @@ export default function QuizCategoryDashboard() {
   const addCategory = (newCat) => {
     setCategoriesArray([...categoriesArray, newCat])
   }
-
-
 
   const handleCreateNewCategoryClick = () => {
     // Handle the click event for the IconButton here
@@ -53,7 +47,6 @@ export default function QuizCategoryDashboard() {
           }}>
             <SearchBar />
 
-            {/* 'ml' does not work here, we must use marginLeft */}
             <Button
               className='button-mediumBlue'
               style={{ marginLeft: '50px' }}
@@ -69,7 +62,6 @@ export default function QuizCategoryDashboard() {
           toggle={modalState}
           handleCancel={handleCreateNewCategoryClick}
           handleAddNewCategory={addCategory}
-          categoriesArray={categoriesArray}
         />
       </div>
       <QuizCategories categoriesArray={categoriesArray} />

@@ -31,7 +31,7 @@ export default function CategoryCard(props) {
 
     // Handle the click event for the IconButton here
     // You can add your logic here
-    setCategoryName(props.category)
+    setCategoryName(props.catName);
     setModalState(!modalState);
   };
 
@@ -54,7 +54,10 @@ export default function CategoryCard(props) {
       >
         {/* borderRadius controls how rounded the corners are */}
         <CardActionArea>
-          <CardHeader sx={{ backgroundColor: '#cfd9fa', height: 50 }} />
+
+          {/* ___________________________________________________________________________________________ */}
+          <CardHeader sx={{ backgroundColor: `${props.color}`, height: 50 }} />
+          {/* ___________________________________________________________________________________________ */}
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
@@ -66,7 +69,7 @@ export default function CategoryCard(props) {
             <Typography /*gutterBottom variant="h5" component="div" */ sx={{ flex: 1, minWidth: 0 }}>
               {/* By default, flex containers will try to distribute space among their children elements based 
             on their content and available space. When you add content to one child element, it can affect the layout of other child elements. */}
-              {props.category} {modalState.toString()}
+              {props.catName} {modalState.toString()}
             </Typography>
 
             <CardActions style={{ all: "initial" }}>

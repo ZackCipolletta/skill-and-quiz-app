@@ -1,14 +1,20 @@
 import React, { useState } from "react";
-import { Box, Button, IconButton} from '@mui/material';
+import { Box, Button, IconButton } from '@mui/material';
 import '../Styles/Components.css';
 import { CgColorPicker } from 'react-icons/cg';
 
 export default function ColorTemplates(props) {
 
   const [selectedButton, setSelectedButton] = useState(null);
+  // const [selectedColor, setSelectedColor] = useState(null);
 
-  const handleChange = (buttonName) => {
+
+  // selectColor
+
+  const handleChange = (buttonName, color) => {
     setSelectedButton(buttonName);
+    // setSelectedColor(color);
+    props.selectColor(color);
   };
 
   const emptyRoundButtonStyle = {
@@ -29,43 +35,28 @@ export default function ColorTemplates(props) {
           variant="outlined"
           style={emptyRoundButtonStyle}
           sx={{
-            backgroundColor: 'rgba(167,215,249,255)',
-            border: selectedButton === 'button1' ? '2px solid rgb(62, 167, 242) !important' : 'transparent',
+            backgroundColor: '#a7d7f9',
+            border: selectedButton === 'button1' ? '2px solid #3ea7f2 !important' : 'transparent',
             '&:hover': {
-              backgroundColor: 'rgba(167, 215, 249, 1)',
-              border: '2px solid rgb(62, 167, 242) !important'
+              backgroundColor: '#a7d7f9',
+              border: '2px solid #3ea7f2 !important'
             }
           }}
-          onClick={() => handleChange('button1')}
+          onClick={() => handleChange('button1', '#a7d7f9')}
         >
         </Button>
         <Button
           variant="outlined"
           style={emptyRoundButtonStyle}
           sx={{
-            backgroundColor: 'rgba(207,217,250,255)',
-            border: selectedButton === 'button2' ? '2px solid rgb(95, 129, 238) !important' : 'transparent',
+            backgroundColor: '#cfd9fa',
+            border: selectedButton === 'button2' ? '2px solid #5f81ee !important' : 'transparent',
             '&:hover': {
-              backgroundColor: 'rgba(207,217,250,255)',
-              border: '2px solid rgb(95, 129, 238) !important'
+              backgroundColor: '#cfd9fa',
+              border: '2px solid #5f81ee !important'
             }
           }}
-          onClick={() => handleChange('button2')}
-        >
-        </Button>
-
-        <Button
-          variant="outlined"
-          style={emptyRoundButtonStyle}
-          sx={{
-            backgroundColor: 'rgb(244,187,199,255)',
-            border: selectedButton === 'button3' ? '2px solid rgb(228, 87, 117) !important' : 'transparent',
-            '&:hover': {
-              backgroundColor: 'rgb(244,187,199,255)',
-              border: '2px solid rgb(228, 87, 117) !important'
-            }
-          }}
-          onClick={() => handleChange('button3')}
+          onClick={() => handleChange('button2', '#cfd9fa')}
         >
         </Button>
 
@@ -73,21 +64,36 @@ export default function ColorTemplates(props) {
           variant="outlined"
           style={emptyRoundButtonStyle}
           sx={{
-            backgroundColor: 'rgba(192,248,137,255)',
-            border: selectedButton === 'button4' ? '2px solid rgb(140, 242, 39) !important' : 'transparent',
+            backgroundColor: '#f4bbc7',
+            border: selectedButton === 'button3' ? '2px solid #e45775 !important' : 'transparent',
             '&:hover': {
-              backgroundColor: 'rgba(192,248,137,255)',
-              border: '2px solid rgb(140, 242, 39) !important'
+              backgroundColor: '#f4bbc7',
+              border: '2px solid #e45775 !important'
             }
           }}
-          onClick={() => handleChange('button4')}
+          onClick={() => handleChange('button3', '#f4bbc7')}
+        >
+        </Button>
+
+        <Button
+          variant="outlined"
+          style={emptyRoundButtonStyle}
+          sx={{
+            backgroundColor: '#c0f889',
+            border: selectedButton === 'button4' ? '2px solid #5fb60b !important' : 'transparent',
+            '&:hover': {
+              backgroundColor: '#c0f889',
+              border: '2px solid #5fb60b !important'
+            }
+          }}
+          onClick={() => handleChange('button4', '#c0f889')}
         >
         </Button>
 
         <IconButton sx={{ color: 'black', transform: "scale(0.8)" }}>
-                <CgColorPicker />
+          <CgColorPicker />
         </IconButton>
-        
+
       </Box>
     </div>
   );

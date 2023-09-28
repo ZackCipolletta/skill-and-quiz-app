@@ -11,8 +11,6 @@ import { CgColorPicker } from 'react-icons/cg';
 import ColorTemplates from "./ColorTemplates";
 import PropTypes from "prop-types";
 
-
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,14 +27,27 @@ const style = {
 
 export default function CreateNewCategoryModal(props) {
 
-  const [catName, setCatName] = useState("");
+  // const categoriesArr = [{ Name: "Science", Color: '#cfd9fa' }, { Name: "Maths", Color: '#67c27c' }, { Name: "English", Color: '#cfd9fa' }];
 
+  const [catName, setCatName] = useState("");
+  const [catColor, setCatColor] = useState("");
+  
   const modalState = props.toggle;
 
   const createCategory = () => {
-    props.handleAddNewCategory({ Name: catName });
-    console.log(props.categoriesArray)
-    close(); // Add () to call the handleClose function
+    if (catName.trim()) {
+      if (catColor?.trim()) {
+        props.handleAddNewCategory({ Name: catName, Color: catColor });
+      } else {
+        props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa' });
+      }
+    }
+    close();
+    setCatName("");
+  }
+
+  const handleCatColor = (col) => {
+    setCatColor(col);
   }
 
   const close = () => {
@@ -49,8 +60,6 @@ export default function CreateNewCategoryModal(props) {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={modalState}
-        // onClose={props.handleClose}
-
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -94,7 +103,9 @@ export default function CreateNewCategoryModal(props) {
               Here are some templates to help you get started
             </Typography>
 
-            <ColorTemplates />
+            <ColorTemplates
+            selectColor={handleCatColor}
+            />
             <Box>
               <Button
                 className='button-mediumBlue'
@@ -108,8 +119,6 @@ export default function CreateNewCategoryModal(props) {
       </Modal>
     </div>
   );
-
-
 }
 
 CreateNewCategoryModal.propTypes = {

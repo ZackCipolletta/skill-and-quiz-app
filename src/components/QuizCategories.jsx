@@ -23,7 +23,11 @@ export default function QuizCategories(props) {
     <div style={gridStyle}>
       {categoriesList.map((category, index) => (
 
-        <CategoryCard key={index} category={category.Name} />
+        <CategoryCard
+          key={index}
+          catName={category.Name}
+          color={category.Color}
+        />
       ))}
     </div >
   );
