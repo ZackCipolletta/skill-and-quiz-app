@@ -22,7 +22,7 @@ const style = {
   textAlign: 'center'
 };
 
-export default function DeleteCategoryModal(props) {
+export default function DeleteQuizModal(props) {
   const [open, setOpen] = useState(false);
   // const handleClose = props.toggle;
 
@@ -49,7 +49,7 @@ export default function DeleteCategoryModal(props) {
         <Fade in={modalState}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2" >
-              Do you want to delete "{props.selectedCategory}" category?
+              Do you want to delete "{props.selectedQuiz}"?
             </Typography>
             <Box>
               <Button

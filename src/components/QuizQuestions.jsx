@@ -46,7 +46,7 @@ export default function QuizQuestions() {
           <TextField
             required
             id={`Quiz-Answer-${optionsArray[i - 1]}`}
-            placeholder={`Enter Answer ${optionsArray[i]}`}
+            placeholder={`Enter Option ${optionsArray[i]}`}
             name={`Quiz-Answer-${optionsArray[i - 1]}`}
             className='input-field'
             height='50px'

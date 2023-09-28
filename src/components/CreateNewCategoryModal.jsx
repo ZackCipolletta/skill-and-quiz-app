@@ -9,6 +9,7 @@ import { TfiClose } from 'react-icons/tfi';
 import { IoCloseOutline } from 'react-icons/io5';
 import { CgColorPicker } from 'react-icons/cg';
 import ColorTemplates from "./ColorTemplates";
+import PropTypes from "prop-types";
 
 
 
@@ -24,9 +25,23 @@ const style = {
   borderRadius: '10px',
 };
 
+// const categoriesArr = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
+
 export default function CreateNewCategoryModal(props) {
 
+  const [catName, setCatName] = useState("");
+
   const modalState = props.toggle;
+
+  const createCategory = () => {
+    props.handleAddNewCategory({ Name: catName });
+    console.log(props.categoriesArray)
+    close(); // Add () to call the handleClose function
+  }
+
+  const close = () => {
+    props.handleCancel();
+  }
 
   return (
     <div>
@@ -34,7 +49,7 @@ export default function CreateNewCategoryModal(props) {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={modalState}
-        onClose={props.handleClose}
+        // onClose={props.handleClose}
 
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
@@ -50,7 +65,7 @@ export default function CreateNewCategoryModal(props) {
               <Typography id="transition-modal-title" className='inputLabel' >
                 Add name to Quiz Category
               </Typography>
-              <IconButton sx={{ transform: "scale(0.7)" }} onClick={props.handleCancel}>
+              <IconButton sx={{ transform: "scale(0.7)" }} onClick={close}>
                 <TfiClose />
               </IconButton>
             </Box>
@@ -59,14 +74,18 @@ export default function CreateNewCategoryModal(props) {
               required
               width="250"
               id="QuizName"
-              placeholder="Enter Quiz name"
+              placeholder="Enter Category Name"
               name="QuizName"
               autoFocus
               className='input-field'
               sx={{
                 width: 350
               }}
-              InputProps={{ sx: { borderRadius: 2 } }}
+              InputProps={{
+                sx: { borderRadius: 2 },
+                value: catName,
+                onChange: (e) => setCatName(e.target.value)
+              }}
             />
             <Typography id="transition-modal-title" className='inputLabel' sx={{ mt: 1 }} >
               Select custom colour
@@ -77,11 +96,25 @@ export default function CreateNewCategoryModal(props) {
 
             <ColorTemplates />
             <Box>
-              <Button className='button-mediumBlue' onClick={props.handleClose}>Create category</Button>
+              <Button
+                className='button-mediumBlue'
+                onClick={createCategory}
+              >
+                Create category
+              </Button>
             </Box>
           </Box>
         </Fade>
       </Modal>
     </div>
   );
+
+
 }
+
+CreateNewCategoryModal.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired,
+  handleAddNewCategory: PropTypes.func.isRequired,
+  toggle: PropTypes.bool.isRequired,
+};

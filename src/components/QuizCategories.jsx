@@ -3,9 +3,13 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
 import CategoryCard from './CategoryCard';
 
-const categoriesList = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
+// const categoriesList = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
 
-export default function QuizCategories() {
+
+
+export default function QuizCategories(props) {
+
+  const categoriesList = props.categoriesArray;
 
   // move card into it's own component, import into QuizBoard and add styling to accommodate multiple cards - 3 across and stacked vertically with appropriate spacing.
   const gridStyle = {

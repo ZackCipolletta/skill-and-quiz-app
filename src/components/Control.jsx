@@ -35,7 +35,6 @@ export default function Control({ page }) {
       content =
         <>
           <QuizCategoryDashboard />,
-          <QuizCategories />;
         </>;
       break;
 
