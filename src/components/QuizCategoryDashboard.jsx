@@ -12,7 +12,11 @@ export default function QuizCategoryDashboard() {
   const [modalState, setModalState] = useState(false);
   const [categoriesArray, setCategoriesArray] = useState([]);
 
-  const categoriesArr = [{ Name: "Science", Color: '#cfd9fa' }, { Name: "Maths", Color: '#67c27c' }, { Name: "English", Color: '#cfd9fa' }];
+  const categoriesArr = [
+    { Name: "Science", Color: '#cfd9fa', id: 1 },
+    { Name: "Maths", Color: '#67c27c', id: 2 },
+    { Name: "English", Color: '#cfd9fa', id: 3 }
+  ];
 
   useEffect(() => {
     setCategoriesArray([...categoriesArray, ...categoriesArr]);
@@ -26,8 +30,9 @@ export default function QuizCategoryDashboard() {
     setModalState(!modalState);
   };
 
-  const handleDeleteCategory = (index) => {
-    setCategoriesArray(categoriesArray.filter((cat) => cat.index !== index));
+  const handleDeleteCategory = (id) => {
+    console.log("The id is: " + id)
+    setCategoriesArray(categoriesArray.filter((cat) => cat.id !== id));
   };
 
   return (

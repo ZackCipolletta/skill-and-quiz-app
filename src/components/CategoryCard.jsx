@@ -7,6 +7,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import DeleteCategoryModal from './DeleteCategoryModal';
 import { PiTrashThin, PiTagChevron } from 'react-icons/pi';
+
 // PiTagChevronFill will be colored gold and used to signify a 'favorite' category
 
 export default function CategoryCard(props) {
@@ -27,9 +28,10 @@ export default function CategoryCard(props) {
 
   const handleDeleteConfirm = () => {
     setDeleteConfirm(true);
+    setModalState(!modalState);
   }
 
-  const handleDeleteButtonClick = (event, index) => {
+  const handleDeleteButtonClick = (event, id) => {
     // Prevent the click event from propagating to the CardActionArea
     event.stopPropagation();
 
@@ -37,7 +39,8 @@ export default function CategoryCard(props) {
     setModalState(!modalState);
 
     if (deleteConfirm) {
-      props.delete(index);
+      console.log("Inside quizCard the id is: " + id)
+      props.delete(id);
     }
   };
 
@@ -54,6 +57,7 @@ export default function CategoryCard(props) {
         ':hover': { boxShadow: 5 }
       }}
         index={props.index}
+        id={props.id}
       >
         {/* borderRadius controls how rounded the corners are */}
         <CardActionArea>
@@ -70,7 +74,7 @@ export default function CategoryCard(props) {
             <Typography /*gutterBottom variant="h5" component="div" */ sx={{ flex: 1, minWidth: 0 }}>
               {/* By default, flex containers will try to distribute space among their children elements based 
             on their content and available space. When you add content to one child element, it can affect the layout of other child elements. */}
-              {props.catName} {modalState.toString()}
+              {props.catName} {modalState.toString()} {props.id}
             </Typography>
 
             <CardActions style={{ all: "initial" }}>
@@ -88,7 +92,7 @@ export default function CategoryCard(props) {
                 marginRight: '-5px',
                 transform: "scale(.7) scaleY(1.2)"
               }}
-                onClick={(event) => handleDeleteButtonClick(event, props.index)}
+                onClick={(event) => handleDeleteButtonClick(event, props.id)}
               >
                 <PiTrashThin color='red' />
 

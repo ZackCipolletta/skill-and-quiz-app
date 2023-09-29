@@ -43,7 +43,7 @@ export default function DeleteCategoryModal(props) {
         slotProps={{
           backdrop: {
             timeout: 500,
-          },
+          }
         }}
       >
         <Fade in={modalState}>

@@ -24,15 +24,19 @@ export default function CreateNewCategoryModal(props) {
   const [catName, setCatName] = useState("");
   const [catColor, setCatColor] = useState("");
   
+
+  const [indexCounter, setIndexCounter] = useState(4); // ------------------------------DELETE THIS!!! -------------------------------------
+  
   const modalState = props.toggle;
 
   const createCategory = () => {
     if (catName?.trim()) {
       if (catColor?.trim()) {
-        props.handleAddNewCategory({ Name: catName, Color: catColor });
+        props.handleAddNewCategory({ Name: catName, Color: catColor, id: indexCounter });
       } else {
-        props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa' });
+        props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa', id: indexCounter });
       }
+      setIndexCounter(indexCounter + 1)
     }
     close();
     setCatName("");

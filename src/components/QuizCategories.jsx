@@ -5,8 +5,6 @@ import CategoryCard from './CategoryCard';
 
 // const categoriesList = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
 
-
-
 export default function QuizCategories(props) {
 
   const categoriesList = props.categoriesArray;
@@ -29,6 +27,7 @@ export default function QuizCategories(props) {
           color={category.Color}
           index={category.index}
           delete={props.delete}
+          id={category.id}
         />
       ))}
     </div >
