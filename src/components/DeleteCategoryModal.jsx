@@ -54,11 +54,14 @@ export default function DeleteCategoryModal(props) {
             <Box>
               <Button
                 className='button-redButton'
-              sx={{mr:5}}>
+                onClick={props.handleDeleteConfirm}
+                sx={{ mr: 5 }}>
                 Delete
               </Button>
               <Button
-                className='button-mediumBlue' onClick={props.handleClose}>
+                className='button-mediumBlue'
+                onClick={props.handleClose}
+              >
                 Cancel
               </Button>
             </Box>

@@ -19,13 +19,15 @@ export default function QuizCategoryDashboard() {
   }, []);
 
   const addCategory = (newCat) => {
-    setCategoriesArray([...categoriesArray, newCat])
-  }
+    setCategoriesArray([...categoriesArray, newCat]);
+  };
 
   const handleCreateNewCategoryClick = () => {
-    // Handle the click event for the IconButton here
-    // You can add your logic here
     setModalState(!modalState);
+  };
+
+  const handleDeleteCategory = (index) => {
+    setCategoriesArray(categoriesArray.filter((cat) => cat.index !== index));
   };
 
   return (
@@ -62,9 +64,13 @@ export default function QuizCategoryDashboard() {
           toggle={modalState}
           handleCancel={handleCreateNewCategoryClick}
           handleAddNewCategory={addCategory}
+          
         />
       </div>
-      <QuizCategories categoriesArray={categoriesArray} />
+      <QuizCategories
+        categoriesArray={categoriesArray}
+        delete={handleDeleteCategory}
+      />
     </>
   );
 }

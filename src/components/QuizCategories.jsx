@@ -27,6 +27,8 @@ export default function QuizCategories(props) {
           key={index}
           catName={category.Name}
           color={category.Color}
+          index={category.index}
+          delete={props.delete}
         />
       ))}
     </div >

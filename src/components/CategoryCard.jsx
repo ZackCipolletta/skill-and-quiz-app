@@ -9,11 +9,11 @@ import DeleteCategoryModal from './DeleteCategoryModal';
 import { PiTrashThin, PiTagChevron } from 'react-icons/pi';
 // PiTagChevronFill will be colored gold and used to signify a 'favorite' category
 
-
 export default function CategoryCard(props) {
 
   const [modalState, setModalState] = useState(false);
   const [categoryName, setCategoryName] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const theme = createTheme({
     palette: {
@@ -25,22 +25,24 @@ export default function CategoryCard(props) {
 
   const history = useNavigate();
 
-  const handleDeleteButtonClick = (event) => {
+  const handleDeleteConfirm = () => {
+    setDeleteConfirm(true);
+  }
+
+  const handleDeleteButtonClick = (event, index) => {
     // Prevent the click event from propagating to the CardActionArea
     event.stopPropagation();
 
-    // Handle the click event for the IconButton here
-    // You can add your logic here
     setCategoryName(props.catName);
     setModalState(!modalState);
+
+    if (deleteConfirm) {
+      props.delete(index);
+    }
   };
 
   const handleFavoriteButtonClick = (event, webAddress) => {
-    // Prevent the click event from propagating to the CardActionArea
     event.stopPropagation();
-
-    // Handle the click event for the IconButton here
-    // You can add your logic here
     history(webAddress);
   };
 
@@ -51,13 +53,12 @@ export default function CategoryCard(props) {
         borderRadius: '20px',
         ':hover': { boxShadow: 5 }
       }}
+        index={props.index}
       >
         {/* borderRadius controls how rounded the corners are */}
         <CardActionArea>
 
-          {/* ___________________________________________________________________________________________ */}
           <CardHeader sx={{ backgroundColor: `${props.color}`, height: 50 }} />
-          {/* ___________________________________________________________________________________________ */}
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
@@ -87,7 +88,7 @@ export default function CategoryCard(props) {
                 marginRight: '-5px',
                 transform: "scale(.7) scaleY(1.2)"
               }}
-                onClick={(event) => handleDeleteButtonClick(event, 'delete')}
+                onClick={(event) => handleDeleteButtonClick(event, props.index)}
               >
                 <PiTrashThin color='red' />
 
@@ -100,6 +101,7 @@ export default function CategoryCard(props) {
           toggle={modalState}
           handleClose={handleDeleteButtonClick}
           selectedCategory={categoryName}
+          handleDeleteConfirm={handleDeleteConfirm}
         />
       </Card>
 

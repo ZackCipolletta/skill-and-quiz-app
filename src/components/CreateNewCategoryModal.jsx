@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import {
   Backdrop, Box, Modal, Fade, TextField,
-  Button, Typography, IconButton, Radio
-} from '@mui/material';
+  Button, Typography, IconButton} from '@mui/material';
 import '../Styles/Components.css';
-import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import { TfiClose } from 'react-icons/tfi';
-import { IoCloseOutline } from 'react-icons/io5';
-import { CgColorPicker } from 'react-icons/cg';
 import ColorTemplates from "./ColorTemplates";
 import PropTypes from "prop-types";
 
@@ -23,11 +19,7 @@ const style = {
   borderRadius: '10px',
 };
 
-// const categoriesArr = [{ Name: "Science" }, { Name: "Maths" }, { Name: "English" }];
-
 export default function CreateNewCategoryModal(props) {
-
-  // const categoriesArr = [{ Name: "Science", Color: '#cfd9fa' }, { Name: "Maths", Color: '#67c27c' }, { Name: "English", Color: '#cfd9fa' }];
 
   const [catName, setCatName] = useState("");
   const [catColor, setCatColor] = useState("");
@@ -35,7 +27,7 @@ export default function CreateNewCategoryModal(props) {
   const modalState = props.toggle;
 
   const createCategory = () => {
-    if (catName.trim()) {
+    if (catName?.trim()) {
       if (catColor?.trim()) {
         props.handleAddNewCategory({ Name: catName, Color: catColor });
       } else {

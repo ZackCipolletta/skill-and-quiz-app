@@ -13,7 +13,6 @@ export default function ColorTemplates(props) {
 
   const handleChange = (buttonName, color) => {
     setSelectedButton(buttonName);
-    // setSelectedColor(color);
     props.selectColor(color);
   };
 
