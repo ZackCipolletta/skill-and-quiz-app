@@ -6,11 +6,15 @@ import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 import CreateNewCategoryModal from './CreateNewCategoryModal';
 import QuizCategories from './QuizCategories';
+import DeleteCategoryModal from './DeleteCategoryModal';
 
 export default function QuizCategoryDashboard() {
 
-  const [modalState, setModalState] = useState(false);
+  const [createModalState, seCreateModalState] = useState(false);
+  const [deleteModalState, seDeleteModalState] = useState(false);
   const [categoriesArray, setCategoriesArray] = useState([]);
+  const [deleteCategory, setDeleteCategory] = useState([]);
+  const [deleteCategoryId, setDeleteCategoryId] = useState([]);
 
   const categoriesArr = [
     { Name: "Science", Color: '#cfd9fa', id: 1 },
@@ -27,12 +31,20 @@ export default function QuizCategoryDashboard() {
   };
 
   const handleCreateNewCategoryClick = () => {
-    setModalState(!modalState);
+    seCreateModalState(!createModalState);
   };
 
-  const handleDeleteCategory = (id) => {
-    console.log("The id is: " + id)
-    setCategoriesArray(categoriesArray.filter((cat) => cat.id !== id));
+
+  const handleDeleteButtonClick = (event, id, cat) => {
+    seDeleteModalState(!deleteModalState);
+    setDeleteCategory(cat);
+    setDeleteCategoryId(id);
+  };
+
+  const handleDeleteConfirm = () => {
+    console.log("The Category id to delete is: " + deleteCategoryId);
+    seDeleteModalState(!deleteModalState);
+    setCategoriesArray(categoriesArray.filter((cat) => cat.id !== deleteCategoryId));
   };
 
   return (
@@ -66,15 +78,20 @@ export default function QuizCategoryDashboard() {
           </div>
         </div>
         <CreateNewCategoryModal
-          toggle={modalState}
+          toggle={createModalState}
           handleCancel={handleCreateNewCategoryClick}
           handleAddNewCategory={addCategory}
-          
         />
       </div>
       <QuizCategories
         categoriesArray={categoriesArray}
-        delete={handleDeleteCategory}
+        toggle={handleDeleteButtonClick}
+      />
+      <DeleteCategoryModal
+        toggle={deleteModalState}
+        handleClose={handleDeleteButtonClick}
+        selectedCategory={deleteCategory}
+        handleDeleteConfirm={handleDeleteConfirm}
       />
     </>
   );

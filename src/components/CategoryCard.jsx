@@ -7,6 +7,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import DeleteCategoryModal from './DeleteCategoryModal';
 import { PiTrashThin, PiTagChevron } from 'react-icons/pi';
+import PropTypes from "prop-types";
 
 // PiTagChevronFill will be colored gold and used to signify a 'favorite' category
 
@@ -31,17 +32,23 @@ export default function CategoryCard(props) {
     setModalState(!modalState);
   }
 
-  const handleDeleteButtonClick = (event, id) => {
+  // const handleDeleteButtonClick = (event, id) => {
+  //   // Prevent the click event from propagating to the CardActionArea
+  //   event.stopPropagation();
+
+  //   setCategoryName(props.catName);
+  //   setModalState(!modalState);
+
+  //   if (deleteConfirm) {
+  //     console.log("Inside quizCard the id is: " + id)
+  //     props.delete(id);
+  //   }
+  // };
+
+  const handleDeleteButtonClick = (e, id, catName) => {
     // Prevent the click event from propagating to the CardActionArea
-    event.stopPropagation();
-
-    setCategoryName(props.catName);
-    setModalState(!modalState);
-
-    if (deleteConfirm) {
-      console.log("Inside quizCard the id is: " + id)
-      props.delete(id);
-    }
+    e.stopPropagation();
+    props.toggle(e, id,catName);
   };
 
   const handleFavoriteButtonClick = (event, webAddress) => {
@@ -74,7 +81,7 @@ export default function CategoryCard(props) {
             <Typography /*gutterBottom variant="h5" component="div" */ sx={{ flex: 1, minWidth: 0 }}>
               {/* By default, flex containers will try to distribute space among their children elements based 
             on their content and available space. When you add content to one child element, it can affect the layout of other child elements. */}
-              {props.catName} {modalState.toString()} {props.id}
+              {props.catName} {props.id}
             </Typography>
 
             <CardActions style={{ all: "initial" }}>
@@ -92,7 +99,8 @@ export default function CategoryCard(props) {
                 marginRight: '-5px',
                 transform: "scale(.7) scaleY(1.2)"
               }}
-                onClick={(event) => handleDeleteButtonClick(event, props.id)}
+                // onClick={(event) => handleDeleteButtonClick(event, props.id)}
+                onClick={(event) => handleDeleteButtonClick(event, props.id, props.catName)}
               >
                 <PiTrashThin color='red' />
 
@@ -101,12 +109,12 @@ export default function CategoryCard(props) {
             {/* </div> */}
           </Box>
         </CardActionArea>
-        <DeleteCategoryModal
+        {/* <DeleteCategoryModal
           toggle={modalState}
           handleClose={handleDeleteButtonClick}
           selectedCategory={categoryName}
           handleDeleteConfirm={handleDeleteConfirm}
-        />
+        /> */}
       </Card>
 
     </ThemeProvider >

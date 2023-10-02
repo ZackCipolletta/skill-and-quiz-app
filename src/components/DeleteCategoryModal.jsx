@@ -23,9 +23,6 @@ const style = {
 };
 
 export default function DeleteCategoryModal(props) {
-  const [open, setOpen] = useState(false);
-  // const handleClose = props.toggle;
-
 
   const modalState = props.toggle;
 
