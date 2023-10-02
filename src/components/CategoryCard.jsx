@@ -6,16 +6,13 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DeleteCategoryModal from './DeleteCategoryModal';
-import { PiTrashThin, PiTagChevron } from 'react-icons/pi';
+import { PiTrashThin, PiTagChevron, PiTagChevronFill } from 'react-icons/pi';
 import PropTypes from "prop-types";
 
 // PiTagChevronFill will be colored gold and used to signify a 'favorite' category
 
 export default function CategoryCard(props) {
-
-  const [modalState, setModalState] = useState(false);
-  const [categoryName, setCategoryName] = useState(null);
-  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const { category } = props;
 
   const theme = createTheme({
     palette: {
@@ -27,34 +24,16 @@ export default function CategoryCard(props) {
 
   const history = useNavigate();
 
-  const handleDeleteConfirm = () => {
-    setDeleteConfirm(true);
-    setModalState(!modalState);
-  }
-
-  // const handleDeleteButtonClick = (event, id) => {
-  //   // Prevent the click event from propagating to the CardActionArea
-  //   event.stopPropagation();
-
-  //   setCategoryName(props.catName);
-  //   setModalState(!modalState);
-
-  //   if (deleteConfirm) {
-  //     console.log("Inside quizCard the id is: " + id)
-  //     props.delete(id);
-  //   }
-  // };
-
   const handleDeleteButtonClick = (e, id, catName) => {
     // Prevent the click event from propagating to the CardActionArea
     e.stopPropagation();
-    props.toggle(e, id,catName);
+    props.toggle(e, id, catName);
   };
 
-  const handleFavoriteButtonClick = (event, webAddress) => {
-    event.stopPropagation();
-    history(webAddress);
-  };
+  // const handleFavoriteButtonClick = (e, id) => {
+  //   e.stopPropagation();
+  //   // history(webAddress);
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,7 +48,7 @@ export default function CategoryCard(props) {
         {/* borderRadius controls how rounded the corners are */}
         <CardActionArea>
 
-          <CardHeader sx={{ backgroundColor: `${props.color}`, height: 50 }} />
+          <CardHeader sx={{ backgroundColor: `${category.Color}`, height: 50 }} />
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
@@ -81,7 +60,7 @@ export default function CategoryCard(props) {
             <Typography /*gutterBottom variant="h5" component="div" */ sx={{ flex: 1, minWidth: 0 }}>
               {/* By default, flex containers will try to distribute space among their children elements based 
             on their content and available space. When you add content to one child element, it can affect the layout of other child elements. */}
-              {props.catName} {props.id}
+              {category.Name} {category.id}
             </Typography>
 
             <CardActions style={{ all: "initial" }}>
@@ -91,16 +70,22 @@ export default function CategoryCard(props) {
                 marginRight: '-25px',
                 transform: "rotate(90deg) scale(.7) scaleY(1.2)"
               }}
-                onClick={(event) => handleFavoriteButtonClick(event, 'favorite')}
+                onClick={(event) => props.favorite(category.id)}
               >
-                <PiTagChevron color='black' />
+
+                
+                {category.Favorite ? (
+                  <PiTagChevronFill color='gold' />
+              ) : (  <PiTagChevron color='black' />
+          )}
+                
               </IconButton>
               <IconButton sx={{
                 marginRight: '-5px',
                 transform: "scale(.7) scaleY(1.2)"
               }}
                 // onClick={(event) => handleDeleteButtonClick(event, props.id)}
-                onClick={(event) => handleDeleteButtonClick(event, props.id, props.catName)}
+                onClick={(event) => handleDeleteButtonClick(event, category.id, category.Name)}
               >
                 <PiTrashThin color='red' />
 
@@ -109,12 +94,6 @@ export default function CategoryCard(props) {
             {/* </div> */}
           </Box>
         </CardActionArea>
-        {/* <DeleteCategoryModal
-          toggle={modalState}
-          handleClose={handleDeleteButtonClick}
-          selectedCategory={categoryName}
-          handleDeleteConfirm={handleDeleteConfirm}
-        /> */}
       </Card>
 
     </ThemeProvider >

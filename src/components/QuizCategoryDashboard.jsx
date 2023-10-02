@@ -8,22 +8,22 @@ import CreateNewCategoryModal from './CreateNewCategoryModal';
 import QuizCategories from './QuizCategories';
 import DeleteCategoryModal from './DeleteCategoryModal';
 
-export default function QuizCategoryDashboard() {
+export default function QuizCategoryDashboard(props) {
 
   const [createModalState, seCreateModalState] = useState(false);
   const [deleteModalState, seDeleteModalState] = useState(false);
   const [categoriesArray, setCategoriesArray] = useState([]);
   const [deleteCategory, setDeleteCategory] = useState([]);
-  const [deleteCategoryId, setDeleteCategoryId] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState([]);
 
-  const categoriesArr = [
-    { Name: "Science", Color: '#cfd9fa', id: 1 },
-    { Name: "Maths", Color: '#67c27c', id: 2 },
-    { Name: "English", Color: '#cfd9fa', id: 3 }
+  const catsArr = [
+    { Name: "Science", Color: '#cfd9fa', id: 1, Favorite: true },
+    { Name: "Maths", Color: '#67c27c', id: 2, Favorite: false },
+    { Name: "English", Color: '#cfd9fa', id: 3, Favorite: true }
   ];
 
   useEffect(() => {
-    setCategoriesArray([...categoriesArray, ...categoriesArr]);
+    setCategoriesArray([...catsArr]);
   }, []);
 
   const addCategory = (newCat) => {
@@ -34,17 +34,37 @@ export default function QuizCategoryDashboard() {
     seCreateModalState(!createModalState);
   };
 
+  const handleFavoriteButtonClick = (id) => {
+    console.log("Fav icon clicked. Id value is: " + id);
+    const index = categoriesArray.findIndex((category) => category.id === id);
+
+    if (index !== -1) {
+      const updatedCategoriesArray = [...categoriesArray];
+      updatedCategoriesArray[index].Favorite = !updatedCategoriesArray[index].Favorite;
+
+      setCategoriesArray(updatedCategoriesArray);
+    }
+    
+    reset();
+  };
 
   const handleDeleteButtonClick = (event, id, cat) => {
     seDeleteModalState(!deleteModalState);
     setDeleteCategory(cat);
-    setDeleteCategoryId(id);
+    setSelectedCategoryId(id);
+  };
+
+  const reset = () => {
+    setSelectedCategoryId([]);
+    setDeleteCategory([]);
   };
 
   const handleDeleteConfirm = () => {
-    console.log("The Category id to delete is: " + deleteCategoryId);
+    console.log("The Category id to delete is: " + selectedCategoryId);
     seDeleteModalState(!deleteModalState);
-    setCategoriesArray(categoriesArray.filter((cat) => cat.id !== deleteCategoryId));
+    setCategoriesArray(categoriesArray.filter((cat) => cat.id !== selectedCategoryId));
+
+    reset();
   };
 
   return (
@@ -86,6 +106,7 @@ export default function QuizCategoryDashboard() {
       <QuizCategories
         categoriesArray={categoriesArray}
         toggle={handleDeleteButtonClick}
+        favorite={handleFavoriteButtonClick}
       />
       <DeleteCategoryModal
         toggle={deleteModalState}

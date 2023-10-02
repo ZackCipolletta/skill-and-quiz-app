@@ -15,10 +15,6 @@ const Search = styled('div')(() => ({
   position: 'relative',
   width: '300px',
   height: '40px',
-
-  '&:hover': {
-    backgroundColor: alpha('#f4effd', 0.85), // color when hovering
-  },
 }));
 
 const SearchIconWrapper = styled('div')(() => ({

@@ -37,6 +37,7 @@ export default function CreateNewCategoryModal(props) {
         props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa', id: indexCounter });
       }
       setIndexCounter(indexCounter + 1)
+      setCatColor("");
     }
     close();
     setCatName("");
