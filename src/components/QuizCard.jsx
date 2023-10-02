@@ -7,8 +7,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import DeleteCategoryModal from './DeleteCategoryModal';
 import { PiTrashThin, PiTagChevron } from 'react-icons/pi';
-// PiTagChevronFill will be colored gold and used to signify a 'favorite' category
-
 
 export default function CategoryCard(props) {
 
@@ -76,7 +74,7 @@ export default function CategoryCard(props) {
                 marginRight: '-25px',
                 transform: "rotate(90deg) scale(.7) scaleY(1.2)"
               }}
-                onClick={(event) => handleFavoriteButtonClick(event, 'favorite')}
+                onClick={(event) => handleFavoriteButtonClick(event)}
               >
                 <PiTagChevron color='black' />
               </IconButton>

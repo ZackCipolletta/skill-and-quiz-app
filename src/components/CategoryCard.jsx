@@ -9,8 +9,6 @@ import DeleteCategoryModal from './DeleteCategoryModal';
 import { PiTrashThin, PiTagChevron, PiTagChevronFill } from 'react-icons/pi';
 import PropTypes from "prop-types";
 
-// PiTagChevronFill will be colored gold and used to signify a 'favorite' category
-
 export default function CategoryCard(props) {
   const { category } = props;
 
@@ -29,11 +27,6 @@ export default function CategoryCard(props) {
     e.stopPropagation();
     props.toggle(e, id, catName);
   };
-
-  // const handleFavoriteButtonClick = (e, id) => {
-  //   e.stopPropagation();
-  //   // history(webAddress);
-  // };
 
   return (
     <ThemeProvider theme={theme}>

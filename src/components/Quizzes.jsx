@@ -11,7 +11,6 @@ const quizList = [
 
 export default function Quizzes() {
 
-  // move card into it's own component, import into QuizBoard and add styling to accommodate multiple cards - 3 across and stacked vertically with appropriate spacing.
   const gridStyle = {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)', // Three columns with equal width
