@@ -2,11 +2,12 @@ import '../Styles/Components.css';
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
 import QuizCard from './QuizCard';
+import Cards from './Cards';
 
 const quizList = [
-  { Name: "Quiz1", tags: ['Tag1', 'Tag2', 'Tag3'] },
-  { Name: "Quiz2", tags: ['TagA', 'TagB', 'TagC'] },
-  { Name: "Quiz3", tags: ['Tag2', 'TagC']}
+  { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3'] },
+  { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'] },
+  { Name: "Quiz3", Color: '#cfd9fa', tags: ['Tag2', 'TagC']}
 ];
 
 export default function Quizzes() {
@@ -22,7 +23,11 @@ export default function Quizzes() {
     <div style={gridStyle}>
       {quizList.map((quiz, index) => (
 
-        <QuizCard key={index} quiz={quiz} />
+        <Cards
+          key={index}
+          cardInfo={quiz}
+          height={100}
+        />
       ))}
     </div >
   );

@@ -1,7 +1,7 @@
 import '../Styles/Components.css';
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
-import CategoryCard from './CategoryCard';
+import Cards from './Cards';
 
 export default function QuizCategories(props) {
 
@@ -18,11 +18,12 @@ export default function QuizCategories(props) {
     <div style={gridStyle}>
       {categoriesList.map((category, index) => (
 
-        <CategoryCard
+        <Cards
           key={index}
-          category={category}
+          cardInfo={category}
           toggle={props.toggle}
           favorite={props.favorite}
+          height={50}
         />
       ))}
     </div >
