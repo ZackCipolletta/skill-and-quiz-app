@@ -5,9 +5,9 @@ import QuizCard from './QuizCard';
 import Cards from './Cards';
 
 const quizList = [
-  { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3'] },
-  { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'] },
-  { Name: "Quiz3", Color: '#cfd9fa', tags: ['Tag2', 'TagC']}
+  { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3', ], id: 1, Favorite: false  },
+  { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false  },
+  { Name: "Quiz3", Color: '#cfd9fa', tags: ['Tag2', 'TagC'], id: 3, Favorite: true }
 ];
 
 export default function Quizzes() {
