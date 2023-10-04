@@ -27,7 +27,7 @@ export default function Cards(props) {
   const handleDeleteButtonClick = (e, id, catName) => {
     // Prevent the click event from propagating to the CardActionArea
     e.stopPropagation();
-    props.toggle(e, id, catName);
+    props.deleteClick(e, id, catName);
   };
 
   return (

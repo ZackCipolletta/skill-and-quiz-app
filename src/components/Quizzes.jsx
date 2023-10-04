@@ -1,22 +1,25 @@
 import '../Styles/Components.css';
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
-import QuizCard from './QuizCard';
+// import QuizCard from './QuizCard';
 import Cards from './Cards';
 
-const quizList = [
-  { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3', ], id: 1, Favorite: false  },
-  { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false  },
-  { Name: "Quiz3", Color: '#cfd9fa', tags: ['Tag2', 'TagC'], id: 3, Favorite: true }
-];
 
-export default function Quizzes() {
+export default function Quizzes(props) {
+
+  const { quizList } = props;
 
   const gridStyle = {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)', // Three columns with equal width
     gap: '16px', // Adjust the spacing between cards
     paddingTop: '50px',
+  };
+
+  const handleDeleteButtonClick = (event, id, cat) => {
+    // seDeleteModalState(!deleteModalState);
+    // setDeleteCategory(cat);
+    // setSelectedCategoryId(id);
   };
 
   return (
@@ -27,6 +30,7 @@ export default function Quizzes() {
           key={index}
           cardInfo={quiz}
           height={100}
+          deleteClick={handleDeleteButtonClick}
         />
       ))}
     </div >

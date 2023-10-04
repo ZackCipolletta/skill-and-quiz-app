@@ -3,11 +3,7 @@ import React, { } from "react";
 import Header from './Header';
 import QuizCategoryDashboard from './QuizCategoryDashboard';
 import QuizzesDashboard from './QuizzesDashboard';
-import QuizCategories from './QuizCategories';
-import Quizzes from './Quizzes';
 import CreateNewQuiz from './CreateNewQuiz';
-import { useParams } from 'react-router-dom';
-import QuizQuestions from './QuizQuestions';
 
 
 export default function Control({ page }) {
@@ -24,7 +20,6 @@ export default function Control({ page }) {
       content =
         <>
         <QuizzesDashboard />
-        <Quizzes />
         </>
         
       break;

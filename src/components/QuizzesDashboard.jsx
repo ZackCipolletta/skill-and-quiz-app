@@ -1,19 +1,55 @@
 
 import '../Styles/Components.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
+import DeleteCategoryModal from './DeleteCategoryModal';
+import Quizzes from './Quizzes';
 
 export default function QuizzesDashboard() {
 
+  const quizArr = [
+    { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
+    { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false },
+    { Name: "Quiz3", Color: '#cfd9fa', tags: ['Tag2', 'TagC'], id: 3, Favorite: true }
+  ];
   const navigate = useNavigate();
 
+  const [deleteQuiz, setDeleteQuiz] = useState([]);
+  const [quizzesArray, setQuizzesArray] = useState([]);
+  const [selectedQuiz, setSelectedQuiz] = useState([]);
+  // const [selectedQuiz, setSelectedQuiz] = useState([]);
+  const [deleteModalState, seDeleteModalState] = useState(false);
+
+
+  useEffect(() => {
+    setQuizzesArray([...quizArr]);
+  }, []);
+
   const handleCreateNewQuizClick = () => {
-    navigate('/questions')
+    navigate('/questions');
   };
 
+  const handleDeleteButtonClick = (event, id, quiz) => {
+    seDeleteModalState(!deleteModalState);
+    setSelectedQuiz(quiz);
+    // setSelectedCategoryId(id);
+  };
+
+  const reset = () => {
+    // setSelectedCategoryId([]);
+    // setDeleteCategory([]);
+  };
+
+  const handleDeleteConfirm = () => {
+    // console.log("The Category id to delete is: " + selectedCategoryId);
+    // seDeleteModalState(!deleteModalState);
+    // setCategoriesArray(categoriesArray.filter((cat) => cat.id !== selectedCategoryId));
+
+    reset();
+  };
 
   return (
     <div style={{ marginTop: '20px' }} >
@@ -45,6 +81,15 @@ export default function QuizzesDashboard() {
 
         </div>
       </div>
+      <Quizzes
+        quizList={quizzesArray}
+
+      />
+      <DeleteCategoryModal
+        toggle={deleteModalState}
+        handleClose={handleDeleteButtonClick}
+      // selectedCard={`"${deleteCategory}" quiz`}
+      />
     </div>
   );
 }

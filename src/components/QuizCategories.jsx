@@ -21,7 +21,7 @@ export default function QuizCategories(props) {
         <Cards
           key={index}
           cardInfo={category}
-          toggle={props.toggle}
+          deleteClick={props.deleteClick}
           favorite={props.favorite}
           height={50}
         />

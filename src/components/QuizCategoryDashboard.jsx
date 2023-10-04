@@ -60,7 +60,6 @@ export default function QuizCategoryDashboard(props) {
   };
 
   const handleDeleteConfirm = () => {
-    console.log("The Category id to delete is: " + selectedCategoryId);
     seDeleteModalState(!deleteModalState);
     setCategoriesArray(categoriesArray.filter((cat) => cat.id !== selectedCategoryId));
 
@@ -105,13 +104,13 @@ export default function QuizCategoryDashboard(props) {
       </div>
       <QuizCategories
         categoriesArray={categoriesArray}
-        toggle={handleDeleteButtonClick}
+        deleteClick={handleDeleteButtonClick}
         favorite={handleFavoriteButtonClick}
       />
       <DeleteCategoryModal
         toggle={deleteModalState}
         handleClose={handleDeleteButtonClick}
-        selectedCategory={deleteCategory}
+        selectedCard={`"${deleteCategory}" category`}
         handleDeleteConfirm={handleDeleteConfirm}
       />
     </>
