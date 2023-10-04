@@ -51,6 +51,20 @@ export default function QuizzesDashboard() {
     reset();
   };
 
+  const handleFavoriteButtonClick = (id) => {
+    console.log("Fav icon clicked. Id value is: " + id);
+    const index = quizzesArray.findIndex((quiz) => quiz.id === id);
+
+    if (index !== -1) {
+      const updatedQuizzesArray = [...quizzesArray];
+      updatedQuizzesArray[index].Favorite = !updatedQuizzesArray[index].Favorite;
+
+      setQuizzesArray(updatedQuizzesArray);
+    }
+    
+    reset();
+  };
+
   return (
     <div style={{ marginTop: '20px' }} >
       <div style={{
@@ -84,6 +98,7 @@ export default function QuizzesDashboard() {
       <Quizzes
         quizList={quizzesArray}
         deleteClick={handleDeleteButtonClick}
+        favorite={handleFavoriteButtonClick}
       />
       <DeleteModal
         toggle={deleteModalState}

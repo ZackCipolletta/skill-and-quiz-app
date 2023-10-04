@@ -16,12 +16,6 @@ export default function Quizzes(props) {
     paddingTop: '50px',
   };
 
-  const handleDeleteButtonClick = (event, id, cat) => {
-    // seDeleteModalState(!deleteModalState);
-    // setDeleteCategory(cat);
-    // setSelectedCategoryId(id);
-  };
-
   return (
     <div style={gridStyle}>
       {quizList.map((quiz, index) => (
@@ -30,7 +24,7 @@ export default function Quizzes(props) {
           key={index}
           cardInfo={quiz}
           height={100}
-          // deleteClick={handleDeleteButtonClick}
+          favorite={props.favorite}
           deleteClick={props.deleteClick}
         />
       ))}
