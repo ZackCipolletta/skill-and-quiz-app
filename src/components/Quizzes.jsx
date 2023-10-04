@@ -30,7 +30,8 @@ export default function Quizzes(props) {
           key={index}
           cardInfo={quiz}
           height={100}
-          deleteClick={handleDeleteButtonClick}
+          // deleteClick={handleDeleteButtonClick}
+          deleteClick={props.deleteClick}
         />
       ))}
     </div >

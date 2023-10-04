@@ -17,10 +17,10 @@ export default function QuizzesDashboard() {
   ];
   const navigate = useNavigate();
 
-  const [deleteQuiz, setDeleteQuiz] = useState([]);
+  // const [deleteQuiz, setDeleteQuiz] = useState([]);
   const [quizzesArray, setQuizzesArray] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState([]);
-  // const [selectedQuiz, setSelectedQuiz] = useState([]);
+  const [idOfQuizToDelete, setIdOfQuizToDelete] = useState([]);
   const [deleteModalState, seDeleteModalState] = useState(false);
 
 
@@ -35,18 +35,18 @@ export default function QuizzesDashboard() {
   const handleDeleteButtonClick = (event, id, quiz) => {
     seDeleteModalState(!deleteModalState);
     setSelectedQuiz(quiz);
-    // setSelectedCategoryId(id);
+    setIdOfQuizToDelete(id);
   };
 
   const reset = () => {
-    // setSelectedCategoryId([]);
-    // setDeleteCategory([]);
+    setIdOfQuizToDelete([]);
+    setSelectedQuiz([]);
   };
 
   const handleDeleteConfirm = () => {
-    // console.log("The Category id to delete is: " + selectedCategoryId);
-    // seDeleteModalState(!deleteModalState);
-    // setCategoriesArray(categoriesArray.filter((cat) => cat.id !== selectedCategoryId));
+    console.log("The quiz id to delete is: " + idOfQuizToDelete);
+    seDeleteModalState(!deleteModalState);
+    setQuizzesArray(quizzesArray.filter((quiz) => quiz.id !== idOfQuizToDelete));
 
     reset();
   };
@@ -83,12 +83,13 @@ export default function QuizzesDashboard() {
       </div>
       <Quizzes
         quizList={quizzesArray}
-
+        deleteClick={handleDeleteButtonClick}
       />
       <DeleteCategoryModal
         toggle={deleteModalState}
         handleClose={handleDeleteButtonClick}
-      // selectedCard={`"${deleteCategory}" quiz`}
+        selectedCard={`"${selectedQuiz}" quiz`}
+        handleDeleteConfirm={handleDeleteConfirm}
       />
     </div>
   );

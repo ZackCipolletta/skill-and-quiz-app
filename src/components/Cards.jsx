@@ -24,10 +24,10 @@ export default function Cards(props) {
 
   const cardHeight = props.height;
 
-  const handleDeleteButtonClick = (e, id, catName) => {
+  const handleDeleteButtonClick = (e, id, cardName) => {
     // Prevent the click event from propagating to the CardActionArea
     e.stopPropagation();
-    props.deleteClick(e, id, catName);
+    props.deleteClick(e, id, cardName);
   };
 
   return (
