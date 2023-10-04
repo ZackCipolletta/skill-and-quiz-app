@@ -22,10 +22,7 @@ const style = {
   textAlign: 'center'
 };
 
-export default function DeleteQuizModal(props) {
-  const [open, setOpen] = useState(false);
-  // const handleClose = props.toggle;
-
+export default function DeleteModal(props) {
 
   const modalState = props.toggle;
 
@@ -43,22 +40,25 @@ export default function DeleteQuizModal(props) {
         slotProps={{
           backdrop: {
             timeout: 500,
-          },
+          }
         }}
       >
         <Fade in={modalState}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2" >
-              Do you want to delete "{props.selectedQuiz}"?
+              Do you want to delete the {props.selectedCard}?
             </Typography>
             <Box>
               <Button
                 className='button-redButton'
-              sx={{mr:5}}>
+                onClick={props.handleDeleteConfirm}
+                sx={{ mr: 5 }}>
                 Delete
               </Button>
               <Button
-                className='button-mediumBlue' onClick={props.handleClose}>
+                className='button-mediumBlue'
+                onClick={props.handleClose}
+              >
                 Cancel
               </Button>
             </Box>

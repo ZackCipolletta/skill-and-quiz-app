@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
-import DeleteCategoryModal from './DeleteCategoryModal';
+import DeleteModal from './DeleteModal';
 import Quizzes from './Quizzes';
 
 export default function QuizzesDashboard() {
@@ -85,7 +85,7 @@ export default function QuizzesDashboard() {
         quizList={quizzesArray}
         deleteClick={handleDeleteButtonClick}
       />
-      <DeleteCategoryModal
+      <DeleteModal
         toggle={deleteModalState}
         handleClose={handleDeleteButtonClick}
         selectedCard={`"${selectedQuiz}" quiz`}

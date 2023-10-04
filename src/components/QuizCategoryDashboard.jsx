@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 import CreateNewCategoryModal from './CreateNewCategoryModal';
 import QuizCategories from './QuizCategories';
-import DeleteCategoryModal from './DeleteCategoryModal';
+import DeleteModal from './DeleteModal';
 
 export default function QuizCategoryDashboard(props) {
 
@@ -107,7 +107,7 @@ export default function QuizCategoryDashboard(props) {
         deleteClick={handleDeleteButtonClick}
         favorite={handleFavoriteButtonClick}
       />
-      <DeleteCategoryModal
+      <DeleteModal
         toggle={deleteModalState}
         handleClose={handleDeleteButtonClick}
         selectedCard={`"${deleteCategory}" category`}

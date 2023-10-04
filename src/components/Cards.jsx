@@ -5,7 +5,7 @@ import {
   CardActionArea, Box, IconButton, createTheme, ThemeProvider
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import DeleteCategoryModal from './DeleteCategoryModal';
+import DeleteCategoryModal from './DeleteModal';
 import { PiTrashThin, PiTagChevron, PiTagChevronFill } from 'react-icons/pi';
 import PropTypes from "prop-types";
 
