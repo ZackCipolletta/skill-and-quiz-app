@@ -16,6 +16,7 @@ export default function QuizQuestions() {
 
   const [answerType, setAnswerType] = useState('');
   const [options, setOptions] = useState(0);
+  const [optionFields, setOptionFields] = useState([]);
 
   const handleChange = (event) => {
     setAnswerType(event.target.value);
@@ -45,9 +46,9 @@ export default function QuizQuestions() {
         <Box key={i} sx={{ mt: 1 }}>
           <TextField
             required
-            id={`Quiz-Answer-${optionsArray[i - 1]}`}
+            id={`Quiz-Answer-${optionsArray[i]}`}
             placeholder={`Enter Option ${optionsArray[i]}`}
-            name={`Quiz-Answer-${optionsArray[i - 1]}`}
+            name={`Quiz-Answer-${optionsArray[i]}`}
             className='input-field'
             height='50px'
             size='small'
@@ -67,6 +68,25 @@ export default function QuizQuestions() {
     }
     return optionFields;
   };
+
+
+  const addOptionButton = (
+    <Button onClick={handleAddOptionClick}>
+      <IconButton>
+        <AddBoxOutlinedIcon sx={{ color: "rgba(72, 139, 253, 255)" }}
+        />
+      </IconButton>
+
+      <Typography
+        component="span"
+        sx={{
+          color: '#a2a2a2'
+        }}>
+        Add another option
+        {options.toString()}
+      </Typography>
+    </Button>
+  );
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -143,26 +163,13 @@ export default function QuizQuestions() {
               <MenuItem value={'Type in Answer'}>Type in Answer</MenuItem>
             </Select>
 
-            {(answerType === 'Single Choice' || answerType === 'Multiple Choice') && (
-              <Box component="span">
-                <IconButton>
-                  <AddBoxOutlinedIcon sx={{ color: "rgba(72, 139, 253, 255)" }}
-                    onClick={handleAddOptionClick} />
-                </IconButton>
-                
-                <Typography
-                  component="span"
-                  sx={{
-                    color: '#a2a2a2'
-                  }}>
-                  Add another option
-                  {options.toString()}
-                </Typography>
-                
-                <Box id='answersList'>
-                  {generateOptionFields()}
-                </Box>
+            <Box id='answersList'>
+              {generateOptionFields()}
+            </Box>
 
+            {(answerType === 'Single Choice' || answerType === 'Multiple Choice') && (
+              <Box>
+                {addOptionButton}
               </Box>
             )}
 
