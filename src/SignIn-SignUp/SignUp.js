@@ -1,7 +1,7 @@
 import '../Styles/Components.css';
 import React, { useState } from 'react';
 import {
-  Button, CssBaseline, TextField, Box, Typography, Container,
+  Button, CssBaseline, TextField, Box, Typography, Container, Checkbox,
   createTheme, InputAdornment, ThemeProvider, Paper, IconButton
 } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
@@ -40,6 +40,8 @@ function SignIn() {
 
   const isPassword = (str) => str.length >= 8;
 
+  // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -73,9 +75,9 @@ function SignIn() {
                 }}
                 >
                   <div style={{
-                      textAlign: 'left',
-                      fontWeight: 'bold'
-                    }}
+                    textAlign: 'left',
+                    fontWeight: 'bold'
+                  }}
                   >
                     Name
                   </div>
@@ -103,17 +105,17 @@ function SignIn() {
                   />
 
                   <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      fontSize: 'large',
-                      marginBottom: '-18px'
-                    }}
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: 'large',
+                    marginBottom: '-18px'
+                  }}
                   >
                     <div style={{
-                        textAlign: 'left',
-                        fontWeight: 'bold'
-                      }}
+                      textAlign: 'left',
+                      fontWeight: 'bold'
+                    }}
                     >
                       Email
                     </div>
@@ -201,9 +203,27 @@ function SignIn() {
                     helperText={!isValidPassword && password !== '' ? "Enter At Least 8 Characters Long" : ""}
                   />
                   <div style={{ textAlign: 'left' }}>
-                    {/* place warning text here that password must be at least 8 characters long */}
                   </div>
-
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: -2 }}>
+                    <Checkbox
+                      size="small"
+                      InputProps={{
+                        label: 'tosAgreement'
+                      }}
+                      // sx={{
+                      //   pb: 0,
+                      //   mb: -2
+                      // }}
+                    />
+                    <Typography
+                      fontSize={10}
+                    sx={{paddingTop: 2}}
+                    >
+                      By signing up, I agree with
+                      <a href='https://myconnectlink.com/terms-of-service/'> ConnectLink terms of service </a>
+                      and <a href='https://myconnectlink.com/privacy-policy/'>Privacy Policy </a>
+                    </Typography>
+                  </Box>
                   <Button
                     type="Continue"
                     fullWidth

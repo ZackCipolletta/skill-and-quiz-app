@@ -163,14 +163,15 @@ export default function QuizQuestions() {
               <MenuItem value={'Type in Answer'}>Type in Answer</MenuItem>
             </Select>
 
-            <Box id='answersList'>
-              {generateOptionFields()}
-            </Box>
-
             {(answerType === 'Single Choice' || answerType === 'Multiple Choice') && (
-              <Box>
-                {addOptionButton}
-              </Box>
+              <>
+                <Box id='answersList'>
+                  {generateOptionFields()}
+                </Box>
+                <Box>
+                  {addOptionButton}
+                </Box>
+              </>
             )}
 
           </div>

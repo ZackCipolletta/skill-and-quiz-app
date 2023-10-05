@@ -19,8 +19,8 @@ root.render(
       {/* <Landing /> */}
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/signIn" element={<SignIn />} />
         <Route path="/quizzes" element={ <Control page="quizzes"/> } />
         <Route path="/categories" element={ <Control page="categories"/> } />
         <Route path="/questions" element={ <Control page="questions"/> } />
