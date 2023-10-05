@@ -14,6 +14,9 @@ function SignIn() {
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [password, setPassword] = useState('');
   const [isValidPassword, setIsValidPassword] = useState(false);
+  const [tosAgreement, setTosAgreement] = useState(false);
+  const [displayTosWarning, setDisplayTosWarning] = useState(false);
+
 
   const handleEmailChange = (event) => {
     const inputEmail = event.target.value;
@@ -40,7 +43,15 @@ function SignIn() {
 
   const isPassword = (str) => str.length >= 8;
 
-  // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const handleButtonClick = () => {
+    if (tosAgreement) {
+      //proceed to next page, send info to server, etc
+      setDisplayTosWarning(false);
+    } else {
+      setDisplayTosWarning(true);
+    }
+
+  };
 
 
   return (
@@ -204,31 +215,43 @@ function SignIn() {
                   />
                   <div style={{ textAlign: 'left' }}>
                   </div>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: -2 }}>
-                    <Checkbox
-                      size="small"
-                      InputProps={{
-                        label: 'tosAgreement'
-                      }}
-                      // sx={{
-                      //   pb: 0,
-                      //   mb: -2
-                      // }}
-                    />
-                    <Typography
-                      fontSize={10}
-                    sx={{paddingTop: 2}}
-                    >
-                      By signing up, I agree with
-                      <a href='https://myconnectlink.com/terms-of-service/'> ConnectLink terms of service </a>
-                      and <a href='https://myconnectlink.com/privacy-policy/'>Privacy Policy </a>
-                    </Typography>
+
+                  <Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: -2 }}>
+                      <Checkbox
+                        size="small"
+                        InputProps={{
+                          label: 'tosAgreement'
+                        }}
+                        onChange={() => setTosAgreement(!tosAgreement)}
+                      />
+                      <Typography
+                        fontSize={10}
+                        sx={{ paddingTop: 2 }}
+                      >
+                        By signing up, I agree with
+                        <a href='https://myconnectlink.com/terms-of-service/'> ConnectLink terms of service </a>
+                        and <a href='https://myconnectlink.com/privacy-policy/'>Privacy Policy </a>
+                      </Typography>
+                    </Box>
+
+                    {(displayTosWarning) && (
+                      <Typography
+                        fontSize={10}
+                        sx={{ marginTop: 3, marginBottom: -2 }}
+                        color={'red'}
+                      >
+                        You must agree to the terms of service and privacy policy before proceeding.
+                      </Typography>
+                    )}
+
                   </Box>
+
                   <Button
-                    type="Continue"
                     fullWidth
                     className='button-black'
                     sx={{ mt: 3, mb: 6 }}
+                    onClick={handleButtonClick}
                   >
                     Continue
                   </Button>
