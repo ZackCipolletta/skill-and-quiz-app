@@ -25,6 +25,12 @@ export default function QuizDetails() {
     setTags(updatedTags);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleAddClick();
+    }
+  };
+
   return (
     <Box sx={{ width: '100%' }}>
       <Typography className='inputLabel' sx={{ mt: 1 }} >
@@ -80,6 +86,7 @@ export default function QuizDetails() {
             value: newTag,
             onChange: (e) => setNewTag(e.target.value)
           }}
+          onKeyDown={handleKeyPress}
         />
         <Button
           className='button-mediumBlue'
