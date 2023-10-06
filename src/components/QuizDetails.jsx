@@ -13,9 +13,10 @@ export default function QuizDetails() {
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState('');
 
-  const handleAddClick = (tag) => {
+  const handleAddClick = () => {
     if (newTag.trim() !== "") {
-      setTags([...tags, newTag]);
+      const splitTags = newTag.split(',');
+      setTags([...splitTags]);
       setNewTag("");
     }
   };
