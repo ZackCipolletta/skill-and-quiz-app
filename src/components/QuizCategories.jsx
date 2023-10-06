@@ -11,6 +11,7 @@ export default function QuizCategories(props) {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)', // Three columns with equal width
     gap: 25, // Adjust the spacing between cards
+    gridRowGap: 50,
     paddingTop: 50,
   };
 

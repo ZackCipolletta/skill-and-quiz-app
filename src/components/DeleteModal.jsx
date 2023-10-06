@@ -48,7 +48,7 @@ export default function DeleteModal(props) {
             <Typography id="transition-modal-title" variant="h6" component="h2" >
               Do you want to delete the {props.selectedCard}?
             </Typography>
-            <Box>
+            <Box sx={{pt: 2 }}>
               <Button
                 className='button-redButton'
                 onClick={props.handleDeleteConfirm}

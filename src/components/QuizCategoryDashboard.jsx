@@ -17,9 +17,12 @@ export default function QuizCategoryDashboard(props) {
   const [selectedCategoryId, setSelectedCategoryId] = useState([]);
 
   const catsArr = [
-    { Name: "Science", Color: '#cfd9fa', id: 1, Favorite: true },
+    { Name: "Science", Color: '#a7d7f9', id: 1, Favorite: true },
     { Name: "Maths", Color: '#67c27c', id: 2, Favorite: false },
-    { Name: "English", Color: '#cfd9fa', id: 3, Favorite: true }
+    { Name: "English", Color: '#cfd9fa', id: 3, Favorite: true },
+    { Name: "Cat4", Color: '#f4bbc7', id: 3, Favorite: false },
+    { Name: "Cat5", Color: '#c0f889', id: 3, Favorite: false },
+    { Name: "Cat6", Color: '#cfd9fa', id: 3, Favorite: true }
   ];
 
   useEffect(() => {
