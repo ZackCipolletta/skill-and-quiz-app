@@ -11,9 +11,9 @@ export default function Quizzes(props) {
 
   const gridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)', // Three columns with equal width
-    gap: '16px', // Adjust the spacing between cards
-    paddingTop: '50px',
+    gridTemplateColumns: 'repeat(4, 1fr)', // Three columns with equal width
+    gap: 25, // Adjust the spacing between cards
+    paddingTop: 50,
   };
 
   return (

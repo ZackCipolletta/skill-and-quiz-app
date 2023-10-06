@@ -92,7 +92,6 @@ export default function ColorTemplates(props) {
         <IconButton sx={{ color: 'black', transform: "scale(0.8)" }}>
           <CgColorPicker />
         </IconButton>
-
       </Box>
     </div>
   );

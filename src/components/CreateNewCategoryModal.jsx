@@ -51,6 +51,12 @@ export default function CreateNewCategoryModal(props) {
     props.handleCancel();
   }
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      createCategory();
+    }
+  };
+
   return (
     <div>
       <Modal
@@ -79,6 +85,7 @@ export default function CreateNewCategoryModal(props) {
               margin="normal"
               required
               width="250"
+              size="small"
               id="QuizName"
               placeholder="Enter Category Name"
               name="QuizName"
@@ -92,6 +99,7 @@ export default function CreateNewCategoryModal(props) {
                 value: catName,
                 onChange: (e) => setCatName(e.target.value)
               }}
+              onKeyDown={handleKeyPress}
             />
             <Typography id="transition-modal-title" className='inputLabel' sx={{ mt: 1 }} >
               Select custom colour
@@ -101,7 +109,7 @@ export default function CreateNewCategoryModal(props) {
             </Typography>
 
             <ColorTemplates
-            selectColor={handleCatColor}
+              selectColor={handleCatColor}
             />
             <Box>
               <Button

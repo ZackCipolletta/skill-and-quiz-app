@@ -55,7 +55,7 @@ export default function Cards(props) {
             <Typography /*gutterBottom variant="h5" component="div" */ sx={{ flex: 1, minWidth: 0 }}>
               {/* By default, flex containers will try to distribute space among their children elements based 
             on their content and available space. When you add content to one child element, it can affect the layout of other child elements. */}
-              {cardInfo.Name} {cardInfo.id}
+              {cardInfo.Name}
             </Typography>
 
             <CardActions style={{ all: "initial" }}>
