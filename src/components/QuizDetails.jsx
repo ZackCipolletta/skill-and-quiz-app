@@ -37,7 +37,12 @@ export default function QuizDetails() {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Quiz Name
       </Typography>
-
+      <Box style=
+        {{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
       <TextField
         margin="normal"
         required
@@ -46,13 +51,13 @@ export default function QuizDetails() {
         name="QuizName"
         autoFocus
         className='input-field'
-        borderRadius='20px'
         size='small'
         sx={{
           width: 350,
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
-      />
+        />
+        </Box>
       {/* {selectedButton.toString()} */}
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
