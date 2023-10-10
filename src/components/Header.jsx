@@ -1,8 +1,15 @@
 import '../Styles/Components.css';
 import React, {  } from "react";
 import { Button, Toolbar, Typography } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/categories')
+}
 
   return (
     <div style={{ margin: 0 }}>
@@ -15,6 +22,8 @@ export default function Header() {
           className='darkBlue-text'
           fontWeight='bold'
           variant="h6"
+          onClick={handleClick}
+          style={{ cursor: 'pointer'}}
         >
           ConnectLink
         </Typography>
