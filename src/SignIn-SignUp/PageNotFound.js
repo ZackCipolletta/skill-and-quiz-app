@@ -1,11 +1,16 @@
 
 import '../Styles/Components.css';
 import React from 'react';
-import {Box, Typography} from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 
 export default function PageNotFound() {
+  const navigate = useNavigate();
 
+  const handleButtonClick = () => {
+    navigate('/')
+}
 
   return (
     <Box sx={{
@@ -31,11 +36,13 @@ export default function PageNotFound() {
       >
         Page not found
       </Typography>
-      <Typography
+      <Button
         align='left'
+        variant='contained'
+        onClick={handleButtonClick}
       >
-        <a href='/'> Back to Home </a>
-      </Typography>
+          Back to Home
+      </Button>
     </Box>
   );
 }
