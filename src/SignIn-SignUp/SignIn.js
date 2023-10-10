@@ -8,7 +8,6 @@ import {
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import isEmail from 'validator/lib/isEmail';
 
-
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -164,10 +163,22 @@ export default function SignIn() {
                     type="Continue"
                     fullWidth
                     className='button-black'
-                    sx={{ mt: 3, mb: 6 }}
+                    sx={{ mt: 3, mb: 1 }}
                   >
                     Continue
                   </Button>
+
+                  <Button
+                    type="Continue"
+                    fullWidth
+                    className='button-mediumBlue'
+                    // color='blue'
+                    sx={{ mt: 0, mb: 6 }}
+                  >
+                    Sign in with LinkedIn (replace w/LI API)
+                  </Button>
+
+
                 </Box>
               </Box>
             </Container>
