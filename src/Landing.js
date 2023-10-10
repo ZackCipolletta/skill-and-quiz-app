@@ -11,30 +11,32 @@ function Landing() {
   const navigate = useNavigate();
 
   const handleLoginButtonClick = () => {
-    navigate('/SignIn');
+    navigate('/signin');
   };
 
   const handleSignUpButtonClick = () => {
-    navigate('/SignUp');
+    navigate('/signup');
   };
 
 
   return (
     <div className="App">
       <div className="App-splash">
-        <h1>
+        <h1 style={{ marginBottom: -4 }} >
           Skill and Quiz  {/* Google web font 'Anton' */}
         </h1>
-        <p style={{ fontWeight: 'bold' }}>
+        <p style={{ fontWeight: 'bold', marginTop: 5 }}>
           Your own quiz app
         </p>
-        <div>
+        <div style={{marginTop: -5 }}>
           <Button className='button-lightBlue'
+            sx={{ mr: 2 }}
             onClick={handleLoginButtonClick}>
             Login
           </Button>
-          <span></span>
+          {/* <span> </span> */}
           <Button className='button-darkBlue'
+            sx={{ ml: 2 }}
             onClick={handleSignUpButtonClick}>
             SignUp
           </Button>

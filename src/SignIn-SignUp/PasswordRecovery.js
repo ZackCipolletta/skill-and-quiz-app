@@ -9,7 +9,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import isEmail from 'validator/lib/isEmail';
 
 
-export default function SignIn() {
+export default function PasswordRecovery() {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
 
@@ -49,7 +49,7 @@ export default function SignIn() {
                   fontWeight={850}
                   sx={{ mb: '20px', mt: -5 }}
                 >
-                  LogIn
+                  Recover Your Password
                 </Typography>
 
                 <div
@@ -116,50 +116,6 @@ export default function SignIn() {
                         : {},
                     }}
                   />
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '5px',
-                    fontSize: 'large'
-                  }}
-                  >
-                    <div style={{
-                      textAlign: 'left',
-                      fontWeight: 'bold'
-                    }}>
-                      Password
-                    </div>
-                    <div
-                      className="faded"
-                      style={{ textAlign: 'right' }}
-                    >
-                      Mandatory
-                    </div>
-                  </div>
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    placeholder="Placeholder"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    sx={{ mb: -1, mt: -1 }}
-                    className='input-field'
-                  />
-                  <div style={{ textAlign: 'left' }}>
-                    <Link
-                      className='faded'
-                      href="password-recovery"
-                      variant="body2"
-                      underline="hover"
-                    >
-                      Forgot Your Password?
-                    </Link>
-                  </div>
-
                   <Button
                     type="Continue"
                     fullWidth
