@@ -15,7 +15,9 @@ export default function QuizzesDashboard() {
   const quizArr = [
     { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
     { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false },
-    { Name: "Quiz3", Color: '#cfd9fa', tags: ['Tag2', 'TagC'], id: 3, Favorite: true }
+    { Name: "Quiz3", Color: '#cfd9fa', tags: ['TagB', 'TagC'], id: 3, Favorite: false },
+    { Name: "Quiz4", Color: '#cfd9fa', tags: [ 'TagC'], id: 4, Favorite: false },
+    { Name: "Quiz5", Color: '#cfd9fa', tags: ['Tag2', 'TagC'], id: 5, Favorite: true }
   ];
   const navigate = useNavigate();
 

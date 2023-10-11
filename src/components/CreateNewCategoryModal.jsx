@@ -1,32 +1,39 @@
 import React, { useState } from "react";
 import {
   Backdrop, Box, Modal, Fade, TextField,
-  Button, Typography, IconButton} from '@mui/material';
+  Button, Typography, IconButton
+} from '@mui/material';
 import '../Styles/Components.css';
 import { TfiClose } from 'react-icons/tfi';
 import ColorTemplates from "./ColorTemplates";
 import PropTypes from "prop-types";
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 450,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-  borderRadius: '10px',
-};
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 export default function CreateNewCategoryModal(props) {
 
   const [catName, setCatName] = useState("");
   const [catColor, setCatColor] = useState("");
-  
 
-  const [indexCounter, setIndexCounter] = useState(4); // ------------------------------DELETE THIS!!! -------------------------------------
-  
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const [indexCounter, setIndexCounter] = useState(7); // ------------------------------DELETE THIS!!! -------------------------------------
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: !isMobile ? 450 : 300,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: '10px',
+  };
+
   const modalState = props.toggle;
 
   const createCategory = () => {
@@ -36,20 +43,20 @@ export default function CreateNewCategoryModal(props) {
       } else {
         props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa', id: indexCounter });
       }
-      setIndexCounter(indexCounter + 1)
+      setIndexCounter(indexCounter + 1);
       setCatColor("");
     }
     close();
     setCatName("");
-  }
+  };
 
   const handleCatColor = (col) => {
     setCatColor(col);
-  }
+  };
 
   const close = () => {
     props.handleCancel();
-  }
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -92,7 +99,7 @@ export default function CreateNewCategoryModal(props) {
               autoFocus
               className='input-field'
               sx={{
-                width: 350
+                width: !isMobile ? 350 : 250
               }}
               InputProps={{
                 sx: { borderRadius: 2 },
