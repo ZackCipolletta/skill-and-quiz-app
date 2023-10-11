@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Box, Button, Paper, Tabs, Tab, Typography } from '@mui/material';
 import QuizDetails from "./QuizDetails";
 import QuizQuestions from "./QuizQuestions";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -30,6 +33,10 @@ CustomTabPanel.propTypes = {
 
 export default function CreateNewQuiz() {
   const [value, setValue] = useState(0);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,7 +86,7 @@ export default function CreateNewQuiz() {
               fontSize: 'larger'
             }} />
           </Tabs>
-          <Box>
+          <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
             <Button className="button-darkMediumBlue" sx={{ mr: "20px" }}>Preview</Button>
             <Button className="button-darkMediumBlue" sx={{ mr: "50px" }}>Publish</Button>
           </Box>
@@ -97,15 +104,30 @@ export default function CreateNewQuiz() {
       </Box>
       <Button
         className="button-darkMediumBlue"
-        onClick={changeToNextTab}
-      >Next
-      </Button>
-      <Button
-        className="button-darkMediumBlue"
+        size="small"
+        sx={{ mr: 1 }}
         onClick={changeToPreviousTab}
       >Back
       </Button>
-      
+      <Button
+        className="button-darkMediumBlue"
+        size="small"
+        onClick={changeToNextTab}
+      >Next
+      </Button>
+
+      <Button
+        className="button-darkMediumBlue"
+        size="small"
+        sx={{
+          mr: "20px",
+        }}>Preview</Button>
+      <Button
+        size="small"
+        className="button-darkMediumBlue"
+        sx={{ mr: "50px" }}>
+        Publish</Button>
+
     </Paper>
   );
 }
