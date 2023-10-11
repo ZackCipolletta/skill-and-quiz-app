@@ -1,24 +1,28 @@
 import '../Styles/Components.css';
 import React, { useState } from "react";
 import {
-  Typography, Card, CardContent, CardHeader, CardActions,
+  Typography, Card, CardHeader, CardActions,
   CardActionArea, Box, IconButton, createTheme, ThemeProvider
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import DeleteCategoryModal from './DeleteModal';
 import { PiTrashThin, PiTagChevron, PiTagChevronFill } from 'react-icons/pi';
 import PropTypes from "prop-types";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Cards(props) {
   const { cardInfo } = props;
 
-  const theme = createTheme({
+  const cardTheme = createTheme({
     palette: {
       iconOutline: {
         main: 'black'
       }
     },
   });
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const history = useNavigate();
 
@@ -31,9 +35,10 @@ export default function Cards(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={cardTheme}>
       <Card sx={{
         maxWidth: 235,
+        minWidth: !isMobile ? 200 : {},
         borderRadius: '20px',
         ':hover': { boxShadow: 5 },
         mb: 2

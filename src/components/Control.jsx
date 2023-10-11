@@ -19,18 +19,16 @@ export default function Control({ page }) {
     case 'quizzes':
       content =
         <>
-        <QuizzesDashboard />
-        </>
-        
+          <QuizzesDashboard />
+        </>;
+
       break;
     case 'questions':
       content = <CreateNewQuiz />;
       break;
     case 'categories':
       content =
-        <>
-          <QuizCategoryDashboard />,
-        </>;
+          <QuizCategoryDashboard />;
       break;
 
     default:

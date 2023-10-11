@@ -35,6 +35,20 @@ export default function CreateNewQuiz() {
     setValue(newValue);
   };
 
+  const changeToNextTab = () => {
+    const nextTab = value + 1;
+    if (nextTab < 3) {
+      setValue(nextTab);
+    }
+  };
+
+  const changeToPreviousTab = () => {
+    const nextTab = value - 1;
+    if (nextTab >= 0) {
+      setValue(nextTab);
+    }
+  };
+
   return (
     <Paper sx={{ marginTop: '50px' }}>
       <Box sx={{ width: '100%' }}>
@@ -42,7 +56,7 @@ export default function CreateNewQuiz() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderBottom: 1, 
+          borderBottom: 1,
           borderColor: 'divider'
         }} >
           <Tabs value={value} onChange={handleChange}>
@@ -81,7 +95,17 @@ export default function CreateNewQuiz() {
         </CustomTabPanel>
 
       </Box>
-
+      <Button
+        className="button-darkMediumBlue"
+        onClick={changeToNextTab}
+      >Next
+      </Button>
+      <Button
+        className="button-darkMediumBlue"
+        onClick={changeToPreviousTab}
+      >Back
+      </Button>
+      
     </Paper>
   );
 }
