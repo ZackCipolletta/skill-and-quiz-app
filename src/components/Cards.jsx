@@ -35,7 +35,8 @@ export default function Cards(props) {
       <Card sx={{
         maxWidth: 235,
         borderRadius: '20px',
-        ':hover': { boxShadow: 5 }
+        ':hover': { boxShadow: 5 },
+        mb: 2
       }}
         index={props.index}
         id={props.id}

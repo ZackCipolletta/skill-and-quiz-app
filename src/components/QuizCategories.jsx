@@ -2,17 +2,22 @@ import '../Styles/Components.css';
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
 import Cards from './Cards';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function QuizCategories(props) {
 
   const categoriesList = props.categoriesArray;
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const gridStyle = {
-    display: 'grid',
+    display: !isMobile ? 'grid' : 'column',
     gridTemplateColumns: 'repeat(4, 1fr)', // Three columns with equal width
     gap: 25, // Adjust the spacing between cards
     gridRowGap: 50,
-    paddingTop: 50,
+    paddingTop: !isMobile ? 50 : 25,
   };
 
   return (
