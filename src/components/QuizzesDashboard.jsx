@@ -7,6 +7,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import DeleteModal from './DeleteModal';
 import Quizzes from './Quizzes';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function QuizzesDashboard() {
 
@@ -22,6 +24,9 @@ export default function QuizzesDashboard() {
   const [selectedQuiz, setSelectedQuiz] = useState([]);
   const [idOfQuizToDelete, setIdOfQuizToDelete] = useState([]);
   const [deleteModalState, seDeleteModalState] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 
   useEffect(() => {
@@ -61,15 +66,15 @@ export default function QuizzesDashboard() {
 
       setQuizzesArray(updatedQuizzesArray);
     }
-    
+
     reset();
   };
 
   return (
-    <div style={{ marginTop: '20px' }} >
+    <div style={!isMobile ? { marginTop: 20 } : { marginTop: 1 }} >
       <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
+        display: !isMobile ? 'flex' : 'block',
+        justifyContent: !isMobile ? 'space-between' : 'flex-start',
         alignItems: 'center'
       }}
       >
@@ -78,7 +83,7 @@ export default function QuizzesDashboard() {
         </h1>
 
         <div style={{
-          display: 'flex',
+          display: !isMobile ? 'flex' : 'block',
           alignItems: 'center'
         }}>
           <SearchBar />
@@ -86,7 +91,7 @@ export default function QuizzesDashboard() {
           {/* 'ml' does not work here, we must use marginLeft */}
           <Button
             className='button-mediumBlue'
-            style={{ marginLeft: '50px' }}
+            style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
             onClick={(event) => handleCreateNewQuizClick(event, 'delete')}
           >
             <AddIcon />
