@@ -9,11 +9,16 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 import { autocompleteClasses } from '@mui/material/Autocomplete';
 import '../Styles/Components.css';
 
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+
+
 const Search = styled('div')(() => ({
   borderRadius: '5px',
   backgroundColor: '#f4effd', // color of search bar
   position: 'relative',
-  width: '300px',
+  width: 300,
   height: '40px',
 }));
 
@@ -78,6 +83,10 @@ const Listbox = styled('ul')(() => ({
 const SearchBar = ({ value, width, onChange, placeholder, height,
   onCancelResearch, onSearch, className, style, disabled, options,
 }) => {
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [internalValue, setInternalValue] = useState(value || '');
 
   const { getRootProps, getInputProps, getListboxProps, getOptionProps, groupedOptions } =
@@ -130,11 +139,12 @@ const SearchBar = ({ value, width, onChange, placeholder, height,
       <Search
         {...getRootProps()}
         key={'SearchBarComponent-root'}
-        style={{ ...style, width: width || '300px', height: height || '40px' }}
+        style={isMobile ? { ...style, width: 250, height: height || '40px' } :
+          { ...style, width: width, height: height || '40px' }}
         className={`SearchBarComponent-root ${className ? className : null}`}
       >
         <SearchIconWrapper>
-          <SearchIcon className='faded'/>
+          <SearchIcon className='faded' />
         </SearchIconWrapper>
         <StyledInputBase
           inputProps={{ ...getInputProps(), onChange: handleChange, value: internalValue }}

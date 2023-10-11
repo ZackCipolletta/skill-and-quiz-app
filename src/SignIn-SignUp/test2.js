@@ -1,26 +1,66 @@
-const generateOptionFields = () => {
-  const optionsArray = ['A', 'B', 'C', 'D'];
+return (
+  <>
+  <div style={{ marginTop: '20px' }} >
 
-  return optionFields.map((_, i) => (
-    <Box key={i} sx={{ mt: 1 }}>
-      <TextField
-        required
-        id={`Quiz-Answer-${optionsArray[i]}`}
-        placeholder={`Enter Option ${optionsArray[i]}`}
-        name={`Quiz-Answer-${optionsArray[i]}`}
-        className='input-field'
-        height='50px'
-        size='small'
-        sx={{
-          width: 200
-        }}
-        InputProps={{ sx: { borderRadius: 2 } }}
+    {!isMobile ? (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    }}
+    >
+      ) : (
+      <div style={{
+        display: 'block', // Change 'flex' to 'block'
+        // justifyContent: 'space-between', // Delete
+        alignItems: 'center'
+      }}
+      >
+        )
+    }
+        <h1 className='darkBlue-text'>
+          Quiz Board  {/* Google web font 'Anton' */}
+        </h1>
+
+        <div style={{
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          {/* <div style={{
+            display: 'block', // Change 'flex' to 'block'
+            alignItems: 'center'
+          }}> */}
+
+
+          <SearchBar />
+
+          <Button
+            className='button-mediumBlue'
+            style={{ marginLeft: '50px' }}
+            onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
+          >
+            <AddIcon />
+            Create new category
+          </Button>
+
+        </div>
+      </div>
+      <CreateNewCategoryModal
+        toggle={createModalState}
+        handleCancel={handleCreateNewCategoryClick}
+        handleAddNewCategory={addCategory}
       />
-      {i > 0 && (
-        <IconButton sx={{ transform: "scale(0.5)" }} onClick={handleRemoveClick}>
-          <TfiClose />
-        </IconButton>
-      )}
-    </Box>
-  ));
-};
+    </div>
+    <QuizCategories
+      categoriesArray={categoriesArray}
+      deleteClick={handleDeleteButtonClick}
+      favorite={handleFavoriteButtonClick}
+    />
+    <DeleteModal
+      toggle={deleteModalState}
+      handleClose={handleDeleteButtonClick}
+      selectedCard={`"${deleteCategory}" category`}
+      handleDeleteConfirm={handleDeleteConfirm}
+    />
+  </>
+  );

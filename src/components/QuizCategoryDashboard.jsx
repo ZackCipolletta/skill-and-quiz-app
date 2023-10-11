@@ -7,8 +7,13 @@ import AddIcon from '@mui/icons-material/Add';
 import CreateNewCategoryModal from './CreateNewCategoryModal';
 import QuizCategories from './QuizCategories';
 import DeleteModal from './DeleteModal';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function QuizCategoryDashboard(props) {
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [createModalState, seCreateModalState] = useState(false);
   const [deleteModalState, seDeleteModalState] = useState(false);
@@ -69,12 +74,13 @@ export default function QuizCategoryDashboard(props) {
     reset();
   };
 
+  
   return (
     <>
       <div style={{ marginTop: '20px' }} >
         <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
+          display: !isMobile ? 'flex' : 'block',
+          justifyContent: !isMobile ? 'space-between' : 'flex-start',
           alignItems: 'center'
         }}
         >
@@ -83,14 +89,14 @@ export default function QuizCategoryDashboard(props) {
           </h1>
 
           <div style={{
-            display: 'flex',
+            display: !isMobile ? 'flex' : 'block',
             alignItems: 'center'
           }}>
             <SearchBar />
 
             <Button
               className='button-mediumBlue'
-              style={{ marginLeft: '50px' }}
+              style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20} }
               onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
             >
               <AddIcon />
