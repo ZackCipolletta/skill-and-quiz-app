@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Box, Button, Paper, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Button, Paper, Tabs, Tab, Typography, IconButton } from '@mui/material';
 import QuizDetails from "./QuizDetails";
 import QuizQuestions from "./QuizQuestions";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
+// AiOutlineArrowRight
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -87,8 +89,8 @@ export default function CreateNewQuiz() {
             }} />
           </Tabs>
           <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
-            <Button className="button-darkMediumBlue" sx={{ mr: "20px" }}>Preview</Button>
-            <Button className="button-darkMediumBlue" sx={{ mr: "50px" }}>Publish</Button>
+            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Preview</Button>
+            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Publish</Button>
           </Box>
         </Box>
         <CustomTabPanel value={value} index={0}>
@@ -109,24 +111,35 @@ export default function CreateNewQuiz() {
         onClick={changeToPreviousTab}
       >Back
       </Button>
-      <Button
+      {/* <Button
         className="button-darkMediumBlue"
         size="small"
         onClick={changeToNextTab}
       >Next
-      </Button>
+      </Button> */}
 
-      <Button
-        className="button-darkMediumBlue"
-        size="small"
-        sx={{
-          mr: "20px",
-        }}>Preview</Button>
-      <Button
-        size="small"
-        className="button-darkMediumBlue"
-        sx={{ mr: "50px" }}>
-        Publish</Button>
+      <IconButton sx={{
+        marginLeft: '5px',
+        marginRight: '-25px',
+        // transform: "scale(.7) scaleY(1.2)"
+      }}
+        onClick={changeToNextTab}
+      >
+      <AiOutlineArrowRight />
+      </IconButton>
+
+        {/* <Button
+          className="button-darkMediumBlue"
+          size="small"
+          sx={{}}
+        >
+          Preview</Button>
+        <Button
+          size="small"
+          className="button-darkMediumBlue"
+          sx={{}}
+        >
+          Publish</Button> */}
 
     </Paper>
   );

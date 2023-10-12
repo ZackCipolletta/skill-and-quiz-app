@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Box, Button, Paper, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Paper, Tabs, Tab, Typography, IconButton } from '@mui/material';
 import QuizDetails from "./QuizDetails";
 import QuizQuestions from "./QuizQuestions";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { AiOutlineArrowRight } from 'react-icons/ai';
+import { Swipeable } from 'react-swipeable';
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -31,58 +35,66 @@ CustomTabPanel.propTypes = {
 export default function CreateNewQuiz() {
   const [value, setValue] = useState(0);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const switchToNextTab = () => {
-    const nextTab = value + 1; // Calculate the index of the next tab
+  const changeToNextTab = () => {
+    const nextTab = value + 1;
     if (nextTab < 3) {
-      setValue(nextTab); // Set the next tab as the selected tab
+      setValue(nextTab);
     }
+  };
+
+  const changeToPreviousTab = () => {
+    const nextTab = value - 1;
+    if (nextTab >= 0) {
+      setValue(nextTab);
+    }
+  };
+
+  // Define swipe handlers for left and right swipes
+  const swipeHandlers = {
+    onSwipedLeft: changeToNextTab,
+    onSwipedRight: changeToPreviousTab,
   };
 
   return (
     <Paper sx={{ marginTop: '50px' }}>
       <Box sx={{ width: '100%' }}>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderBottom: 1, 
-          borderColor: 'divider'
-        }} >
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Details" sx={{
-              textTransform: 'none',
-              fontWeight: '525',
-              color: '#a2a2a2',
-              fontSize: 'larger'
-            }} />
-            <Tab label="Questions" sx={{
-              textTransform: 'none',
-              fontWeight: '525',
-              color: '#a2a2a2',
-              fontSize: 'larger'
-            }} />
-            <Tab label="Schedule" sx={{
-              textTransform: 'none',
-              fontWeight: '525',
-              color: '#a2a2a2',
-              fontSize: 'larger'
-            }} />
-          </Tabs>
-          <Box>
-            <Button className="button-darkMediumBlue" sx={{ mr: "20px" }}>Preview</Button>
-            <Button className="button-darkMediumBlue" sx={{ mr: "50px" }}>Publish</Button>
-            <Button
-              className="button-darkMediumBlue"
-              onClick={switchToNextTab} // Call the function to switch to the next tab
-            >
-              Next
-            </Button>
+        <Swipeable {...swipeHandlers}>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderBottom: 1,
+            borderColor: 'divider'
+          }} >
+            <Tabs value={value} onChange={handleChange}>
+              <Tab label="Details" sx={{
+                textTransform: 'none',
+                fontWeight: '525',
+                color: '#a2a2a2',
+                fontSize: 'larger'
+              }} />
+              <Tab label="Questions" sx={{
+                textTransform: 'none',
+                fontWeight: '525',
+                color: '#a2a2a2',
+                fontSize: 'larger'
+              }} />
+              <Tab label="Schedule" sx={{
+                textTransform: 'none',
+                fontWeight: '525',
+                color: '#a2a2a2',
+                fontSize: 'larger'
+              }} />
+            </Tabs>
           </Box>
-        </Box>
+        </Swipeable>
         <CustomTabPanel value={value} index={0}>
           <QuizDetails />
         </CustomTabPanel>
@@ -93,6 +105,23 @@ export default function CreateNewQuiz() {
           Schedule
         </CustomTabPanel>
       </Box>
+      <Button
+        className="button-darkMediumBlue"
+        size="small"
+        sx={{ mr: 1 }}
+        onClick={changeToPreviousTab}
+      >
+        Back
+      </Button>
+      <IconButton
+        sx={{
+          marginLeft: '5px',
+          marginRight: '-25px',
+        }}
+        onClick={changeToNextTab}
+      >
+        <AiOutlineArrowRight />
+      </IconButton>
     </Paper>
   );
 }
