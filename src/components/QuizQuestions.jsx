@@ -9,8 +9,8 @@ import '../Styles/Components.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import { FaFileCsv } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
-
-
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function QuizQuestions() {
 
@@ -21,6 +21,9 @@ export default function QuizQuestions() {
   const handleChange = (event) => {
     setAnswerType(event.target.value);
   };
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const answersList = document.getElementById("answersList");
   const optionNumber = answersList ? answersList.children.length : 0;
@@ -126,11 +129,11 @@ export default function QuizQuestions() {
         height='50px'
         size='small'
         sx={{
-          width: 550
+          width: !isMobile ? 550 : 150
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
       />
-      <Button className='button-mediumBlue' sx={{ ml: 4, }}>Add</Button>
+      <Button className='button-mediumBlue' sx={{ ml: !isMobile ? 4 : 1 }}>Add</Button>
 
       <Box sx={{ mt: 5 }}>
         <FormControl size='small'>
