@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import {
   Box, Paper, Tabs, Tab, IconButton,
@@ -7,11 +7,30 @@ import {
 import ColorTemplates from './ColorTemplates';
 import '../Styles/Components.css';
 import { TfiClose } from 'react-icons/tfi';
+import { PiHandSwipeRightDuotone } from 'react-icons/pi';
+import { PiHandSwipeLeftDuotone } from 'react-icons/pi';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 export default function QuizDetails() {
 
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState('');
+  const [showIcons, setShowIcons] = useState(true);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  useEffect(() => {
+    //set a timer to hide icons after 5 seconds
+    const timeout = setTimeout(() => {
+      setShowIcons(false);
+    }, 5000); // timer is in milliseconds - 5k = 5 seconds
+
+    // Clear timer when component unmounts
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleAddClick = () => {
     if (newTag.trim() !== "") {
@@ -32,6 +51,17 @@ export default function QuizDetails() {
     }
   };
 
+  const iconStyling = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 305,
+    zIndex: 1,
+    transform: "scale(3)",
+    opacity: .2
+  };
+
   return (
     <Box sx={{ width: '100%' }}>
       <Typography className='inputLabel' sx={{ mt: 1 }} >
@@ -43,25 +73,44 @@ export default function QuizDetails() {
           alignItems: 'center',
         }}
       >
-      <TextField
-        margin="normal"
-        required
-        id="QuizName"
-        placeholder="Enter Quiz Name"
-        name="QuizName"
-        autoFocus
-        className='input-field'
-        size='small'
-        sx={{
-          width: 350,
-        }}
-        InputProps={{ sx: { borderRadius: 2 } }}
+        <TextField
+          margin="normal"
+          required
+          id="QuizName"
+          placeholder="Enter Quiz Name"
+          name="QuizName"
+          autoFocus
+          className='input-field'
+          size='small'
+          sx={{
+            width: 350,
+          }}
+          InputProps={{ sx: { borderRadius: 2 } }}
         />
+      </Box>
+
+      {isMobile && showIcons && (
+        <Box>
+          <PiHandSwipeLeftDuotone style=
+            {{
+              ...iconStyling,
+              right: 305,
+
+            }} />
+          <PiHandSwipeRightDuotone style=
+            {{
+              ...iconStyling,
+              right: 55,
+            }} />
         </Box>
+      )}
+
       {/* {selectedButton.toString()} */}
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
       </Typography>
+
+
       <Typography sx={{ mb: '-10px' }}>
         Or here are some templates to help you get started
       </Typography>
