@@ -7,35 +7,24 @@ import {
 import ColorTemplates from './ColorTemplates';
 import '../Styles/Components.css';
 import { TfiClose } from 'react-icons/tfi';
-import { PiHandSwipeRightDuotone, PiHandSwipeLeftDuotone } from 'react-icons/pi';
 import { MdOutlineSwipe } from 'react-icons/md';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useSwipeable } from 'react-swipeable';
 
 
 export default function QuizDetails(props) {
 
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState('');
+  const [quizColor, setQuizColor] = useState('');
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // useEffect(() => {
-  //   //set a timer to hide icons after 5 seconds
-  //   const timeout = setTimeout(() => {
-  //     setShowIcons(false);
-  //   }, 5000); // timer is in milliseconds - 5k = 5 seconds
-
-  //   // Clear timer when component unmounts
-  //   return () => clearTimeout(timeout);
-  // }, []);
 
   const handleAddClick = () => {
     if (newTag.trim() !== "") {
-      const splitTags = newTag.split(',');
-      setTags([...splitTags]);
+      setTags([ ...tags, ...newTag.split(',') ]);
       setNewTag("");
     }
   };
@@ -49,6 +38,10 @@ export default function QuizDetails(props) {
     if (event.key === 'Enter') {
       handleAddClick();
     }
+  };
+
+  const handleQuizColor = (col) => {
+    setQuizColor(col);
   };
 
   const iconStyling = {
@@ -68,9 +61,6 @@ export default function QuizDetails(props) {
       easing: theme.transitions.easing.easeOut,
     }),
   };
-
-
-
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -101,17 +91,6 @@ export default function QuizDetails(props) {
 
       {isMobile && props.showIcons && (
         <Box>
-          {/* <PiHandSwipeLeftDuotone style=
-            {{
-              ...iconStyling,
-              right: 305,
-
-            }} />
-          <PiHandSwipeRightDuotone style=
-            {{
-              ...iconStyling,
-              right: 55,
-            }} /> */}
           <MdOutlineSwipe style=
             {{
               ...iconStyling,
@@ -129,7 +108,8 @@ export default function QuizDetails(props) {
       <Typography sx={{ mb: '-10px' }}>
         Or here are some templates to help you get started
       </Typography>
-      <ColorTemplates />
+      <ColorTemplates
+        selectColor={handleQuizColor} />
 
       <Typography className='inputLabel' >
         Tags

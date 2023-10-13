@@ -8,8 +8,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { useSwipeable } from 'react-swipeable';
 
-// AiOutlineArrowRight
-
 function CustomTabPanel(props) {
   const { children, value, index } = props;
 
@@ -37,10 +35,10 @@ CustomTabPanel.propTypes = {
 export default function CreateNewQuiz() {
   const [value, setValue] = useState(0);
   const [showIcons, setShowIcons] = useState(true);
-  
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -69,39 +67,39 @@ export default function CreateNewQuiz() {
     <Paper sx={{ marginTop: '50px' }} {...swipeHandlers}>
       <Box sx={{ width: '100%' }}>
 
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderBottom: 1,
-            borderColor: 'divider'
-          }} >
-            <Tabs value={value} onChange={handleChange}>
-              <Tab label="Details" sx={{
-                textTransform: 'none',
-                fontWeight: '525',
-                color: '#a2a2a2',
-                fontSize: 'larger'
-              }} />
-              <Tab label="Questions" sx={{
-                textTransform: 'none',
-                fontWeight: '525',
-                color: '#a2a2a2',
-                fontSize: 'larger'
-              }} />
-              <Tab label="Schedule" sx={{
-                textTransform: 'none',
-                fontWeight: '525',
-                color: '#a2a2a2',
-                fontSize: 'larger'
-              }} />
-            </Tabs>
-            <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
-              <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Preview</Button>
-              <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Publish</Button>
-            </Box>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: 1,
+          borderColor: 'divider'
+        }} >
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="Details" sx={{
+              textTransform: 'none',
+              fontWeight: '525',
+              color: '#a2a2a2',
+              fontSize: 'larger'
+            }} />
+            <Tab label="Questions" sx={{
+              textTransform: 'none',
+              fontWeight: '525',
+              color: '#a2a2a2',
+              fontSize: 'larger'
+            }} />
+            <Tab label="Schedule" sx={{
+              textTransform: 'none',
+              fontWeight: '525',
+              color: '#a2a2a2',
+              fontSize: 'larger'
+            }} />
+          </Tabs>
+          <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
+            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Preview</Button>
+            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Publish</Button>
           </Box>
-        
+        </Box>
+
         <CustomTabPanel value={value} index={0}>
           <QuizDetails showIcons={showIcons} />
         </CustomTabPanel>
@@ -113,34 +111,12 @@ export default function CreateNewQuiz() {
         </CustomTabPanel>
 
       </Box>
-      <Button
-        className="button-darkMediumBlue"
-        size="small"
-        sx={{ mr: 1 }}
-        onClick={changeToPreviousTab}
-      >Back
-      </Button>
-      {/* <Button
-        className="button-darkMediumBlue"
-        size="small"
-        onClick={changeToNextTab}
-      >Next
-      </Button> */}
 
-      <IconButton sx={{
-        marginLeft: '5px',
-        marginRight: '-25px',
-        // transform: "scale(.7) scaleY(1.2)"
-      }}
-        onClick={changeToNextTab}
-      >
-        <AiOutlineArrowRight />
-      </IconButton>
-
-      {/* <Button
+      <Box>
+        <Button
           className="button-darkMediumBlue"
           size="small"
-          sx={{}}
+          sx={{ mr: 1 }}
         >
           Preview</Button>
         <Button
@@ -148,7 +124,8 @@ export default function CreateNewQuiz() {
           className="button-darkMediumBlue"
           sx={{}}
         >
-          Publish</Button> */}
+          Publish</Button>
+      </Box>
 
     </Paper>
   );
