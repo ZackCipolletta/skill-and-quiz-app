@@ -137,3 +137,23 @@ export default function QuizSchedule() {
     // </LocalizationProvider>
   );
 };  
+
+<DatePicker
+  value={endDate ? dayjs(endDate) : null}
+  onChange={(newEndDate) => setEndDate(newEndDate)}
+  minDate={startDate ? dayjs(startDate) : dayjs()}
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      borderRadius: 2, // This will make the border radius 10px
+    },
+    '& .MuiOutlinedInput-input': {
+      padding: '5px', // Adjust the padding as needed
+    }
+  }}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      placeholder={endDate ? 'Select Date' : 'Custom String'}
+    />
+  )}
+/>

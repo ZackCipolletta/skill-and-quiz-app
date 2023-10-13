@@ -20,16 +20,19 @@ import dayjs, { Dayjs } from 'dayjs';
 
 export default function QuizSchedule() {
 
-  const [startDate, setStartDate] = React.useState(dayjs('2022-04-17'));
-  const [startTime, setStartTime] = React.useState(dayjs('2022-04-17T15:30'));
-  const [endDate, setEndDate] = React.useState(dayjs('2022-04-17'));
-  const [endTime, setEndTime] = React.useState(dayjs('2022-04-17T15:30'));
-  // const [endDate, setEndDate] = React.useState < Dayjs | null > (dayjs('2022-04-17'));
+  const [date, setDate] = useState(new Date());
+  
+  const [startDate, setStartDate] = React.useState(dayjs(`${date}`));
+  const [startTime, setStartTime] = React.useState(dayjs(`${date}`));
+  const [endDate, setEndDate] = React.useState(dayjs(`${date}`));
+  const [endTime, setEndTime] = React.useState(dayjs(`${date}`));
 
-
+  
   return (
 
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+      
 
       <Box sx={{ mb: 5, display: 'flex' }}>
         <Box sx={{ mr: 5 }}>
@@ -37,6 +40,7 @@ export default function QuizSchedule() {
           <DatePicker
             value={startDate}
             onChange={(newStartDate) => setStartDate(newStartDate)}
+            minDate={dayjs(`${date}`)}
             sx={{
               '& .MuiOutlinedInput-root': {
                 borderRadius: 2, // This will make the border radius 10px
@@ -69,8 +73,9 @@ export default function QuizSchedule() {
         <Box sx={{ mr: 5 }}>
           <Typography>End Date</Typography>
           <DatePicker
-            value={endDate}
+            value={endDate ? dayjs(endDate) : null}
             onChange={(newEndDate) => setEndDate(newEndDate)}
+            minDate={startDate ? dayjs(startDate) : dayjs()}
             sx={{
               '& .MuiOutlinedInput-root': {
                 borderRadius: 2, // This will make the border radius 10px
