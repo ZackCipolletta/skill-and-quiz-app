@@ -36,11 +36,11 @@ CustomTabPanel.propTypes = {
 
 export default function CreateNewQuiz() {
   const [value, setValue] = useState(0);
-
+  const [showIcons, setShowIcons] = useState(true);
+  
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -50,6 +50,7 @@ export default function CreateNewQuiz() {
     if (nextTab < 3) {
       setValue(nextTab);
     }
+    setShowIcons(false);
   };
 
   const changeToPreviousTab = () => {
@@ -102,7 +103,7 @@ export default function CreateNewQuiz() {
           </Box>
         
         <CustomTabPanel value={value} index={0}>
-          <QuizDetails />
+          <QuizDetails showIcons={showIcons} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <QuizQuestions />

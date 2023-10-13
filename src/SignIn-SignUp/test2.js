@@ -1,98 +1,152 @@
-import React, { FunctionComponent, ReactNode } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import {
-  Wrapper,
-  CarouselContainer,
-  CarouselSlot,
-  SlideButtonContainer,
-  SlideButton,
-  PREV,
-  NEXT
-} from '../components';
+  Box, Paper, Tabs, Tab, IconButton,
+  Typography, TextField, Button
+} from '@mui/material';
+import ColorTemplates from './ColorTemplates';
+import '../Styles/Components.css';
+import { TfiClose } from 'react-icons/tfi';
+import { PiHandSwipeRightDuotone, PiHandSwipeLeftDuotone } from 'react-icons/pi';
+import { MdOutlineSwipe } from 'react-icons/md';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Swipeable } from 'react-swipeable';
 
-type Direction = typeof PREV | typeof NEXT;
+export default function QuizDetails() {
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState('');
+  const [showIcons, setShowIcons] = useState(true);
 
-interface CarouselState {
-  pos: number;
-  sliding: boolean;
-  dir: Direction;
-}
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-type CarouselAction =
-  | { type: Direction, numItems: number }
-  | { type: 'stopSliding' };
-
-const getOrder = (index: number, pos: number, numItems: number) => {
-  return index - pos < 0 ? numItems - Math.abs(index - pos) : index - pos;
-};
-
-const getInitialState = (numItems: number): CarouselState => ({ pos: numItems - 1, sliding: false, dir: NEXT });
-
-const Carousel: FunctionComponent<{children: ReactNode}> = (props) => {
-  const numItems = React.Children.count(props.children);
-  const [state, dispatch] = React.useReducer(reducer, getInitialState(numItems));
-
-  const slide = (dir: Direction) => {
-    dispatch({ type: dir, numItems });
-    setTimeout(() => {
-      dispatch({ type: 'stopSliding' });
-    }, 50);
+  const handleAddClick = () => {
+    if (newTag.trim() !== "") {
+      const splitTags = newTag.split(',');
+      setTags([...splitTags]);
+      setNewTag("");
+    }
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => slide(NEXT),
-    onSwipedRight: () => slide(PREV),
-    swipeDuration: 500,
-    preventScrollOnSwipe: true,
-    trackMouse: true
-  });
+  const handleRemoveClick = (tagToRemove) => {
+    const updatedTags = tags.filter(tag => tag !== tagToRemove);
+    setTags(updatedTags);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleAddClick();
+    }
+  };
+
+  const iconStyling = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'absolute',
+    background: '#80808080',
+    borderRadius: 25,
+    padding: 10,
+    top: 305,
+    zIndex: 1,
+    transform: "scale(3)",
+    opacity: showIcons ? 1 : 0,
+    transition: theme.transitions.create('opacity', {
+      duration: 5000, // 5 seconds
+      easing: theme.transitions.easing.easeOut,
+    }),
+  };
+
+  // Handle swipe left to hide icons
+  const handleSwipeLeft = () => {
+    setShowIcons(false);
+  };
 
   return (
-    <div {...handlers}>
-      <Wrapper>
-        <CarouselContainer dir={state.dir} sliding={state.sliding}>
-          {React.Children.map(props.children, (child, index) => (
-            <CarouselSlot
-              order={getOrder(index, state.pos, numItems)}
-            >
-              {child}
-            </CarouselSlot>
-          ))}
-        </CarouselContainer>
-      </Wrapper>
-      <SlideButtonContainer>
-        <SlideButton onClick={() => slide(PREV)} float="left">
-          Prev
-        </SlideButton>
-        <SlideButton onClick={() => slide(NEXT)} float="right">
-          Next
-        </SlideButton>
-      </SlideButtonContainer>
-    </div>
-  );
-};
+    <Swipeable onSwipedLeft={handleSwipeLeft}>
+      <Box sx={{ width: '100%' }}>
+        <Typography className='inputLabel' sx={{ mt: 1 }}>
+          Quiz Name
+        </Typography>
+        <Box style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}>
+          <TextField
+            margin="normal"
+            required
+            id="QuizName"
+            placeholder="Enter Quiz Name"
+            name="QuizName"
+            autoFocus
+            className='input-field'
+            size='small'
+            sx={{
+              width: 350,
+            }}
+            InputProps={{ sx: { borderRadius: 2 } }}
+          />
+        </Box>
 
-function reducer(state: CarouselState, action: CarouselAction): CarouselState {
-  switch (action.type) {
-    case PREV:
-      return {
-        ...state,
-        dir: PREV,
-        sliding: true,
-        pos: state.pos === 0 ? action.numItems - 1 : state.pos - 1
-      };
-    case NEXT:
-      return {
-        ...state,
-        dir: NEXT,
-        sliding: true,
-        pos: state.pos === action.numItems - 1 ? 0 : state.pos + 1
-      };
-    case 'stopSliding':
-      return { ...state, sliding: false };
-    default:
-      return state;
-  }
-}
+        {isMobile && showIcons && (
+          <Box>
+            <MdOutlineSwipe
+              style={{
+                ...iconStyling,
+                right: 185,
+              }}
+            />
+          </Box>
+        )}
 
-export default Carousel;
+        <Typography className='inputLabel' sx={{ mt: 1 }}>
+          Select a quiz picture
+        </Typography>
+
+        <Typography sx={{ mb: '-10px' }}>
+          Or here are some templates to help you get started
+        </Typography>
+        <ColorTemplates />
+
+        <Typography className='inputLabel'>
+          Tags
+        </Typography>
+        <Box style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}>
+          <TextField
+            margin="normal"
+            required
+            id="QuizTags"
+            placeholder="Placeholder"
+            name="QuizTags"
+            size='small'
+            sx={{
+              width: 250
+            }}
+            InputProps={{
+              sx: { borderRadius: 2 },
+              value: newTag,
+              onChange: (e) => setNewTag(e.target.value)
+            }}
+            onKeyDown={handleKeyPress}
+          />
+          <Button
+            className='button-mediumBlue'
+            sx={{ ml: 3, }}
+            onClick={() => handleAddClick()}>
+            Add
+          </Button>
+        </Box>
+
+        {tags.map((tag, index) => (
+          <span key={index} className="tag" style={{
+            border: '1px solid #67c27c',
+            padding: '5px',
+            paddingLeft: '7px',
+            paddingRight: '7px',
+            borderRadius: '15px',
+           
+

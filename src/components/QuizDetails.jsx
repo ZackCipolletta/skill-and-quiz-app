@@ -7,30 +7,30 @@ import {
 import ColorTemplates from './ColorTemplates';
 import '../Styles/Components.css';
 import { TfiClose } from 'react-icons/tfi';
-import { PiHandSwipeRightDuotone } from 'react-icons/pi';
-import { PiHandSwipeLeftDuotone } from 'react-icons/pi';
+import { PiHandSwipeRightDuotone, PiHandSwipeLeftDuotone } from 'react-icons/pi';
+import { MdOutlineSwipe } from 'react-icons/md';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useSwipeable } from 'react-swipeable';
 
 
-export default function QuizDetails() {
+export default function QuizDetails(props) {
 
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState('');
-  const [showIcons, setShowIcons] = useState(true);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  useEffect(() => {
-    //set a timer to hide icons after 5 seconds
-    const timeout = setTimeout(() => {
-      setShowIcons(false);
-    }, 5000); // timer is in milliseconds - 5k = 5 seconds
+  // useEffect(() => {
+  //   //set a timer to hide icons after 5 seconds
+  //   const timeout = setTimeout(() => {
+  //     setShowIcons(false);
+  //   }, 5000); // timer is in milliseconds - 5k = 5 seconds
 
-    // Clear timer when component unmounts
-    return () => clearTimeout(timeout);
-  }, []);
+  //   // Clear timer when component unmounts
+  //   return () => clearTimeout(timeout);
+  // }, []);
 
   const handleAddClick = () => {
     if (newTag.trim() !== "") {
@@ -56,11 +56,21 @@ export default function QuizDetails() {
     justifyContent: 'space-between',
     alignItems: 'center',
     position: 'absolute',
+    background: '#80808080',
+    borderRadius: 25,
+    padding: 10,
     top: 305,
     zIndex: 1,
     transform: "scale(3)",
-    opacity: .2
+    opacity: props.showIcons ? 1 : 0,
+    transition: theme.transitions.create('opacity', {
+      duration: 5000, // 5 seconds
+      easing: theme.transitions.easing.easeOut,
+    }),
   };
+
+
+
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -89,9 +99,9 @@ export default function QuizDetails() {
         />
       </Box>
 
-      {isMobile && showIcons && (
+      {isMobile && props.showIcons && (
         <Box>
-          <PiHandSwipeLeftDuotone style=
+          {/* <PiHandSwipeLeftDuotone style=
             {{
               ...iconStyling,
               right: 305,
@@ -101,6 +111,11 @@ export default function QuizDetails() {
             {{
               ...iconStyling,
               right: 55,
+            }} /> */}
+          <MdOutlineSwipe style=
+            {{
+              ...iconStyling,
+              right: 185,
             }} />
         </Box>
       )}
