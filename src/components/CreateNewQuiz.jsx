@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Button, Paper, Tabs, Tab, Typography, IconButton } from '@mui/material';
 import QuizDetails from "./QuizDetails";
 import QuizQuestions from "./QuizQuestions";
+import QuizSchedule from "./QuizSchedule";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
@@ -107,7 +108,7 @@ export default function CreateNewQuiz() {
           <QuizQuestions />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Schedule
+          <QuizSchedule />
         </CustomTabPanel>
 
       </Box>

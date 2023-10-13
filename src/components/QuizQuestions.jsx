@@ -129,7 +129,7 @@ export default function QuizQuestions() {
         height='50px'
         size='small'
         sx={{
-          width: !isMobile ? 550 : 150
+          width: !isMobile ? 500 : 150
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
       />
