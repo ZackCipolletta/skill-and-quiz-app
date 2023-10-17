@@ -5,6 +5,7 @@
     --lightGreen: rgba(103, 194, 124, 255);
     --warning: rgba(255, 89, 100, 255);
     --darkMediumBlue: rgba(48, 86, 211, 255);
+    --lightGray: rgba(241,246,252,255);
 
 }
 
@@ -27,6 +28,26 @@ Button.button-lightBlue {
     &:hover {
         background-color: var(--lightBlue);
         color: var(--darkBlue);
+    }
+}
+
+Button.button-lightGreen {
+    background-color: var(--lightGreen);
+    color: white;
+
+    &:hover {
+        background-color: var(--lightGreen);
+        color: white;
+    }
+}
+
+Button.button-lightGray {
+    background-color: var(--lightGray);
+    /* color: white; */
+
+    &:hover {
+        background-color: var(--lightGray);
+        /* color: white; */
     }
 }
 
