@@ -4,6 +4,7 @@ import Header from './Header';
 import QuizCategoryDashboard from './QuizCategoryDashboard';
 import QuizzesDashboard from './QuizzesDashboard';
 import CreateNewQuiz from './CreateNewQuiz';
+import Quiz from './Quiz';
 
 
 export default function Control({ page }) {
@@ -26,9 +27,15 @@ export default function Control({ page }) {
     case 'questions':
       content = <CreateNewQuiz />;
       break;
+    
     case 'categories':
       content =
           <QuizCategoryDashboard />;
+      break;
+    
+    case 'quiz':
+      content =
+          <Quiz />;
       break;
 
     default:
