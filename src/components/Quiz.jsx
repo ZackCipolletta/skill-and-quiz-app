@@ -3,7 +3,7 @@ import '../Styles/Components.css';
 import React, { useState, useEffect } from "react";
 import {
   Button, Box, IconButton, TableContainer, Table, TableHead,
-  TableRow, TableCell, TableBody, Paper
+  TableRow, TableCell, TableBody, Paper, TextField
 } from '@mui/material';
 import SearchBar from './SearchBar';
 import { useNavigate } from 'react-router-dom';
@@ -14,29 +14,33 @@ import { PiTagChevron } from 'react-icons/pi';
 
 export default function Quiz() {
 
+  const [options, setOptions] = useState(0);
+
   const quizInfo =
-    { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false, question: 'What is the fastest route of all time?', answers: ['The Kessel run', 'qwerty', 'what?'] };
+    { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false, question: 'What is the fastest route of all time?', answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'] };
   const navigate = useNavigate();
+
+
 
   return (
     <Box
       style={{ marginTop: 35 }}>
-      
+
       <Box name='name&Buttons'
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           marginBottom: 5
-        }}> 
-        
+        }}>
+
         <Box name='quizImage&Name'
           style={{
             display: 'flex',
             alignItems: 'center',
             marginBottom: 5
           }}>
-          
+
           <Box name='quizName'
             style={{
               backgroundColor: quizInfo.Color,
@@ -112,34 +116,90 @@ export default function Quiz() {
       </Box>
 
       <TableContainer component={Paper}>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell><h1>#</h1></TableCell>
-            <TableCell><h1>Questions</h1></TableCell>
-            <TableCell><h1>3</h1></TableCell>
-            <TableCell><h1>4</h1></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {/* Add your rows and cells here */}
-          <TableRow>
-            <TableCell>1</TableCell>
-              <TableCell>{quizInfo.question}</TableCell>
-            <TableCell>3</TableCell>
-            <TableCell>4</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>2</TableCell>
-            <TableCell>Where are you from?</TableCell>
-            <TableCell>Cell 3 Content</TableCell>
-            <TableCell>Cell 4 Content</TableCell>
-          </TableRow>
-          {/* Add more rows as needed */}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell><h1>#</h1></TableCell>
+              <TableCell><h1>Questions</h1></TableCell>
+              <TableCell><h1>3</h1></TableCell>
+              <TableCell><h1>4</h1></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* Add your rows and cells here */}
+            <TableRow>
+              <TableCell>1</TableCell>
+              <TableCell>{quizInfo.question}
+              <Box name='answers'>
+                  {quizInfo.answers.map((answer, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        border: '1px solid #67c27c',
+                        padding: '1px',
+                        paddingLeft: '7px',
+                        paddingRight: '7px',
+                        borderRadius: '15px',
+                        color: '#67c27c',
+                        background: 'rgba(103, 194, 124, .09)',
+                        marginRight: 5, // Add marginRight to create spacing between tags
+                      }}
+                    >
+                      {answer}
+                    </span>
+                  ))}
+                </Box>
+              </TableCell>
+              <TableCell>3</TableCell>
+              <TableCell>
+                
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>2</TableCell>
+              <TableCell>Where are you from?</TableCell>
+              <TableCell>Cell 3 Content</TableCell>
+              <TableCell>Cell 4 Content</TableCell>
+            </TableRow>
+            {/* Add more rows as needed */}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
     </Box>
   );
 }
+
+
+
+// const generateAnswersField = () => {
+//   const answersArr = [];
+
+//   const answersOptionsArray = ['A', 'B', 'C', 'D'];
+
+
+//   for (let i = 0; i < options; i++) {
+
+//     answersArr.push(
+//       <Box name='tags'>
+//         {quizInfo.answers.map((answer, index) => (
+//           <span
+//             key={index}
+//             style={{
+//               border: '1px solid #67c27c',
+//               padding: '1px',
+//               paddingLeft: '7px',
+//               paddingRight: '7px',
+//               borderRadius: '15px',
+//               color: '#67c27c',
+//               background: 'rgba(103, 194, 124, .09)',
+//             }}
+//           >
+//             {answer}
+//           </span>
+//         ))}
+//       </Box>
+//     );
+//   }
+//   return answersArr;
+// };
