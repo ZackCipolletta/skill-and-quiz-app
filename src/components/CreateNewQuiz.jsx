@@ -113,20 +113,22 @@ export default function CreateNewQuiz() {
 
       </Box>
 
-      <Box>
-        <Button
-          className="button-darkMediumBlue"
-          size="small"
-          sx={{ mr: 1 }}
-        >
-          Preview</Button>
-        <Button
-          size="small"
-          className="button-darkMediumBlue"
-          sx={{}}
-        >
-          Publish</Button>
-      </Box>
+      {!isMobile ? null :
+        <Box>
+          <Button
+            className="button-darkMediumBlue"
+            size="small"
+            sx={{ mr: 1 }}
+          >
+            Preview</Button>
+          <Button
+            size="small"
+            className="button-darkMediumBlue"
+            sx={{}}
+          >
+            Publish</Button>
+        </Box>
+      }
 
     </Paper>
   );

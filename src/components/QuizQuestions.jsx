@@ -133,7 +133,7 @@ export default function QuizQuestions() {
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
       />
-      <Button className='button-mediumBlue' sx={{ ml: !isMobile ? 4 : 1 }}>Add</Button>
+      <Button className='button-mediumBlue' sx={{ ml: !isMobile ? 3 : 1 }}>Add</Button>
 
       <Box sx={{ mt: 5 }}>
         <FormControl size='small'>
