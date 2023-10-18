@@ -12,6 +12,7 @@ import Quizzes from './Quizzes';
 import { LuAward } from 'react-icons/lu';
 import { PiTagChevron, PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
 import { CiStar } from 'react-icons/ci';
+import QuestionDetail from './QuestionDetail';
 
 export default function Quiz() {
 
@@ -143,10 +144,13 @@ export default function Quiz() {
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {/* Add your rows and cells here */}
 
+            <QuestionDetail
+              quizInfo={quizInfo}
+              />
 
+            
+            {/* <TableBody>
               {quizInfo.questions.map((question, i) => (
                 <TableRow key={i}>
                   <TableCell>{i + 1}</TableCell>
@@ -205,7 +209,8 @@ export default function Quiz() {
                   </TableCell>
                 </TableRow>
               ))}
-            </TableBody>
+            </TableBody> */}
+
           </Table>
         </TableContainer>
 
