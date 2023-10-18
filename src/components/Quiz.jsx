@@ -3,7 +3,7 @@ import '../Styles/Components.css';
 import React, { useState, useEffect } from "react";
 import {
   Button, Box, IconButton, TableContainer, Table, TableHead,
-  TableRow, TableCell, TableBody, Paper, TextField
+  TableRow, TableCell, TableBody, Paper, TextField, Typography
 } from '@mui/material';
 import SearchBar from './SearchBar';
 import { useNavigate } from 'react-router-dom';
@@ -132,76 +132,84 @@ export default function Quiz() {
         ))}
       </Box>
 
-      <TableContainer component={Paper}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell><h1>#</h1></TableCell>
-              <TableCell><h1>Questions</h1></TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* Add your rows and cells here */}
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell
-                style={{ width: '40%' }}
-              >{quizInfo.questions[0].question}
-                <Box name='answers'>
-                  {quizInfo.questions[0].answers.map((answer, index) => (
-                    <p
-                      key={index}
-                      style={{
-                        border: '1px solid #67c27c',
-                        padding: '1px',
-                        paddingLeft: '7px',
-                        paddingRight: '7px',
-                        borderRadius: '15px',
-                        color: '#67c27c',
-                        background: 'rgba(103, 194, 124, .09)',
-                      }}
-                    >
-                      {answer}
-                    </p>
-                  ))}
-                </Box>
-              </TableCell>
-              <TableCell>
+      <Box sx={{mt: 3}}>
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell><h1>#</h1></TableCell>
+                <TableCell><h1>Questions</h1></TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {/* Add your rows and cells here */}
 
-                <IconButton sx={{
-                  marginLeft: -1,
-                  marginRight: -3,
-                  transform: "scale(.7)"
-                }}>
-                  <PiStar color='black' />
-                </IconButton>
 
-              </TableCell>
-              <TableCell>
+              {quizInfo.questions.map((question, i) => (
+                <TableRow key={i}>
+                  <TableCell>{i + 1}</TableCell>
+                  <TableCell
+                    style={{ width: '40%' }}
+                  >{quizInfo.questions[i].question}
+                    <Box name='answers'>
+                      {quizInfo.questions[i].answers.map((answer, index) => (
+                        <Typography
+                          key={index}
+                          style={{
+                            border: '1px solid #67c27c',
+                            padding: '1px',
+                            paddingLeft: '7px',
+                            paddingRight: '7px',
+                            borderRadius: '15px',
+                            color: '#67c27c',
+                            background: 'rgba(103, 194, 124, .09)',
+                          }}
+                        >
+                          {answer}
+                        </Typography>
+                      ))}
+                    </Box>
+                  </TableCell>
 
-                <IconButton sx={{
-                  marginLeft: -1,
-                  marginRight: -1,
-                  transform: "scale(.7) scaleY(1.2)"
-                }}>
-                  <PiPencilLineLight color='black' />
-                </IconButton>
 
-                <IconButton sx={{
-                  marginRight: -4,
-                  transform: "scale(.7) scaleY(1.2)"
-                }}>
-                  <PiTrashThin color='red' />
-                </IconButton>
+                  <TableCell>
 
-              </TableCell>
-            </TableRow>
-            {/* Add more rows as needed */}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                    <IconButton sx={{
+                      marginLeft: -1,
+                      marginRight: -3,
+                      transform: "scale(.7)"
+                    }}>
+                      <PiStar color='black' />
+                    </IconButton>
+
+                  </TableCell>
+                  <TableCell>
+
+                    <IconButton sx={{
+                      marginLeft: -1,
+                      marginRight: -1,
+                      transform: "scale(.7) scaleY(1.2)"
+                    }}>
+                      <PiPencilLineLight color='black' />
+                    </IconButton>
+
+                    <IconButton sx={{
+                      marginRight: -4,
+                      transform: "scale(.7) scaleY(1.2)"
+                    }}>
+                      <PiTrashThin color='red' />
+                    </IconButton>
+
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+      </Box>
 
     </Box>
   );
