@@ -10,16 +10,33 @@ import { useNavigate } from 'react-router-dom';
 import DeleteModal from './DeleteModal';
 import Quizzes from './Quizzes';
 import { LuAward } from 'react-icons/lu';
-import { PiTagChevron } from 'react-icons/pi';
+import { PiTagChevron, PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
+import { CiStar } from 'react-icons/ci';
 
 export default function Quiz() {
 
   const [options, setOptions] = useState(0);
 
-  const quizInfo =
-    { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false, question: 'What is the fastest route of all time?', answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'] };
-  const navigate = useNavigate();
+  const quizInfo = {
+    Name: "Quiz1",
+    Color: '#cfd9fa',
+    tags: ['Tag1', 'Tag2', 'Tag3'],
+    id: 1,
+    Favorite: false,
+    questions: [
+      {
+        question: 'What is the fastest route of all time?',
+        answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
+      },
+      {
+        question: 'How many planets are there in the solar system?',
+        answers: ['1', '8', '9'],
+      },
+    ],
+  };
 
+
+  const navigate = useNavigate();
 
 
   return (
@@ -121,18 +138,20 @@ export default function Quiz() {
             <TableRow>
               <TableCell><h1>#</h1></TableCell>
               <TableCell><h1>Questions</h1></TableCell>
-              <TableCell><h1>3</h1></TableCell>
-              <TableCell><h1>4</h1></TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {/* Add your rows and cells here */}
             <TableRow>
               <TableCell>1</TableCell>
-              <TableCell>{quizInfo.question}
-              <Box name='answers'>
-                  {quizInfo.answers.map((answer, index) => (
-                    <span
+              <TableCell
+                style={{ width: '40%' }}
+              >{quizInfo.questions[0].question}
+                <Box name='answers'>
+                  {quizInfo.questions[0].answers.map((answer, index) => (
+                    <p
                       key={index}
                       style={{
                         border: '1px solid #67c27c',
@@ -142,24 +161,42 @@ export default function Quiz() {
                         borderRadius: '15px',
                         color: '#67c27c',
                         background: 'rgba(103, 194, 124, .09)',
-                        marginRight: 5, // Add marginRight to create spacing between tags
                       }}
                     >
                       {answer}
-                    </span>
+                    </p>
                   ))}
                 </Box>
               </TableCell>
-              <TableCell>3</TableCell>
               <TableCell>
-                
+
+                <IconButton sx={{
+                  marginLeft: -1,
+                  marginRight: -3,
+                  transform: "scale(.7)"
+                }}>
+                  <PiStar color='black' />
+                </IconButton>
+
               </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>2</TableCell>
-              <TableCell>Where are you from?</TableCell>
-              <TableCell>Cell 3 Content</TableCell>
-              <TableCell>Cell 4 Content</TableCell>
+              <TableCell>
+
+                <IconButton sx={{
+                  marginLeft: -1,
+                  marginRight: -1,
+                  transform: "scale(.7) scaleY(1.2)"
+                }}>
+                  <PiPencilLineLight color='black' />
+                </IconButton>
+
+                <IconButton sx={{
+                  marginRight: -4,
+                  transform: "scale(.7) scaleY(1.2)"
+                }}>
+                  <PiTrashThin color='red' />
+                </IconButton>
+
+              </TableCell>
             </TableRow>
             {/* Add more rows as needed */}
           </TableBody>
