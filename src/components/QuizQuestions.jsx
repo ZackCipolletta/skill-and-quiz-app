@@ -177,6 +177,8 @@ export default function QuizQuestions() {
               </>
             )}
 
+            <Button sx={{ display: 'block', mt: 2 }} className="button-mediumBlue">Add Question</Button>
+
           </div>
         </FormControl>
       </Box>
