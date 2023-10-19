@@ -11,7 +11,7 @@ import { FaFileCsv } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import QuestionDetail from "./QuestionDetail";
+import QuestionsAndAnswers from "./QuestionsAndAnswers";
 
 
 export default function QuizQuestions() {
@@ -135,6 +135,7 @@ export default function QuizQuestions() {
   );
 
   return (
+
     <Box sx={{ width: '100%' }}>
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Have Questions Already? Import them!
@@ -243,10 +244,15 @@ export default function QuizQuestions() {
         </FormControl>
       </Box>
 
-      <QuestionDetail
-        quizInfo={questionAnswerArr}
-      />
+      <Box
+        
+      >
+        <QuestionsAndAnswers
+          
+          quizInfo={questionAnswerArr}
+        />
+      </Box >
 
-    </Box >
+    </Box>
   );
 };  

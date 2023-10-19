@@ -3,31 +3,19 @@ import React from "react";
 import { Box, IconButton, TableRow, TableCell, Typography, TableBody } from '@mui/material';
 import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
 
-export default function QuestionDetail(props) {
+export default function QuestionsAndAnswers(props) {
 
   const { quizInfo } = props;
-
-  // const quizInfo = {
-  //   "questions": [
-  //       {
-  //           "answers": []
-  //       },
-  //       {
-  //           "question": "what is your name?",
-  //           "answers": []
-  //       }
-  //   ]
-  // }
 
   return (
     <TableBody>
       {quizInfo.questions.map((q, i) => (
         <TableRow key={i}>
-          <TableCell>{i + 1}</TableCell>
+          <TableCell>
+            {i + 1}
+          </TableCell>
           <TableCell
-            // style={{ width: '40%' }}
           >
-            {/* {quizInfo.questions[i].question} */}
             {q.question}
             <Box name='answers'>
               {q.answers.map((answer, index) => (
@@ -43,7 +31,7 @@ export default function QuestionDetail(props) {
                     background: 'rgba(103, 194, 124, .09)',
                   }}
                 >
-                  {answer ? answer : null}
+                  {answer}
                 </Typography>
               ))}
             </Box>

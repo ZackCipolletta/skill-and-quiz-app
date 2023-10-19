@@ -12,7 +12,7 @@ import Quizzes from './Quizzes';
 import { LuAward } from 'react-icons/lu';
 import { PiTagChevron, PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
 import { CiStar } from 'react-icons/ci';
-import QuestionDetail from './QuestionDetail';
+import QuestionsAndAnswers from './QuestionsAndAnswers';
 
 export default function Quiz() {
 
@@ -135,7 +135,9 @@ export default function Quiz() {
 
       <Box sx={{mt: 3}}>
         <TableContainer component={Paper}>
-          <Table size="small">
+          <Table
+            // size="small"
+          >
             <TableHead>
               <TableRow>
                 <TableCell><h1>#</h1></TableCell>
@@ -145,7 +147,7 @@ export default function Quiz() {
               </TableRow>
             </TableHead>
 
-            <QuestionDetail
+            <QuestionsAndAnswers
               quizInfo={quizInfo}
             />
             
