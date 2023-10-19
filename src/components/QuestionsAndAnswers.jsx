@@ -10,12 +10,16 @@ export default function QuestionsAndAnswers(props) {
   return (
     <TableBody>
       {quizInfo.questions.map((q, i) => (
-        <TableRow key={i}>
+        <TableRow key={i}
+          
+        >
           <TableCell>
             {i + 1}
           </TableCell>
           <TableCell
+          // sx={{width: 400}}
           >
+
             {q.question}
             <Box name='answers'>
               {q.answers.map((answer, index) => (
@@ -49,7 +53,9 @@ export default function QuestionsAndAnswers(props) {
 
           </TableCell>
 
-          <TableCell>
+          <TableCell
+          sx={{width: 75}}
+          >
 
             <IconButton sx={{
               marginLeft: -1,
@@ -60,7 +66,7 @@ export default function QuestionsAndAnswers(props) {
             </IconButton>
 
             <IconButton sx={{
-              marginRight: -4,
+              marginRight: -1,
               transform: "scale(.7) scaleY(1.2)"
             }}>
               <PiTrashThin color='red' />

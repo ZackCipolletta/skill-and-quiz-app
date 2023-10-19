@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import {
-  Box, Button, Paper, Tabs, Tab, Typography, InputLabel,
+  Box, Button, Paper, Tabs, Tab, Typography, InputLabel, Table, TableContainer,
   TextField, FormControl, Select, MenuItem, IconButton,
 } from '@mui/material';
 import ColorTemplates from './ColorTemplates';
@@ -244,13 +244,18 @@ export default function QuizQuestions() {
         </FormControl>
       </Box>
 
-      <Box
-        
-      >
+      <Box>
+      <TableContainer component={Paper}>
+          <Table
+            // size="small"
+          >
+
         <QuestionsAndAnswers
-          
           quizInfo={questionAnswerArr}
-        />
+            />
+            
+          </Table>
+          </TableContainer>
       </Box >
 
     </Box>
