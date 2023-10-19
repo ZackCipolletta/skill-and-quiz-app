@@ -8,12 +8,16 @@ export default function QuestionDetail(props) {
   const { quizInfo } = props;
 
   // const quizInfo = {
-  //   questions: [
-  //     {
-  //       answers: [],
-  //     }
+  //   "questions": [
+  //       {
+  //           "answers": []
+  //       },
+  //       {
+  //           "question": "what is your name?",
+  //           "answers": []
+  //       }
   //   ]
-  // };
+  // }
 
   return (
     <TableBody>

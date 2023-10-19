@@ -29,6 +29,19 @@ export default function QuizQuestions() {
     ]
   });
 
+  const quest = {
+    questions: [
+      {
+        question: 'What is the fastest route of all time?',
+        answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
+      },
+      {
+        question: 'How many planets are there in the solar system?',
+        answers: ['1', '8', '9'],
+      }
+    ]
+  };
+
   const handleAnswerChange = (event) => {
     setAnswerType(event.target.value);
   };
@@ -99,6 +112,7 @@ export default function QuizQuestions() {
         }
       ]
     }));
+    console.log(questionAnswerArr);
   };
 
 
@@ -228,6 +242,10 @@ export default function QuizQuestions() {
           </div>
         </FormControl>
       </Box>
+
+      <QuestionDetail
+        quizInfo={questionAnswerArr}
+      />
 
     </Box >
   );
