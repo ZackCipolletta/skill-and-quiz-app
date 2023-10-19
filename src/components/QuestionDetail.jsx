@@ -7,18 +7,26 @@ export default function QuestionDetail(props) {
 
   const { quizInfo } = props;
 
+  // const quizInfo = {
+  //   questions: [
+  //     {
+  //       answers: [],
+  //     }
+  //   ]
+  // };
+
   return (
     <TableBody>
-      {quizInfo.questions.map((question, i) => (
+      {quizInfo.questions.map((q, i) => (
         <TableRow key={i}>
           <TableCell>{i + 1}</TableCell>
           <TableCell
             // style={{ width: '40%' }}
           >
             {/* {quizInfo.questions[i].question} */}
-            {question.question}
+            {q.question}
             <Box name='answers'>
-              {quizInfo.questions[i].answers.map((answer, index) => (
+              {q.answers.map((answer, index) => (
                 <Typography
                   key={index}
                   style={{
@@ -31,7 +39,7 @@ export default function QuestionDetail(props) {
                     background: 'rgba(103, 194, 124, .09)',
                   }}
                 >
-                  {answer}
+                  {answer ? answer : null}
                 </Typography>
               ))}
             </Box>

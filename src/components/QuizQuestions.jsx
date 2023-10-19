@@ -11,14 +11,25 @@ import { FaFileCsv } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import QuestionDetail from "./QuestionDetail";
+
 
 export default function QuizQuestions() {
 
   const [answerType, setAnswerType] = useState('');
   const [options, setOptions] = useState(0);
   const [optionFields, setOptionFields] = useState([]);
+  const [question, setQuestion] = useState('');
 
-  const handleChange = (event) => {
+  const [questionAnswerArr, setQuestionAnswerArr] = useState({
+    questions: [
+      {
+        answers: [],
+      }
+    ]
+  });
+
+  const handleAnswerChange = (event) => {
     setAnswerType(event.target.value);
   };
 
@@ -27,7 +38,6 @@ export default function QuizQuestions() {
 
   const answersList = document.getElementById("answersList");
   const optionNumber = answersList ? answersList.children.length : 0;
-
 
   const handleAddOptionClick = () => {
     setOptions(options < 4 ? options + 1 : options);
@@ -39,12 +49,9 @@ export default function QuizQuestions() {
 
   const generateOptionFields = () => {
     const optionFields = [];
-
     const optionsArray = ['A', 'B', 'C', 'D'];
 
-
     for (let i = 0; i < options; i++) {
-
       optionFields.push(
         <Box key={i} sx={{ mt: 1 }}>
           <TextField
@@ -70,6 +77,28 @@ export default function QuizQuestions() {
       );
     }
     return optionFields;
+  };
+
+  const handleQuestionChange = (event) => {
+    setQuestion(event.target.value);
+  };
+
+  const handleAddQuestionClick = () => {
+
+    setQuestionAnswerArr();
+  };
+
+  const handleAddClick = () => {
+    setQuestionAnswerArr((prevState) => ({
+      ...prevState,
+      questions: [
+        ...prevState.questions,
+        {
+          question: question,
+          answers: []
+        }
+      ]
+    }));
   };
 
 
@@ -128,12 +157,21 @@ export default function QuizQuestions() {
         className='input-field'
         height='50px'
         size='small'
+        value={question}
+        onChange={handleQuestionChange}
         sx={{
           width: !isMobile ? 500 : 150
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
       />
-      <Button className='button-mediumBlue' sx={{ ml: !isMobile ? 3 : 1 }}>Add</Button>
+      <Button className='button-mediumBlue' sx={{
+        ml:
+          !isMobile ? 3 : 1
+      }}
+        onClick={handleAddClick}
+      >
+        Add
+      </Button>
 
       <Box sx={{ mt: 5 }}>
         <FormControl size='small'>
@@ -150,7 +188,7 @@ export default function QuizQuestions() {
               labelId='select-answer-type'
               id='select-answer-type'
               value={answerType}
-              onChange={handleChange}
+              onChange={handleAnswerChange}
               label='answerType'
               sx={{
                 minWidth: 200,
@@ -177,7 +215,15 @@ export default function QuizQuestions() {
               </>
             )}
 
-            <Button sx={{ display: 'block', mt: 2 }} className="button-mediumBlue">Add Question</Button>
+            <Button sx={{
+              display: 'block',
+              mt: 2
+            }}
+              className="button-mediumBlue"
+
+            >
+              Add Question
+            </Button>
 
           </div>
         </FormControl>
