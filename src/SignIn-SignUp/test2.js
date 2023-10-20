@@ -41,3 +41,21 @@ const generateOptionFields = () => {
   }
   return optionFields;
 };
+
+
+
+
+{
+  "questions": [
+      {
+          "question": "this is the first question of this quiz",
+          "answers": [
+              [
+                  "This is the first possible answer",
+                  "The second answer",
+                  "The third possible answer"
+              ]
+          ]
+      }
+  ]
+}

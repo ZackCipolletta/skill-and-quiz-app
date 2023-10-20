@@ -11,6 +11,7 @@ import { TfiClose } from 'react-icons/tfi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import QuestionsAndAnswers from "./QuestionsAndAnswers";
+import { reset } from "yargs";
 
 
 export default function QuizQuestions() {
@@ -40,10 +41,6 @@ export default function QuizQuestions() {
     ]
   };
 
-  const handleAnswerTypeChange = (event) => {
-    setAnswerType(event.target.value);
-  };
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -53,6 +50,21 @@ export default function QuizQuestions() {
   const handleAddOptionClick = () => {
     setOptions(options < 4 ? options + 1 : options);
   };
+
+
+  const handleAnswerTypeChange = (event) => {
+    setAnswerType(event.target.value);
+
+    if (event.target.value === 'TypeIn') {
+      reset();
+    }
+  };
+
+  const reset = () => {
+    setAnswersArr([])
+    setOptions(0)
+  }
+
 
   const handleRemoveClick = (i) => {
     // first we create a copy of the existing answersArr array
@@ -71,8 +83,11 @@ export default function QuizQuestions() {
   };
 
   const handleAnswerArrChange = (i, value) => {
+    //first we copy the answer array to a new variable 'updatedAnswerArr'
     const updatedAnswerArr = [...answersArr];
+    // then we set the value of index position 'i' equal to the 'value' that was passed in.
     updatedAnswerArr[i] = value;
+    //Then we update answerArr to be equal to updatedAnswerArr
     setAnswersArr(updatedAnswerArr);
   };
 
@@ -88,7 +103,7 @@ export default function QuizQuestions() {
         ...prevState.questions,
         {
           question: question,
-          answers: [answersArr]
+          answers: answersArr
         }
       ]
     }));
@@ -223,12 +238,12 @@ export default function QuizQuestions() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={'Single Choice'}>Single Choice</MenuItem>
-              <MenuItem value={'Multiple Choice'}>Multiple Choice</MenuItem>
-              <MenuItem value={'Type in Answer'}>Type in Answer</MenuItem>
+              <MenuItem value={'Single'}>Single Choice</MenuItem>
+              <MenuItem value={'Multiple'}>Multiple Choice</MenuItem>
+              <MenuItem value={'TypeIn'}>Type in Answer</MenuItem>
             </Select>
 
-            {(answerType === 'Single Choice' || answerType === 'Multiple Choice') && (
+            {(answerType === 'Single' || answerType === 'Multiple') && (
             // show or hide 'Add another option' button
               <>
                 <Box id='answersList'>
