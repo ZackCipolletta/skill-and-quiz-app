@@ -5,7 +5,7 @@ import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
 
 export default function QuestionsAndAnswers(props) {
 
-  const { quizInfo } = props;
+  const { quizInfo, questionWidth } = props;
 
   return (
     <TableBody>
@@ -17,7 +17,7 @@ export default function QuestionsAndAnswers(props) {
             {i + 1}
           </TableCell>
           <TableCell
-          // sx={{width: 400}}
+          sx={{width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
           >
 
             {q.question}

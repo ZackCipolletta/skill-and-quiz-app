@@ -21,13 +21,12 @@ export default function QuizQuestions() {
   const [optionFields, setOptionFields] = useState([]);
   const [question, setQuestion] = useState('');
 
-  const [questionAnswerArr, setQuestionAnswerArr] = useState({
-    questions: [
+  const [questionAnswerArr, setQuestionAnswerArr] = useState
+    (
       {
-        answers: [],
+        questions: []
       }
-    ]
-  });
+    );
 
   const quest = {
     questions: [
@@ -65,6 +64,7 @@ export default function QuizQuestions() {
     const optionsArray = ['A', 'B', 'C', 'D'];
 
     for (let i = 0; i < options; i++) {
+      // Assign options the four letters of the optionsArray
       optionFields.push(
         <Box key={i} sx={{ mt: 1 }}>
           <TextField
@@ -80,7 +80,8 @@ export default function QuizQuestions() {
             }}
             InputProps={{ sx: { borderRadius: 2 } }}
           />
-          {i > 0 && (
+          {i > 0 && ( // if there is more than 1 answer option, add an X icon to 
+            // remove or delete that specified TextField
             <IconButton sx={{ transform: "scale(0.5)" }}
               onClick={handleRemoveClick}>
               <TfiClose />
@@ -129,7 +130,6 @@ export default function QuizQuestions() {
           color: '#a2a2a2'
         }}>
         Add another option
-        {options.toString()}
       </Typography>
     </Button>
   );
@@ -179,14 +179,6 @@ export default function QuizQuestions() {
         }}
         InputProps={{ sx: { borderRadius: 2 } }}
       />
-      <Button className='button-mediumBlue' sx={{
-        ml:
-          !isMobile ? 3 : 1
-      }}
-        onClick={handleAddClick}
-      >
-        Add
-      </Button>
 
       <Box sx={{ mt: 5 }}>
         <FormControl size='small'>
@@ -220,6 +212,7 @@ export default function QuizQuestions() {
             </Select>
 
             {(answerType === 'Single Choice' || answerType === 'Multiple Choice') && (
+            // show or hide 'Add another option' button
               <>
                 <Box id='answersList'>
                   {generateOptionFields()}
@@ -235,7 +228,7 @@ export default function QuizQuestions() {
               mt: 2
             }}
               className="button-mediumBlue"
-
+              onClick={handleAddClick}
             >
               Add Question
             </Button>
@@ -244,18 +237,21 @@ export default function QuizQuestions() {
         </FormControl>
       </Box>
 
-      <Box>
-      <TableContainer component={Paper}>
-          <Table
-            // size="small"
-          >
+      <Box sx={{mt: 5}}>
+        <TableContainer component={Paper}>
+          <Table>
 
-        <QuestionsAndAnswers
-          quizInfo={questionAnswerArr}
+            <QuestionsAndAnswers
+              quizInfo={questionAnswerArr}
+              // pass the array containing the question/answer
+              //info to QuestionsAndAnswers
+              questionWidth={350}
+              // pass in the value we want the width of the
+              //question /answer column to be so it is displayed correctly.
             />
-            
+
           </Table>
-          </TableContainer>
+        </TableContainer>
       </Box >
 
     </Box>
