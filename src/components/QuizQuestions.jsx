@@ -18,7 +18,7 @@ export default function QuizQuestions() {
   const [answerType, setAnswerType] = useState('');
   const [options, setOptions] = useState(0);
   const [question, setQuestion] = useState('');
-  const [answersArr, setAnswersArr] = useState([])
+  const [answersArr, setAnswersArr] = useState([]);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -50,14 +50,14 @@ export default function QuizQuestions() {
     setOptions(options < 4 ? options + 1 : options);
   };
 
-    const handleAnswerTypeChange = (event) => {
-    setAnswerType(event.target.value)
+  const handleAnswerTypeChange = (event) => {
+    setAnswerType(event.target.value);
   };
 
 
   // ran into issue I was not able to resolve when this was directly called in handleAnswerTypeChange.
   // This is the best solution I could think of
-  
+
   // ERROR: BREAKING CHANGE: webpack < 5 used to include polyfills for 
   // node.js core modules by default. This is no longer the case. Verify 
   // if you need this module and configure a polyfill for it.
@@ -74,11 +74,11 @@ export default function QuizQuestions() {
 
   const handleRemoveClick = (i) => {
     // first we create a copy of the existing answersArr array
-    const updatedAnswers = [...answersArr]
+    const updatedAnswers = [...answersArr];
     // at the index of 'i' remove 1 item from the array
     updatedAnswers.splice(i, 1);
     //then we set the answersArr array equal to the updatedAnswers array we just modified
-    setAnswersArr(updatedAnswers)
+    setAnswersArr(updatedAnswers);
 
     //reduce options count
     setOptions(options - 1);
@@ -97,11 +97,6 @@ export default function QuizQuestions() {
     setAnswersArr(updatedAnswerArr);
   };
 
-  const handleAddQuestionClick = () => {
-
-    setQuestionAnswerArr();
-  };
-
   const handleAddClick = () => {
     setQuestionAnswerArr((prevState) => ({
       ...prevState,
@@ -113,7 +108,15 @@ export default function QuizQuestions() {
         }
       ]
     }));
-    console.log(questionAnswerArr);
+    console.log(questionAnswerArr); // -------------------------------------------delete
+  };
+
+  const handleRemoveQuestion = (i) => {
+    const updatedQuestionAnswerArr = [...questionAnswerArr];
+
+    updatedQuestionAnswerArr.splice(i, 1);
+
+    setQuestionAnswerArr(updatedQuestionAnswerArr);
   };
 
   const addOptionButton = (
@@ -250,12 +253,12 @@ export default function QuizQuestions() {
             </Select>
 
             {(answerType === 'Single' || answerType === 'Multiple') && (
-            // show or hide 'Add another option' button
+              // show or hide 'Add another option' button
               <>
                 <Box id='answersList'>
                   {generateOptionFields()}
                 </Box>
-                <Box sx={{mt: 1}}>
+                <Box sx={{ mt: 1 }}>
                   {addOptionButton}
                 </Box>
               </>
@@ -275,7 +278,7 @@ export default function QuizQuestions() {
         </FormControl>
       </Box>
 
-      <Box sx={{mt: 5}}>
+      <Box sx={{ mt: 5 }}>
         <TableContainer component={Paper}>
           <Table>
 
@@ -286,6 +289,7 @@ export default function QuizQuestions() {
               questionWidth={350}
               // pass in the value we want the width of the
               //question /answer column to be so it is displayed correctly.
+              handleRemoveQuestion={handleRemoveQuestion}
             />
 
           </Table>

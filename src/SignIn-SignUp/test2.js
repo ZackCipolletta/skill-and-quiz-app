@@ -1,43 +1,100 @@
-const handleRemoveClick = (index) => {
-  // Create a copy of the answersArr without the item at the specified index
-  const updatedAnswers = [...answersArr];
-  updatedAnswers.splice(index, 1);
-  setAnswersArr(updatedAnswers);
+import '../Styles/Components.css';
+import React from "react";
+import { Box, IconButton, TableRow, TableCell, Typography, TableBody } from '@mui/material';
+import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
 
-  // Reduce the options count
-  setOptions(options - 1);
-};
+export default function QuestionsAndAnswers(props) {
 
-const generateOptionFields = () => {
-  const optionFields = [];
-  const optionsArray = ['A', 'B', 'C', 'D'];
+  const { quizInfo, questionWidth, handleRemoveQuestion } = props;
 
-  for (let i = 0; i < options; i++) {
-    optionFields.push(
-      <Box key={i} sx={{ mt: 1 }}>
-        <TextField
-          required
-          value={answersArr[i]}
-          onChange={(e) => handleAnswerChange(i, e.target.value)}
-          id={`Quiz-Answer-${optionsArray[i]}`}
-          placeholder={`Enter Option ${optionsArray[i]}`}
-          name={`Quiz-Answer-${optionsArray[i]}`}
-          className='input-field'
-          height='50px'
-          size='small'
-          sx={{
-            width: 200
-          }}
-          InputProps={{ sx: { borderRadius: 2 } }}
-        />
-        {i > 0 && (
-          <IconButton sx={{ transform: "scale(0.5)" }}
-            onClick={() => handleRemoveClick(i)}>
-            <TfiClose />
-          </IconButton>
-        )}
-      </Box>
-    );
+  return (
+    <TableBody>
+      {quizInfo.questions.map((q, i) => (
+        <TableRow key={i}
+          
+        >
+          <TableCell>
+            {i + 1}
+          </TableCell>
+          <TableCell
+          sx={{width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
+          >
+
+            {q.question}
+            <Box name='answers'>
+              {q.answers.map((answer, index) => (
+                <Typography
+                  key={index}
+                  style={{
+                    border: '1px solid #67c27c',
+                    padding: '1px',
+                    paddingLeft: '7px',
+                    paddingRight: '7px',
+                    borderRadius: '15px',
+                    color: '#67c27c',
+                    background: 'rgba(103, 194, 124, .09)',
+                  }}
+                >
+                  {answer}
+                </Typography>
+              ))}
+            </Box>
+          </TableCell>
+
+          <TableCell>
+
+            <IconButton sx={{
+              marginLeft: -1,
+              marginRight: -3,
+              transform: "scale(.7)"
+            }}>
+              <PiStar color='black' />
+            </IconButton>
+
+          </TableCell>
+
+          <TableCell
+          sx={{width: 75}}
+          >
+
+            <IconButton sx={{
+              marginLeft: -1,
+              marginRight: -1,
+              transform: "scale(.7) scaleY(1.2)"
+            }}>
+              <PiPencilLineLight color='black' />
+            </IconButton>
+
+            <IconButton sx={{
+              marginRight: -1,
+              transform: "scale(.7) scaleY(1.2)"
+            }}
+            onClick={handleRemoveQuestion(i)}
+            >
+              
+              <PiTrashThin color='red' />
+            </IconButton>
+
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  );
+}
+
+
+const [questionAnswerArr, setQuestionAnswerArr] = useState
+(
+  {
+    questions: []
   }
-  return optionFields;
+);
+
+
+const handleRemoveQuestion = (i) => {
+  const updatedQuestionAnswerArr = [...questionAnswerArr];
+
+  updatedQuestionAnswerArr.splice(i, 1);
+
+  setQuestionAnswerArr(updatedQuestionAnswerArr);
 };
