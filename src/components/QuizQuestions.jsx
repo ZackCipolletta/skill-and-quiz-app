@@ -54,7 +54,15 @@ export default function QuizQuestions() {
     setOptions(options < 4 ? options + 1 : options);
   };
 
-  const handleRemoveClick = () => {
+  const handleRemoveClick = (i) => {
+    // first we create a copy of the existing answersArr array
+    const updatedAnswers = [...answersArr]
+    // at the index of 'i' remove 1 item from the array
+    updatedAnswers.splice(i, 1);
+    //then we set the answersArr array equal to the updatedAnswers array we just modified
+    setAnswersArr(updatedAnswers)
+
+    //reduce options count
     setOptions(options - 1);
   };
 
@@ -132,7 +140,7 @@ export default function QuizQuestions() {
           {i > 0 && ( // if there is more than 1 answer option, add an X icon to 
             // remove or delete that specified TextField
             <IconButton sx={{ transform: "scale(0.5)" }}
-              onClick={handleRemoveClick}>
+              onClick={() => handleRemoveClick(i)}>
               <TfiClose />
             </IconButton>
           )}

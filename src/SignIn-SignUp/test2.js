@@ -1,9 +1,11 @@
-const [answersArr, setAnswersArr] = useState(Array(options).fill('')); // Initialize with empty strings
-
-const handleAnswerChange = (index, value) => {
+const handleRemoveClick = (index) => {
+  // Create a copy of the answersArr without the item at the specified index
   const updatedAnswers = [...answersArr];
-  updatedAnswers[index] = value;
+  updatedAnswers.splice(index, 1);
   setAnswersArr(updatedAnswers);
+
+  // Reduce the options count
+  setOptions(options - 1);
 };
 
 const generateOptionFields = () => {
@@ -30,7 +32,7 @@ const generateOptionFields = () => {
         />
         {i > 0 && (
           <IconButton sx={{ transform: "scale(0.5)" }}
-            onClick={handleRemoveClick}>
+            onClick={() => handleRemoveClick(i)}>
             <TfiClose />
           </IconButton>
         )}
