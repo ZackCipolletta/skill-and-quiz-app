@@ -4,7 +4,6 @@ import {
   Box, Button, Paper, Tabs, Tab, Typography, InputLabel, Table, TableContainer,
   TextField, FormControl, Select, MenuItem, IconButton,
 } from '@mui/material';
-import ColorTemplates from './ColorTemplates';
 import '../Styles/Components.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import { FaFileCsv } from 'react-icons/fa';
@@ -18,8 +17,8 @@ export default function QuizQuestions() {
 
   const [answerType, setAnswerType] = useState('');
   const [options, setOptions] = useState(0);
-  const [optionFields, setOptionFields] = useState([]);
   const [question, setQuestion] = useState('');
+  const [answersArr, setAnswersArr] = useState([])
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -41,7 +40,7 @@ export default function QuizQuestions() {
     ]
   };
 
-  const handleAnswerChange = (event) => {
+  const handleAnswerTypeChange = (event) => {
     setAnswerType(event.target.value);
   };
 
@@ -59,6 +58,52 @@ export default function QuizQuestions() {
     setOptions(options - 1);
   };
 
+  const handleQuestionChange = (event) => {
+    setQuestion(event.target.value);
+  };
+
+  const handleAnswerArrChange = (i, value) => {
+    const updatedAnswerArr = [...answersArr];
+    updatedAnswerArr[i] = value;
+    setAnswersArr(updatedAnswerArr);
+  };
+
+  const handleAddQuestionClick = () => {
+
+    setQuestionAnswerArr();
+  };
+
+  const handleAddClick = () => {
+    setQuestionAnswerArr((prevState) => ({
+      ...prevState,
+      questions: [
+        ...prevState.questions,
+        {
+          question: question,
+          answers: [answersArr]
+        }
+      ]
+    }));
+    console.log(questionAnswerArr);
+  };
+
+  const addOptionButton = (
+    <Button onClick={handleAddOptionClick}>
+      <IconButton>
+        <AddBoxOutlinedIcon sx={{ color: "rgba(72, 139, 253, 255)" }}
+        />
+      </IconButton>
+
+      <Typography
+        component="span"
+        sx={{
+          color: '#a2a2a2'
+        }}>
+        Add another option
+      </Typography>
+    </Button>
+  );
+
   const generateOptionFields = () => {
     const optionFields = [];
     const optionsArray = ['A', 'B', 'C', 'D'];
@@ -69,6 +114,10 @@ export default function QuizQuestions() {
         <Box key={i} sx={{ mt: 1 }}>
           <TextField
             required
+            value={answersArr[i]} // points to a different answer in the array (using i). 
+            // Without the index to select the position of the array, each answer TextField 
+            // becomes the same. Modifying one, modifies each other TextField to be equal. 
+            onChange={(e) => handleAnswerArrChange(i, e.target.value)}
             id={`Quiz-Answer-${optionsArray[i]}`}
             placeholder={`Enter Option ${optionsArray[i]}`}
             name={`Quiz-Answer-${optionsArray[i]}`}
@@ -93,46 +142,6 @@ export default function QuizQuestions() {
     return optionFields;
   };
 
-  const handleQuestionChange = (event) => {
-    setQuestion(event.target.value);
-  };
-
-  const handleAddQuestionClick = () => {
-
-    setQuestionAnswerArr();
-  };
-
-  const handleAddClick = () => {
-    setQuestionAnswerArr((prevState) => ({
-      ...prevState,
-      questions: [
-        ...prevState.questions,
-        {
-          question: question,
-          answers: []
-        }
-      ]
-    }));
-    console.log(questionAnswerArr);
-  };
-
-
-  const addOptionButton = (
-    <Button onClick={handleAddOptionClick}>
-      <IconButton>
-        <AddBoxOutlinedIcon sx={{ color: "rgba(72, 139, 253, 255)" }}
-        />
-      </IconButton>
-
-      <Typography
-        component="span"
-        sx={{
-          color: '#a2a2a2'
-        }}>
-        Add another option
-      </Typography>
-    </Button>
-  );
 
   return (
 
@@ -180,7 +189,7 @@ export default function QuizQuestions() {
         InputProps={{ sx: { borderRadius: 2 } }}
       />
 
-      <Box sx={{ mt: 5 }}>
+      <Box sx={{ mt: 3 }}>
         <FormControl size='small'>
           <InputLabel id="select-answer-type"
             sx={{
@@ -195,7 +204,7 @@ export default function QuizQuestions() {
               labelId='select-answer-type'
               id='select-answer-type'
               value={answerType}
-              onChange={handleAnswerChange}
+              onChange={handleAnswerTypeChange}
               label='answerType'
               sx={{
                 minWidth: 200,
@@ -217,7 +226,7 @@ export default function QuizQuestions() {
                 <Box id='answersList'>
                   {generateOptionFields()}
                 </Box>
-                <Box>
+                <Box sx={{mt: 1}}>
                   {addOptionButton}
                 </Box>
               </>

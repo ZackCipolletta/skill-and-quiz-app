@@ -159,37 +159,3 @@ export default function Quiz() {
     </Box>
   );
 }
-
-
-
-// const generateAnswersField = () => {
-//   const answersArr = [];
-
-//   const answersOptionsArray = ['A', 'B', 'C', 'D'];
-
-
-//   for (let i = 0; i < options; i++) {
-
-//     answersArr.push(
-//       <Box name='tags'>
-//         {quizInfo.answers.map((answer, index) => (
-//           <span
-//             key={index}
-//             style={{
-//               border: '1px solid #67c27c',
-//               padding: '1px',
-//               paddingLeft: '7px',
-//               paddingRight: '7px',
-//               borderRadius: '15px',
-//               color: '#67c27c',
-//               background: 'rgba(103, 194, 124, .09)',
-//             }}
-//           >
-//             {answer}
-//           </span>
-//         ))}
-//       </Box>
-//     );
-//   }
-//   return answersArr;
-// };
