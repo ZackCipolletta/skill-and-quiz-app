@@ -111,6 +111,7 @@ export default function QuizQuestions() {
 
     reset();
     setQuestion('');
+    setAnswerType('');
   };
 
   const handleRemoveQuestion = (i) => {
