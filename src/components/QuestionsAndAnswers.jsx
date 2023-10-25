@@ -11,13 +11,18 @@ export default function QuestionsAndAnswers(props) {
     <TableBody>
       {quizInfo.questions.map((q, i) => (
         <TableRow key={i}
-          
+          sx={{
+            '&:hover': {
+              backgroundColor: '#f8fafe',
+              // border: '2px solid #3ea7f2 !important'
+            }
+          }}
         >
           <TableCell>
             {i + 1}
           </TableCell>
           <TableCell
-          sx={{width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
+            sx={{ width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
           >
 
             {q.question}
@@ -54,7 +59,7 @@ export default function QuestionsAndAnswers(props) {
           </TableCell>
 
           <TableCell
-          sx={{width: 75}}
+            sx={{ width: 75 }}
           >
 
             <IconButton sx={{
@@ -63,7 +68,7 @@ export default function QuestionsAndAnswers(props) {
               transform: "scale(.7) scaleY(1.2)"
             }}>
               <PiPencilLineLight color='black'
-              onClick={() => handleEditQuestion(i)}
+                onClick={() => handleEditQuestion(i)}
               />
             </IconButton>
 
@@ -71,9 +76,9 @@ export default function QuestionsAndAnswers(props) {
               marginRight: -1,
               transform: "scale(.7) scaleY(1.2)"
             }}
-            onClick={() => handleRemoveQuestion(i)}
+              onClick={() => handleRemoveQuestion(i)}
             >
-              
+
               <PiTrashThin color='red' />
             </IconButton>
 
