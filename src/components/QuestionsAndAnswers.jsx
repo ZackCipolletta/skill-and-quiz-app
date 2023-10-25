@@ -1,6 +1,6 @@
 import '../Styles/Components.css';
 import React from "react";
-import { Box, IconButton, TableRow, TableCell, Typography, TableBody } from '@mui/material';
+import { Box, IconButton, TableRow, TableCell, Typography, TableBody, Checkbox } from '@mui/material';
 import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
 
 export default function QuestionsAndAnswers(props) {

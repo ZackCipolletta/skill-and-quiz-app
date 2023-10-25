@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import {
   Box, Button, Paper, Tabs, Tab, Typography, InputLabel, Table, TableContainer,
-  TextField, FormControl, Select, MenuItem, IconButton,
+  TextField, FormControl, Select, MenuItem, IconButton, Checkbox, CircleChecked, 
 } from '@mui/material';
 import '../Styles/Components.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import { FaFileCsv } from 'react-icons/fa';
+import { FaFileCsv, FaCheckCircle } from 'react-icons/fa';
 import { TfiClose } from 'react-icons/tfi';
+import { BsFillCircleFill } from 'react-icons/bs';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import QuestionsAndAnswers from "./QuestionsAndAnswers";
@@ -199,7 +200,11 @@ export default function QuizQuestions() {
     for (let i = 0; i < options; i++) {
       // Assign options the four letters of the optionsArray
       optionFields.push(
-        <Box key={i} sx={{ mt: 1 }}>
+        <Box key={i} sx={{ mt: 1, display: 'flex', alignItems: 'center' }}>
+          <Checkbox
+          icon={<BsFillCircleFill />}
+          checkedIcon={<FaCheckCircle />}
+        />
           <TextField
             required
             value={answersArr[i]} // points to a different answer in the array (using i). 
@@ -329,7 +334,7 @@ export default function QuizQuestions() {
             >
               Add Question
             </Button>
-
+            
           </div>
         </FormControl>
       </Box>
