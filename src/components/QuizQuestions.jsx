@@ -21,7 +21,8 @@ export default function QuizQuestions() {
   const [question, setQuestion] = useState('');
   const [answersArr, setAnswersArr] = useState([]);
   const [questionToEdit, setQuestionToEdit] = useState(null);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [singleCorrect, setSingleCorrect] = useState([]);
+  const [multipleCorrect, setMultipleCorrect] = useState([]);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -199,10 +200,25 @@ export default function QuizQuestions() {
     const optionsArray = ['A', 'B', 'C', 'D'];
 
     const handleCheckBoxChange = (index) => {
-      if (selectedOption === index) {
-        setSelectedOption(null);
-      } else {
-        setSelectedOption(index);
+      if (answerType === 'Single') {
+        // first we take the selected option the user clicked (the index value) and check if it is equal to the current
+        // value for 'singleOption'(checking to see if this option is already selected). 
+        // if it is already selected, we deselect it and uncheck the box. Otherwise we check the box
+        setSingleCorrect(singleCorrect === index ? null : index);
+      } else if (answerType === 'Multiple') {
+        // when selecting multiple correct answers, we first create a copy of the array of multiple correct answers.
+        const updatedMultipleCorrect = [...multipleCorrect];
+        //first we check to see if the array already includes the option the user clicked on (the index value).
+        if (updatedMultipleCorrect.includes(index)) {
+          // if so, we then splice out 1 value at the [index] position, thus removing the value from
+          // the array and therefore unselecting or unchecking that answer.
+          updatedMultipleCorrect.splice(updatedMultipleCorrect.indexOf(index), 1);
+        } else {
+          // if the array does not already include the selected value (index) then we add it to the array (which then checks the corresponding box on the page).
+          updatedMultipleCorrect.push(index);
+        }
+        //lastly we set value of 'multipleCorrect' to the updated array contained in 'updatedMultipleCorrect'
+        setMultipleCorrect(updatedMultipleCorrect);
       }
     };
 
@@ -214,14 +230,13 @@ export default function QuizQuestions() {
             icon={<BsFillCircleFill color="#c6c6c6" />}
             checkedIcon={<FaCheckCircle color="#67c27c" />}
 
-            onChange={() => {
-              if (answerType === 'Single') {
-                handleCheckBoxChange(i);
-              } else if (answerType === 'Multiple') {
-                console.log('yay!');
-              }
-            }}
-            checked={selectedOption === i}
+            onChange={() => handleCheckBoxChange(i)}
+            // this determines whether the box is checked or not. If the answerType is 'single'
+            // then the box is checked if the 'singleCorrect' state is equal to the corresponding value (in this case the index position).
+            checked={answerType === 'Single' ? singleCorrect === i
+              :
+              // otherwise the box is checked if the 'multipleCorrect' state contains the index position.
+              multipleCorrect.includes(i)}
           />
           <TextField
             required
