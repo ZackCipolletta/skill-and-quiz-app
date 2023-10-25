@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import {
   Box, Button, Paper, Tabs, Tab, Typography, InputLabel, Table, TableContainer,
-  TextField, FormControl, Select, MenuItem, IconButton, Checkbox, CircleChecked, 
+  TextField, FormControl, Select, MenuItem, IconButton, Checkbox, CircleChecked,
 } from '@mui/material';
 import '../Styles/Components.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
@@ -21,6 +21,7 @@ export default function QuizQuestions() {
   const [question, setQuestion] = useState('');
   const [answersArr, setAnswersArr] = useState([]);
   const [questionToEdit, setQuestionToEdit] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -147,7 +148,7 @@ export default function QuizQuestions() {
 
 
   const handleEditQuestion = (i) => {
-    setAnswerType(questionAnswerArr.questions[i].type)
+    setAnswerType(questionAnswerArr.questions[i].type);
     // we set 'question' in state equal to the selected value at position 'i' of the questionAnswerArr array.
     setQuestion(questionAnswerArr.questions[i].question);
     // we set the value of options equal to the length of the answers array at position 'i' of the questionAnswerArr array.
@@ -197,14 +198,31 @@ export default function QuizQuestions() {
     const optionFields = [];
     const optionsArray = ['A', 'B', 'C', 'D'];
 
+    const handleCheckBoxChange = (index) => {
+      if (selectedOption === index) {
+        setSelectedOption(null);
+      } else {
+        setSelectedOption(index);
+      }
+    };
+
     for (let i = 0; i < options; i++) {
       // Assign options the four letters of the optionsArray
       optionFields.push(
         <Box key={i} sx={{ mt: 1, display: 'flex', alignItems: 'center' }}>
           <Checkbox
-          icon={<BsFillCircleFill />}
-          checkedIcon={<FaCheckCircle />}
-        />
+            icon={<BsFillCircleFill color="#c6c6c6" />}
+            checkedIcon={<FaCheckCircle color="#67c27c" />}
+
+            onChange={() => {
+              if (answerType === 'Single') {
+                handleCheckBoxChange(i);
+              } else if (answerType === 'Multiple') {
+                console.log('yay!');
+              }
+            }}
+            checked={selectedOption === i}
+          />
           <TextField
             required
             value={answersArr[i]} // points to a different answer in the array (using i). 
@@ -334,7 +352,7 @@ export default function QuizQuestions() {
             >
               Add Question
             </Button>
-            
+
           </div>
         </FormControl>
       </Box>
