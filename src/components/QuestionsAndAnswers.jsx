@@ -5,7 +5,7 @@ import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
 
 export default function QuestionsAndAnswers(props) {
 
-  const { quizInfo, questionWidth, handleRemoveQuestion } = props;
+  const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion } = props;
 
   return (
     <TableBody>
@@ -62,7 +62,9 @@ export default function QuestionsAndAnswers(props) {
               marginRight: -1,
               transform: "scale(.7) scaleY(1.2)"
             }}>
-              <PiPencilLineLight color='black' />
+              <PiPencilLineLight color='black'
+              onClick={() => handleEditQuestion(i)}
+              />
             </IconButton>
 
             <IconButton sx={{

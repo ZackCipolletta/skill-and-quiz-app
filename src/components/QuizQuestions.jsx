@@ -27,6 +27,7 @@ export default function QuizQuestions() {
       }
     );
 
+
   const quest = {
     questions: [
       {
@@ -125,20 +126,18 @@ export default function QuizQuestions() {
     });
   };
 
-  
+
   const handleEditQuestion = (i) => {
     // first we create a copy of the existing questions objects in questionAnswerArr array
     const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
-
-
-
-    
     // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
-    updatedQuestionAnswerArr.splice(i, 1);
-    // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
-    setQuestionAnswerArr({
-      questions: updatedQuestionAnswerArr
-    });
+    setQuestion(questionAnswerArr.questions[i].question);
+    // const updatedQuestion = [];
+    // updatedQuestionAnswerArr.splice(i, 1, updatedQuestion);
+    // // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
+    // setQuestionAnswerArr({
+    //   questions: updatedQuestionAnswerArr
+    // });
   };
 
   const addOptionButton = (
@@ -312,6 +311,7 @@ export default function QuizQuestions() {
               // pass in the value we want the width of the
               //question /answer column to be so it is displayed correctly.
               handleRemoveQuestion={handleRemoveQuestion}
+            handleEditQuestion={handleEditQuestion}
             />
 
           </Table>
