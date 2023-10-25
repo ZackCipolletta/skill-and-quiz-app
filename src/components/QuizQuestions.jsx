@@ -32,10 +32,12 @@ export default function QuizQuestions() {
   const quest = {
     questions: [
       {
+        type: 'Single',
         question: 'What is the fastest route of all time?',
         answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
       },
       {
+        type: 'Multiple',
         question: 'How many planets are there in the solar system?',
         answers: ['1', '8', '9'],
       }
@@ -46,7 +48,6 @@ export default function QuizQuestions() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const answersList = document.getElementById("answersList");
-  const optionNumber = answersList ? answersList.children.length : 0;
 
   const handleAddOptionClick = () => {
     setOptions(options < 4 ? options + 1 : options);
@@ -81,7 +82,7 @@ export default function QuizQuestions() {
     setQuestion('');
     setAnswerType('');
     setQuestionToEdit(null);
-  }
+  };
 
   const handleRemoveClick = (i) => {
     // first we create a copy of the existing answersArr array
@@ -109,9 +110,9 @@ export default function QuizQuestions() {
   };
 
   const handleAddClick = () => {
-// because we are setting 'questionToEdit' to a position of the array, it could be that we wish to edit the 
-// first question in the array which is position 0. But because 0 evaluates to false, the first question 
-// cannot be edited.So we must evaluate whether 'questionToEdit' is null, instead of weather it exists. 
+    // because we are setting 'questionToEdit' to a position of the array, it could be that we wish to edit the 
+    // first question in the array which is position 0. But because 0 evaluates to false, the first question 
+    // cannot be edited.So we must evaluate whether 'questionToEdit' is null, instead of weather it exists. 
     if (questionToEdit !== null) {
       editQuestionInPlace();
     } else {
@@ -120,6 +121,7 @@ export default function QuizQuestions() {
         questions: [
           ...prevState.questions,
           {
+            type: answerType,
             question: question,
             answers: answersArr
           }
@@ -144,7 +146,8 @@ export default function QuizQuestions() {
 
 
   const handleEditQuestion = (i) => {
-    // then we set 'question' in state equal to the selected value at position 'i' of the questionAnswerArr array.
+    setAnswerType(questionAnswerArr.questions[i].type)
+    // we set 'question' in state equal to the selected value at position 'i' of the questionAnswerArr array.
     setQuestion(questionAnswerArr.questions[i].question);
     // we set the value of options equal to the length of the answers array at position 'i' of the questionAnswerArr array.
     setOptions(questionAnswerArr.questions[i].answers.length);
@@ -159,6 +162,7 @@ export default function QuizQuestions() {
     const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
     // then we create a variable that will contain our updated question.
     const updatedQuestion = {
+      type: answerType,
       question: question,
       answers: answersArr
     };
