@@ -19,6 +19,7 @@ export default function QuizQuestions() {
   const [options, setOptions] = useState(0);
   const [question, setQuestion] = useState('');
   const [answersArr, setAnswersArr] = useState([]);
+  const [questionToEdit, setQuestionToEdit] = useState(null);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -68,10 +69,19 @@ export default function QuizQuestions() {
     }
   }, [answerType]);
 
+  // used to clear answer array when changing answer type to reset 'options' and the array of answers.
   const reset = () => {
     setAnswersArr([]);
     setOptions(0);
   };
+
+  // used to clear all fields and reset all variables back to original once a question is created or done being edited.
+  const clearAll = () => {
+    reset();
+    setQuestion('');
+    setAnswerType('');
+    setQuestionToEdit(null);
+  }
 
   const handleRemoveClick = (i) => {
     // first we create a copy of the existing answersArr array
@@ -99,20 +109,26 @@ export default function QuizQuestions() {
   };
 
   const handleAddClick = () => {
-    setQuestionAnswerArr((prevState) => ({
-      ...prevState,
-      questions: [
-        ...prevState.questions,
-        {
-          question: question,
-          answers: answersArr
-        }
-      ]
-    }));
+// because we are setting 'questionToEdit' to a position of the array, it could be that we wish to edit the 
+// first question in the array which is position 0. But because 0 evaluates to false, the first question 
+// cannot be edited.So we must evaluate whether 'questionToEdit' is null, instead of weather it exists. 
+    if (questionToEdit !== null) {
+      editQuestionInPlace();
+    } else {
+      setQuestionAnswerArr((prevState) => ({
+        ...prevState,
+        questions: [
+          ...prevState.questions,
+          {
+            question: question,
+            answers: answersArr
+          }
+        ]
+      }));
 
-    reset();
-    setQuestion('');
-    setAnswerType('');
+      clearAll();
+    }
+
   };
 
   const handleRemoveQuestion = (i) => {
@@ -128,16 +144,31 @@ export default function QuizQuestions() {
 
 
   const handleEditQuestion = (i) => {
+    // then we set 'question' in state equal to the selected value at position 'i' of the questionAnswerArr array.
+    setQuestion(questionAnswerArr.questions[i].question);
+    // we set the value of options equal to the length of the answers array at position 'i' of the questionAnswerArr array.
+    setOptions(questionAnswerArr.questions[i].answers.length);
+    // we set the answersArr array equal to the array of answers at position 'i' of the questionAnswerArr array, which then populates the answer options text fields with answers from the selected question.
+    setAnswersArr(questionAnswerArr.questions[i].answers);
+    // sets the questionAnswerArr position that will be edited so we can edit and update the correct question while also telling handleAddClick that we are editing and not creating a new question.
+    setQuestionToEdit(i);
+  };
+
+  const editQuestionInPlace = () => {
     // first we create a copy of the existing questions objects in questionAnswerArr array
     const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
-    // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
-    setQuestion(questionAnswerArr.questions[i].question);
-    // const updatedQuestion = [];
-    // updatedQuestionAnswerArr.splice(i, 1, updatedQuestion);
-    // // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
-    // setQuestionAnswerArr({
-    //   questions: updatedQuestionAnswerArr
-    // });
+    // then we create a variable that will contain our updated question.
+    const updatedQuestion = {
+      question: question,
+      answers: answersArr
+    };
+    // then we splice our updated question back into the at the same position the question we are editing originally was.
+    updatedQuestionAnswerArr.splice(questionToEdit, 1, updatedQuestion);
+    setQuestionAnswerArr({
+      questions: updatedQuestionAnswerArr
+    });
+
+    clearAll();
   };
 
   const addOptionButton = (
@@ -311,7 +342,7 @@ export default function QuizQuestions() {
               // pass in the value we want the width of the
               //question /answer column to be so it is displayed correctly.
               handleRemoveQuestion={handleRemoveQuestion}
-            handleEditQuestion={handleEditQuestion}
+              handleEditQuestion={handleEditQuestion}
             />
 
           </Table>
