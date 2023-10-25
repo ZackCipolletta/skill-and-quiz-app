@@ -115,13 +115,26 @@ export default function QuizQuestions() {
   };
 
   const handleRemoveQuestion = (i) => {
+    // first we create a copy of the existing questions objects in questionAnswerArr array
+    const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
+    // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
+    updatedQuestionAnswerArr.splice(i, 1);
+    // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
+    setQuestionAnswerArr({
+      questions: updatedQuestionAnswerArr
+    });
+  };
 
+  
+  const handleEditQuestion = (i) => {
     // first we create a copy of the existing questions objects in questionAnswerArr array
     const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
 
+
+
+    
     // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
     updatedQuestionAnswerArr.splice(i, 1);
-
     // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
     setQuestionAnswerArr({
       questions: updatedQuestionAnswerArr
