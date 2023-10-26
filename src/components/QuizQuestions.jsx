@@ -16,14 +16,14 @@ import QuestionsAndAnswers from "./QuestionsAndAnswers";
 
 export default function QuizQuestions() {
 
-  const [answerType, setAnswerType] = useState('');
+  const [answerType, setAnswerType] = useState('Multiple');
   const [options, setOptions] = useState(0);
   const [question, setQuestion] = useState('');
   const [answersArr, setAnswersArr] = useState([]);
   const [questionToEdit, setQuestionToEdit] = useState(null);
   const [singleCorrect, setSingleCorrect] = useState(null);
   const [multipleCorrect, setMultipleCorrect] = useState([]);
-  const [favQuestion, setFavQuestion] = useState();
+  const [warn, setWarn] = useState(false);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -60,6 +60,7 @@ export default function QuizQuestions() {
 
   const handleAddOptionClick = () => {
     setOptions(options < 4 ? options + 1 : options);
+    setWarn(options === 4 ? true : false);
   };
 
   const handleAnswerTypeChange = (event) => {
@@ -85,6 +86,7 @@ export default function QuizQuestions() {
   const reset = () => {
     setAnswersArr([]);
     setOptions(0);
+    setWarn(false);
   };
 
   // used to clear all fields and reset all variables back to original once a question is created or done being edited.
@@ -105,6 +107,8 @@ export default function QuizQuestions() {
     //then we set the answersArr array equal to the updatedAnswers array we just modified
     setAnswersArr(updatedAnswers);
 
+    setWarn(false);
+
     //reduce options count
     setOptions(options - 1);
   };
@@ -116,7 +120,7 @@ export default function QuizQuestions() {
   const handleFavorite = (i) => {
 
     const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
-    
+
     updatedQuestionAnswerArr[i].favorite = true;
 
     setQuestionAnswerArr({ questions: updatedQuestionAnswerArr, });
@@ -375,8 +379,8 @@ export default function QuizQuestions() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={'Single'}>Single Choice</MenuItem>
               <MenuItem value={'Multiple'}>Multiple Choice</MenuItem>
+              <MenuItem value={'Single'}>Single Choice</MenuItem>
               <MenuItem value={'TypeIn'}>Type in Answer</MenuItem>
             </Select>
 
@@ -387,6 +391,12 @@ export default function QuizQuestions() {
                   {generateOptionFields()}
                 </Box>
                 <Box sx={{ mt: 1 }}>
+                  {warn ?
+                    <Typography sx={{ color: 'red' }}>
+                      You cannot add more than 4 possible answers
+                    </Typography>
+                    : null
+                  }
                   {addOptionButton}
                 </Box>
               </>
