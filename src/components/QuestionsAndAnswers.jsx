@@ -1,14 +1,14 @@
 import '../Styles/Components.css';
 import React from "react";
 import { Box, IconButton, TableRow, TableCell, Typography, TableBody, Checkbox } from '@mui/material';
-import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
+import { PiTrashThin, PiPencilLineLight, PiStar, PiStarFill } from 'react-icons/pi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 export default function QuestionsAndAnswers(props) {
 
-  const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion } = props;
+  const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion, handleFavorite } = props;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -30,7 +30,7 @@ export default function QuestionsAndAnswers(props) {
             {/* we use the index (i) to add number each question when it is displayed */}
             {i + 1}
           </TableCell>
-          
+
           <TableCell
             sx={{ width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
           >
@@ -64,14 +64,17 @@ export default function QuestionsAndAnswers(props) {
 
           <TableCell>
 
-            <IconButton sx={{
+            <Checkbox sx={{
               marginLeft: !isMobile ? -1 : -4,
               marginRight: -4,
-              transform: "scale(.7)"
-            }}>
+              // transform: "scale(.7)"
+            }}
+              icon={<PiStar color='black' />}
+              checkedIcon={<PiStarFill color='gold' />}
+              checked={q.favorite}
 
-              <PiStar color='black' />
-            </IconButton>
+            onChange={() => handleFavorite(i)}
+            />
 
           </TableCell>
 
