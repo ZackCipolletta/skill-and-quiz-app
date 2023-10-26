@@ -65,7 +65,7 @@ export default function CreateNewQuiz() {
   });
 
   return (
-    <Paper sx={{ marginTop: '50px' }} {...swipeHandlers}>
+    <Paper sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
       <Box sx={{ width: '100%' }}>
 
         <Box sx={{

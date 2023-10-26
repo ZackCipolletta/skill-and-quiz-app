@@ -2,10 +2,16 @@ import '../Styles/Components.css';
 import React from "react";
 import { Box, IconButton, TableRow, TableCell, Typography, TableBody, Checkbox } from '@mui/material';
 import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 export default function QuestionsAndAnswers(props) {
 
   const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion } = props;
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 
   return (
@@ -24,14 +30,13 @@ export default function QuestionsAndAnswers(props) {
             {/* we use the index (i) to add number each question when it is displayed */}
             {i + 1}
           </TableCell>
+          
           <TableCell
             sx={{ width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
           >
+
             {/* here we display the question */}
             {q.question}
-
-            {/* border: correctAnswers === index || (Array.isArray(correctAnswers) && correctAnswers.includes(index)) ? '1 px solid #478bfe'
-                    : '1px solid #67c27c', */}
 
             {/* Then we map array of answers onto this template */}
             <Box name='answers'>
@@ -60,10 +65,11 @@ export default function QuestionsAndAnswers(props) {
           <TableCell>
 
             <IconButton sx={{
-              marginLeft: -1,
-              marginRight: -3,
+              marginLeft: !isMobile ? -1 : -4,
+              marginRight: -4,
               transform: "scale(.7)"
             }}>
+
               <PiStar color='black' />
             </IconButton>
 
@@ -74,7 +80,7 @@ export default function QuestionsAndAnswers(props) {
           >
 
             <IconButton sx={{
-              marginLeft: -1,
+              marginLeft: !isMobile ? -4 : -4,
               marginRight: -1,
               transform: "scale(.7) scaleY(1.2)"
             }}>
@@ -84,7 +90,7 @@ export default function QuestionsAndAnswers(props) {
             </IconButton>
 
             <IconButton sx={{
-              marginRight: -1,
+              marginRight: !isMobile ? -1 : -3,
               transform: "scale(.7) scaleY(1.2)"
             }}
               onClick={() => handleRemoveQuestion(i)}
