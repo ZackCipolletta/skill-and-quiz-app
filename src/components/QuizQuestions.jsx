@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
 import {
-  Box, Button, Paper, Tabs, Tab, Typography, InputLabel, Table, TableContainer,
-  TextField, FormControl, Select, MenuItem, IconButton, Checkbox, CircleChecked,
+  Box, Button, Paper, Typography, InputLabel, Table, TableContainer,
+  TextField, FormControl, Select, MenuItem, IconButton, Checkbox,
 } from '@mui/material';
 import '../Styles/Components.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
@@ -55,8 +54,6 @@ export default function QuizQuestions() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const answersList = document.getElementById("answersList");
 
   const handleAddOptionClick = () => {
     setOptions(options < 4 ? options + 1 : options);
@@ -292,6 +289,7 @@ export default function QuizQuestions() {
               width: 200
             }}
             InputProps={{ sx: { borderRadius: 2 } }}
+            autoFocus 
           />
           {i > 0 && ( // if there is more than 1 answer option, add an X icon to 
             // remove or delete that specified TextField
