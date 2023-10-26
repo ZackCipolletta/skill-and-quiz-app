@@ -8,11 +8,16 @@ import Control from './components/Control';
 import { Routes, Route } from 'react-router-dom';
 import PasswordRecovery from './SignIn-SignUp/PasswordRecovery';
 import PageNotFound from './SignIn-SignUp/PageNotFound';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const helmetContext = {};
+
 root.render(
+  <HelmetProvider context={helmetContext}>
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -29,5 +34,6 @@ root.render(
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+    </React.StrictMode>
+    </HelmetProvider>
 );

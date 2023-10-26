@@ -5,6 +5,8 @@ import QuizCategoryDashboard from './QuizCategoryDashboard';
 import QuizzesDashboard from './QuizzesDashboard';
 import CreateNewQuiz from './CreateNewQuiz';
 import Quiz from './Quiz';
+import { Helmet } from 'react-helmet-async';
+import FavIcon from '../img/FavIcon.png'
 
 
 export default function Control({ page }) {
@@ -27,15 +29,15 @@ export default function Control({ page }) {
     case 'questions':
       content = <CreateNewQuiz />;
       break;
-    
+
     case 'categories':
       content =
-          <QuizCategoryDashboard />;
+        <QuizCategoryDashboard />;
       break;
-    
+
     case 'quiz':
       content =
-          <Quiz />;
+        <Quiz />;
       break;
 
     default:
@@ -46,6 +48,11 @@ export default function Control({ page }) {
 
   return (
     <>
+      <Helmet>
+        <link rel="icon" type="image/png" href={FavIcon} />
+        <title>Quiz By Connect Link</title>
+        <meta name="Connect link" content="Quiz By Connect Link" />
+      </Helmet>
       <div className="header">
         <div className="Dash-and-Header" >
 
