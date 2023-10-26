@@ -21,7 +21,7 @@ export default function QuizQuestions() {
   const [question, setQuestion] = useState('');
   const [answersArr, setAnswersArr] = useState([]);
   const [questionToEdit, setQuestionToEdit] = useState(null);
-  const [singleCorrect, setSingleCorrect] = useState([]);
+  const [singleCorrect, setSingleCorrect] = useState(null);
   const [multipleCorrect, setMultipleCorrect] = useState([]);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
@@ -31,16 +31,19 @@ export default function QuizQuestions() {
       }
     );
 
+    
 
   const quest = {
     questions: [
       {
         type: 'Single',
+        correct: 2,
         question: 'What is the fastest route of all time?',
         answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
       },
       {
         type: 'Multiple',
+        correct: [1, 2],
         question: 'How many planets are there in the solar system?',
         answers: ['1', '8', '9'],
       }
@@ -58,6 +61,8 @@ export default function QuizQuestions() {
 
   const handleAnswerTypeChange = (event) => {
     setAnswerType(event.target.value);
+    setSingleCorrect(null);
+    setMultipleCorrect([]);
   };
 
 
@@ -85,6 +90,8 @@ export default function QuizQuestions() {
     setQuestion('');
     setAnswerType('');
     setQuestionToEdit(null);
+    setSingleCorrect(null);
+    setMultipleCorrect([]);
   };
 
   const handleRemoveClick = (i) => {
@@ -125,6 +132,7 @@ export default function QuizQuestions() {
           ...prevState.questions,
           {
             type: answerType,
+            correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
             question: question,
             answers: answersArr
           }
@@ -151,6 +159,14 @@ export default function QuizQuestions() {
   const handleEditQuestion = (i) => {
     setAnswerType(questionAnswerArr.questions[i].type);
     // we set 'question' in state equal to the selected value at position 'i' of the questionAnswerArr array.
+
+    // Then we check to see if the question type is 'Single' or 'Multiple' and set the corresponding
+    // state equal to the value of 'correct' stored within the question.
+    if (questionAnswerArr.questions[i].type === 'Single') {
+      setSingleCorrect(questionAnswerArr.questions[i].correct);
+    } else if (questionAnswerArr.questions[i].type === 'Multiple') {
+      setMultipleCorrect(questionAnswerArr.questions[i].correct);
+    }
     setQuestion(questionAnswerArr.questions[i].question);
     // we set the value of options equal to the length of the answers array at position 'i' of the questionAnswerArr array.
     setOptions(questionAnswerArr.questions[i].answers.length);
@@ -166,6 +182,7 @@ export default function QuizQuestions() {
     // then we create a variable that will contain our updated question.
     const updatedQuestion = {
       type: answerType,
+      correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
       question: question,
       answers: answersArr
     };
@@ -177,6 +194,8 @@ export default function QuizQuestions() {
 
     clearAll();
   };
+
+  const correctAnswers = singleCorrect || multipleCorrect;
 
   const addOptionButton = (
     <Button onClick={handleAddOptionClick}>
@@ -373,16 +392,19 @@ export default function QuizQuestions() {
       </Box>
 
       <Box sx={{ mt: 5 }}>
+        
         <TableContainer component={Paper}>
           <Table>
 
             <QuestionsAndAnswers
-              quizInfo={questionAnswerArr}
               // pass the array containing the question/answer
               //info to QuestionsAndAnswers
-              questionWidth={350}
+              quizInfo={questionAnswerArr}
               // pass in the value we want the width of the
               //question /answer column to be so it is displayed correctly.
+              questionWidth={350}
+              // correctAnswers={correctAnswers}
+              correctAnswers={singleCorrect}
               handleRemoveQuestion={handleRemoveQuestion}
               handleEditQuestion={handleEditQuestion}
             />

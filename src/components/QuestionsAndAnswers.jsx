@@ -7,8 +7,10 @@ export default function QuestionsAndAnswers(props) {
 
   const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion } = props;
 
+
   return (
     <TableBody>
+      {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
       {quizInfo.questions.map((q, i) => (
         <TableRow key={i}
           sx={{
@@ -19,25 +21,34 @@ export default function QuestionsAndAnswers(props) {
           }}
         >
           <TableCell>
+            {/* we use the index (i) to add number each question when it is displayed */}
             {i + 1}
           </TableCell>
           <TableCell
             sx={{ width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
           >
-
+            {/* here we display the question */}
             {q.question}
+
+            {/* border: correctAnswers === index || (Array.isArray(correctAnswers) && correctAnswers.includes(index)) ? '1 px solid #478bfe'
+                    : '1px solid #67c27c', */}
+
+            {/* Then we map array of answers onto this template */}
             <Box name='answers'>
               {q.answers.map((answer, index) => (
                 <Typography
                   key={index}
                   style={{
-                    border: '1px solid #67c27c',
+                    border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ? '1px solid #478bfe'
+                      : '1px solid #67c27c',
                     padding: '1px',
                     paddingLeft: '7px',
                     paddingRight: '7px',
                     borderRadius: '15px',
-                    color: '#67c27c',
-                    background: 'rgba(103, 194, 124, .09)',
+                    color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ? '#478bfe' : '#67c27c',
+                    background:
+                      q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ? 'rgba(208, 225, 255, .4)'
+                        : 'rgba(103, 194, 124, .09)',
                   }}
                 >
                   {answer}
@@ -84,7 +95,8 @@ export default function QuestionsAndAnswers(props) {
 
           </TableCell>
         </TableRow>
-      ))}
-    </TableBody>
+      ))
+      }
+    </TableBody >
   );
 }
