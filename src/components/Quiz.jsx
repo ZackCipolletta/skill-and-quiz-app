@@ -1,24 +1,19 @@
 
 import '../Styles/Components.css';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button, Box, IconButton, TableContainer, Table, TableHead,
-  TableRow, TableCell, TableBody, Paper, TextField, Typography
-} from '@mui/material';
-import SearchBar from './SearchBar';
+  TableRow, TableCell, Paper} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import DeleteModal from './DeleteModal';
-import Quizzes from './Quizzes';
 import { LuAward } from 'react-icons/lu';
-import { PiTagChevron, PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
-import { CiStar } from 'react-icons/ci';
+import { PiTagChevron } from 'react-icons/pi';
 import QuestionsAndAnswers from './QuestionsAndAnswers';
 
 export default function Quiz() {
 
   const [options, setOptions] = useState(0);
+  const [quizInfo, setQuizInfo] = useState({
 
-  const quizInfo = {
     Name: "Quiz1",
     Color: '#cfd9fa',
     tags: ['Tag1', 'Tag2', 'Tag3'],
@@ -26,19 +21,64 @@ export default function Quiz() {
     Favorite: false,
     questions: [
       {
+        id: 0,
+        type: 'Single',
+        favorite: true,
+        correct: 0,
         question: 'What is the fastest route of all time?',
         answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
       },
       {
+        id: 1,
+        type: 'Single',
+        favorite: false,
+        correct: 1,
         question: 'How many planets are there in the solar system?',
         answers: ['1', '8', '9'],
       },
     ],
+  })
+
+
+  // const quizInfo = {
+  //   Name: "Quiz1",
+  //   Color: '#cfd9fa',
+  //   tags: ['Tag1', 'Tag2', 'Tag3'],
+  //   id: 1,
+  //   Favorite: false,
+  //   questions: [
+  //     {
+  //       id: 1,
+  //       type: 'Single',
+  //       favorite: true,
+  //       correct: 0,
+  //       question: 'What is the fastest route of all time?',
+  //       answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
+  //     },
+  //     {
+  //       id: 2,
+  //       type: 'Single',
+  //       favorite: false,
+  //       correct: 1,
+  //       question: 'How many planets are there in the solar system?',
+  //       answers: ['1', '8', '9'],
+  //     },
+  //   ],
+  // };
+
+  const handleRemoveQuestion = (i) => {
+    // first we create a copy of the existing questions objects in questionAnswerArr array
+    const updatedQuestionAnswerArr = [...quizInfo.questions];
+    // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
+    updatedQuestionAnswerArr.splice(i, 1);
+    // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
+    setQuizInfo({
+      ...quizInfo,
+      questions: updatedQuestionAnswerArr
+    });
   };
 
-
   const navigate = useNavigate();
-
 
   return (
     <Box
@@ -149,6 +189,7 @@ export default function Quiz() {
 
             <QuestionsAndAnswers
               quizInfo={quizInfo}
+              handleRemoveQuestion={handleRemoveQuestion}
             />
             
           </Table>
