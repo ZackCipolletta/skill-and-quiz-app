@@ -1,100 +1,127 @@
-// import '../Styles/Components.css';
-// import React from "react";
-// import { Box, IconButton, TableRow, TableCell, Typography, TableBody } from '@mui/material';
-// import { PiTrashThin, PiPencilLineLight, PiStar } from 'react-icons/pi';
+import React from "react";
+import { IconButton, Checkbox, Typography } from '@mui/material';
+import { PiTrashThin, PiPencilLineLight, PiStar, PiStarFill } from 'react-icons/pi';
 
-// export default function QuestionsAndAnswers(props) {
+export default function Test(props) {
+  const { questionWidth, handleRemoveQuestion, handleEditQuestion, handleFavorite } = props;
 
-//   const { quizInfo, questionWidth, handleRemoveQuestion } = props;
+  const quizInfo = {
+    questions: [
+      {
+        type: 'Single',
+        favorite: false,
+        correct: 2,
+        question: 'What is the fastest route of all time?',
+        answers: ['The Kessel run', 'what happens when every one of the answers is super long?', 'what?', 'qwerty'],
+      },
+      {
+        type: 'Multiple',
+        favorite: true,
+        correct: [1, 2],
+        question: 'How many planets are there in the solar system?',
+        answers: ['1', '8', '9'],
+      }
+    ]
+  };
 
-//   return (
-//     <TableBody>
-//       {quizInfo.questions.map((q, i) => (
-//         <TableRow key={i}
-          
-//         >
-//           <TableCell>
-//             {i + 1}
-//           </TableCell>
-//           <TableCell
-//           sx={{width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
-//           >
-
-//             {q.question}
-//             <Box name='answers'>
-//               {q.answers.map((answer, index) => (
-//                 <Typography
-//                   key={index}
-//                   style={{
-//                     border: '1px solid #67c27c',
-//                     padding: '1px',
-//                     paddingLeft: '7px',
-//                     paddingRight: '7px',
-//                     borderRadius: '15px',
-//                     color: '#67c27c',
-//                     background: 'rgba(103, 194, 124, .09)',
-//                   }}
-//                 >
-//                   {answer}
-//                 </Typography>
-//               ))}
-//             </Box>
-//           </TableCell>
-
-//           <TableCell>
-
-//             <IconButton sx={{
-//               marginLeft: -1,
-//               marginRight: -3,
-//               transform: "scale(.7)"
-//             }}>
-//               <PiStar color='black' />
-//             </IconButton>
-
-//           </TableCell>
-
-//           <TableCell
-//           sx={{width: 75}}
-//           >
-
-//             <IconButton sx={{
-//               marginLeft: -1,
-//               marginRight: -1,
-//               transform: "scale(.7) scaleY(1.2)"
-//             }}>
-//               <PiPencilLineLight color='black' />
-//             </IconButton>
-
-//             <IconButton sx={{
-//               marginRight: -1,
-//               transform: "scale(.7) scaleY(1.2)"
-//             }}
-//             onClick={handleRemoveQuestion(i)}
-//             >
-              
-//               <PiTrashThin color='red' />
-//             </IconButton>
-
-//           </TableCell>
-//         </TableRow>
-//       ))}
-//     </TableBody>
-//   );
-// }
-
-
-// const [questionAnswerArr, setQuestionAnswerArr] = useState
-// (
-//   {
-//     questions: []
-//   }
-// );
+  return (
+    <div>
+      {quizInfo.questions.map((q, i) => (
+        <div key={i} style={{ 
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '10px',
+          border: '1px solid #ddd',
+          borderRadius: '5px',
+          backgroundColor: i % 2 === 0 ? '#f8fafe' : 'white'
+        }}>
+          <div style={{
+            fontWeight: 'bold',
+            marginRight: '10px',
+          }}>
+            {i + 1}
+          </div>
+          <div style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '5px',
+            width: questionWidth || 'auto'
+          }}>
+            <div style={{
+              fontWeight: 'bold',
+            }}>
+              {q.question}
+            </div>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '5px',
+            }}>
+              {q.answers.map((answer, index) => (
+                <Typography
+                  key={index}
+                  style={{
+                    border: q.correct === index ? '1px solid #478bfe' : '1px solid #67c27c',
+                    padding: '1px 7px',
+                    borderRadius: '15px',
+                    backgroundColor: q.correct === index ? 'rgba(208, 225, 255, 0.4)' : 'rgba(103, 194, 124, 0.09)',
+                    color: q.correct === index ? '#478bfe' : '#67c27c',
+                  }}
+                >
+                  {answer}
+                </Typography>
+              ))}
+            </div>
+          </div>
+          <div style={{
+            display: 'flex',
+            gap: '10px',
+          }}>
+            <Checkbox
+              icon={<PiStar color='black' />}
+              checkedIcon={<PiStarFill color='gold' />}
+              checked={q.favorite}
+              onChange={() => handleFavorite(i)}
+            />
+            <IconButton onClick={() => handleEditQuestion(i)}>
+              <PiPencilLineLight color='black' />
+            </IconButton>
+            <IconButton onClick={() => handleRemoveQuestion(i)}>
+              <PiTrashThin color='red' />
+            </IconButton>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 
-// const handleRemoveQuestion = (i) => {
-//   const updatedQuestionAnswerArr = [...questionAnswerArr];
 
-//   updatedQuestionAnswerArr.splice(i, 1);
 
-//   setQuestionAnswerArr(updatedQuestionAnswerArr);
-// };
+<TableCell sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+  {/* Add the Question content here */}
+  <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+    {q.answers.map((answer, index) => (
+      {/* Add the answer styling here */}
+    ))}
+  </Box>
+  <Box>
+    <Checkbox
+      icon={<PiStar color='black' />}
+      checkedIcon={<PiStarFill color='gold' />}
+      checked={q.favorite}
+      onChange={() => handleFavorite(i)}
+    />
+  </Box>
+  <Box>
+    <IconButton onClick={() => handleEditQuestion(i)}>
+      <PiPencilLineLight color='black' />
+    </IconButton>
+    <IconButton onClick={() => handleRemoveQuestion(i)}>
+      <PiTrashThin color='red' />
+    </IconButton>
+  </Box>
+</TableCell>

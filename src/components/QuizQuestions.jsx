@@ -428,7 +428,7 @@ export default function QuizQuestions() {
 
               // pass in the value we want the width of the
               //question /answer column to be so it is displayed correctly.
-              questionWidth={350}
+              questionWidth={750}
               // correctAnswers={correctAnswers}
               correctAnswers={singleCorrect}
               handleRemoveQuestion={handleRemoveQuestion}

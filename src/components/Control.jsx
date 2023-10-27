@@ -5,8 +5,9 @@ import QuizCategoryDashboard from './QuizCategoryDashboard';
 import QuizzesDashboard from './QuizzesDashboard';
 import CreateNewQuiz from './CreateNewQuiz';
 import Quiz from './Quiz';
+import Test from './Test';
 import { Helmet } from 'react-helmet-async';
-import FavIcon from '../img/FavIcon.png'
+import FavIcon from '../img/FavIcon.png';
 
 
 export default function Control({ page }) {
@@ -38,6 +39,11 @@ export default function Control({ page }) {
     case 'quiz':
       content =
         <Quiz />;
+      break;
+
+    case 'test':
+      content =
+        <Test />;
       break;
 
     default:

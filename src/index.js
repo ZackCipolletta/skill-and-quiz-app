@@ -29,6 +29,7 @@ root.render(
         <Route path="/categories" element={ <Control page="categories"/> } />
         <Route path="/questions" element={<Control page="questions" />} />
         <Route path="/quiz" element={<Control page="quiz" />} />
+        <Route path="/test" element={<Control page="test" />} />
 
 
         <Route path="*" element={<PageNotFound />} />

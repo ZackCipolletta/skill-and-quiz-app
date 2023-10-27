@@ -49,30 +49,30 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function QuestionsAndAnswers(props) {
 
-  const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion, handleFavorite } = props;
+  const {  questionWidth, handleRemoveQuestion, handleEditQuestion, handleFavorite } = props;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 
-  // const quizInfo = {
-  //   questions: [
-  //     {
-  //       type: 'Single',
-  //       favorite: false,
-  //       correct: 2,
-  //       question: 'What is the fastest route of all time?',
-  //       answers: ['The Kessel run', 'what happens when every one of the answers is super long?', 'what?', 'qwerty'],
-  //     },
-  //     {
-  //       type: 'Multiple',
-  //       favorite: true,
-  //       correct: [1, 2],
-  //       question: 'How many planets are there in the solar system?',
-  //       answers: ['1', '8', '9'],
-  //     }
-  //   ]
-  // };
+  const quizInfo = {
+    questions: [
+      {
+        type: 'Single',
+        favorite: false,
+        correct: 2,
+        question: 'What is the fastest route of all time?',
+        answers: ['The Kessel run', 'what happens when every one of the answers is super long?', 'what?', 'qwerty'],
+      },
+      {
+        type: 'Multiple',
+        favorite: true,
+        correct: [1, 2],
+        question: 'How many planets are there in the solar system?',
+        answers: ['1', '8', '9'],
+      }
+    ]
+  };
 
   return (
     <TableBody>
@@ -153,7 +153,7 @@ export default function QuestionsAndAnswers(props) {
             </IconButton>
 
             <IconButton sx={{
-              marginRight: !isMobile ? 0 : -3,
+              // marginRight: !isMobile ? -1 : -3,
               transform: "scale(.7) scaleY(1.2)"
             }}
               onClick={() => handleRemoveQuestion(i)}
