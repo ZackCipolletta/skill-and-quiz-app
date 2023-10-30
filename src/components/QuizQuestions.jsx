@@ -162,6 +162,24 @@ export default function QuizQuestions() {
 
   };
 
+  const addUploadedQuestions = (upload) => {
+    upload.forEach((obj) => {
+      setQuestionAnswerArr((prevState) => ({
+        ...prevState,
+        questions: [
+          ...prevState.questions,
+          {
+            type: obj.type,
+            correct: obj.correct,
+            question: obj.question,
+            answers: obj.answers
+          }
+        ]
+      }));
+    });
+  };
+
+
   const handleRemoveQuestion = (i) => {
     // first we create a copy of the existing questions objects in questionAnswerArr array
     const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
@@ -315,7 +333,7 @@ export default function QuizQuestions() {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Have Questions Already? Import them!
       </Typography>
-      <Button
+      {/* <Button
         variant="outlined"
         size='small'
         id="importButton"
@@ -335,9 +353,12 @@ export default function QuizQuestions() {
           <FaFileCsv color='green' />
         </IconButton>
         Import using CSV
-      </Button>
+      </Button> */}
 
-      <FilePicker onFileSelected={handleFileSelected} />
+      <FilePicker
+        onFileSelected={handleFileSelected}
+        setQuestionAnswerArr={setQuestionAnswerArr}
+      />
       {selectedFile && (
         <div>
           <p>Selected File: {selectedFile.name}</p>
