@@ -38,7 +38,7 @@
 
 
 
-  
+
 import '../Styles/Components.css';
 import React from "react";
 import { Box, IconButton, TableRow, TableCell, Typography, TableBody, Checkbox } from '@mui/material';
@@ -53,6 +53,7 @@ export default function QuestionsAndAnswers(props) {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const optionsArray = ['A', 'B', 'C', 'D'];
 
 
   // const quizInfo = {
@@ -86,43 +87,58 @@ export default function QuestionsAndAnswers(props) {
             }
           }}
         >
-          <TableCell>
+          <TableCell
+            sx={{ borderRight: '1px solid #e0e0e0', fontWeight: 'bold', borderBottom: "none"}}
+          >
             {/* we use the index (i) to add number each question when it is displayed */}
             {i + 1}
           </TableCell>
 
           <TableCell
-            sx={{ width: questionWidth || 'auto' }} // check to see if 'questionWidth' has been passed in - if so use the value of questionWidth as the value of the width, otherwise width is set automatically.
+            sx={{ width: 750, borderRight: '1px solid #e0e0e0', borderBottom: "none" }}
           >
 
             {/* here we display the question */}
-            {q.question}
+            <Typography
+              style={{
+                fontWeight: 'bold',
+              }}
+            >
+              {q.question}
+            </Typography>
 
             {/* Then we map array of answers onto this template */}
-            <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+            <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
               {q.answers.map((answer, index) => (
                 <Typography
                   key={index}
                   style={{
-                    border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ? '1px solid #478bfe'
+                    marginTop: !isMobile ? 0 : 5,
+                    border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                      '1px solid #478bfe'
                       : '1px solid #67c27c',
-                    padding: '1px',
-                    paddingLeft: '7px',
-                    paddingRight: '7px',
-                    borderRadius: '15px',
-                    color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ? '#478bfe' : '#67c27c',
+                    // padding: 1,
+                    paddingLeft: 7,
+                    paddingRight: 7,
+                    marginRight: 5,
+                    borderRadius: '12px',
+                    color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                      '#478bfe' : '#67c27c',
                     background:
-                      q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ? 'rgba(208, 225, 255, .4)'
+                      q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                        'rgba(208, 225, 255, .4)'
                         : 'rgba(103, 194, 124, .09)',
                   }}
                 >
-                  {answer}
+                  {optionsArray[index]}.  {answer}
                 </Typography>
               ))}
             </Box>
           </TableCell>
 
-          <TableCell>
+          <TableCell
+            sx={{ borderRight: '1px solid #e0e0e0', borderBottom: "none" }}
+          >
 
             <Checkbox sx={{
               // marginLeft: !isMobile ? -1 : -4,
@@ -133,13 +149,13 @@ export default function QuestionsAndAnswers(props) {
               checkedIcon={<PiStarFill color='gold' />}
               checked={q.favorite}
 
-            onChange={() => handleFavorite(i)}
+              onChange={() => handleFavorite(i)}
             />
 
           </TableCell>
 
           <TableCell
-            sx={{ minWidth: 100 }}
+            sx={{ minWidth: 100, borderBottom: "none", paddingRight: 0 }}
           >
 
             <IconButton sx={{

@@ -195,5 +195,14 @@ Button.button-darkMediumBlue {
 
 .QuestionsAndAnswers .trash-icon,
 .QuestionsAndAnswers .pencil-icon {
-  margin-right: 10px; /* Adjust the margin-right as needed to move the icons to the right. */
+    margin-right: 10px;
+    /* Adjust the margin-right as needed to move the icons to the right. */
 }
+
+.QuestionsAndAnswers TableCell {
+    border-left: 1px solid black;
+    /* Add a black left border */
+    border-right: 1px solid black;
+    /* Add a black right border */
+}
+

@@ -36,6 +36,13 @@ export default function Quiz() {
         question: 'How many planets are there in the solar system?',
         answers: ['1', '8', '9'],
       },
+      {
+        id: 2,
+        type: 'Type',
+        favorite: false,
+        question: 'How many planets are there in the solar system?',
+        answers: [],
+      }
     ],
   })
 
@@ -82,7 +89,7 @@ export default function Quiz() {
 
   return (
     <Box
-      style={{ marginTop: 35 }}>
+      style={{ marginTop: 35, paddingBottom: 5 }}>
 
       <Box name='name&Buttons'
         style={{
@@ -173,7 +180,7 @@ export default function Quiz() {
         ))}
       </Box>
 
-      <Box sx={{mt: 3}}>
+      <Box sx={{mt: 3, mb: 5}}>
         <TableContainer component={Paper}>
           <Table
             // size="small"

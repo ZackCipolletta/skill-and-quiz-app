@@ -424,16 +424,11 @@ export default function QuizQuestions() {
               //info to QuestionsAndAnswers
 
               quizInfo={questionAnswerArr}
-              // quizInfo={quest}
-
-              // pass in the value we want the width of the
-              //question /answer column to be so it is displayed correctly.
-              questionWidth={750}
-              // correctAnswers={correctAnswers}
               correctAnswers={singleCorrect}
               handleRemoveQuestion={handleRemoveQuestion}
               handleEditQuestion={handleEditQuestion}
               handleFavorite={handleFavorite}
+              className="table-with-borders" 
             />
 
           </Table>
