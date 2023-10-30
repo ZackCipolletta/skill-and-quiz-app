@@ -32,7 +32,7 @@ export default function Quiz() {
         id: 1,
         type: 'Single',
         favorite: false,
-        correct: 1,
+        correct: [1, 2],
         question: 'How many planets are there in the solar system?',
         answers: ['1', '8', '9'],
       },

@@ -11,6 +11,7 @@ import { BsFillCircleFill } from 'react-icons/bs';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import QuestionsAndAnswers from "./QuestionsAndAnswers";
+import FilePicker from "./FilePicker";
 
 
 export default function QuizQuestions() {
@@ -23,6 +24,7 @@ export default function QuizQuestions() {
   const [singleCorrect, setSingleCorrect] = useState(null);
   const [multipleCorrect, setMultipleCorrect] = useState([]);
   const [warn, setWarn] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -30,8 +32,6 @@ export default function QuizQuestions() {
         questions: []
       }
     );
-
-
 
   const quest = {
     questions: [
@@ -131,6 +131,10 @@ export default function QuizQuestions() {
     updatedAnswerArr[i] = value;
     //Then we update answerArr to be equal to updatedAnswerArr
     setAnswersArr(updatedAnswerArr);
+  };
+
+  const handleFileSelected = (file) => {
+    setSelectedFile(file);
   };
 
   const handleAddClick = () => {
@@ -289,7 +293,7 @@ export default function QuizQuestions() {
               width: 200
             }}
             InputProps={{ sx: { borderRadius: 2 } }}
-            autoFocus 
+            autoFocus
           />
           {i > 0 && ( // if there is more than 1 answer option, add an X icon to 
             // remove or delete that specified TextField
@@ -332,6 +336,14 @@ export default function QuizQuestions() {
         </IconButton>
         Import using CSV
       </Button>
+
+      <FilePicker onFileSelected={handleFileSelected} />
+      {selectedFile && (
+        <div>
+          <p>Selected File: {selectedFile.name}</p>
+        </div>
+      )}
+
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Questions
       </Typography>
@@ -428,7 +440,7 @@ export default function QuizQuestions() {
               handleRemoveQuestion={handleRemoveQuestion}
               handleEditQuestion={handleEditQuestion}
               handleFavorite={handleFavorite}
-              className="table-with-borders" 
+              className="table-with-borders"
             />
 
           </Table>
