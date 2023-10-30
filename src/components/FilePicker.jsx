@@ -52,6 +52,7 @@ export default function FilePicker(props) {
           ...prevState.questions,
           {
             type: obj.type,
+            favorite: JSON.parse(obj.favorite),
             correct: Array.isArray(obj.correct) ?
               obj.correct.map((str) => parseInt(str, 10)) :
               parseInt(obj.correct),

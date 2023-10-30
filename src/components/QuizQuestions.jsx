@@ -25,6 +25,7 @@ export default function QuizQuestions() {
   const [multipleCorrect, setMultipleCorrect] = useState([]);
   const [warn, setWarn] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const [questionAnswerArr, setQuestionAnswerArr] = useState
     (
@@ -84,6 +85,7 @@ export default function QuizQuestions() {
     setAnswersArr([]);
     setOptions(0);
     setWarn(false);
+    setIsFavorite(false);
   };
 
   // used to clear all fields and reset all variables back to original once a question is created or done being edited.
@@ -118,7 +120,7 @@ export default function QuizQuestions() {
 
     const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
 
-    updatedQuestionAnswerArr[i].favorite = true;
+    updatedQuestionAnswerArr[i].favorite = !updatedQuestionAnswerArr[i].favorite;
 
     setQuestionAnswerArr({ questions: updatedQuestionAnswerArr, });
 
@@ -162,23 +164,6 @@ export default function QuizQuestions() {
 
   };
 
-  const addUploadedQuestions = (upload) => {
-    upload.forEach((obj) => {
-      setQuestionAnswerArr((prevState) => ({
-        ...prevState,
-        questions: [
-          ...prevState.questions,
-          {
-            type: obj.type,
-            correct: obj.correct,
-            question: obj.question,
-            answers: obj.answers
-          }
-        ]
-      }));
-    });
-  };
-
 
   const handleRemoveQuestion = (i) => {
     // first we create a copy of the existing questions objects in questionAnswerArr array
@@ -212,6 +197,8 @@ export default function QuizQuestions() {
     // we set the answersArr array equal to the array of answers at position 'i' of the questionAnswerArr array, which then populates the answer options text fields with answers from the selected question.
     setAnswersArr(questionAnswerArr.questions[i].answers);
 
+    // we check to see if this was a favorite question so that value does not get lost when editing the question.
+    setIsFavorite(questionAnswerArr.questions[i].favorite);
     // sets the questionAnswerArr position that will be edited so we can edit and update the correct question while also telling handleAddClick that we are editing and not creating a new question.
     setQuestionToEdit(i);
   };
@@ -222,6 +209,7 @@ export default function QuizQuestions() {
     // then we create a variable that will contain our updated question.
     const updatedQuestion = {
       type: answerType,
+      favorite: isFavorite,
       correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
       question: question,
       answers: answersArr
@@ -333,27 +321,6 @@ export default function QuizQuestions() {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Have Questions Already? Import them!
       </Typography>
-      {/* <Button
-        variant="outlined"
-        size='small'
-        id="importButton"
-        sx={{
-          p: 0,
-          pr: 1,
-          borderRadius: '10px',
-          color: '#a2a2a2',
-          borderColor: '#c4c4c4',
-          '&:hover': {
-            borderColor: 'black',
-            backgroundColor: 'white'
-          }
-        }}
-      >
-        <IconButton>
-          <FaFileCsv color='green' />
-        </IconButton>
-        Import using CSV
-      </Button> */}
 
       <FilePicker
         onFileSelected={handleFileSelected}
