@@ -9,8 +9,9 @@ import { Routes, Route } from 'react-router-dom';
 import PasswordRecovery from './SignIn-SignUp/PasswordRecovery';
 import PageNotFound from './SignIn-SignUp/PageNotFound';
 import { HelmetProvider } from 'react-helmet-async';
-
 import { BrowserRouter } from 'react-router-dom';
+import configureStore from './components/redux/store'
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,23 +19,25 @@ const helmetContext = {};
 
 root.render(
   <HelmetProvider context={helmetContext}>
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/password-recovery" element={<PasswordRecovery />} />
-        <Route path="/quizzes" element={ <Control page="quizzes"/> } />
-        <Route path="/categories" element={ <Control page="categories"/> } />
-        <Route path="/questions" element={<Control page="questions" />} />
-        <Route path="/quiz" element={<Control page="quiz" />} />
-        <Route path="/test" element={<Control page="test" />} />
+    <React.StrictMode>
+      <Provider store={configureStore}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/password-recovery" element={<PasswordRecovery />} />
+            <Route path="/quizzes" element={<Control page="quizzes" />} />
+            <Route path="/categories" element={<Control page="categories" />} />
+            <Route path="/questions" element={<Control page="questions" />} />
+            <Route path="/quiz" element={<Control page="quiz" />} />
+            <Route path="/test" element={<Control page="test" />} />
 
 
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </React.StrictMode>
-    </HelmetProvider>
+  </HelmetProvider>
 );

@@ -16,6 +16,22 @@ export default function Control({ page }) {
   // will dictate what is mounted in Control
   // const { page } = useParams();
 
+  // const [tags, setTags] = useState([]);
+  // const [newTag, setNewTag] = useState('');
+  // const [quizColor, setQuizColor] = useState('');
+
+  // const [answerType, setAnswerType] = useState('Multiple');
+  // const [options, setOptions] = useState(0);
+  // const [question, setQuestion] = useState('');
+  // const [answersArr, setAnswersArr] = useState([]);
+  // const [questionToEdit, setQuestionToEdit] = useState(null);
+  // const [singleCorrect, setSingleCorrect] = useState(null);
+  // const [multipleCorrect, setMultipleCorrect] = useState([]);
+  // const [warn, setWarn] = useState(false);
+  // const [selectedFile, setSelectedFile] = useState(null);
+  // const [isFavorite, setIsFavorite] = useState(false);
+
+
   let content;
   console.log("current page:", page);
 

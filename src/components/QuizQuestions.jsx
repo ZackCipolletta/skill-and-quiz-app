@@ -12,12 +12,19 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import QuestionsAndAnswers from "./QuestionsAndAnswers";
 import FilePicker from "./FilePicker";
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { increaseOptions, decreaseOptions, setOptionsTo } from "./redux/quizQuestions";
+
 
 
 export default function QuizQuestions() {
 
+  const dispatch = useDispatch();
+
   const [answerType, setAnswerType] = useState('Multiple');
-  const [options, setOptions] = useState(0);
+  // const [options, setOptions] = useState(0);
+  const { options } = useSelector((state) => state.options);
   const [question, setQuestion] = useState('');
   const [answersArr, setAnswersArr] = useState([]);
   const [questionToEdit, setQuestionToEdit] = useState(null);
@@ -57,7 +64,8 @@ export default function QuizQuestions() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleAddOptionClick = () => {
-    setOptions(options < 4 ? options + 1 : options);
+    options < 4 && dispatch(increaseOptions());
+    // setOptions(options < 4 ? options + 1 : options);
     setWarn(options === 4 ? true : false);
   };
 
@@ -83,7 +91,8 @@ export default function QuizQuestions() {
   // used to clear answer array when changing answer type to reset 'options' and the array of answers.
   const reset = () => {
     setAnswersArr([]);
-    setOptions(0);
+    dispatch(setOptionsTo(0))
+    // setOptions(0);
     setWarn(false);
     setIsFavorite(false);
   };
@@ -109,7 +118,8 @@ export default function QuizQuestions() {
     setWarn(false);
 
     //reduce options count
-    setOptions(options - 1);
+    dispatch(decreaseOptions())
+    // setOptions(options - 1);
   };
 
   const handleQuestionChange = (event) => {
@@ -192,7 +202,8 @@ export default function QuizQuestions() {
     }
 
     // we set the value of options equal to the length of the answers array at position 'i' of the questionAnswerArr array so that the text boxes are correctly assigned 'A, B, C, D' values.
-    setOptions(questionAnswerArr.questions[i].answers.length);
+    // setOptions(questionAnswerArr.questions[i].answers.length);
+    dispatch(setOptionsTo(questionAnswerArr.questions[i].answers.length))
 
     // we set the answersArr array equal to the array of answers at position 'i' of the questionAnswerArr array, which then populates the answer options text fields with answers from the selected question.
     setAnswersArr(questionAnswerArr.questions[i].answers);
