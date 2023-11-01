@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Options Slice
 export const optionsSlice = createSlice({
-  name: 'counter',
+  name: 'options',
   initialState: {
-    options: 0
+    options: 0,
   },
   reducers: {
     increaseOptions: (state) => {
@@ -18,31 +19,27 @@ export const optionsSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
+// Export action creators for the options slice
 export const { increaseOptions, decreaseOptions, setOptionsTo } = optionsSlice.actions;
 
-export default optionsSlice.reducer;
+// Export the options reducer
+export const optionsReducer = optionsSlice.reducer;
 
+// Question Slice
+export const questionSlice = createSlice({
+  name: 'question',
+  initialState: {
+    question: '',
+  },
+  reducers: {
+    setQuestionTo: (state, action) => {
+      state.question = action.payload;
+    },
+  },
+});
 
-// export const questionSlice = createSlice({
-//   name: 'counter',
-//   initialState: {
-//     value: 0
-//   },
-//   reducers: {
-//     increment: (state) => {
-//       state.value += 1
-//     },
-//     decrement: (state) => {
-//       state.value -= 1
-//     },
-//     incrementByAmount: (state, action) => {
-//       state.value += action.payload
-//     },
-//   },
-// })
+// Export action creators for the question slice
+export const { setQuestionTo } = questionSlice.actions;
 
-// // Action creators are generated for each case reducer function
-// export const { increment, decrement, incrementByAmount } = questionSlice.actions
-
-// export default questionSlice.reducer
+// Export the question reducer
+export const questionReducer = questionSlice.reducer;

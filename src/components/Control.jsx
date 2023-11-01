@@ -6,6 +6,7 @@ import QuizzesDashboard from './QuizzesDashboard';
 import CreateNewQuiz from './CreateNewQuiz';
 import Quiz from './Quiz';
 import Test from './Test';
+import Preview from './Preview';
 import { Helmet } from 'react-helmet-async';
 import FavIcon from '../img/FavIcon.png';
 
@@ -21,7 +22,7 @@ export default function Control({ page }) {
   // const [quizColor, setQuizColor] = useState('');
 
   // const [answerType, setAnswerType] = useState('Multiple');
-  // const [options, setOptions] = useState(0);
+
   // const [question, setQuestion] = useState('');
   // const [answersArr, setAnswersArr] = useState([]);
   // const [questionToEdit, setQuestionToEdit] = useState(null);
@@ -60,6 +61,11 @@ export default function Control({ page }) {
     case 'test':
       content =
         <Test />;
+      break;
+    
+    case 'preview':
+      content =
+        <Preview />;
       break;
 
     default:
