@@ -1,39 +1,124 @@
-<Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
-  {q.answers.map((answer, index) => (
-    <Typography
-      key={index}
-      style={{
-        marginTop: !isMobile ? 0 : 5,
-        border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-          '1px solid #478bfe'
-          : '1px solid #67c27c',
-        // padding: 1,
-        paddingLeft: 7,
-        paddingRight: 7,
-        marginRight: 5,
-        borderRadius: '12px',
-        color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-          '#478bfe' : '#67c27c',
-        background:
-          q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-            'rgba(208, 225, 255, .4)'
-            : 'rgba(103, 194, 124, .09',
-      }}
-    >
-      {optionsArray[index]}. {answer}
-    </Typography>
-  ))}
-  {q.answers.length === 0 && (
-    <TextField
-      margin="normal"
-      placeholder="Enter your answer here"
-      name="Answer"
-      className='input-field'
-      size='small'
-      sx={{
-        width: 350,
-      }}
-      InputProps={{ sx: { borderRadius: 2 } }}
-    />
-  )}
-</Box>
+import FilePicker from "./FilePicker";
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { increaseOptions, decreaseOptions, setOptions, setQuestion, setAnswersArr, setQuestionEdit } from "./redux/quizQuestions";
+
+
+
+export default function QuizQuestions() {
+
+  const dispatch = useDispatch();
+
+  const [answerType, setAnswerType] = useState('Multiple');
+  const { options } = useSelector((state) => state.options);
+  const { question } = useSelector((state) => state.question)
+  const { answersArr } = useSelector((state) => state.answersArr)
+
+
+
+  dispatch(setAnswersArr([]))
+  dispatch(setOptions(0))
+
+
+
+  setQuestionEdit to setQuestionToEdit.
+
+
+
+  import { createSlice } from '@reduxjs/toolkit';
+
+// Options Slice
+export const optionsSlice = createSlice({
+  name: 'options',
+  initialState: {
+    options: 0,
+  },
+  reducers: {
+    increaseOptions: (state) => {
+      state.options += 1;
+    },
+    decreaseOptions: (state) => {
+      state.options -= 1;
+    },
+    setOptions: (state, action) => {
+      state.options = action.payload;
+    },
+  },
+});
+
+// Export action creators for the options slice
+export const { increaseOptions, decreaseOptions, setOptions } = optionsSlice.actions;
+
+// Export the options reducer
+export const optionsReducer = optionsSlice.reducer;
+
+
+
+// Question Slice
+export const questionSlice = createSlice({
+  name: 'question',
+  initialState: {
+    question: '',
+  },
+  reducers: {
+    setQuestion: (state, action) => {
+      state.question = action.payload;
+    },
+  },
+});
+
+// Export action creators for the question slice
+export const { setQuestion } = questionSlice.actions;
+
+// Export the question reducer
+export const questionReducer = questionSlice.reducer;
+
+
+
+// answers Array Slice
+export const answersArrSlice = createSlice({
+  name: 'answersArr',
+  initialState: {
+    answersArr: [],
+  },
+  reducers: {
+    setAnswersArr: (state, action) => {
+      state.answersArr  = action.payload;
+    },
+  },
+});
+
+// Export action creators for the answersArr slice
+export const { setAnswersArr } = answersArrSlice.actions;
+
+// Export the answersArr reducer
+export const answersArrReducer = answersArrSlice.reducer;
+
+
+
+// questionToEdit Slice
+export const questionToEditSlice = createSlice({
+  name: 'answersArr',
+  initialState: {
+    questionToEdit: null,
+  },
+  reducers: {
+    setQuestionEdit: (state, action) => {
+      state.questionToEdit  = action.payload;
+    },
+  },
+});
+
+// Export action creators for the answersArr slice
+export const { questionToEdit } = questionToEditSlice.actions;
+
+// Export the answersArr reducer
+export const questionToEditReducer = questionToEditSlice.reducer;
+
+
+const [questionAnswerArr, setQuestionAnswerArr] = useState
+(
+  {
+    questions: []
+  }
+);

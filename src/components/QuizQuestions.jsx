@@ -14,32 +14,50 @@ import QuestionsAndAnswers from "./QuestionsAndAnswers";
 import FilePicker from "./FilePicker";
 import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { increaseOptions, decreaseOptions, setOptionsTo } from "./redux/quizQuestions";
-
-
+import { useSelect } from "@mui/base";
+import {
+  setOptions, decreaseOptions, setQuestion, setAnswersArr,
+  setQuestionToEdit, setSingleCorrect, setMultipleCorrect,
+  setWarn, setSelectedFile, setAnswerType, setIsFavorite, setQuestionAnswerArr
+} from "./redux/quizQuestions";
 
 export default function QuizQuestions() {
 
   const dispatch = useDispatch();
 
-  const [answerType, setAnswerType] = useState('Multiple');
+  // const [answerType, setAnswerType] = useState('Multiple');
   // const [options, setOptions] = useState(0);
-  const { options } = useSelector((state) => state.options);
-  const [question, setQuestion] = useState('');
-  const [answersArr, setAnswersArr] = useState([]);
-  const [questionToEdit, setQuestionToEdit] = useState(null);
-  const [singleCorrect, setSingleCorrect] = useState(null);
-  const [multipleCorrect, setMultipleCorrect] = useState([]);
-  const [warn, setWarn] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [isFavorite, setIsFavorite] = useState(false);
+  // const [question, setQuestion] = useState('');
+  // const [answersArr, setAnswersArr] = useState([]);
+  // const [questionToEdit, setQuestionToEdit] = useState(null);
+  // const [singleCorrect, setSingleCorrect] = useState(null);
+  // const [multipleCorrect, setMultipleCorrect] = useState([]);
+  // const [warn, setWarn] = useState(false);  
+  // const [selectedFile, setSelectedFile] = useState(null);
+  // const [isFavorite, setIsFavorite] = useState(false);
 
-  const [questionAnswerArr, setQuestionAnswerArr] = useState
-    (
-      {
-        questions: []
-      }
-    );
+  // const [questionAnswerArr, setQuestionAnswerArr] = useState
+  // (
+  //   {
+  //     questions: []
+  //   }
+  // );
+
+
+  const { options } = useSelector((state) => state.options);
+  const { question } = useSelector((state) => state.question);
+  const { answersArr } = useSelector((state) => state.answersArr);
+  const { questionToEdit } = useSelector((state) => state.questionToEdit);
+  const { singleCorrect } = useSelector((state) => state.singleCorrect);
+  const { multipleCorrect } = useSelector((state) => state.multipleCorrect);
+  const { warn } = useSelector((state) => state.warn);
+  const { selectedFile } = useSelector((state) => state.selectedFile);
+  const { answerType } = useSelector((state) => state.answerType);
+  const { isFavorite } = useSelector((state) => state.isFavorite);
+
+
+  const { questionAnswerArr } = useSelector((state) => state.questionAnswerArr);
+
 
   const quest = {
     questions: [
@@ -64,15 +82,19 @@ export default function QuizQuestions() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleAddOptionClick = () => {
-    options < 4 && dispatch(increaseOptions());
     // setOptions(options < 4 ? options + 1 : options);
-    setWarn(options === 4 ? true : false);
+    dispatch(setOptions(options < 4 ? options + 1 : options));
+    dispatch(setWarn(options === 4 ? true : false));
+    // setWarn(options === 4 ? true : false);
   };
 
   const handleAnswerTypeChange = (event) => {
-    setAnswerType(event.target.value);
-    setSingleCorrect(null);
-    setMultipleCorrect([]);
+    // setAnswerType(event.target.value);
+    dispatch(setAnswerType(event.target.value));
+    // setSingleCorrect(null);
+    dispatch(setSingleCorrect(null));
+    // setMultipleCorrect([]);
+    dispatch(setMultipleCorrect([]));
   };
 
 
@@ -90,21 +112,30 @@ export default function QuizQuestions() {
 
   // used to clear answer array when changing answer type to reset 'options' and the array of answers.
   const reset = () => {
-    setAnswersArr([]);
-    dispatch(setOptionsTo(0))
+    // setAnswersArr([]);
+    dispatch(setAnswersArr([]));
+    dispatch(setOptions(0));
     // setOptions(0);
-    setWarn(false);
+    // setWarn(false);
+    dispatch(setWarn(false));
     setIsFavorite(false);
+    dispatch(setIsFavorite(false));
   };
 
   // used to clear all fields and reset all variables back to original once a question is created or done being edited.
   const clearAll = () => {
     reset();
-    setQuestion('');
-    setAnswerType('');
-    setQuestionToEdit(null);
-    setSingleCorrect(null);
-    setMultipleCorrect([]);
+    // setQuestion('');
+    dispatch(setQuestion(''));
+    // setAnswerType('');
+    dispatch(setAnswerType(''));
+    // setQuestionToEdit(null);
+    dispatch(setQuestionToEdit(null));
+
+    // setSingleCorrect(null);
+    dispatch(setSingleCorrect(null));
+    // setMultipleCorrect([]);
+    dispatch(setMultipleCorrect([]));
   };
 
   const handleRemoveClick = (i) => {
@@ -113,17 +144,19 @@ export default function QuizQuestions() {
     // at the index of 'i' remove 1 item from the array
     updatedAnswers.splice(i, 1);
     //then we set the answersArr array equal to the updatedAnswers array we just modified
-    setAnswersArr(updatedAnswers);
+    // setAnswersArr(updatedAnswers);
+    dispatch(setAnswersArr(updatedAnswers));
 
-    setWarn(false);
+    // setWarn(false);
+    dispatch(setWarn(false));
 
     //reduce options count
-    dispatch(decreaseOptions())
-    // setOptions(options - 1);
+    dispatch(decreaseOptions());
   };
 
   const handleQuestionChange = (event) => {
-    setQuestion(event.target.value);
+    dispatch(setQuestion(event.target.value));
+    // setQuestion(event.target.value);
   };
 
   const handleFavorite = (i) => {
@@ -132,7 +165,8 @@ export default function QuizQuestions() {
 
     updatedQuestionAnswerArr[i].favorite = !updatedQuestionAnswerArr[i].favorite;
 
-    setQuestionAnswerArr({ questions: updatedQuestionAnswerArr, });
+    // setQuestionAnswerArr({ questions: updatedQuestionAnswerArr, });
+    dispatch(setQuestionAnswerArr({ questions: updatedQuestionAnswerArr }));
 
   };
 
@@ -142,11 +176,13 @@ export default function QuizQuestions() {
     // then we set the value of index position 'i' equal to the 'value' that was passed in.
     updatedAnswerArr[i] = value;
     //Then we update answerArr to be equal to updatedAnswerArr
-    setAnswersArr(updatedAnswerArr);
+    // setAnswersArr(updatedAnswerArr);
+    dispatch(setAnswersArr(updatedAnswerArr));
   };
 
   const handleFileSelected = (file) => {
-    setSelectedFile(file);
+    // setSelectedFile(file);
+    dispatch(setSelectedFile(file));
   };
 
   const handleAddClick = () => {
@@ -156,7 +192,8 @@ export default function QuizQuestions() {
     if (questionToEdit !== null) {
       editQuestionInPlace();
     } else {
-      setQuestionAnswerArr((prevState) => ({
+
+      dispatch(setQuestionAnswerArr((prevState) => ({
         ...prevState,
         questions: [
           ...prevState.questions,
@@ -164,10 +201,23 @@ export default function QuizQuestions() {
             type: answerType,
             correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
             question: question,
-            answers: answersArr
-          }
-        ]
-      }));
+            answers: answersArr,
+          },
+        ],
+      })));
+
+      // setQuestionAnswerArr((prevState) => ({
+      //   ...prevState,
+      //   questions: [
+      //     ...prevState.questions,
+      //     {
+      //       type: answerType,
+      //       correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
+      //       question: question,
+      //       answers: answersArr
+      //     }
+      //   ]
+      // }));
 
       clearAll();
     }
@@ -181,37 +231,50 @@ export default function QuizQuestions() {
     // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
     updatedQuestionAnswerArr.splice(i, 1);
     // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
-    setQuestionAnswerArr({
-      questions: updatedQuestionAnswerArr
-    });
+
+    // setQuestionAnswerArr({
+    //   questions: updatedQuestionAnswerArr
+    // });
+
+    dispatch(setQuestionAnswerArr({
+      questions: updatedQuestionAnswerArr,
+    }));
+
   };
 
 
   const handleEditQuestion = (i) => {
     // we set 'question' in state equal to the selected value at position 'i' of the questionAnswerArr array.
-    setQuestion(questionAnswerArr.questions[i].question);
+    // setQuestion(questionAnswerArr.questions[i].question);
+    dispatch(setQuestion(questionAnswerArr.questions[i].question));
 
     // we get the answer type from the selected question and assign that value to 'answerType' in state so the correct value is preselected for the user when they start editing the question.
-    setAnswerType(questionAnswerArr.questions[i].type);
+    // setAnswerType(questionAnswerArr.questions[i].type);
+    dispatch(setAnswerType(questionAnswerArr.questions[i].type));
 
     // Then we check to see if the question type is 'Single' or 'Multiple' and assign the corresponding value in state (single/multiple) the id value of the correct answer or answers. Ex: singleCorrect: 2 (the id of the correct answer). Or multipleCorrect: [1, 3] (the ids of the 2 correct answers).
     if (questionAnswerArr.questions[i].type === 'Single') {
-      setSingleCorrect(questionAnswerArr.questions[i].correct);
+      // setSingleCorrect(questionAnswerArr.questions[i].correct);
+      dispatch(setSingleCorrect(questionAnswerArr.questions[i].correct));
     } else if (questionAnswerArr.questions[i].type === 'Multiple') {
-      setMultipleCorrect(questionAnswerArr.questions[i].correct);
+      // setMultipleCorrect(questionAnswerArr.questions[i].correct);
+      dispatch(setMultipleCorrect(questionAnswerArr.questions[i].correct));
     }
 
     // we set the value of options equal to the length of the answers array at position 'i' of the questionAnswerArr array so that the text boxes are correctly assigned 'A, B, C, D' values.
     // setOptions(questionAnswerArr.questions[i].answers.length);
-    dispatch(setOptionsTo(questionAnswerArr.questions[i].answers.length))
+    dispatch(setOptions(questionAnswerArr.questions[i].answers.length));
 
     // we set the answersArr array equal to the array of answers at position 'i' of the questionAnswerArr array, which then populates the answer options text fields with answers from the selected question.
-    setAnswersArr(questionAnswerArr.questions[i].answers);
+    // setAnswersArr(questionAnswerArr.questions[i].answers);
+    dispatch(setAnswersArr(questionAnswerArr.questions[i].answers));
 
     // we check to see if this was a favorite question so that value does not get lost when editing the question.
-    setIsFavorite(questionAnswerArr.questions[i].favorite);
+    // setIsFavorite(questionAnswerArr.questions[i].favorite);
+    dispatch(setIsFavorite(questionAnswerArr.questions[i].favorite));
     // sets the questionAnswerArr position that will be edited so we can edit and update the correct question while also telling handleAddClick that we are editing and not creating a new question.
-    setQuestionToEdit(i);
+    // setQuestionToEdit(i);
+    dispatch(setQuestionToEdit(i));
   };
 
   const editQuestionInPlace = () => {
@@ -227,9 +290,15 @@ export default function QuizQuestions() {
     };
     // then we splice our updated question back into the at the same position the question we are editing originally was.
     updatedQuestionAnswerArr.splice(questionToEdit, 1, updatedQuestion);
-    setQuestionAnswerArr({
-      questions: updatedQuestionAnswerArr
-    });
+
+
+    // setQuestionAnswerArr({
+    //   questions: updatedQuestionAnswerArr
+    // });
+
+    dispatch(setQuestionAnswerArr({
+      questions: updatedQuestionAnswerArr,
+    }));
 
     clearAll();
   };
@@ -260,7 +329,8 @@ export default function QuizQuestions() {
         // first we take the selected option the user clicked (the index value) and check if it is equal to the current
         // value for 'singleOption'(checking to see if this option is already selected). 
         // if it is already selected, we deselect it and uncheck the box. Otherwise we check the box
-        setSingleCorrect(singleCorrect === index ? null : index);
+        // setSingleCorrect(singleCorrect === index ? null : index);
+        dispatch(setSingleCorrect(singleCorrect === index ? null : index));
       } else if (answerType === 'Multiple') {
         // when selecting multiple correct answers, we first create a copy of the array of multiple correct answers.
         const updatedMultipleCorrect = [...multipleCorrect];
@@ -274,7 +344,8 @@ export default function QuizQuestions() {
           updatedMultipleCorrect.push(index);
         }
         //lastly we set value of 'multipleCorrect' to the updated array contained in 'updatedMultipleCorrect'
-        setMultipleCorrect(updatedMultipleCorrect);
+        // setMultipleCorrect(updatedMultipleCorrect);
+        dispatch(setMultipleCorrect(updatedMultipleCorrect));
       }
     };
 
@@ -435,7 +506,6 @@ export default function QuizQuestions() {
               //info to QuestionsAndAnswers
 
               quizInfo={questionAnswerArr}
-              correctAnswers={singleCorrect}
               handleRemoveQuestion={handleRemoveQuestion}
               handleEditQuestion={handleEditQuestion}
               handleFavorite={handleFavorite}
