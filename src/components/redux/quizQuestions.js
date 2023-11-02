@@ -230,19 +230,20 @@ export const isFavoriteReducer = isFavoriteSlice.reducer;
 export const questionAnswerArrSlice = createSlice({
   name: 'questionAnswerArr',
   initialState: {
-    questionAnswerArr: {
-      questions: []
-    }
+    questions: []
   },
   reducers: {
     setQuestionAnswerArr: (state, action) => {
-      state.questionAnswerArr = action.payload;
+      return action.payload;
+    },
+    addQuestion: (state, action) => {
+      state.questions.push(action.payload);
     },
   },
 });
 
 // Export action creators for the questionAnswerArr slice
-export const { setQuestionAnswerArr } = questionAnswerArrSlice.actions;
+export const { setQuestionAnswerArr, addQuestion } = questionAnswerArrSlice.actions;
 
 // Export the questionAnswerArr reducer
 export const questionAnswerArrReducer = questionAnswerArrSlice.reducer;

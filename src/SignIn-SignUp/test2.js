@@ -122,3 +122,57 @@ const [questionAnswerArr, setQuestionAnswerArr] = useState
     questions: []
   }
 );
+
+
+
+
+dispatch(setQuestionAnswerArr({
+  questions: [
+    ...questionAnswerArr.questions,
+    {
+      type: answerType,
+      correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
+      question: question,
+      answers: answersArr,
+    },
+  ],
+}));
+
+dispatch(setQuestionAnswerArr((prevState) => ({
+  ...prevState,
+  questions: [
+    ...prevState.questions,
+    {
+      type: answerType,
+      correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
+      question: question,
+      answers: answersArr,
+    },
+  ],
+})));
+
+
+
+{
+  "questions": [
+      {
+          "type": "Multiple",
+          "correct": [],
+          "question": "aasdafsdf",
+          "answers": [
+              "asdfasdf"
+          ]
+      },
+      {
+          "type": "Multiple",
+          "correct": [],
+          "question": "question 2",
+          "answers": [
+              "aaaa",
+              "bbbb",
+              "cccc",
+              "dddd"
+          ]
+      }
+  ]
+}

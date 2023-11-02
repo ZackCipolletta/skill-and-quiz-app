@@ -12,18 +12,27 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import QuestionsAndAnswers from "./QuestionsAndAnswers";
 import FilePicker from "./FilePicker";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { useSelect } from "@mui/base";
 import {
   setOptions, decreaseOptions, setQuestion, setAnswersArr,
   setQuestionToEdit, setSingleCorrect, setMultipleCorrect,
-  setWarn, setSelectedFile, setAnswerType, setIsFavorite, setQuestionAnswerArr
+  setWarn, setSelectedFile, setAnswerType, setIsFavorite, setQuestionAnswerArr, addQuestion
 } from "./redux/quizQuestions";
 
 export default function QuizQuestions() {
 
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(setAnswerType('Multiple'));
+  //   dispatch(setOptions(0));
+  //   dispatch(setQuestion(''));
+  //   dispatch(setAnswersArr([]));
+  //   dispatch(setSingleCorrect(null));
+  //   dispatch(setMultipleCorrect([]));
+  //   dispatch(setIsFavorite(false));
+  // }, [dispatch]);
 
   // const [answerType, setAnswerType] = useState('Multiple');
   // const [options, setOptions] = useState(0);
@@ -32,6 +41,7 @@ export default function QuizQuestions() {
   // const [questionToEdit, setQuestionToEdit] = useState(null);
   // const [singleCorrect, setSingleCorrect] = useState(null);
   // const [multipleCorrect, setMultipleCorrect] = useState([]);
+
   // const [warn, setWarn] = useState(false);  
   // const [selectedFile, setSelectedFile] = useState(null);
   // const [isFavorite, setIsFavorite] = useState(false);
@@ -56,7 +66,7 @@ export default function QuizQuestions() {
   const { isFavorite } = useSelector((state) => state.isFavorite);
 
 
-  const { questionAnswerArr } = useSelector((state) => state.questionAnswerArr);
+  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
 
   const quest = {
@@ -193,18 +203,14 @@ export default function QuizQuestions() {
       editQuestionInPlace();
     } else {
 
-      dispatch(setQuestionAnswerArr((prevState) => ({
-        ...prevState,
-        questions: [
-          ...prevState.questions,
+      dispatch(addQuestion(
           {
             type: answerType,
             correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
             question: question,
             answers: answersArr,
           },
-        ],
-      })));
+        ));
 
       // setQuestionAnswerArr((prevState) => ({
       //   ...prevState,
@@ -224,6 +230,10 @@ export default function QuizQuestions() {
 
   };
 
+
+  useEffect(() => {
+    console.log(questionAnswerArr);
+  }, [questionAnswerArr]);
 
   const handleRemoveQuestion = (i) => {
     // first we create a copy of the existing questions objects in questionAnswerArr array
@@ -501,16 +511,16 @@ export default function QuizQuestions() {
         <TableContainer component={Paper}>
           <Table>
 
-            <QuestionsAndAnswers
+            {/* <QuestionsAndAnswers
               // pass the array containing the question/answer
               //info to QuestionsAndAnswers
 
-              quizInfo={questionAnswerArr}
+              // quizInfo={questionAnswerArr}
               handleRemoveQuestion={handleRemoveQuestion}
               handleEditQuestion={handleEditQuestion}
               handleFavorite={handleFavorite}
               className="table-with-borders"
-            />
+            /> */}
 
           </Table>
         </TableContainer>
