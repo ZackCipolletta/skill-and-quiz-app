@@ -9,6 +9,7 @@ import Test from './Test';
 import Preview from './Preview';
 import { Helmet } from 'react-helmet-async';
 import FavIcon from '../img/FavIcon.png';
+import Leaderboard from './Leaderboard';
 
 
 export default function Control({ page }) {
@@ -16,22 +17,6 @@ export default function Control({ page }) {
   // We may end up having to use state to update a 'CurrentlyVisibleState' which
   // will dictate what is mounted in Control
   // const { page } = useParams();
-
-  // const [tags, setTags] = useState([]);
-  // const [newTag, setNewTag] = useState('');
-  // const [quizColor, setQuizColor] = useState('');
-
-  // const [answerType, setAnswerType] = useState('Multiple');
-
-  // const [question, setQuestion] = useState('');
-  // const [answersArr, setAnswersArr] = useState([]);
-  // const [questionToEdit, setQuestionToEdit] = useState(null);
-  // const [singleCorrect, setSingleCorrect] = useState(null);
-  // const [multipleCorrect, setMultipleCorrect] = useState([]);
-  // const [warn, setWarn] = useState(false);
-  // const [selectedFile, setSelectedFile] = useState(null);
-  // const [isFavorite, setIsFavorite] = useState(false);
-
 
   let content;
   console.log("current page:", page);
@@ -66,6 +51,11 @@ export default function Control({ page }) {
     case 'preview':
       content =
         <Preview />;
+      break;
+    
+    case 'leaderboard':
+      content =
+        <Leaderboard />;
       break;
 
     default:

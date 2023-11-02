@@ -15,7 +15,7 @@ export default function Quiz() {
   const [quizInfo, setQuizInfo] = useState({
 
     Name: "Quiz1",
-    Color: '#cfd9fa',
+    Color: '#a7d7f9',
     tags: ['Tag1', 'Tag2', 'Tag3'],
     id: 1,
     Favorite: false,
@@ -45,33 +45,6 @@ export default function Quiz() {
       }
     ],
   })
-
-
-  // const quizInfo = {
-  //   Name: "Quiz1",
-  //   Color: '#cfd9fa',
-  //   tags: ['Tag1', 'Tag2', 'Tag3'],
-  //   id: 1,
-  //   Favorite: false,
-  //   questions: [
-  //     {
-  //       id: 1,
-  //       type: 'Single',
-  //       favorite: true,
-  //       correct: 0,
-  //       question: 'What is the fastest route of all time?',
-  //       answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
-  //     },
-  //     {
-  //       id: 2,
-  //       type: 'Single',
-  //       favorite: false,
-  //       correct: 1,
-  //       question: 'How many planets are there in the solar system?',
-  //       answers: ['1', '8', '9'],
-  //     },
-  //   ],
-  // };
 
   const handleRemoveQuestion = (i) => {
     // first we create a copy of the existing questions objects in questionAnswerArr array

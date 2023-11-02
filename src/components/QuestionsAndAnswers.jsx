@@ -49,7 +49,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function QuestionsAndAnswers(props) {
 
-  const { questionWidth, handleRemoveQuestion, handleEditQuestion, handleFavorite } = props;
+  const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion, handleFavorite } = props;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -57,29 +57,29 @@ export default function QuestionsAndAnswers(props) {
 
   const { questionAnswerArr } = useSelector((state) => state.questionAnswerArr);
 
-  const quizInfo = {
-    questions: [
-      {
-        type: 'Single',
-        favorite: false,
-        correct: 2,
-        question: 'What is the fastest route of all time?',
-        answers: ['The Kessel run', 'what happens when every one of the answers is super long?', 'what?', 'qwerty'],
-      },
-      {
-        type: 'Multiple',
-        favorite: true,
-        correct: [1, 2],
-        question: 'How many planets are there in the solar system?',
-        answers: ['1', '8', '9'],
-      }
-    ]
-  };
+  // const quizInfo = {
+  //   questions: [
+  //     {
+  //       type: 'Single',
+  //       favorite: false,
+  //       correct: 2,
+  //       question: 'What is the fastest route of all time?',
+  //       answers: ['The Kessel run', 'what happens when every one of the answers is super long?', 'what?', 'qwerty'],
+  //     },
+  //     {
+  //       type: 'Multiple',
+  //       favorite: true,
+  //       correct: [1, 2],
+  //       question: 'How many planets are there in the solar system?',
+  //       answers: ['1', '8', '9'],
+  //     }
+  //   ]
+  // };
 
   return (
     <TableBody>
       {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
-      {questionAnswerArr.questions.map((q, i) => (
+      {quizInfo.questions.map((q, i) => (
         <TableRow key={i}
           sx={{
             '&:hover': {
