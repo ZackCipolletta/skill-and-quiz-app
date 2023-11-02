@@ -8,6 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { useSwipeable } from 'react-swipeable';
+import PublishModal from "./PublishModal";
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -36,6 +37,40 @@ CustomTabPanel.propTypes = {
 export default function CreateNewQuiz() {
   const [value, setValue] = useState(0);
   const [showIcons, setShowIcons] = useState(true);
+
+  const [publishModalState, setPublishModalState] = useState(false);
+
+  const handleCancelButtonClick = () => {
+    toggle();
+  };
+
+  const toggle = () => {
+    setPublishModalState(!publishModalState);
+  };
+
+  const handlePublishButtonClick = () => {
+    toggle();
+  };
+
+  const quiz = {
+    title: 'Title quiz test',
+    questions: [
+      {
+        type: 'Single',
+        favorite: false,
+        correct: 2,
+        question: 'What is the fastest route of all time?',
+        answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
+      },
+      {
+        type: 'Multiple',
+        favorite: true,
+        correct: [1, 2],
+        question: 'How many planets are there in the solar system?',
+        answers: ['1', '8', '9'],
+      }
+    ]
+  };
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -97,7 +132,9 @@ export default function CreateNewQuiz() {
           </Tabs>
           <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
             <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Preview</Button>
-            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Publish</Button>
+            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}
+            onClick={handlePublishButtonClick}
+            >Publish</Button>
           </Box>
         </Box>
 
@@ -129,6 +166,12 @@ export default function CreateNewQuiz() {
             Publish</Button>
         </Box>
       }
+
+      <PublishModal
+        publishModalState={publishModalState}
+        handleCancelButtonClick={handleCancelButtonClick}
+        quizToPublish={quiz.title}
+      />
 
     </Paper>
   );

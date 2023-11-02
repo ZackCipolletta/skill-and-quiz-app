@@ -22,9 +22,10 @@ const style = {
   textAlign: 'center'
 };
 
-export default function DeleteModal(props) {
+export default function PublishModal(props) {
 
-  const modalState = props.toggle;
+  const { publishModalState, handleCancelButtonClick, quizToPublish } = props;
+
 
   return (
     <div>
@@ -32,8 +33,8 @@ export default function DeleteModal(props) {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={modalState}
-        onClose={props.handleClose}
+        open={publishModalState}
+        onClose={handleCancelButtonClick}
 
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
@@ -43,21 +44,21 @@ export default function DeleteModal(props) {
           }
         }}
       >
-        <Fade in={modalState}>
+        <Fade in={publishModalState}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2" >
-              Do you want to delete the {props.selectedCard}?
+              Do you want to publish {quizToPublish}?
             </Typography>
             <Box sx={{pt: 2 }}>
               <Button
                 className='button-redButton'
-                onClick={props.handleDeleteConfirm}
+                // onClick={props.handleDeleteConfirm}
                 sx={{ mr: 5 }}>
-                Delete
+                Publish
               </Button>
               <Button
                 className='button-mediumBlue'
-                onClick={props.handleClose}
+                onClick={handleCancelButtonClick}
               >
                 Cancel
               </Button>

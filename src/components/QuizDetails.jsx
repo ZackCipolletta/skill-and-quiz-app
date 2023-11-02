@@ -12,6 +12,8 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
+
+
 export default function QuizDetails(props) {
 
   const [tags, setTags] = useState([]);
@@ -21,10 +23,9 @@ export default function QuizDetails(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-
   const handleAddClick = () => {
     if (newTag.trim() !== "") {
-      setTags([ ...tags, ...newTag.split(',') ]);
+      setTags([...tags, ...newTag.split(',')]);
       setNewTag("");
     }
   };
