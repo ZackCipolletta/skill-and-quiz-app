@@ -2,19 +2,15 @@
 import '../Styles/Components.css';
 import React, { useState } from "react";
 import {
-  Button, Box, IconButton, TableContainer, Table, TableHead, Typography,
+  Box, TableContainer, Table, TableHead, Typography,
   TableRow, TableCell, Paper
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { LuAward } from 'react-icons/lu';
-import { PiTagChevron } from 'react-icons/pi';
-import QuestionsAndAnswers from './QuestionsAndAnswers';
+
 
 export default function Leaderboard() {
 
   const [options, setOptions] = useState(0);
   const [quizInfo, setQuizInfo] = useState({
-
     Name: "Quiz1",
     Color: '#a7d7f9',
     tags: ['Tag1', 'Tag2', 'Tag3'],
@@ -53,12 +49,12 @@ export default function Leaderboard() {
       {
         userName: 'userName1',
         userImage: 'Single',
-        score: 1000,
+        score: 700,
       },
       {
         userName: 'userName2',
         userImage: 'Single',
-        score: 900,
+        score: 500,
       },
       {
         userName: 'userName3',
@@ -68,7 +64,7 @@ export default function Leaderboard() {
       {
         userName: 'userName4',
         userImage: 'Single',
-        score: 700,
+        score: 900,
       },
       {
         userName: 'userName5',
@@ -78,7 +74,7 @@ export default function Leaderboard() {
     ],
   });
 
-
+  
   return (
     <Box
       style={{ marginTop: 35, paddingBottom: 5 }}>
@@ -130,6 +126,7 @@ export default function Leaderboard() {
                   }}
                 >
                   <h2>#</h2>
+
                 </TableCell>
                 <TableCell
                   sx={{
@@ -149,53 +146,77 @@ export default function Leaderboard() {
             </TableHead>
 
 
-            {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
-            {userInfo.users.map((u, i) => (
-              <TableRow key={i}
+            {/* we sort userInfo by score high to low, then map onto this template. 
+            The userInfo as a whole is represented by 'u' */}
+            {userInfo.users.sort((a, b) => b.score - a.score).map((u, i) => (
+
+            <TableRow key={i}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#f8fafe',
+                  // border: '2px solid #3ea7f2 !important'
+                },
+                color: i < 3 ? (i === 0 ? '#FCD25C': i === 1 ? '#9A8D8D' : '#A77272') : null
+              }}
+            >
+              <TableCell
                 sx={{
-                  '&:hover': {
-                    backgroundColor: '#f8fafe',
-                    // border: '2px solid #3ea7f2 !important'
-                  }
+                  borderRight: '1px solid #e0e0e0',
+                  fontWeight: 'bold', borderBottom: "none"
                 }}
               >
-                <TableCell
-                  sx={{
-                    borderRight: '1px solid #e0e0e0',
-                    fontWeight: 'bold', borderBottom: "none"
-                  }}
-                >
-                  {/* we use the index (i) to add number each question when it is displayed */}
-                  {i + 1}
-                </TableCell>
+                {/* we use the index (i) to add a number for each user when it is displayed */}
+                {i + 1}
+              </TableCell>
 
-                <TableCell
-                  sx={{
-                    width: 750, borderRight: '1px solid #e0e0e0',
-                    borderBottom: "none"
-                  }}
-                >
+                {/* here we display the users information */}
+              <TableCell
+                sx={{
+                  width: 750, borderRight: '1px solid #e0e0e0',
+                  borderBottom: "none",
+                  marginTop: 0,
+                  marginBottom: 0,
+                  paddingTop: 0,
+                  paddingBottom: 0
+                }}
+              >
+                {/* here is the user's image or placeHolder image */}
+                <div style={{ display: 'flex', alignItems: 'center', }}>
 
-                  {/* here we display the question */}
-                  <Typography
-                    style={{
-                      fontWeight: 'bold',
-                    }}
-                  >
+                  <img
+                    src='/img/placeholder-image.png'
+                    width="30"
+                    height="30"
+                    alt="Placeholder"
+                  />
+
+                    {/* her is the username  */}
+                  <Typography style={{
+                    marginLeft: 10,
+                    fontFamily: 'Inter', // Font family should be enclosed in single or double quotes
+                    fontSize: '1.75rem',
+                    fontStyle: 'normal',
+                    fontWeight: 500,
+                    lineHeight: '100%', // 1.75rem
+                  }}>
                     {u.userName}
                   </Typography>
 
-                </TableCell>
-                <TableCell
-                  sx={{
-                    borderRight: '1px solid #e0e0e0',
-                    fontWeight: 'bold', borderBottom: "none"
-                  }}
-                >
-                  {u.score}
-                </TableCell>
+                </div>
 
-              </TableRow>
+                </TableCell>
+                
+                {/* and finally the sore  */}
+              <TableCell
+                sx={{
+                  borderRight: '1px solid #e0e0e0',
+                  fontWeight: 'bold', borderBottom: "none"
+                }}
+              >
+                {u.score}
+              </TableCell>
+
+            </TableRow>
             ))}
 
 
@@ -207,3 +228,5 @@ export default function Leaderboard() {
     </Box >
   );
 }
+
+
