@@ -9,7 +9,8 @@ import Test from './Test';
 import Preview from './Preview';
 import { Helmet } from 'react-helmet-async';
 import FavIcon from '../img/FavIcon.png';
-import Leaderboard from './Leaderboard';
+import LeaderboardAndAnalysis from './LeaderboardAndAnalysis';
+
 
 
 export default function Control({ page }) {
@@ -29,7 +30,7 @@ export default function Control({ page }) {
         </>;
 
       break;
-    case 'questions':
+    case 'newquiz':
       content = <CreateNewQuiz />;
       break;
 
@@ -53,9 +54,9 @@ export default function Control({ page }) {
         <Preview />;
       break;
     
-    case 'leaderboard':
+    case 'LeaderboardAndAnalysis':
       content =
-        <Leaderboard />;
+        <LeaderboardAndAnalysis />;
       break;
 
     default:

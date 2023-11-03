@@ -29,11 +29,11 @@ root.render(
             <Route path="/password-recovery" element={<PasswordRecovery />} />
             <Route path="/quizzes" element={<Control page="quizzes" />} />
             <Route path="/categories" element={<Control page="categories" />} />
-            <Route path="/questions" element={<Control page="questions" />} />
+            <Route path="/newquiz" element={<Control page="newquiz" />} />
             <Route path="/quiz" element={<Control page="quiz" />} />
             <Route path="/test" element={<Control page="test" />} />
             <Route path="/preview" element={<Control page="preview" />} />
-            <Route path="/leaderboard" element={<Control page="leaderboard" />} />
+            <Route path="/leaderboard" element={<Control page="LeaderboardAndAnalysis" />} />
 
 
             <Route path="*" element={<PageNotFound />} />

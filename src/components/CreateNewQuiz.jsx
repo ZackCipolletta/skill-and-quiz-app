@@ -99,6 +99,13 @@ export default function CreateNewQuiz() {
     onSwipedRight: () => changeToPreviousTab()
   });
 
+  const tabStyles = {
+    textTransform: 'none',
+    fontWeight: '525',
+    color: '#a2a2a2',
+    fontSize: 'larger'
+  };
+
   return (
     <Paper sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
       <Box sx={{ width: '100%' }}>
@@ -111,24 +118,9 @@ export default function CreateNewQuiz() {
           borderColor: 'divider'
         }} >
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Details" sx={{
-              textTransform: 'none',
-              fontWeight: '525',
-              color: '#a2a2a2',
-              fontSize: 'larger'
-            }} />
-            <Tab label="Questions" sx={{
-              textTransform: 'none',
-              fontWeight: '525',
-              color: '#a2a2a2',
-              fontSize: 'larger'
-            }} />
-            <Tab label="Schedule" sx={{
-              textTransform: 'none',
-              fontWeight: '525',
-              color: '#a2a2a2',
-              fontSize: 'larger'
-            }} />
+            <Tab label="Details" sx={tabStyles}/>
+            <Tab label="Questions" sx={tabStyles} />
+            <Tab label="Schedule" sx={tabStyles} />
           </Tabs>
           <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
             <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Preview</Button>
