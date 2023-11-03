@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 
 
-export default function Leaderboard() {
+export default function QuestionAnalysis() {
 
   const [userInfo, setUserInfo] = useState({
     users: [
@@ -39,7 +39,45 @@ export default function Leaderboard() {
     ],
   });
 
-  
+  const optionsArray = ['A', 'B', 'C', 'D'];
+
+  const quizInfo = {
+    title: 'Title quiz test',
+    Color: '#a7d7f9',
+    tags: ['Tag1', 'Tag2', 'Tag3'],
+    id: 1,
+    Favorite: false,
+    questions: [
+      {
+        id: 0,
+        type: 'Single',
+        favorite: true,
+        correct: 0,
+        question: 'What is the fastest route of all time?',
+        answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
+        correct: 60,
+      },
+      {
+        id: 1,
+        type: 'Single',
+        favorite: false,
+        correct: [1, 2],
+        question: 'How many planets are there in the solar system?',
+        answers: ['1', '8', '9'],
+        correct: 25,
+      },
+      {
+        id: 2,
+        type: 'Type',
+        favorite: false,
+        question: 'How many planets are there in the solar system?',
+        answers: [],
+        correct: 50,
+      }
+    ],
+  };
+
+
   return (
     <Box
       style={{ marginTop: 35, paddingBottom: 5 }}>
@@ -72,91 +110,80 @@ export default function Leaderboard() {
                     borderRight: '1px solid #e0e0e0',
                     borderBottom: '1px solid #e0e0e0'
                   }}>
-                  <h2>Users</h2>
+                  <h2>Questions</h2>
                 </TableCell>
                 <TableCell
                   sx={{
                     borderRight: '1px solid #e0e0e0',
                     borderBottom: '1px solid #e0e0e0'
                   }}>
-                  <h2>Points</h2>
                 </TableCell>
               </TableRow>
             </TableHead>
 
 
-            {/* we sort userInfo by score high to low, then map onto this template. 
-            The userInfo as a whole is represented by 'u' */}
-            {userInfo.users.sort((a, b) => b.score - a.score).map((u, i) => (
-
-            <TableRow key={i}
-              sx={{
-                '&:hover': {
-                  backgroundColor: '#f8fafe',
-                  // border: '2px solid #3ea7f2 !important'
-                },
-                color: i < 3 ? (i === 0 ? '#FCD25C': i === 1 ? '#9A8D8D' : '#A77272') : null
-              }}
-            >
-              <TableCell
+            {quizInfo.questions.map((q, i) => (
+              <TableRow key={i}
                 sx={{
-                  borderRight: '1px solid #e0e0e0',
-                  fontWeight: 'bold', borderBottom: "none"
+                  '&:hover': {
+                    backgroundColor: '#f8fafe',
+                    // border: '2px solid #3ea7f2 !important'
+                  }
                 }}
               >
-                {/* we use the index (i) to add a number for each user when it is displayed */}
-                {i + 1}
-              </TableCell>
+                <TableCell
+                  sx={{ borderRight: '1px solid #e0e0e0', fontWeight: 'bold', borderBottom: "none" }}
+                >
+                  {/* we use the index (i) to add number each question when it is displayed */}
+                  {i + 1}
+                </TableCell>
 
-                {/* here we display the users information */}
-              <TableCell
-                sx={{
-                  width: 750, borderRight: '1px solid #e0e0e0',
-                  borderBottom: "none",
-                  marginTop: 0,
-                  marginBottom: 0,
-                  paddingTop: 0,
-                  paddingBottom: 0
-                }}
-              >
-                {/* here is the user's image or placeHolder image */}
-                <div style={{ display: 'flex', alignItems: 'center', }}>
+                <TableCell
+                  sx={{ width: 750, borderRight: '1px solid #e0e0e0', borderBottom: "none" }}
+                >
 
-                  <img
-                    src='/img/placeholder-image.png'
-                    width="30"
-                    height="30"
-                    alt="Placeholder"
-                  />
-
-                    {/* her is the username  */}
-                  <Typography style={{
-                    marginLeft: 10,
-                    fontFamily: 'Inter', // Font family should be enclosed in single or double quotes
-                    fontSize: '1.75rem',
-                    fontStyle: 'normal',
-                    fontWeight: 500,
-                    lineHeight: '100%', // 1.75rem
-                  }}>
-                    {u.userName}
+                  {/* here we display the question */}
+                  <Typography
+                    style={{
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {q.question}
                   </Typography>
 
-                </div>
-
+                  {/* Then we map array of answers onto this template */}
+                  <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
+                    {q.answers.map((answer, index) => (
+                      <Typography
+                        key={index}
+                        style={{
+                          marginTop: 0,
+                          border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                            '1px solid #478bfe'
+                            : '1px solid #67c27c',
+                          // padding: 1,
+                          paddingLeft: 7,
+                          paddingRight: 7,
+                          marginRight: 5,
+                          borderRadius: '12px',
+                          color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                            '#478bfe' : '#67c27c',
+                          background:
+                            q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                              'rgba(208, 225, 255, .4)'
+                              : 'rgba(103, 194, 124, .09)',
+                        }}
+                      >
+                        {optionsArray[index]}.  {answer}
+                      </Typography>
+                    ))}
+                  </Box>
                 </TableCell>
-                
-                {/* and finally the sore  */}
-              <TableCell
-                sx={{
-                  borderRight: '1px solid #e0e0e0',
-                  fontWeight: 'bold', borderBottom: "none"
-                }}
-              >
-                {u.score}
-              </TableCell>
 
-            </TableRow>
-            ))}
+
+              </TableRow>
+            ))
+            }
 
 
           </Table>

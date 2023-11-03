@@ -8,6 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { useSwipeable } from 'react-swipeable';
 import Leaderboard from "./Leaderboard";
+import QuestionAnalysis from "./QuestionAnalysis";
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -106,22 +107,35 @@ export default function LeaderboardAndAnalysis() {
 
   const quiz = {
     title: 'Title quiz test',
+    Color: '#a7d7f9',
+    tags: ['Tag1', 'Tag2', 'Tag3'],
+    id: 1,
+    Favorite: false,
     questions: [
       {
+        id: 0,
         type: 'Single',
-        favorite: false,
-        correct: 2,
+        favorite: true,
+        correct: 0,
         question: 'What is the fastest route of all time?',
         answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
       },
       {
-        type: 'Multiple',
-        favorite: true,
+        id: 1,
+        type: 'Single',
+        favorite: false,
         correct: [1, 2],
         question: 'How many planets are there in the solar system?',
         answers: ['1', '8', '9'],
+      },
+      {
+        id: 2,
+        type: 'Type',
+        favorite: false,
+        question: 'How many planets are there in the solar system?',
+        answers: [],
       }
-    ]
+    ],
   };
 
   const theme = useTheme();
@@ -162,7 +176,7 @@ export default function LeaderboardAndAnalysis() {
   return (
     <Box sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
 
-<Box name='name&Selection'
+      <Box name='name&Selection'
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -178,7 +192,7 @@ export default function LeaderboardAndAnalysis() {
 
         <Box name='selection'>
 
-        <Tabs value={value}
+          <Tabs value={value}
             onChange={handleChange}
             // TabIndicatorProps controls the underline 'indicator' from the tab selection
             TabIndicatorProps={{
@@ -198,14 +212,14 @@ export default function LeaderboardAndAnalysis() {
         </Box> {/* selection closes */}
       </Box> {/* name&Selection closes */}
 
-      
+
       <Box sx={{ width: '100%', marginTop: -5 }}>
 
         <CustomTabPanel value={value} index={0}>
           <Leaderboard showIcons={showIcons} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <QuizQuestions />
+          <QuestionAnalysis />
         </CustomTabPanel>
 
       </Box>
