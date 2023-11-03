@@ -5,6 +5,7 @@ import {
   Box, TableContainer, Table, TableHead, Typography,
   TableRow, TableCell, Paper
 } from '@mui/material';
+import StackedBarChart from './StackedBarChart';
 
 
 export default function QuestionAnalysis() {
