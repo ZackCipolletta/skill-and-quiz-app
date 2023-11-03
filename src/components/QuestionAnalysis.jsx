@@ -71,7 +71,7 @@ export default function QuestionAnalysis() {
         favorite: false,
         question: 'How many planets are there in the solar system?',
         answers: [],
-        correct: 50,
+        correct: 99,
       }
     ],
   };
@@ -210,13 +210,14 @@ export default function QuestionAnalysis() {
                         display: 'flex',
                         alignItems: 'right',
                         justifyContent: 'right',
+                        flex: `${q.correct}%`
                       }}
                     >
                       {q.correct}%
                     </Box>
 
                     {/* second div (for 100 - q.correct) */}
-                    <Box style={{ ...customBoxStyle, flex: 1 }}>
+                    <Box style={{ ...customBoxStyle, flex: `${100 - q.correct}%` }}>
                       {100 - q.correct}%
                     </Box>
                   </Box>
