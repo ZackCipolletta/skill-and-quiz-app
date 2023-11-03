@@ -5,8 +5,6 @@ import {
   Box, TableContainer, Table, TableHead, Typography,
   TableRow, TableCell, Paper
 } from '@mui/material';
-import StackedBarChart from './StackedBarChart';
-
 
 export default function QuestionAnalysis() {
 
@@ -78,10 +76,23 @@ export default function QuestionAnalysis() {
     ],
   };
 
+  const customBoxStyle = {
+    display: 'flex',
+    borderLeft: '1.333px solid var(--connectlink-gray, #F1F6FC)',
+    padding: 5,
+    width: 35,
+    background: '#D64751',
+    borderRadius: '0rem 2.5rem 2.5rem 0rem',
+    color: '#FFF',
+    fontFamily: 'Inter',
+    fontSize: '0.875rem',
+    fontStyle: 'normal',
+    fontWeight: 500,
+  };
 
   return (
     <Box
-      style={{ marginTop: 35, paddingBottom: 5 }}>
+      style={{ marginTop: 35, paddingBottom: 5, maxWidth: 850 }}>
 
       <Box sx={{ mt: 3, mb: 5 }}>
         <TableContainer component={Paper}>
@@ -177,10 +188,40 @@ export default function QuestionAnalysis() {
                       >
                         {optionsArray[index]}.  {answer}
                       </Typography>
+
+
                     ))}
                   </Box>
                 </TableCell>
 
+                <TableCell
+                  sx={{
+                    borderRight: '1px solid #e0e0e0',
+                    borderBottom: "none"
+                  }}>
+
+                  <Box style={{ display: 'flex' }}>
+                    {/* first div (for q.correct) */}
+                    <Box
+                      style={{
+                        ...customBoxStyle,
+                        background: 'var(--connectlink-green, #67C27C)',
+                        borderRadius: '2.5rem 0rem 0rem 2.5rem',
+                        display: 'flex',
+                        alignItems: 'right',
+                        justifyContent: 'right',
+                      }}
+                    >
+                      {q.correct}%
+                    </Box>
+
+                    {/* second div (for 100 - q.correct) */}
+                    <Box style={{ ...customBoxStyle, flex: 1 }}>
+                      {100 - q.correct}%
+                    </Box>
+                  </Box>
+
+                </TableCell>
 
               </TableRow>
             ))
