@@ -1,19 +1,26 @@
 import '../Styles/Components.css';
-import React, {  } from "react";
-import { Button, Toolbar, Typography } from '@mui/material';
+import React, { useState } from "react";
+import { Button, Toolbar, Typography, IconButton } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
+import { HiOutlineCog8Tooth, HiOutlineChevronLeft } from 'react-icons/hi2';
+
 export default function Header() {
+  const [settings, setSettings] = useState(false);
 
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/categories')
-}
+    navigate('/categories');
+  };
+
+  const toggle = () => {
+    setSettings(!settings);
+  };
 
   return (
     <div style={{ margin: 0 }}>
-    {/*disableGutters removes the default built in padding for the element*/}
+      {/*disableGutters removes the default built in padding for the element*/}
       <Toolbar disableGutters sx={{
         display: 'flex',
         justifyContent: 'space-between'
@@ -23,16 +30,54 @@ export default function Header() {
           fontWeight='bold'
           variant="h6"
           onClick={handleClick}
-          style={{ cursor: 'pointer'}}
+          style={{ cursor: 'pointer' }}
         >
           ConnectLink
         </Typography>
-        <Button className='button-darkBlue'>
-          Logout
+
+
+
+        {settings ? <Button
+          className='button-darkBlue'
+          style={{
+            gap: '0.3125rem',
+            flexShrink: 0,
+            borderRadius: '0.25rem',
+            color: '#FFF',
+            fontSize: '1rem',
+            fontWeight: 500,
+            lineHeight: '1.5rem',
+          }}
+          onClick={toggle}>
+
+          <HiOutlineChevronLeft style={{
+            fontSize: '1.5rem',
+            transform: "scaleY(.8)"
+          }} />
+          Back
         </Button>
-        </Toolbar>
-    </div>
-  )
+
+          :
+
+          <IconButton
+            sx={{
+              display: 'flex',
+              padding: '.3rem .4rem',
+              justifyContent: 'center',
+              alignItems: 'center',
+              transform: "scale(1.2)",
+              borderRadius: '5px'
+            }}
+            className='button-darkBlue'
+            onClick={toggle} >
+            <HiOutlineCog8Tooth />
+          </IconButton>
+        }
+
+
+      </Toolbar>
+    </div >
+  );
 
 }
 

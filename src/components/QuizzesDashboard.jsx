@@ -36,7 +36,7 @@ export default function QuizzesDashboard() {
   }, []);
 
   const handleCreateNewQuizClick = () => {
-    navigate('/questions');
+    navigate('/newquiz');
   };
 
   const handleDeleteButtonClick = (event, id, quiz) => {
@@ -94,7 +94,7 @@ export default function QuizzesDashboard() {
           <Button
             className='button-mediumBlue'
             style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
-            onClick={(event) => handleCreateNewQuizClick(event, 'delete')}
+            onClick={(event) => handleCreateNewQuizClick()}
           >
             <AddIcon />
             Create new quiz
