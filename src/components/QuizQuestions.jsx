@@ -39,6 +39,17 @@ export default function QuizQuestions() {
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
 
+
+  // const [questionAnswerArr, setQuestionAnswerArr] = useState
+  // (
+  //   {
+  //     questions: []
+  //   }
+  // );
+
+
+
+
   const quiz = {
     questions: [
       {
@@ -431,16 +442,15 @@ export default function QuizQuestions() {
         <TableContainer component={Paper}>
           <Table>
 
-            {/* <QuestionsAndAnswers
+            <QuestionsAndAnswers
               // pass the array containing the question/answer
               //info to QuestionsAndAnswers
 
-              // quizInfo={questionAnswerArr}
+              quizInfo={questionAnswerArr}
               handleRemoveQuestion={handleRemoveQuestion}
               handleEditQuestion={handleEditQuestion}
-              handleFavorite={handleFavorite}
               className="table-with-borders"
-            /> */}
+            />
 
           </Table>
         </TableContainer>

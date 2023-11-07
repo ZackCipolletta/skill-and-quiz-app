@@ -1,16 +1,23 @@
 import React, { useRef } from "react";
 import Papa from 'papaparse';
-import { FaFileCsv, FaCheckCircle } from 'react-icons/fa';
+import { FaFileCsv } from 'react-icons/fa';
 import {
-  Box, Button, Paper, Typography, InputLabel, Table, TableContainer,
-  TextField, FormControl, Select, MenuItem, IconButton, Checkbox,
+  Button, 
+  IconButton,
 } from '@mui/material';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import {
+  setQuestionAnswerArr} from "./redux/quizQuestions";
 
 
 
 export default function FilePicker(props) {
   const fileInputRef = useRef(null);
 
+  const dispatch = useDispatch();
+
+  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
   const parseCSV = (file) => {
     Papa.parse(file, {
@@ -45,26 +52,25 @@ export default function FilePicker(props) {
 
 
   const addUploadedQuestions = (upload) => {
-    upload.forEach((obj) => {
-      props.setQuestionAnswerArr((prevState) => ({
-        ...prevState,
-        questions: [
-          ...prevState.questions,
-          {
-            type: obj.type,
-            favorite: JSON.parse(obj.favorite),
-            correct: Array.isArray(obj.correct) ?
-              obj.correct.map((str) => parseInt(str, 10)) :
-              parseInt(obj.correct),
-
-            question: obj.question,
-            answers: obj.answers
-          }
-        ]
-      }));
+    const updatedQuestions = upload.map((obj) => {
+      return {
+        type: obj.type,
+        favorite: obj.favorite ? JSON.parse(obj.favorite) : false,
+        correct: Array.isArray(obj.correct)
+          ? obj.correct.map((str) => parseInt(str, 10))
+          : [parseInt(obj.correct)],
+        question: obj.question,
+        answers: obj.answers,
+      };
     });
+  
+    const newQuestionAnswerArr = {
+      questions: [...questionAnswerArr.questions, ...updatedQuestions],
+    };
+  
+    dispatch(setQuestionAnswerArr(newQuestionAnswerArr));
   };
-
+  
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

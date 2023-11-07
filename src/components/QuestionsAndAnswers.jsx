@@ -1,44 +1,3 @@
-// import '../Styles/Components.css';
-// import React, { useState } from "react";
-// import { createTheme, ThemeProvider } from '@mui/material';
-// import Cards from './Cards';
-// import { useTheme } from '@mui/material/styles';
-// import useMediaQuery from '@mui/material/useMediaQuery';
-
-// export default function Test() {
-
-//   return (
-//     <>
-// const quizInfo = {
-//   questions: [
-//     {
-//       type: 'Single',
-//       favorite: false,
-//       correct: 2,
-//       question: 'What is the fastest route of all time?',
-//       answers: ['The Kessel run', 'what happens when every one of the answers is super long?', 'what?', 'qwerty'],
-//     },
-//     {
-//       type: 'Multiple',
-//       favorite: true,
-//       correct: [1, 2],
-//       question: 'How many planets are there in the solar system?',
-//       answers: ['1', '8', '9'],
-//     }
-//   ]
-// };
-
-//     </>
-//   );
-
-// }
-
-
-
-
-
-
-
 import '../Styles/Components.css';
 import React from "react";
 import { Box, IconButton, TableRow, TableCell, Typography, TableBody, Checkbox } from '@mui/material';
@@ -46,35 +5,57 @@ import { PiTrashThin, PiPencilLineLight, PiStar, PiStarFill } from 'react-icons/
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import {
+  setOptions, decreaseOptions, setQuestion, setAnswersArr,
+  setQuestionToEdit, setSingleCorrect, setMultipleCorrect,
+  setWarn, setSelectedFile, setAnswerType, setIsFavorite, setQuestionAnswerArr, addQuestion
+} from "./redux/quizQuestions";
+
 
 export default function QuestionsAndAnswers(props) {
 
-  const { quizInfo, questionWidth, handleRemoveQuestion, handleEditQuestion, handleFavorite } = props;
+  const { quizInfo, questionWidth, handleEditQuestion } = props;
 
+  const dispatch = useDispatch();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const optionsArray = ['A', 'B', 'C', 'D'];
 
-  const { questionAnswerArr } = useSelector((state) => state.questionAnswerArr);
 
-  // const quizInfo = {
-  //   questions: [
-  //     {
-  //       type: 'Single',
-  //       favorite: false,
-  //       correct: 2,
-  //       question: 'What is the fastest route of all time?',
-  //       answers: ['The Kessel run', 'what happens when every one of the answers is super long?', 'what?', 'qwerty'],
-  //     },
-  //     {
-  //       type: 'Multiple',
-  //       favorite: true,
-  //       correct: [1, 2],
-  //       question: 'How many planets are there in the solar system?',
-  //       answers: ['1', '8', '9'],
-  //     }
-  //   ]
-  // };
+  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
+
+  const handleRemoveQuestion = (i) => {
+    // first we create a copy of the existing questions objects in questionAnswerArr array
+    const updatedQuestionAnswerArr = [...questionAnswerArr.questions];
+    // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
+    updatedQuestionAnswerArr.splice(i, 1);
+    // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
+
+    dispatch(setQuestionAnswerArr({
+      questions: updatedQuestionAnswerArr,
+    }));
+
+  };
+
+  const handleFavorite = (i) => {
+    const updatedQuestionAnswerArr = questionAnswerArr.questions.map((question, index) => {
+      if (i === index) {
+        // Create a new object with the properties of the existing question
+        // and add or modify the "favorite" property.
+        return {
+          ...question,
+          favorite: !question.favorite,
+        };
+      }
+      return question;
+    });
+  
+    // Dispatch the updated array back to the state.
+    dispatch(setQuestionAnswerArr({ questions: updatedQuestionAnswerArr }));
+  };
+  
+
 
   return (
     <TableBody>
