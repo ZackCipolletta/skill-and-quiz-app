@@ -10,6 +10,7 @@ import Preview from './Preview';
 import { Helmet } from 'react-helmet-async';
 import FavIcon from '../img/FavIcon.png';
 import LeaderboardAndAnalysis from './LeaderboardAndAnalysis';
+import Settings from './Settings';
 
 
 
@@ -54,11 +55,16 @@ export default function Control({ page }) {
         <Preview />;
       break;
     
-    case 'LeaderboardAndAnalysis':
+    case 'leaderboard':
       content =
         <LeaderboardAndAnalysis />;
       break;
-
+    
+    case 'settings':
+      content =
+        <Settings />;
+      break;
+    
     default:
       content = <Header />;
       break;

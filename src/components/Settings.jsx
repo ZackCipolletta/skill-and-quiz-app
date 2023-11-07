@@ -35,6 +35,62 @@ export default function Settings() {
   };
 
 
+  const creationDate = (
+    <Box sx={{ marginTop: 5 }}>
+      <Typography style={{ textFieldLabel }} >
+        Creation Date
+      </Typography>
+      <Box name='CreationDate'
+        style=
+        {{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <TextField
+          id="CreationDate"
+          name="CreationDate"
+          autoFocus
+          className='input-field'
+          size='small'
+          sx={{
+            width: 350,
+          }}
+          InputProps={{ sx: { borderRadius: 2 } }}
+        />
+      </Box>
+    </Box>
+  );
+
+
+  const status = (
+    < Box sx={{ marginTop: 3 }}>
+      <Typography style={{ textFieldLabel }} >
+        Status
+      </Typography>
+      <Box name='Status'
+        style=
+        {{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <TextField
+          id="Status"
+          placeholder="Status"
+          name="Status"
+          autoFocus
+          className='input-field'
+          size='small'
+          sx={{
+            width: 350,
+          }}
+          InputProps={{ sx: { borderRadius: 2 } }}
+        />
+      </Box>
+    </Box >
+  );
+
   return (
     <Box style={!isMobile ? { marginTop: 20 } : { marginTop: 1 }} >
 
@@ -128,37 +184,8 @@ export default function Settings() {
         </Box>
 
         <Box sx={{ marginTop: 3 }}>
-          <Typography style={{ textFieldLabel }} >
-            Current Password
-          </Typography>
-          <Box name='CurrentPassword'
-            style=
-            {{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'left',
-            }}
-          >
-            <TextField
-              id="Password"
-              placeholder="User Password"
-              name="CurrentPassword"
-              type="CurrentPassword"
-              className='input-field'
-              size='small'
-              error={!isValidPassword && password !== ''} // apply error style if password is less than 8 characters and not and empty string
-              helperText={!isValidPassword && password !== '' ? "Enter At Least 8 Characters Long" : ""}
-              sx={{
-                width: 350,
-              }}
-              InputProps={{ sx: { borderRadius: 2 } }}
-            />
-
-            
-            <Typography style={{ textFieldLabel }} >
-              New Password
-            </Typography>
-            <Box name='NewPassword'
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Box name='CurrentPassword'
               style=
               {{
                 display: 'flex',
@@ -166,102 +193,70 @@ export default function Settings() {
                 alignItems: 'left',
               }}
             >
+              <Typography style={{ textFieldLabel }}>
+                Current Password
+              </Typography>
               <TextField
-                id="NewPassword"
-                placeholder="New Password"
-                name="NewPassword"
-                type="NewPassword"
+                id="Password"
+                placeholder="User Password"
+                name="CurrentPassword"
+                type="CurrentPassword"
                 className='input-field'
                 size='small'
-                error={!isValidPassword && password !== ''} // apply error style if password is less than 8 characters and not and empty string
+                error={!isValidPassword && password !== ''}
                 helperText={!isValidPassword && password !== '' ? "Enter At Least 8 Characters Long" : ""}
                 sx={{
                   width: 350,
+                  borderRadius: 2,
                 }}
-                InputProps={{ sx: { borderRadius: 2 } }}
               />
+              {!changePassword ?
+                <Link
+                  style={{
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    color: '#484848', // Set the color
+                    fontFamily: 'Inter',
+                    fontSize: '0.875rem',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '1.25rem', // 142.857%
+                  }}
+                  onClick={handleChangePasswordclick}
+                >
+                  Change Password?
+                </Link>
+                : null
+              }
             </Box>
 
-            {!changePassword ?
-              <Link
-                style={{
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                  color: '#484848', // Set the color
-                  fontFamily: 'Inter',
-                  fontSize: '0.875rem',
-                  fontStyle: 'normal',
-                  fontWeight: 400,
-                  lineHeight: '1.25rem', // 142.857%
-                }}
-                onClick={handleChangePasswordclick}
-              >
-                Change Password?
-              </Link>
+            {changePassword ?
+              <Box name='NewPassword' sx={{ ml: 10 }}>
+                <Typography style={{ textFieldLabel }}>
+                  New Password
+                </Typography>
+                <TextField
+                  id="NewPassword"
+                  placeholder="New Password"
+                  name="NewPassword"
+                  type="NewPassword"
+                  className='input-field'
+                  size='small'
+                  error={!isValidPassword && password !== ''}
+                  helperText={!isValidPassword && password !== '' ? "Enter At Least 8 Characters Long" : ""}
+                  sx={{
+                    width: 350,
+                    borderRadius: 2,
+                  }}
+                />
+              </Box>
               : null
             }
 
-          </Box>
+          </div>
         </Box>
 
-
-        {changePassword ?
-          <Box sx={{ marginTop: 5 }}>
-            <Typography style={{ textFieldLabel }} >
-              Creation Date
-            </Typography>
-            <Box name='CreationDate'
-              style=
-              {{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <TextField
-                id="CreationDate"
-                name="CreationDate"
-                autoFocus
-                className='input-field'
-                size='small'
-                sx={{
-                  width: 350,
-                }}
-                InputProps={{ sx: { borderRadius: 2 } }}
-              />
-            </Box>
-          </Box>
-          : null
-        }
-
-        {changePassword ?
-          <Box sx={{ marginTop: 3 }}>
-            <Typography style={{ textFieldLabel }} >
-              Status
-            </Typography>
-            <Box name='Status'
-              style=
-              {{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <TextField
-                id="Status"
-                placeholder="Status"
-                name="Status"
-                autoFocus
-                className='input-field'
-                size='small'
-                sx={{
-                  width: 350,
-                }}
-                InputProps={{ sx: { borderRadius: 2 } }}
-              />
-            </Box>
-          </Box>
-          : null
-        }
-
+        {changePassword ? [creationDate, status] : null }
 
       </Box>
     </Box >

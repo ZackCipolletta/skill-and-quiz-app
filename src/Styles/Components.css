@@ -15,7 +15,7 @@ Button.button-darkBlue {
 
     &:hover {
         background-color: var(--darkBlue);
-        color: white;
+        /* color: white; */
     }
 }
 
@@ -204,4 +204,15 @@ Button.button-darkMediumBlue {
     /* Add a black left border */
     border-right: 1px solid #e0e0e0;
     /* Add a black right border */
+}
+
+.MuiButton-root.textButton {
+    font-family: 'Inter';
+    gap: 0.3125rem;
+    flex-shrink: 0;
+    border-radius: 0.25rem;
+    color: #FFF;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
 }

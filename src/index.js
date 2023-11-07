@@ -31,11 +31,14 @@ root.render(
             <Route path="/categories" element={<Control page="categories" />} />
             <Route path="/newquiz" element={<Control page="newquiz" />} />
             <Route path="/quiz" element={<Control page="quiz" />} />
-            <Route path="/test" element={<Control page="test" />} />
             <Route path="/preview" element={<Control page="preview" />} />
-            <Route path="/leaderboard" element={<Control page="LeaderboardAndAnalysis" />} />
+            <Route path="/leaderboard" element={<Control page="leaderboard" />} />
+            <Route path="/settings" element={<Control page="settings" />} />
 
+            
+            <Route path="/test" element={<Control page="test" />} />
 
+            
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

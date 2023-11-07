@@ -51,7 +51,6 @@ export default function Header() {
           onClick={toggle}>
 
           <HiOutlineChevronLeft style={{
-            fontSize: '1.5rem',
             transform: "scaleY(.8)"
           }} />
           Back
