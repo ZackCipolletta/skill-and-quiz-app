@@ -10,13 +10,23 @@ export default function Header() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const titleClick = () => {
     navigate('/categories');
   };
 
   const toggle = () => {
     setSettings(!settings);
   };
+
+  const settingsClick = () => {
+    toggle();
+    navigate('/settings');
+  }
+
+  const backClick = () => {
+    toggle();
+    navigate(-1);
+  }
 
   return (
     <div style={{ margin: 0 }}>
@@ -29,7 +39,7 @@ export default function Header() {
           className='darkBlue-text'
           fontWeight='bold'
           variant="h6"
-          onClick={handleClick}
+          onClick={titleClick}
           style={{ cursor: 'pointer' }}
         >
           ConnectLink
@@ -48,7 +58,7 @@ export default function Header() {
             fontWeight: 500,
             lineHeight: '1.5rem',
           }}
-          onClick={toggle}>
+          onClick={backClick}>
 
           <HiOutlineChevronLeft style={{
             transform: "scaleY(.8)"
@@ -68,7 +78,7 @@ export default function Header() {
               borderRadius: '5px'
             }}
             className='button-darkBlue'
-            onClick={toggle} >
+            onClick={settingsClick} >
             <HiOutlineCog8Tooth />
           </IconButton>
         }
