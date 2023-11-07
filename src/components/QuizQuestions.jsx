@@ -38,18 +38,6 @@ export default function QuizQuestions() {
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
-
-
-  // const [questionAnswerArr, setQuestionAnswerArr] = useState
-  // (
-  //   {
-  //     questions: []
-  //   }
-  // );
-
-
-
-
   const quiz = {
     questions: [
       {
@@ -446,7 +434,6 @@ export default function QuizQuestions() {
               // pass the array containing the question/answer
               //info to QuestionsAndAnswers
 
-              quizInfo={questionAnswerArr}
               handleRemoveQuestion={handleRemoveQuestion}
               handleEditQuestion={handleEditQuestion}
               className="table-with-borders"

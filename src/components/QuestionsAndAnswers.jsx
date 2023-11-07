@@ -60,7 +60,7 @@ export default function QuestionsAndAnswers(props) {
   return (
     <TableBody>
       {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
-      {quizInfo.questions.map((q, i) => (
+      {questionAnswerArr.questions.map((q, i) => (
         <TableRow key={i}
           sx={{
             '&:hover': {
