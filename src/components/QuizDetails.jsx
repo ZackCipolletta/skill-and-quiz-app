@@ -16,13 +16,67 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function QuizDetails(props) {
 
-  const [tags, setTags] = useState([]);
+  // const [tags, setTags] = useState([...quiz.tags]);
   const [newTag, setNewTag] = useState('');
   const [quizColor, setQuizColor] = useState('');
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+
+
+  const quiz = {
+    "name": "testQuiz",
+    "tags": [
+    "tag1",
+    "tag2",
+    "tag3"
+    ],
+        "questions": [
+            {
+                "type": "Multiple",
+                "favorite": false,
+                "correct": [
+                    2
+                ],
+                "question": "what?",
+                "answers": [
+                    "asdfas",
+                    "fasdfasdfa",
+                    "dfasdfa"
+                ]
+            },
+            {
+                "type": "Single",
+                "favorite": false,
+                "correct": [
+                    0
+                ],
+                "question": "ASDFSDF",
+                "answers": [
+                    "ASDFAS",
+                    "FASDFASDF"
+                ]
+            },
+            {
+                "type": "Multiple",
+                "favorite": false,
+                "correct": [
+                    1
+                ],
+                "question": "DFASDFASDF",
+                "answers": [
+                    "FASDFASD",
+                    "FASDFAS",
+                    "FASDFASDF"
+                ]
+            }
+        ]
+    }
+    const [tags, setTags] = useState([...quiz.tags]);
+  
+  // const tags = quiz.tags;
+  
   const handleAddClick = () => {
     if (newTag.trim() !== "") {
       setTags([...tags, ...newTag.split(',')]);
@@ -142,7 +196,8 @@ export default function QuizDetails(props) {
         <Button
           className='button-mediumBlue'
           sx={{ ml: 3, }}
-          onClick={() => handleAddClick()}>
+          onClick={() => handleAddClick()}
+        >
           Add
         </Button>
       </Box>
@@ -161,7 +216,8 @@ export default function QuizDetails(props) {
           {tag}
           <IconButton
             sx={{ transform: "scale(0.4)", mr: '-15px', ml: '-10px' }}
-            onClick={() => handleRemoveClick(tag)}>
+            onClick={() => handleRemoveClick(tag)}
+          >
             <TfiClose />
           </IconButton>
         </span>
