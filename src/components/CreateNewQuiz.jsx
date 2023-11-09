@@ -9,6 +9,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { useSwipeable } from 'react-swipeable';
 import PublishModal from "./PublishModal";
+import { useNavigate } from 'react-router-dom';
+
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -106,6 +108,14 @@ export default function CreateNewQuiz() {
     fontSize: 'larger'
   };
 
+  const navigate = useNavigate();
+
+  const handlePreviewClick = () => {
+    navigate('/preview');
+  };
+
+
+
   return (
     <Paper sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
       <Box sx={{ width: '100%' }}>
@@ -118,15 +128,21 @@ export default function CreateNewQuiz() {
           borderColor: 'divider'
         }} >
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Details" sx={tabStyles}/>
+            <Tab label="Details" sx={tabStyles} />
             <Tab label="Questions" sx={tabStyles} />
             <Tab label="Schedule" sx={tabStyles} />
           </Tabs>
           <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
-            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}>Preview</Button>
             <Button className="button-darkMediumBlue" sx={{ mr: 1 }}
-            onClick={handlePublishButtonClick}
-            >Publish</Button>
+              onClick={(handlePreviewClick)}
+            >
+              Preview
+            </Button>
+            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}
+              onClick={handlePublishButtonClick}
+            >
+              Publish
+            </Button>
           </Box>
         </Box>
 
@@ -148,8 +164,10 @@ export default function CreateNewQuiz() {
             className="button-darkMediumBlue"
             size="small"
             sx={{ mr: 1 }}
+            onClick={handlePreviewClick}
           >
-            Preview</Button>
+            Preview
+          </Button>
           <Button
             size="small"
             className="button-darkMediumBlue"
