@@ -3,7 +3,7 @@ import {
   optionsReducer, questionReducer, answersArrReducer, questionToEditReducer, singleCorrectReducer,
   multipleCorrectReducer, warnReducer, selectedFileReducer, answerTypeReducer, questionAnswerArrReducer, isFavoriteReducer,
 } from "./quizQuestions";
-import { quizNameReducer, quizColorReducer } from "./quizDetails";
+import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer } from "./quizDetails";
 
 export default configureStore({
   reducer: {
@@ -22,5 +22,7 @@ export default configureStore({
 
     quizName: quizNameReducer,
     quizColor: quizColorReducer,
+    quizTags: quizTagsReducer,
+    newTag: newTagReducer,
   }
 });

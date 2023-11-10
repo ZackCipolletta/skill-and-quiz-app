@@ -13,21 +13,19 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setQuizName } from "./redux/quizDetails";
+import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag } from "./redux/quizDetails";
 
 
 
 export default function QuizDetails(props) {
   const dispatch = useDispatch();
 
-  // const [tags, setTags] = useState([...quiz.tags]);
-  const [newTag, setNewTag] = useState('');
-  const [quizColor, setQuizColor] = useState('');
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { quizName } = useSelector((state) => state.quizName);
+  const { quizTags } = useSelector((state) => state.quizTags);
+  const { newTag } = useSelector((state) => state.newTag);
 
   const quiz = {
     "name": "testQuiz",
@@ -78,21 +76,22 @@ export default function QuizDetails(props) {
       }
     ]
   };
-  const [tags, setTags] = useState([...quiz.tags]);
-  // const [quizName, setQuizName] = useState(quiz.name);
-
-  // const tags = quiz.tags;
 
   const handleAddClick = () => {
-    if (newTag.trim() !== "") {
-      setTags([...tags, ...newTag.split(',')]);
-      setNewTag("");
+
+    if (newTag && newTag.trim() !== "") {
+      const tagsArr = (newTag.split(','));
+
+      tagsArr.forEach(tag => {
+        dispatch(addQuizTag(tag));
+      });
+
+      dispatch(setNewTag(""));
     }
   };
 
   const handleRemoveClick = (tagToRemove) => {
-    const updatedTags = tags.filter(tag => tag !== tagToRemove);
-    setTags(updatedTags);
+    dispatch(removeQuizTag(tagToRemove));
   };
 
   const handleKeyPress = (event) => {
@@ -101,12 +100,7 @@ export default function QuizDetails(props) {
     }
   };
 
-  const handleQuizColor = (col) => {
-    setQuizColor(col);
-  };
-
   const changeQuizName = (e) => {
-    // setQuizName(value);
     dispatch(setQuizName(e.target.value));
   };
 
@@ -153,7 +147,7 @@ export default function QuizDetails(props) {
           sx={{
             width: 350,
           }}
-          InputProps={{ sx: { borderRadius: 2 } }}
+          InputProps={{ sx: { borderRadius: "0.52069rem" } }}
         />
       </Box>
 
@@ -167,7 +161,6 @@ export default function QuizDetails(props) {
         </Box>
       )}
 
-      {/* {selectedButton.toString()} */}
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
       </Typography>
@@ -176,10 +169,7 @@ export default function QuizDetails(props) {
       <Typography sx={{ mb: '-10px' }}>
         Or here are some templates to help you get started
       </Typography>
-      <ColorTemplates
-        selectColor={handleQuizColor}
-        quizColor={quizColor}
-      />
+      <ColorTemplates />
 
       <Typography className='inputLabel' >
         Tags
@@ -199,25 +189,25 @@ export default function QuizDetails(props) {
           className='Placeholder'
           size='small'
           sx={{
-            width: 250
+            width: 250,
           }}
           InputProps={{
-            sx: { borderRadius: 2 },
+            sx: { borderRadius: "0.52069rem" },
             value: newTag,
-            onChange: (e) => setNewTag(e.target.value)
+            onChange: (e) => dispatch(setNewTag(e.target.value))
           }}
           onKeyDown={handleKeyPress}
         />
         <Button
           className='button-mediumBlue'
-          sx={{ ml: 3, }}
-          onClick={() => handleAddClick()}
+          sx={{ ml: 3, mt: 1 }}
+          onClick={handleAddClick}
         >
           Add
         </Button>
       </Box>
 
-      {tags.map((tag, index) => (
+      {quizTags.map((tag, index) => (
         <span key={index} className="tag" style={{
           border: '1px solid #67c27c',
           padding: '5px',

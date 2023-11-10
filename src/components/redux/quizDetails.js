@@ -40,3 +40,53 @@ export const { setQuizColor } = quizColorSlice.actions;
 
 // Export the options reducer
 export const quizColorReducer = quizColorSlice.reducer;
+
+
+
+
+// quizTags Slice
+export const quizTagsSlice = createSlice({
+  name: 'quizTags',
+  initialState: {
+    quizTags: [],
+  },
+  reducers: {
+    addQuizTag: (state, action) => {
+      state.quizTags.push(action.payload);
+    },
+    removeQuizTag: (state, action) => {
+      state.quizTags = state.quizTags.filter(tag => tag !== action.payload);
+    },
+    setQuizTags: (state, action) => {
+      state.quizTags = action.payload;
+    },
+  },
+});
+
+// Export action creators for the options slice
+export const { addQuizTag, removeQuizTag, setQuizTags } = quizTagsSlice.actions;
+
+// Export the options reducer
+export const quizTagsReducer = quizTagsSlice.reducer;
+
+
+
+
+// newTag Slice
+export const newTagSlice = createSlice({
+  name: 'newTag',
+  initialState: {
+    newTag: null,
+  },
+  reducers: {
+    setNewTag: (state, action) => {
+      state.newTag = action.payload;
+    },
+  },
+});
+
+// Export action creators for the options slice
+export const { setNewTag } = newTagSlice.actions;
+
+// Export the options reducer
+export const newTagReducer = newTagSlice.reducer;
