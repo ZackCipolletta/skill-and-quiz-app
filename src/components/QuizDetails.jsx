@@ -11,10 +11,14 @@ import { MdOutlineSwipe } from 'react-icons/md';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setQuizName } from "./redux/quizDetails";
 
 
 
 export default function QuizDetails(props) {
+  const dispatch = useDispatch();
 
   // const [tags, setTags] = useState([...quiz.tags]);
   const [newTag, setNewTag] = useState('');
@@ -23,60 +27,62 @@ export default function QuizDetails(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-
+  const { quizName } = useSelector((state) => state.quizName);
 
   const quiz = {
     "name": "testQuiz",
+    "color": "#f4bbc7",
     "tags": [
-    "tag1",
-    "tag2",
-    "tag3"
+      "tag1",
+      "tag2",
+      "tag3"
     ],
-        "questions": [
-            {
-                "type": "Multiple",
-                "favorite": false,
-                "correct": [
-                    2
-                ],
-                "question": "what?",
-                "answers": [
-                    "asdfas",
-                    "fasdfasdfa",
-                    "dfasdfa"
-                ]
-            },
-            {
-                "type": "Single",
-                "favorite": false,
-                "correct": [
-                    0
-                ],
-                "question": "ASDFSDF",
-                "answers": [
-                    "ASDFAS",
-                    "FASDFASDF"
-                ]
-            },
-            {
-                "type": "Multiple",
-                "favorite": false,
-                "correct": [
-                    1
-                ],
-                "question": "DFASDFASDF",
-                "answers": [
-                    "FASDFASD",
-                    "FASDFAS",
-                    "FASDFASDF"
-                ]
-            }
+    "questions": [
+      {
+        "type": "Multiple",
+        "favorite": false,
+        "correct": [
+          2
+        ],
+        "question": "what?",
+        "answers": [
+          "asdfas",
+          "fasdfasdfa",
+          "dfasdfa"
         ]
-    }
-    const [tags, setTags] = useState([...quiz.tags]);
-  
+      },
+      {
+        "type": "Single",
+        "favorite": false,
+        "correct": [
+          0
+        ],
+        "question": "ASDFSDF",
+        "answers": [
+          "ASDFAS",
+          "FASDFASDF"
+        ]
+      },
+      {
+        "type": "Multiple",
+        "favorite": false,
+        "correct": [
+          1
+        ],
+        "question": "DFASDFASDF",
+        "answers": [
+          "FASDFASD",
+          "FASDFAS",
+          "FASDFASDF"
+        ]
+      }
+    ]
+  };
+  const [tags, setTags] = useState([...quiz.tags]);
+  // const [quizName, setQuizName] = useState(quiz.name);
+
   // const tags = quiz.tags;
-  
+
   const handleAddClick = () => {
     if (newTag.trim() !== "") {
       setTags([...tags, ...newTag.split(',')]);
@@ -97,6 +103,11 @@ export default function QuizDetails(props) {
 
   const handleQuizColor = (col) => {
     setQuizColor(col);
+  };
+
+  const changeQuizName = (e) => {
+    // setQuizName(value);
+    dispatch(setQuizName(e.target.value));
   };
 
   const iconStyling = {
@@ -137,6 +148,8 @@ export default function QuizDetails(props) {
           autoFocus
           className='input-field'
           size='small'
+          value={quizName || ''}
+          onChange={(e) => changeQuizName(e)}
           sx={{
             width: 350,
           }}
@@ -164,7 +177,9 @@ export default function QuizDetails(props) {
         Or here are some templates to help you get started
       </Typography>
       <ColorTemplates
-        selectColor={handleQuizColor} />
+        selectColor={handleQuizColor}
+        quizColor={quizColor}
+      />
 
       <Typography className='inputLabel' >
         Tags

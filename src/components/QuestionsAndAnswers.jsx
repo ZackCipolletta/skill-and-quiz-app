@@ -127,19 +127,14 @@ export default function QuestionsAndAnswers(props) {
                     style={{
                       marginTop: !isMobile ? 10 : 5,
                       border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-                        '1px solid #478bfe'
-                        : '1px solid #67c27c',
-                      // padding: 1,
+                        '1px solid #67C27C'
+                        : '1px solid #488BFD',
                       paddingLeft: 7,
                       paddingRight: 7,
-                      marginRight: 5,
                       borderRadius: '12px',
                       color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-                        '#478bfe' : '#67c27c',
-                      background:
-                        q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-                          'rgba(208, 225, 255, .4)'
-                          : 'rgba(103, 194, 124, .09)',
+                        '#67C27C' : '#488BFD',
+                      background: '#F6FFF6'
                     }}
                   >
                     {optionsArray[index]}.{answer}
