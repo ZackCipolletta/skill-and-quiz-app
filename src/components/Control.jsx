@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet-async';
 import FavIcon from '../img/FavIcon.png';
 import LeaderboardAndAnalysis from './LeaderboardAndAnalysis';
 import Settings from './Settings';
+import Admin from './Admin';
 
 
 
@@ -63,6 +64,11 @@ export default function Control({ page }) {
     case 'settings':
       content =
         <Settings />;
+      break;
+    
+    case 'admin':
+      content =
+        <Admin />;
       break;
     
     default:

@@ -95,7 +95,7 @@ export default function QuizCategoryDashboard(props) {
             <SearchBar />
 
             <Button
-              className='button-mediumBlue'
+              className='navButton button-mediumBlue'
               style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20} }
               onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
             >

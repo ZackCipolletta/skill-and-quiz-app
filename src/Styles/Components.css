@@ -1,11 +1,11 @@
 :root {
-    --darkBlue: rgb(28, 57, 136, 255);
-    --lightBlue: rgb(215, 237, 255, 255);
-    --mediumBlue: rgba(72, 139, 253, 255);
-    --lightGreen: rgba(103, 194, 124, 255);
-    --warning: rgba(255, 89, 100, 255);
-    --darkMediumBlue: rgba(48, 86, 211, 255);
-    --lightGray: rgba(241, 246, 252, 255);
+    --darkBlue: #1C3988;
+    --lightBlue: #D7EDFF;
+    --mediumBlue: #488BFD;
+    --lightGreen: #67C27C;
+    --warning: #FF5964;
+    --darkMediumBlue: #3056D3;
+    --lightGray: #F1F6FC;
 
 }
 
@@ -215,4 +215,16 @@ Button.button-darkMediumBlue {
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
+}
+
+.MuiButton-root.navButton {
+    display: flex;
+    width: 13.6875rem;
+    height: 2.5rem;
+    /* padding: 0.125rem 1rem; */
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
 }

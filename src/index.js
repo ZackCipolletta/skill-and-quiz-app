@@ -34,6 +34,7 @@ root.render(
             <Route path="/preview" element={<Control page="preview" />} />
             <Route path="/leaderboard" element={<Control page="leaderboard" />} />
             <Route path="/settings" element={<Control page="settings" />} />
+            <Route path="/admin" element={<Control page="admin" />} />
 
             
             <Route path="/test" element={<Control page="test" />} />

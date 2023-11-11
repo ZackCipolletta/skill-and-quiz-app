@@ -9,6 +9,7 @@ import DeleteModal from './DeleteModal';
 import Quizzes from './Quizzes';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { Box } from '@mui/system';
 
 export default function QuizzesDashboard() {
 
@@ -73,8 +74,8 @@ export default function QuizzesDashboard() {
   };
 
   return (
-    <div style={!isMobile ? { marginTop: 20 } : { marginTop: 1 }} >
-      <div style={{
+    <Box style={!isMobile ? { marginTop: 20 } : { marginTop: 1 }} >
+      <Box name="TopNav" style={{
         display: !isMobile ? 'flex' : 'block',
         justifyContent: !isMobile ? 'space-between' : 'flex-start',
         alignItems: 'center'
@@ -84,7 +85,7 @@ export default function QuizzesDashboard() {
           Quizzes  {/* Google web font 'Anton' */}
         </h1>
 
-        <div style={{
+        <Box name="Search&Button" style={{
           display: !isMobile ? 'flex' : 'block',
           alignItems: 'center'
         }}>
@@ -92,16 +93,16 @@ export default function QuizzesDashboard() {
 
           {/* 'ml' does not work here, we must use marginLeft */}
           <Button
-            className='button-mediumBlue'
+            className='navButton button-mediumBlue'
             style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
             onClick={(event) => handleCreateNewQuizClick()}
           >
             <AddIcon />
             Create new quiz
           </Button>
+        </Box> {/* Search&Button closes */}
 
-        </div>
-      </div>
+      </Box> {/* TopNav closes */}
       <Quizzes
         quizList={quizzesArray}
         deleteClick={handleDeleteButtonClick}
@@ -113,6 +114,6 @@ export default function QuizzesDashboard() {
         selectedCard={`"${selectedQuiz}" quiz`}
         handleDeleteConfirm={handleDeleteConfirm}
       />
-    </div>
+    </Box>
   );
 }

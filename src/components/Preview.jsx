@@ -1,12 +1,12 @@
 import '../Styles/Components.css';
 import React from "react";
-import { Box, TableRow, TableCell, Typography, TableBody, TextField } from '@mui/material';
+import { Box, Button, TableRow, TableCell, Typography, TableBody, TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { setQuestionAnswerArr } from "./redux/quizQuestions";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Preview(props) {
 
@@ -17,6 +17,7 @@ export default function Preview(props) {
   const optionsArray = ['A', 'B', 'C', 'D'];
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
+  const navigate = useNavigate();
 
   const quiz = {
     "name": "testQuiz",
@@ -89,9 +90,31 @@ export default function Preview(props) {
     ]
   };
 
+  const switchBack = () => {
+    navigate(-1);
+  };
+
 
   return (
-    <Box sx={{ mt: 10 }}>
+    <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column', alignItems: 'flex-end'  }}>
+      <Box name='switch'>
+        <Button
+          className='button-darkMediumBlue'
+          sx={{
+            fontSize: '1rem',
+            fontStyle: 'normal',
+            fontWeight: 500,
+            lineHeight: '100%',
+            letterSpacing: '-0.05rem',
+            display: 'inline-flex',
+            padding: ' 0.75rem 1.5rem',
+            mb: 2
+          }}
+          onClick={switchBack}
+        >
+          Switch to Draft
+        </Button>
+      </Box>
       <TableBody>
         {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
         {questionAnswerArr.questions.map((q, i) => (

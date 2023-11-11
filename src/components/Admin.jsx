@@ -6,10 +6,12 @@ import QuizQuestions from "./QuizQuestions";
 import QuizSchedule from "./QuizSchedule";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { AiOutlineArrowRight } from 'react-icons/ai';
 import { useSwipeable } from 'react-swipeable';
-import PublishModal from "./PublishModal";
 import { useNavigate } from 'react-router-dom';
+import QuizCategoryDashboard from "./QuizCategoryDashboard";
+import UserBoard from "./UserBoard";
+import SearchBar from "./SearchBar";
+import AddIcon from '@mui/icons-material/Add';
 
 
 function CustomTabPanel(props) {
@@ -36,27 +38,9 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function CreateNewQuiz() {
+export default function Admin() {
   const [value, setValue] = useState(0);
   const [showIcons, setShowIcons] = useState(true);
-
-  const [publishModalState, setPublishModalState] = useState(false);
-
-  const handleCancelButtonClick = () => {
-    toggle();
-  };
-
-  const toggle = () => {
-    setPublishModalState(!publishModalState);
-  };
-
-  const handlePublishButtonClick = () => {
-    toggle();
-  };
-
-  const quiz = {
-    title: 'Title quiz test',
-  };
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -87,21 +71,21 @@ export default function CreateNewQuiz() {
 
   const tabStyles = {
     textTransform: 'none',
-    fontWeight: '525',
+    fontWeight: 525,
     color: '#a2a2a2',
-    fontSize: 'larger'
+    fontSize: 'larger',
+    textAlign: 'center',
+    fontSize: '1.5rem',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    lineHeight: '1.5rem', // 100%
   };
+
 
   const navigate = useNavigate();
 
-  const handlePreviewClick = () => {
-    navigate('/preview');
-  };
-
-
-
   return (
-    <Paper sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
+    <Box sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
       <Box sx={{ width: '100%' }}>
 
         <Box sx={{
@@ -112,61 +96,50 @@ export default function CreateNewQuiz() {
           borderColor: 'divider'
         }} >
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Details" sx={tabStyles} />
-            <Tab label="Questions" sx={tabStyles} />
-            <Tab label="Schedule" sx={tabStyles} />
+            <Tab label="Quiz Board" sx={tabStyles} />
+            <Tab label="User Board" sx={tabStyles} />
           </Tabs>
-          <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
-            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}
-              onClick={(handlePreviewClick)}
-            >
-              Preview
-            </Button>
-            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}
-              onClick={handlePublishButtonClick}
-            >
-              Publish
-            </Button>
-          </Box>
         </Box>
 
         <CustomTabPanel value={value} index={0}>
-          <QuizDetails showIcons={showIcons} />
+          <QuizCategoryDashboard />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <QuizQuestions />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <QuizSchedule />
+          <Box name="TopNav" style={{
+            display: !isMobile ? 'flex' : 'block',
+            justifyContent: !isMobile ? 'space-between' : 'flex-start',
+            alignItems: 'center'
+          }}
+          >
+            <h1 className='darkBlue-text'>
+              User Board  {/* Google web font 'Anton' */}
+            </h1>
+
+            <Box name="Search&Button" style={{
+              display: !isMobile ? 'flex' : 'block',
+              alignItems: 'center'
+            }}>
+              <SearchBar />
+
+              {/* 'ml' does not work here, we must use marginLeft */}
+              <Button
+                className='navButton button-mediumBlue'
+                style={{
+                  ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
+                }}
+              // onClick={(event) => handleCreateNewQuizClick()}
+              >
+                <AddIcon />
+                Create new user
+              </Button>
+            </Box> {/* Search&Button closes */}
+
+          </Box> {/* TopNav closes */}
+          <UserBoard />
         </CustomTabPanel>
 
       </Box>
 
-      {!isMobile ? null :
-        <Box>
-          <Button
-            className="button-darkMediumBlue"
-            size="small"
-            sx={{ mr: 1 }}
-            onClick={handlePreviewClick}
-          >
-            Preview
-          </Button>
-          <Button
-            size="small"
-            className="button-darkMediumBlue"
-            sx={{}}
-          >
-            Publish</Button>
-        </Box>
-      }
-
-      <PublishModal
-        publishModalState={publishModalState}
-        handleCancelButtonClick={handleCancelButtonClick}
-        quizToPublish={quiz.title}
-      />
-
-    </Paper>
+    </Box>
   );
 }
