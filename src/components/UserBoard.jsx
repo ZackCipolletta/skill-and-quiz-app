@@ -9,47 +9,52 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import SearchBar from "./SearchBar";
 import AddIcon from '@mui/icons-material/Add';
 
+// imported into 'Admin'
 
 export default function UserBoard(props) {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  // const [createUser, setCreateUser] = useState(false);
-  
 
-  // const toggle = () => {
-  //   setCreateUser(!createUser);
-  // };
-  
-  const [userInfo, setUserInfo] = useState({
-    users: [
-      {
-        userName: 'userName1',
-        userImage: 'Single',
-        score: 700,
-      },
-      {
-        userName: 'userName2',
-        userImage: 'Single',
-        score: 500,
-      },
-      {
-        userName: 'userName3',
-        userImage: 'Single',
-        score: 800,
-      },
-      {
-        userName: 'userName4',
-        userImage: 'Single',
-        score: 900,
-      },
-      {
-        userName: 'userName5',
-        userImage: 'Single',
-        score: 600,
-      },
-    ],
-  });
+  // const [userInfo, setUserInfo] = useState({
+  //   users: [
+  //     {
+  //       firstName: 'FirstName1',
+  //       lastName: 'LastName1',
+  //       userImage: 'Single',
+  //       score: 700,
+  //     },
+  //     {
+  //       firstName: 'FirstName2',
+  //       lastName: 'LastName2',
+  //       userImage: 'Single',
+  //       score: 500,
+  //     },
+  //     {
+  //       firstName: 'FirstName3',
+  //       lastName: 'LastName3',
+  //       userImage: 'Single',
+  //       score: 800,
+  //     },
+  //     {
+  //       firstName: 'FirstName4',
+  //       lastName: 'LastName4',
+  //       userImage: 'Single',
+  //       score: 900,
+  //     },
+  //     {
+  //       firstName: 'FirstName5',
+  //       lastName: 'LastName5',
+  //       userImage: 'Single',
+  //       score: 600,
+  //     },
+  //   ],
+  // });
+
+  const onUserClick = (id) => {
+    props.selectUser(id);
+    props.toggleUserDetails();
+  };
 
 
   return (
@@ -77,7 +82,7 @@ export default function UserBoard(props) {
             style={{
               ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
             }}
-            onClick={props.toggle}
+            onClick={props.toggleCreate}
           >
             <AddIcon />
             Create new user
@@ -119,7 +124,7 @@ export default function UserBoard(props) {
 
             {/* we sort userInfo by score high to low, then map onto this template. 
             The userInfo as a whole is represented by 'u' */}
-            {userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
+            {props.userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
 
               <TableRow key={i}
                 sx={{ '&:hover': { backgroundColor: '#f8fafe' } }}>
@@ -158,8 +163,11 @@ export default function UserBoard(props) {
                       fontStyle: 'normal',
                       fontWeight: 500,
                       lineHeight: '100%', // 1.75rem
-                    }}>
-                      {u.userName}
+                    }}
+                      onClick={() => onUserClick(u.id)}
+                    // onClick={() => props.selectUser(u.id)}
+                    >
+                      {u.firstName} {u.lastName}
                     </Typography>
                   </div>
 

@@ -1,62 +1,275 @@
-<Box sx={{ mt: 3 }}>
-<FormControl size='small'>
-  <InputLabel id="select-answer-type"
-    sx={{
-      color: "#a2a2a2"
-    }}
-  >
-    Answer Type
-  </InputLabel>
-  <div >
-    <Select
+import '../Styles/Components.css';
+import React, { useState } from "react";
+import { Button, Box, Typography, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { BiUser } from 'react-icons/bi';
+import { LuMail } from 'react-icons/lu';
+import { PiSuitcase } from "react-icons/pi";
+import { FaChevronLeft } from "react-icons/fa";
 
-      labelId='select-answer-type'
-      id='select-answer-type'
-      value={answerType}
-      onChange={handleAnswerTypeChange}
-      label='answerType'
-      sx={{
-        minWidth: 200,
-        mr: 2,
-        borderRadius: 2
+// imported into 'Admin'
+
+const textFieldLabel = {
+  fontFamily: 'Inter',
+  fontSize: '1rem',
+  fontStyle: 'normal',
+  fontWeight: 500,
+  lineHeight: '1.5rem', // 150%
+};
+
+
+const status = (
+  < Box sx={{ marginTop: 3 }}>
+    <Typography style={{ textFieldLabel }} >
+      Status
+    </Typography>
+    <Box name='Status'
+      style=
+      {{
+        display: 'flex',
+        alignItems: 'center',
       }}
     >
-      <MenuItem value="">
-        <em>None</em>
-      </MenuItem>
-      <MenuItem value={'Multiple'}>Multiple Choice</MenuItem>
-      <MenuItem value={'Single'}>Single Choice</MenuItem>
-      <MenuItem value={'TypeIn'}>Type in Answer</MenuItem>
-    </Select>
+      <TextField
+        id="Status"
+        placeholder="Status"
+        name="Status"
+        autoFocus
+        className='input-field'
+        size='small'
+        sx={{
+          width: 350,
+        }}
+        InputProps={{ sx: { borderRadius: 2 } }}
+      />
+    </Box>
+  </Box >
+);
 
-    {(answerType === 'Single' || answerType === 'Multiple') && (
-      // show or hide 'Add another option' button
-      <>
-        <Box id='answersList'>
-          {generateOptionFields()}
+const customStyle = {
+  background: '#FFF',
+  width: '25rem',
+  height: '2.875rem',
+  flexShrink: 0,
+};
+
+
+export default function UserDetails(props) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [role, setRole] = useState('');
+  const [focus, setFocus] = useState(false);
+
+
+  const handleFocus = () => {
+    setFocus(true);
+  };
+
+  const handleBlur = () => {
+    setFocus(false);
+  };
+
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+  };
+
+
+  return (
+
+    <Box style={{ marginTop: 25, paddingBottom: 5 }}>
+
+      <Box name="TopNav" style={{
+        display: !isMobile ? 'flex' : 'block',
+        justifyContent: !isMobile ? 'space-between' : 'flex-start',
+        alignItems: 'center'
+      }}
+      >
+        <h1 className='darkBlue-text'>
+          User Board  {/* Google web font 'Anton' */}
+        </h1>
+
+        <Box name="BackButton" style={{
+          display: !isMobile ? 'flex' : 'block',
+          alignItems: 'center'
+        }}>
+
+          {/* 'ml' does not work here, we must use marginLeft */}
+          <Button
+            className='button-mediumBlue'
+            style={{
+              ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
+            }}
+            onClick={props.toggle}
+          >
+            <FaChevronLeft />
+            Back
+          </Button>
+        </Box> {/* BackButton closes */}
+
+      </Box> {/* TopNav closes */}
+
+
+      <Box>
+        <Box sx={{ marginTop: 3 }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Box name='FirstNameBox'
+              style=
+              {{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'left',
+              }}
+            >
+              <Typography style={{ textFieldLabel }}>
+                First Name
+              </Typography>
+              <TextField
+                id="FirstName"
+                placeholder="Enter first name here"
+                name="FirstName"
+                type="FirstName"
+                className='input-field'
+                size='small'
+                sx={{ ...customStyle }}
+                InputProps={{
+                  // here we check if the value of firstName has been set or not (or if the user has begun 
+                  // typing in the TextField), if not we show the BiUser icon, if so, it disappears 
+                  // (along with the placeholder text). The same is true for the remaining text fields
+                  startAdornment: firstName === '' ? (
+                    <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
+                      <BiUser />
+                    </Box>
+                  ) : null,
+                  sx: { borderRadius: '0.375rem' },
+                }}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+
+            </Box> {/* first name box closes */}
+
+            <Box name='LastNameBox' sx={{ ml: 10 }}>
+              <Typography style={{ textFieldLabel }}>
+                Last Name
+              </Typography>
+              <TextField
+                id="LastName"
+                placeholder="Enter last name here"
+                name="LastName"
+                type="LastName"
+                className='input-field'
+                size='small'
+                sx={{ ...customStyle }}
+                InputProps={{
+                  startAdornment: lastName === '' ? (
+                    <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
+                      <BiUser />
+                    </Box>
+                  ) : null,
+                  sx: { borderRadius: '0.375rem' }
+                }}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </Box>
+
+          </div>
         </Box>
-        <Box sx={{ mt: 1 }}>
-          {warn ?
-            <Typography sx={{ color: 'red' }}>
-              You cannot add more than 4 possible answers
-            </Typography>
-            : null
-          }
-          {addOptionButton}
+
+        < Box sx={{ marginTop: 3 }}>
+          <Typography style={{ textFieldLabel }} >
+            Email
+          </Typography>
+          <Box name='Email'
+            style=
+            {{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <TextField
+              id="Email"
+              placeholder="Enter email address here"
+              name="Email"
+              autoFocus
+              className='input-field'
+              size='small'
+              sx={{ ...customStyle }}
+              InputProps={{
+                startAdornment: email === '' ? (
+                  <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
+                    <LuMail />
+                  </Box>
+                ) : null,
+                sx: { borderRadius: '0.375rem' }
+              }}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Box>
+        </Box >
+
+
+        <Box sx={{ mt: 3 }}>
+          <Typography style={{ textFieldLabel }} >
+            Role
+          </Typography>
+          <FormControl size='small'>
+            <InputLabel id="SelectRole"
+              sx={{ color: "#a2a2a2" }}
+            >
+              {/* here we check to see if a role has been selected and if the input field is in focus. If the role
+              does not have a value and the field is not in focus, we display the suitcase icon. Otherwise it disappears. */}
+              {role === '' && !focus &&
+                (<Box sx={{
+                  display: 'inline-flex',
+                  marginRight: '0.5rem',
+                  pt: '.25rem',
+                  transform: "scale(1.2)"
+                }}>
+                  <PiSuitcase />
+                </Box>)}
+              Select Role
+            </InputLabel>
+            <Box>
+              <Select
+                labelId='SelectRole'
+                id='SelectRole'
+                value={role}
+                onChange={handleRoleChange}
+                onFocus={handleFocus}
+                // onBlur handles when an element loses focus 
+                onBlur={handleBlur}
+                label='SelectRole'
+                sx={{ ...customStyle, borderRadius: '.375rem', height: '2.65rem' }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={'User'}>User</MenuItem>
+                <MenuItem value={'Creator'}>Creator</MenuItem>
+                <MenuItem value={'Admin'}>Admin</MenuItem>
+              </Select>
+            </Box>
+
+          </FormControl>
         </Box>
-      </>
-    )}
 
-    <Button sx={{
-      display: 'block',
-      mt: 2
-    }}
-      className="button-mediumBlue"
-      onClick={handleAddClick}
-    >
-      Add Question
-    </Button>
+      </Box>
+      <Button sx={{
+        display: 'block',
+        margin: '0 auto',
+        mt: 5
+      }}
+        className="button-mediumBlue"
+      // onClick={handleAddClick}
+      >
+        Create
+      </Button>
+    </Box>
+  );
 
-  </div>
-</FormControl>
-</Box>
+}

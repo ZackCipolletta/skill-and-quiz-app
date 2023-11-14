@@ -1,16 +1,14 @@
 import '../Styles/Components.css';
-import React, { useState, useEffect } from "react";
-import { Button, Box, Typography, TextField, Link, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Box, Typography, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { BiUser } from 'react-icons/bi';
 import { LuMail } from 'react-icons/lu';
 import { PiSuitcase } from "react-icons/pi";
-import { HiOutlineChevronLeft } from "react-icons/hi2";
-import { IoIosArrowBack } from "react-icons/io";
 import { FaChevronLeft } from "react-icons/fa";
 
+// imported into 'Admin'
 
 const textFieldLabel = {
   fontFamily: 'Inter',
@@ -104,10 +102,10 @@ export default function CreateNewUser(props) {
           {/* 'ml' does not work here, we must use marginLeft */}
           <Button
             className='button-mediumBlue'
-            // style={{
-            //   ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
-            // }}
-            onClick={props.toggle}
+            style={{
+              ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
+            }}
+            onClick={props.toggleCreate}
           >
             <FaChevronLeft />
             Back
@@ -255,27 +253,22 @@ export default function CreateNewUser(props) {
                 <MenuItem value={'Creator'}>Creator</MenuItem>
                 <MenuItem value={'Admin'}>Admin</MenuItem>
               </Select>
-
-              <Button sx={{
-                display: 'block',
-                mt: 2
-              }}
-                className="button-mediumBlue"
-              // onClick={handleAddClick}
-              >
-                Create
-              </Button>
-
             </Box>
+
           </FormControl>
         </Box>
 
-
-
-
-
       </Box>
-
+      <Button sx={{
+        display: 'block',
+        margin: '0 auto',
+        mt: 5
+      }}
+        className="button-mediumBlue"
+      // onClick={handleAddClick}
+      >
+        Create
+      </Button>
     </Box>
   );
 

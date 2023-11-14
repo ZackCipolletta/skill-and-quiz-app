@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-import { Box, Button, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Tabs, Tab, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSwipeable } from 'react-swipeable';
 import { useNavigate } from 'react-router-dom';
 import QuizCategoryDashboard from "./QuizCategoryDashboard";
 import UserBoard from "./UserBoard";
-import SearchBar from "./SearchBar";
-import AddIcon from '@mui/icons-material/Add';
 import CreateNewUser from "./CreateNewUser";
+import UserDetails from "./UserDetails";
 
 
 function CustomTabPanel(props) {
@@ -38,9 +37,53 @@ CustomTabPanel.propTypes = {
 
 export default function Admin() {
   const [createUser, setCreateUser] = useState(false);
+  const [userDetails, setUserDetails] = useState(false);
 
   const [value, setValue] = useState(0);
   const [showIcons, setShowIcons] = useState(true);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+
+  const [userInfo, setUserInfo] = useState({
+    users: [
+      {
+        firstName: 'FirstName1',
+        lastName: 'LastName1',
+        userImage: 'Single',
+        score: 700,
+        id: 9
+      },
+      {
+        firstName: 'FirstName2',
+        lastName: 'LastName2',
+        userImage: 'Single',
+        score: 500,
+        id: 8
+      },
+      {
+        firstName: 'FirstName3',
+        lastName: 'LastName3',
+        userImage: 'Single',
+        score: 800,
+        id: 7
+      },
+      {
+        firstName: 'FirstName4',
+        lastName: 'LastName4',
+        userImage: 'Single',
+        score: 900,
+        id: 6
+      },
+      {
+        firstName: 'FirstName5',
+        lastName: 'LastName5',
+        userImage: 'Single',
+        score: 600,
+        id: 5
+      },
+    ],
+  });
+
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -83,9 +126,22 @@ export default function Admin() {
 
   const navigate = useNavigate();
 
-  const toggle = () => {
+  const toggleCreate = () => {
     setCreateUser(!createUser);
   };
+
+  const toggleUserDetails = () => {
+    setUserDetails(!userDetails);
+  };
+
+  const selectUser = (id) => {
+    const selectedUser = userInfo.users.find(user => user.id === id);
+    setSelectedUser(selectedUser);
+  }
+
+  useEffect(() => {
+    console.log(selectedUser);
+  }, [selectedUser]);
 
   return (
     <Box sx={{ marginTop: 5, marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
@@ -110,12 +166,21 @@ export default function Admin() {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           {
-            createUser ? <CreateNewUser
-              toggle={toggle}
-            /> :
-              <UserBoard
-                toggle={toggle}
-              />
+            createUser ?
+              <CreateNewUser
+                toggleCreate={toggleCreate}
+              /> :
+              userDetails ?
+                <UserDetails
+                  toggleUserDetails={toggleUserDetails}
+                />
+                :
+                <UserBoard
+                  toggleCreate={toggleCreate}
+                  toggleUserDetails={toggleUserDetails}
+                  userInfo={userInfo}
+                  selectUser={selectUser}
+                />
           }
         </CustomTabPanel>
 
