@@ -15,7 +15,7 @@ export default function Settings() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [password, setPassword] = useState('');
   const [isValidPassword, setIsValidPassword] = useState(false);
-  const [changePassword, setChangePassword] = useState(false);
+  const [changePassword, setChangePassword] = useState(false); 
 
 
   const handleCreateNewQuizClick = () => {
