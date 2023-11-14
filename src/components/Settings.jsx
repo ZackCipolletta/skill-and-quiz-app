@@ -5,6 +5,8 @@ import { Button, Box, Typography, TextField, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { LiaEditSolid } from 'react-icons/lia';
+
 
 export default function Settings() {
 
@@ -15,7 +17,7 @@ export default function Settings() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [password, setPassword] = useState('');
   const [isValidPassword, setIsValidPassword] = useState(false);
-  const [changePassword, setChangePassword] = useState(false); 
+  const [changePassword, setChangePassword] = useState(false);
 
 
   const handleCreateNewQuizClick = () => {
@@ -152,7 +154,14 @@ export default function Settings() {
               sx={{
                 width: 350,
               }}
-              InputProps={{ sx: { borderRadius: 2 } }}
+              InputProps={{
+                endAdornment: (
+                  <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                    <LiaEditSolid />
+                  </Box>
+                ),
+                sx: { borderRadius: 2 }
+              }}
             />
           </Box>
         </Box>
@@ -178,7 +187,14 @@ export default function Settings() {
               sx={{
                 width: 350,
               }}
-              InputProps={{ sx: { borderRadius: 2 } }}
+              InputProps={{
+                endAdornment: (
+                  <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                    <LiaEditSolid />
+                  </Box>
+                ),
+                sx: { borderRadius: 2 }
+              }}
             />
           </Box>
         </Box>
@@ -256,7 +272,7 @@ export default function Settings() {
           </div>
         </Box>
 
-        {changePassword ? [creationDate, status] : null }
+        {changePassword ? [creationDate, status] : null}
 
       </Box>
     </Box >

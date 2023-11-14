@@ -1,6 +1,6 @@
 import '../Styles/Components.css';
 import React, { useState, useEffect } from "react";
-import { Button, Box, Typography, TextField, Link, InputAdornment  } from '@mui/material';
+import { Button, Box, Typography, TextField, Link,  } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
