@@ -1,73 +1,37 @@
-return (
-  <Box style={{ marginTop: 35, paddingBottom: 5 }}>
-    <Box sx={{ mt: 3, mb: 5 }}>
-      <TableContainer sx={{
-        border: '1px solid #E6E6E6',
-        borderRadius: '0.9375rem',
-        overflow: 'hidden'
-      }}>
-        <Table>
-          <TableHead>
-            <TableRow style={{
-              color: '#1E1E1E',
-              fontFamily: 'Anton',
-              fontSize: '2rem',
-              fontStyle: 'normal',
-              fontWeight: 400,
-              lineHeight: '100%'
-            }}>
-              <TableCell sx={{
-                borderRight: '1px solid #E6E6E6',
-                textAlign: 'center',
-                borderBottom: '1px solid #E6E6E6',
-              }}>
-                <h2>#</h2>
-              </TableCell>
-              <TableCell sx={{
-                textAlign: 'center',
-                borderBottom: '1px solid #E6E6E6',
-              }}>
-                <h2>Name</h2>
-              </TableCell>
-            </TableRow>
-          </TableHead>
+import { useState } from 'react';
+import { Box, Typography, TextField } from '@mui/material';
+import { LuMail } from 'your-icon-library'; // Replace with the correct import for your icon
 
-          {/* Sort userInfo by score high to low, then map onto this template. The userInfo as a whole is represented by 'u' */}
-          {userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
-            <TableRow key={i} sx={{ '&:hover': { backgroundColor: '#f8fafe' } }}>
-              <TableCell sx={{
-                borderRight: '1px solid #E6E6E6',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                borderBottom: i === arr.length - 1 ? 'none' : '1px solid #E6E6E6'
-              }}>
-                {i + 1}
-              </TableCell>
+// ... other code ...
 
-              <TableCell sx={{
-                width: 750,
-                marginTop: 0,
-                marginBottom: 0,
-                paddingTop: 0,
-                paddingBottom: 0
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <Typography style={{
-                    marginLeft: 10,
-                    fontFamily: 'Inter',
-                    fontSize: '1.75rem',
-                    fontStyle: 'normal',
-                    fontWeight: 500,
-                    lineHeight: '100%'
-                  }}>
-                    {u.userName}
-                  </Typography>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </Table>
-      </TableContainer>
+export default function YourComponent() {
+  const [email, setEmail] = useState('');
+
+  return (
+    <Box sx={{ marginTop: 3 }}>
+      <Typography style={{ textFieldLabel }}>
+        Email
+      </Typography>
+      <Box name='Email' style={{ display: 'flex', alignItems: 'center' }}>
+        <TextField
+          id="Email"
+          placeholder="Enter email address here"
+          name="Email"
+          autoFocus
+          className='input-field'
+          size='small'
+          sx={{ ...customStyle }}
+          InputProps={{
+            startAdornment: email === '' ? (
+              <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                <LuMail />
+              </Box>
+            ) : null,
+            sx: { borderRadius: '0.375rem' },
+          }}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Box>
     </Box>
-  </Box>
-);
+  );
+}

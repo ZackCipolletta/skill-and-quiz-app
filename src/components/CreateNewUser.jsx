@@ -1,11 +1,12 @@
 import '../Styles/Components.css';
 import React, { useState, useEffect } from "react";
-import { Button, Box, Typography, TextField, Link,  } from '@mui/material';
+import { Button, Box, Typography, TextField, Link, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { BiUser } from 'react-icons/bi';
 import { LuMail } from 'react-icons/lu';
+import { PiSuitcase } from "react-icons/pi";
 
 const textFieldLabel = {
   fontFamily: 'Inter',
@@ -56,10 +57,25 @@ export default function CreateNewUser(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [password, setPassword] = useState('');
-  const [isValidPassword, setIsValidPassword] = useState(false);
 
-  const [settings, setSettings] = useState(false);
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [role, setRole] = useState(''); 
+  const [focus, setFocus] = useState(false); 
+
+
+  const handleFocus = () => {
+    setFocus(true);
+  }
+
+  const handleBlur = () => {
+    setFocus(false);
+  }
+
+  const handleRoleChange = (e) => {
+    setRole(e.target.value)
+  }
 
 
   return (
@@ -119,13 +135,17 @@ export default function CreateNewUser(props) {
                 size='small'
                 sx={{ ...customStyle }}
                 InputProps={{
-                  startAdornment : (
-                    <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                  // here we check if the value of firstName has been set or not (or if the user has begun 
+                  // typing in the TextField), if not we show the BiUser icon, if so, it disappears 
+                  // (along with the placeholder text). The same is true for the remaining text fields
+                  startAdornment: firstName === '' ? (
+                    <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
                       <BiUser />
                     </Box>
-                  ),
+                  ) : null,
                   sx: { borderRadius: '0.375rem' },
                 }}
+                onChange={(e) => setFirstName(e.target.value)}
               />
 
             </Box> {/* first name box closes */}
@@ -143,13 +163,14 @@ export default function CreateNewUser(props) {
                 size='small'
                 sx={{ ...customStyle }}
                 InputProps={{
-                  startAdornment : (
-                    <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                  startAdornment: lastName === '' ? (
+                    <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
                       <BiUser />
                     </Box>
-                  ),
+                  ) : null,
                   sx: { borderRadius: '0.375rem' }
                 }}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </Box>
 
@@ -176,15 +197,77 @@ export default function CreateNewUser(props) {
               size='small'
               sx={{ ...customStyle }}
               InputProps={{
-                startAdornment : (
-                  <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                startAdornment: email === '' ? (
+                  <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
                     <LuMail />
                   </Box>
-                ),sx: { borderRadius: '0.375rem' }
+                ) : null,
+                sx: { borderRadius: '0.375rem' }
               }}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Box>
         </Box >
+
+
+        <Box sx={{ mt: 3 }}>
+          <Typography style={{ textFieldLabel }} >
+            Role
+          </Typography>
+          <FormControl size='small'>
+            <InputLabel id="SelectRole"
+              sx={{ color: "#a2a2a2" }}
+            >
+              {/* here we check to see if a role has been selected and if the input field is in focus. If the role
+              does not have a value and the field is not in focus, we display the suitcase icon. Otherwise it disappears. */}
+              {role === '' && !focus &&
+                (<Box sx={{
+                  display: 'inline-flex',
+                  marginRight: '0.5rem',
+                  pt: '.25rem',
+                  transform: "scale(1.2)"
+                }}>
+                  <PiSuitcase />
+                </Box>)}
+              Select Role
+            </InputLabel>
+            <Box>
+              <Select
+                labelId='SelectRole'
+                id='SelectRole'
+                value={role}
+                onChange={handleRoleChange}
+                onFocus={handleFocus}
+                // onBlur handles when an element loses focus 
+                onBlur={handleBlur}
+                label='SelectRole'
+                sx={{ ...customStyle, borderRadius: '.375rem', height: '2.65rem' }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={'User'}>User</MenuItem>
+                <MenuItem value={'Creator'}>Creator</MenuItem>
+                <MenuItem value={'Admin'}>Admin</MenuItem>
+              </Select>
+
+              <Button sx={{
+                display: 'block',
+                mt: 2
+              }}
+                className="button-mediumBlue"
+              // onClick={handleAddClick}
+              >
+                Add Question
+              </Button>
+
+            </Box>
+          </FormControl>
+        </Box>
+
+
+
+
 
       </Box>
 
@@ -192,3 +275,18 @@ export default function CreateNewUser(props) {
   );
 
 }
+
+
+{/* <InputLabel
+id="SelectRole"
+sx={{
+  color: "#a2a2a2",
+  display: 'flex',
+  alignItems: 'center', // Optional: Align the content vertically
+}}
+>
+<Box sx={{ pt: '.25rem', transform: "scale(1.2)" }}>
+  <PiSuitcase />
+</Box>
+<span style={{ marginLeft: '8px' }}>Select Role</span>
+</InputLabel> */}
