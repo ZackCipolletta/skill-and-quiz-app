@@ -7,6 +7,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { BiUser } from 'react-icons/bi';
 import { LuMail } from 'react-icons/lu';
 import { PiSuitcase } from "react-icons/pi";
+import { HiOutlineChevronLeft } from "react-icons/hi2";
+import { IoIosArrowBack } from "react-icons/io";
+import { FaChevronLeft } from "react-icons/fa";
+
 
 const textFieldLabel = {
   fontFamily: 'Inter',
@@ -61,21 +65,21 @@ export default function CreateNewUser(props) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [role, setRole] = useState(''); 
-  const [focus, setFocus] = useState(false); 
+  const [role, setRole] = useState('');
+  const [focus, setFocus] = useState(false);
 
 
   const handleFocus = () => {
     setFocus(true);
-  }
+  };
 
   const handleBlur = () => {
     setFocus(false);
-  }
+  };
 
   const handleRoleChange = (e) => {
-    setRole(e.target.value)
-  }
+    setRole(e.target.value);
+  };
 
 
   return (
@@ -92,22 +96,23 @@ export default function CreateNewUser(props) {
           User Board  {/* Google web font 'Anton' */}
         </h1>
 
-        <Box name="Search&Button" style={{
+        <Box name="BackButton" style={{
           display: !isMobile ? 'flex' : 'block',
           alignItems: 'center'
         }}>
 
           {/* 'ml' does not work here, we must use marginLeft */}
           <Button
-            className='navButton button-mediumBlue'
-            style={{
-              ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
-            }}
+            className='button-mediumBlue'
+            // style={{
+            //   ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
+            // }}
             onClick={props.toggle}
           >
+            <FaChevronLeft />
             Back
           </Button>
-        </Box> {/* Search&Button closes */}
+        </Box> {/* BackButton closes */}
 
       </Box> {/* TopNav closes */}
 
@@ -258,7 +263,7 @@ export default function CreateNewUser(props) {
                 className="button-mediumBlue"
               // onClick={handleAddClick}
               >
-                Add Question
+                Create
               </Button>
 
             </Box>
@@ -276,17 +281,3 @@ export default function CreateNewUser(props) {
 
 }
 
-
-{/* <InputLabel
-id="SelectRole"
-sx={{
-  color: "#a2a2a2",
-  display: 'flex',
-  alignItems: 'center', // Optional: Align the content vertically
-}}
->
-<Box sx={{ pt: '.25rem', transform: "scale(1.2)" }}>
-  <PiSuitcase />
-</Box>
-<span style={{ marginLeft: '8px' }}>Select Role</span>
-</InputLabel> */}

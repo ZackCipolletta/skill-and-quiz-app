@@ -8,6 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { LiaEditSolid } from 'react-icons/lia';
 
 
+
 export default function Settings() {
 
   const navigate = useNavigate();
@@ -113,7 +114,7 @@ export default function Settings() {
 
           {/* 'ml' does not work here, we must use marginLeft */}
           <Button
-            className='button-mediumBlue textButton'
+            className='button-mediumBlue'
             style={{
               ...(isMobile ? { marginTop: 20 } : { marginLeft: 20 }),
             }}
@@ -121,7 +122,7 @@ export default function Settings() {
             Save Changes
           </Button>
           <Button
-            className='button-darkBlue textButton'
+            className='button-darkBlue'
             style={{
               ...(isMobile ? { marginTop: 20 } : { marginLeft: 20 }),
             }}

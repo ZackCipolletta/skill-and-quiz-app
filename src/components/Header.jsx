@@ -4,6 +4,7 @@ import { Button, Toolbar, Typography, IconButton } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
 import { HiOutlineCog8Tooth, HiOutlineChevronLeft } from 'react-icons/hi2';
+import { FaChevronLeft } from 'react-icons/fa';
 
 export default function Header() {
   const [settings, setSettings] = useState(false);
@@ -21,12 +22,12 @@ export default function Header() {
   const settingsClick = () => {
     toggle();
     navigate('/settings');
-  }
+  };
 
   const backClick = () => {
     toggle();
     navigate(-1);
-  }
+  };
 
   return (
     <div style={{ margin: 0 }}>
@@ -60,9 +61,7 @@ export default function Header() {
           }}
           onClick={backClick}>
 
-          <HiOutlineChevronLeft style={{
-            transform: "scaleY(.8)"
-          }} />
+          <FaChevronLeft />
           Back
         </Button>
 
@@ -75,9 +74,16 @@ export default function Header() {
               justifyContent: 'center',
               alignItems: 'center',
               transform: "scale(1.2)",
-              borderRadius: '5px'
+              borderRadius: '5px',
+              backgroundColor: 'var(--darkBlue)',
+              color: 'white',
+              transition: 'box-shadow 0.3s',
+              '&:hover': {
+                backgroundColor: 'var(--darkBlue)',
+                boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.2)',
+              },
             }}
-            className='button-darkBlue'
+            // className='button-darkBlue'
             onClick={settingsClick} >
             <HiOutlineCog8Tooth />
           </IconButton>

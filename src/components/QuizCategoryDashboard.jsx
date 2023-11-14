@@ -52,7 +52,7 @@ export default function QuizCategoryDashboard(props) {
 
       setCategoriesArray(updatedCategoriesArray);
     }
-    
+
     reset();
   };
 
@@ -74,7 +74,7 @@ export default function QuizCategoryDashboard(props) {
     reset();
   };
 
-  
+
   return (
     <>
       <div style={{ marginTop: '20px' }} >
@@ -96,7 +96,7 @@ export default function QuizCategoryDashboard(props) {
 
             <Button
               className='navButton button-mediumBlue'
-              style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20} }
+              style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
               onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
             >
               <AddIcon />
