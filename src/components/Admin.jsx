@@ -9,6 +9,9 @@ import QuizCategoryDashboard from "./QuizCategoryDashboard";
 import UserBoard from "./UserBoard";
 import CreateNewUser from "./CreateNewUser";
 import UserDetails from "./UserDetails";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "./redux/User";
 
 
 function CustomTabPanel(props) {
@@ -36,53 +39,72 @@ CustomTabPanel.propTypes = {
 };
 
 export default function Admin() {
+  const dispatch = useDispatch();
+
   const [createUser, setCreateUser] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
 
   const [value, setValue] = useState(0);
-  const [showIcons, setShowIcons] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
 
 
-  const [userInfo, setUserInfo] = useState({
-    users: [
-      {
-        firstName: 'FirstName1',
-        lastName: 'LastName1',
-        userImage: 'Single',
-        score: 700,
-        id: 9
-      },
-      {
-        firstName: 'FirstName2',
-        lastName: 'LastName2',
-        userImage: 'Single',
-        score: 500,
-        id: 8
-      },
-      {
-        firstName: 'FirstName3',
-        lastName: 'LastName3',
-        userImage: 'Single',
-        score: 800,
-        id: 7
-      },
-      {
-        firstName: 'FirstName4',
-        lastName: 'LastName4',
-        userImage: 'Single',
-        score: 900,
-        id: 6
-      },
-      {
-        firstName: 'FirstName5',
-        lastName: 'LastName5',
-        userImage: 'Single',
-        score: 600,
-        id: 5
-      },
-    ],
-  });
+
+
+  const newInfoArr = [
+    {
+      firstName: 'FirstName1',
+      lastName: 'LastName1',
+      userImage: 'Single',
+      email: 'firstEmail@mail.com',
+      score: 700,
+      id: 9
+    },
+    {
+      firstName: 'FirstName2',
+      lastName: 'LastName2',
+      userImage: 'Single',
+      email: 'secondEmail@mail.com',
+      score: 500,
+      id: 8
+    },
+    {
+      firstName: 'FirstName3',
+      lastName: 'LastName3',
+      userImage: 'Single',
+      email: 'thirdEmail@mail.com',
+      score: 800,
+      id: 7
+    },
+    {
+      firstName: 'FirstName4',
+      lastName: 'LastName4',
+      userImage: 'Single',
+      email: 'fourthEmail@mail.com',
+      score: 900,
+      id: 6
+    },
+    {
+      firstName: 'FirstName5',
+      lastName: 'LastName5',
+      userImage: 'Single',
+      email: 'fifthEmail@mail.com',
+      score: 600,
+      id: 5
+    },
+  ];
+
+  const { userInfo } = useSelector((state) => state.userInfo);
+  
+  useEffect(() => {
+    dispatch(setUserInfo({
+      users: newInfoArr,
+    })
+    );
+  }, []);
+
+  useEffect(() => {
+    console.log(userInfo)
+  }, [userInfo]);
 
 
   const theme = useTheme();
@@ -97,7 +119,6 @@ export default function Admin() {
     if (nextTab < 3) {
       setValue(nextTab);
     }
-    setShowIcons(false);
   };
 
   const changeToPreviousTab = () => {
@@ -137,11 +158,15 @@ export default function Admin() {
   const selectUser = (id) => {
     const selectedUser = userInfo.users.find(user => user.id === id);
     setSelectedUser(selectedUser);
-  }
+  };
 
   useEffect(() => {
     console.log(selectedUser);
   }, [selectedUser]);
+
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
 
   return (
     <Box sx={{ marginTop: 5, marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
@@ -173,6 +198,7 @@ export default function Admin() {
               userDetails ?
                 <UserDetails
                   toggleUserDetails={toggleUserDetails}
+                  selectedUser={selectedUser}
                 />
                 :
                 <UserBoard
@@ -180,6 +206,7 @@ export default function Admin() {
                   toggleUserDetails={toggleUserDetails}
                   userInfo={userInfo}
                   selectUser={selectUser}
+                  selectedUser={selectedUser}
                 />
           }
         </CustomTabPanel>

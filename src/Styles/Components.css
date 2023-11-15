@@ -36,7 +36,20 @@ Button.button-darkBlue {
 Button.button-lightBlue {
     background-color: var(--lightBlue);
     color: var(--darkBlue);
-    font-weight: 600;
+
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    display: flex;
+    height: 2.5rem;
+    padding: 0.8125rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    white-space: nowrap;
 
     &:hover {
         background-color: var(--lightBlue);
@@ -102,6 +115,20 @@ Button.button-mediumBlue {
 Button.button-redButton {
     background-color: var(--warning);
     color: white;
+    
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    display: flex;
+    height: 2.5rem;
+    padding: 0.8125rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    white-space: nowrap;
 
     &:hover {
         background-color: var(--warning);

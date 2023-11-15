@@ -4,6 +4,7 @@ import {
   multipleCorrectReducer, warnReducer, selectedFileReducer, answerTypeReducer, questionAnswerArrReducer, isFavoriteReducer,
 } from "./quizQuestions";
 import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer } from "./quizDetails";
+import { userInfoReducer } from "./User";
 
 export default configureStore({
   reducer: {
@@ -24,5 +25,7 @@ export default configureStore({
     quizColor: quizColorReducer,
     quizTags: quizTagsReducer,
     newTag: newTagReducer,
+
+    userInfo: userInfoReducer,
   }
 });

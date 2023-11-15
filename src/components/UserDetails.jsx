@@ -19,6 +19,10 @@ const textFieldLabel = {
 };
 
 
+// pass in from 'Admin' the 'selectedUser' info to then be pre-populated in name and email fields.
+
+
+
 const status = (
   < Box sx={{ marginTop: 3 }}>
     <Typography style={{ textFieldLabel }} >
@@ -56,16 +60,17 @@ const customStyle = {
 
 
 export default function UserDetails(props) {
+
+  const { selectedUser, toggleUserDetails } = props;
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
   const [focus, setFocus] = useState(false);
-
 
   const handleFocus = () => {
     setFocus(true);
@@ -75,10 +80,9 @@ export default function UserDetails(props) {
     setFocus(false);
   };
 
-  const handleRoleChange = (e) => {
-    setRole(e.target.value);
-  };
-
+  // const handleRoleChange = (e) => {
+  //   setRole(e.target.value);
+  // };
 
   return (
 
@@ -105,7 +109,7 @@ export default function UserDetails(props) {
             style={{
               ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
             }}
-            onClick={props.toggle}
+            onClick={toggleUserDetails}
           >
             <FaChevronLeft />
             Back
@@ -136,19 +140,20 @@ export default function UserDetails(props) {
                 type="FirstName"
                 className='input-field'
                 size='small'
+                value={selectedUser ? selectedUser.firstName : ''}
                 sx={{ ...customStyle }}
                 InputProps={{
                   // here we check if the value of firstName has been set or not (or if the user has begun 
                   // typing in the TextField), if not we show the BiUser icon, if so, it disappears 
                   // (along with the placeholder text). The same is true for the remaining text fields
-                  startAdornment: firstName === '' ? (
+                  startAdornment: selectedUser && selectedUser.firstName === '' ? (
                     <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
                       <BiUser />
                     </Box>
                   ) : null,
                   sx: { borderRadius: '0.375rem' },
                 }}
-                onChange={(e) => setFirstName(e.target.value)}
+                // onChange={(e) => setFirstName(e.target.value)}
               />
 
             </Box> {/* first name box closes */}
@@ -164,16 +169,17 @@ export default function UserDetails(props) {
                 type="LastName"
                 className='input-field'
                 size='small'
+                value={selectedUser ? selectedUser.lastName : ''}
                 sx={{ ...customStyle }}
                 InputProps={{
-                  startAdornment: lastName === '' ? (
+                  startAdornment: selectedUser && selectedUser.lastName === '' ? (
                     <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
                       <BiUser />
                     </Box>
                   ) : null,
                   sx: { borderRadius: '0.375rem' }
                 }}
-                onChange={(e) => setLastName(e.target.value)}
+                // onChange={(e) => setLastName(e.target.value)}
               />
             </Box>
 
@@ -198,16 +204,17 @@ export default function UserDetails(props) {
               autoFocus
               className='input-field'
               size='small'
+              value={selectedUser ? selectedUser.email : ''}
               sx={{ ...customStyle }}
               InputProps={{
-                startAdornment: email === '' ? (
+                startAdornment: selectedUser && selectedUser.email === '' ? (
                   <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
                     <LuMail />
                   </Box>
                 ) : null,
                 sx: { borderRadius: '0.375rem' }
               }}
-              onChange={(e) => setEmail(e.target.value)}
+              // onChange={(e) => setEmail(e.target.value)}
             />
           </Box>
         </Box >
@@ -239,7 +246,7 @@ export default function UserDetails(props) {
                 labelId='SelectRole'
                 id='SelectRole'
                 value={role}
-                onChange={handleRoleChange}
+                // onChange={handleRoleChange}
                 onFocus={handleFocus}
                 // onBlur handles when an element loses focus 
                 onBlur={handleBlur}
@@ -259,16 +266,21 @@ export default function UserDetails(props) {
         </Box>
 
       </Box>
-      <Button sx={{
-        display: 'block',
-        margin: '0 auto',
-        mt: 5
-      }}
-        className="button-mediumBlue"
-      // onClick={handleAddClick}
-      >
-        Create
-      </Button>
+      <Box sx={{ display: 'block', margin: '0 auto', mt: 5, display: 'flex', justifyContent: 'center' }}>
+        <Button 
+          className="button-redButton"
+          // onClick={handleAddClick}
+          sx={{ mr: 5 }}
+        >
+          Delete User
+        </Button>
+        <Button 
+          className="button-mediumBlue"
+        // onClick={handleAddClick}
+        >
+          Save Changes
+        </Button>
+      </Box>
     </Box>
   );
 

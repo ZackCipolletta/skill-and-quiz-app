@@ -8,6 +8,9 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import SearchBar from "./SearchBar";
 import AddIcon from '@mui/icons-material/Add';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "./redux/User";
 
 // imported into 'Admin'
 
@@ -56,6 +59,8 @@ export default function UserBoard(props) {
     props.toggleUserDetails();
   };
 
+
+  const { userInfo } = useSelector((state) => state.userInfo);
 
   return (
     <Box style={{ marginTop: 25, paddingBottom: 5 }}>
@@ -124,7 +129,9 @@ export default function UserBoard(props) {
 
             {/* we sort userInfo by score high to low, then map onto this template. 
             The userInfo as a whole is represented by 'u' */}
-            {props.userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
+            {/* because arrays in JS are immutable, we must first create a copy of the array so that we can sort it */}
+            {[...userInfo.users].sort((a, b) => b.score - a.score).map((u, i, arr) => (
+            // {props.userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
 
               <TableRow key={i}
                 sx={{ '&:hover': { backgroundColor: '#f8fafe' } }}>
