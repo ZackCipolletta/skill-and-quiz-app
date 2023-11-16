@@ -17,51 +17,6 @@ import { setUserInfo, deleteUser } from "./redux/User";
 
 // imported into 'Admin'
 
-const textFieldLabel = {
-  fontFamily: 'Inter',
-  fontSize: '1rem',
-  fontStyle: 'normal',
-  fontWeight: 500,
-  lineHeight: '1.5rem', // 150%
-};
-
-// pass in from 'Admin' the 'selectedUser' info to then be pre-populated in name and email fields.
-
-const status = (
-  < Box sx={{ marginTop: 3 }}>
-    <Typography style={{ textFieldLabel }} >
-      Status
-    </Typography>
-    <Box name='Status'
-      style=
-      {{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <TextField
-        id="Status"
-        placeholder="Status"
-        name="Status"
-        autoFocus
-        className='input-field'
-        size='small'
-        sx={{
-          width: 350,
-        }}
-        InputProps={{ sx: { borderRadius: 2 } }}
-      />
-    </Box>
-  </Box >
-);
-
-const customStyle = {
-  background: '#FFF',
-  width: '25rem',
-  height: '2.875rem',
-  flexShrink: 0,
-};
-
 
 export default function UserDetails(props) {
   const dispatch = useDispatch();
@@ -79,6 +34,22 @@ export default function UserDetails(props) {
   const [deleteUserModalState, setDeleteUserModalState] = useState(false);
   // const [deleteUser, setDeleteUser] = useState('');
   const [selectedUserId, setSelectedUserId] = useState('');
+  
+  const textFieldLabel = {
+    fontFamily: 'Inter',
+    fontSize: '1rem',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    lineHeight: '1.5rem', // 150%
+  };
+  
+  const customTextField = {
+    background: '#FFF',
+    width: !isMobile ? '25rem' : '15rem',
+    height: '2.875rem',
+    flexShrink: 0,
+    marginTop: '.5rem'
+  };
 
   const handleFocus = () => {
     setFocus(true);
@@ -140,7 +111,7 @@ export default function UserDetails(props) {
 
       <Box>
         <Box sx={{ marginTop: 3 }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: !isMobile ? 'flex' : null, alignItems: 'center' }}>
             <Box name='FirstNameBox'
               style=
               {{
@@ -160,7 +131,7 @@ export default function UserDetails(props) {
                 className='input-field'
                 size='small'
                 value={selectedUser ? selectedUser.firstName : ''}
-                sx={{ ...customStyle }}
+                sx={{ ...customTextField }}
                 InputProps={{
                   // here we check if the value of firstName has been set or not (or if the user has begun 
                   // typing in the TextField), if not we show the BiUser icon, if so, it disappears 
@@ -177,7 +148,7 @@ export default function UserDetails(props) {
 
             </Box> {/* first name box closes */}
 
-            <Box name='LastNameBox' sx={{ ml: 10 }}>
+            <Box name='LastNameBox' sx={{ ml: !isMobile ? 10 : null, mt: isMobile ? 3 : null }}>
               <Typography style={{ textFieldLabel }}>
                 Last Name
               </Typography>
@@ -189,7 +160,7 @@ export default function UserDetails(props) {
                 className='input-field'
                 size='small'
                 value={selectedUser ? selectedUser.lastName : ''}
-                sx={{ ...customStyle }}
+                sx={{ ...customTextField }}
                 InputProps={{
                   startAdornment: selectedUser && selectedUser.lastName === '' ? (
                     <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
@@ -224,7 +195,7 @@ export default function UserDetails(props) {
               className='input-field'
               size='small'
               value={selectedUser ? selectedUser.email : ''}
-              sx={{ ...customStyle }}
+              sx={{ ...customTextField }}
               InputProps={{
                 startAdornment: selectedUser && selectedUser.email === '' ? (
                   <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
@@ -245,7 +216,7 @@ export default function UserDetails(props) {
           </Typography>
           <FormControl size='small'>
             <InputLabel id="SelectRole"
-              sx={{ color: "#a2a2a2" }}
+              sx={{ color: "#a2a2a2", marginTop: '.5rem'  }}
             >
               {/* here we check to see if a role has been selected and if the input field is in focus. If the role
               does not have a value and the field is not in focus, we display the suitcase icon. Otherwise it disappears. */}
@@ -270,7 +241,7 @@ export default function UserDetails(props) {
                 // onBlur handles when an element loses focus 
                 onBlur={handleBlur}
                 label='SelectRole'
-                sx={{ ...customStyle, borderRadius: '.375rem', height: '2.65rem' }}
+                sx={{ ...customTextField, borderRadius: '.375rem', height: '2.65rem' }}
               >
                 <MenuItem value="">
                   <em>None</em>

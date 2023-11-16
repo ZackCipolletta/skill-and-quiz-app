@@ -11,8 +11,7 @@ export const userInfoSlice = createSlice({
       state.users = state.users.filter(user => user.id !== action.payload);
     },
     setUserInfo: (state, action) => {
-      console.log('Setting userInfo:', action.payload);
-      state.users = [...state.users, ...action.payload.users];
+      state.users = action.payload.users;
     },
   },
 });

@@ -10,51 +10,6 @@ import { FaChevronLeft } from "react-icons/fa";
 
 // imported into 'Admin'
 
-const textFieldLabel = {
-  fontFamily: 'Inter',
-  fontSize: '1rem',
-  fontStyle: 'normal',
-  fontWeight: 500,
-  lineHeight: '1.5rem', // 150%
-};
-
-
-const status = (
-  < Box sx={{ marginTop: 3 }}>
-    <Typography style={{ textFieldLabel }} >
-      Status
-    </Typography>
-    <Box name='Status'
-      style=
-      {{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <TextField
-        id="Status"
-        placeholder="Status"
-        name="Status"
-        autoFocus
-        className='input-field'
-        size='small'
-        sx={{
-          width: 350,
-        }}
-        InputProps={{ sx: { borderRadius: 2 } }}
-      />
-    </Box>
-  </Box >
-);
-
-const customStyle = {
-  background: '#FFF',
-  width: '25rem',
-  height: '2.875rem',
-  flexShrink: 0,
-};
-
-
 export default function CreateNewUser(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -66,6 +21,27 @@ export default function CreateNewUser(props) {
   const [role, setRole] = useState('');
   const [focus, setFocus] = useState(false);
 
+  const textFieldLabel = {
+    fontFamily: 'Inter',
+    fontSize: '1rem',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    lineHeight: '1.5rem', // 150%
+  };
+
+  const customTextField = {
+    background: '#FFF',
+    width: !isMobile ? '25rem' : '15rem',
+    height: '2.875rem',
+    flexShrink: 0,
+    marginTop: '.5rem'
+  };
+
+  const adornmentStyle = {
+    color: '#a2a2a2',
+    marginRight: '0.5rem',
+    pt: '.25rem'
+  };
 
   const handleFocus = () => {
     setFocus(true);
@@ -82,7 +58,7 @@ export default function CreateNewUser(props) {
 
   return (
 
-    <Box style={{ marginTop: 25, paddingBottom: 5 }}>
+    <Box style={{ mt: 25, pb: 5 }}>
 
       <Box name="TopNav" style={{
         display: !isMobile ? 'flex' : 'block',
@@ -95,8 +71,7 @@ export default function CreateNewUser(props) {
         </h1>
 
         <Box name="BackButton" style={{
-          display: !isMobile ? 'flex' : 'block',
-          alignItems: 'center'
+          display: !isMobile ? 'flex' : 'block', alignItems: 'center'
         }}>
 
           {/* 'ml' does not work here, we must use marginLeft */}
@@ -116,14 +91,11 @@ export default function CreateNewUser(props) {
 
 
       <Box>
-        <Box sx={{ marginTop: 3 }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ mt: 3 }}>
+          <div style={{ display: !isMobile ? 'flex' : null, alignItems: 'center' }}>
             <Box name='FirstNameBox'
-              style=
-              {{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'left',
+              style={{
+                display: 'flex', flexDirection: 'column', alignItems: 'left',
               }}
             >
               <Typography style={{ textFieldLabel }}>
@@ -136,13 +108,13 @@ export default function CreateNewUser(props) {
                 type="FirstName"
                 className='input-field'
                 size='small'
-                sx={{ ...customStyle }}
+                sx={{ ...customTextField }}
                 InputProps={{
                   // here we check if the value of firstName has been set or not (or if the user has begun 
                   // typing in the TextField), if not we show the BiUser icon, if so, it disappears 
                   // (along with the placeholder text). The same is true for the remaining text fields
                   startAdornment: firstName === '' ? (
-                    <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
+                    <Box sx={{ ...adornmentStyle }}>
                       <BiUser />
                     </Box>
                   ) : null,
@@ -153,7 +125,7 @@ export default function CreateNewUser(props) {
 
             </Box> {/* first name box closes */}
 
-            <Box name='LastNameBox' sx={{ ml: 10 }}>
+            <Box name='LastNameBox' sx={{ ml: !isMobile ? 10 : null, mt: isMobile ? 3 : null }}>
               <Typography style={{ textFieldLabel }}>
                 Last Name
               </Typography>
@@ -164,10 +136,10 @@ export default function CreateNewUser(props) {
                 type="LastName"
                 className='input-field'
                 size='small'
-                sx={{ ...customStyle }}
+                sx={{ ...customTextField }}
                 InputProps={{
                   startAdornment: lastName === '' ? (
-                    <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
+                    <Box sx={{ ...adornmentStyle }}>
                       <BiUser />
                     </Box>
                   ) : null,
@@ -180,17 +152,12 @@ export default function CreateNewUser(props) {
           </div>
         </Box>
 
-        < Box sx={{ marginTop: 3 }}>
+        < Box sx={{ mt: 3 }}>
           <Typography style={{ textFieldLabel }} >
             Email
           </Typography>
           <Box name='Email'
-            style=
-            {{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
+            style={{ display: 'flex', alignItems: 'center' }} >
             <TextField
               id="Email"
               placeholder="Enter email address here"
@@ -198,10 +165,10 @@ export default function CreateNewUser(props) {
               autoFocus
               className='input-field'
               size='small'
-              sx={{ ...customStyle }}
+              sx={{ ...customTextField }}
               InputProps={{
                 startAdornment: email === '' ? (
-                  <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
+                  <Box sx={{ ...adornmentStyle }}>
                     <LuMail />
                   </Box>
                 ) : null,
@@ -219,7 +186,7 @@ export default function CreateNewUser(props) {
           </Typography>
           <FormControl size='small'>
             <InputLabel id="SelectRole"
-              sx={{ color: "#a2a2a2" }}
+              sx={{ color: "#a2a2a2", marginTop: '.5rem' }}
             >
               {/* here we check to see if a role has been selected and if the input field is in focus. If the role
               does not have a value and the field is not in focus, we display the suitcase icon. Otherwise it disappears. */}
@@ -244,7 +211,7 @@ export default function CreateNewUser(props) {
                 // onBlur handles when an element loses focus 
                 onBlur={handleBlur}
                 label='SelectRole'
-                sx={{ ...customStyle, borderRadius: '.375rem', height: '2.65rem' }}
+                sx={{ ...customTextField, borderRadius: '.375rem', height: '2.65rem' }}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -259,11 +226,7 @@ export default function CreateNewUser(props) {
         </Box>
 
       </Box>
-      <Button sx={{
-        display: 'block',
-        margin: '0 auto',
-        mt: 5
-      }}
+      <Button sx={{ display: 'block', margin: '0 auto', mt: 5 }}
         className="button-mediumBlue"
       // onClick={handleAddClick}
       >

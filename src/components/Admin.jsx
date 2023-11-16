@@ -115,24 +115,24 @@ export default function Admin() {
     setValue(newValue);
   };
 
-  const changeToNextTab = () => {
-    const nextTab = value + 1;
-    if (nextTab < 3) {
-      setValue(nextTab);
-    }
-  };
+  // const changeToNextTab = () => {
+  //   const nextTab = value + 1;
+  //   if (nextTab < 3) {
+  //     setValue(nextTab);
+  //   }
+  // };
 
-  const changeToPreviousTab = () => {
-    const nextTab = value - 1;
-    if (nextTab >= 0) {
-      setValue(nextTab);
-    }
-  };
+  // const changeToPreviousTab = () => {
+  //   const nextTab = value - 1;
+  //   if (nextTab >= 0) {
+  //     setValue(nextTab);
+  //   }
+  // };
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => changeToNextTab(),
-    onSwipedRight: () => changeToPreviousTab()
-  });
+  // const swipeHandlers = useSwipeable({
+  //   onSwipedLeft: () => changeToNextTab(),
+  //   onSwipedRight: () => changeToPreviousTab()
+  // });
 
   const tabStyles = {
     textTransform: 'none',
@@ -167,7 +167,9 @@ export default function Admin() {
   }, [selectedUser]);
 
   return (
-    <Box sx={{ marginTop: 5, marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
+    <Box sx={{ marginTop: 5, marginLeft: -3, marginRight: -3 }}
+      // {...swipeHandlers}
+    >
       <Box sx={{ width: '100%' }}>
         <Button
           onClick={loadUsers}
