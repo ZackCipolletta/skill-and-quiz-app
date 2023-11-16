@@ -56,13 +56,13 @@ export default function UserBoard(props) {
 
   const onUserClick = (id) => {
     props.selectUser(id);
-    console.log('from inside UserBoard, user id: ' + id)
+    console.log('from inside UserBoard, user id: ' + id);
     props.toggleUserDetails();
   };
 
   const printUsers = () => {
     console.log(users);
-}
+  };
 
   const { users } = useSelector((state) => state.userInfo);
 
@@ -139,7 +139,7 @@ export default function UserBoard(props) {
             The userInfo as a whole is represented by 'u' */}
             {/* because arrays in JS are immutable, we must first create a copy of the array so that we can sort it */}
             {[...users].sort((a, b) => b.score - a.score).map((u, i, arr) => (
-            // {props.userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
+              // {props.userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
 
               <TableRow key={i}
                 sx={{ '&:hover': { backgroundColor: '#f8fafe' } }}>
@@ -168,8 +168,7 @@ export default function UserBoard(props) {
                     borderBottom: i === (arr.length - 1) ? 'none' : '1px solid #E6E6E6'
                   }}
                 >
-                  {/* here is the user's image or placeHolder image */}
-                  <div style={{ display: 'flex', alignItems: 'center', }}>
+                  <Box style={{ display: 'flex', alignItems: 'center', }}>
                     {/* her is the username  */}
                     <Typography style={{
                       marginLeft: 10,
@@ -178,13 +177,14 @@ export default function UserBoard(props) {
                       fontStyle: 'normal',
                       fontWeight: 500,
                       lineHeight: '100%', // 1.75rem
+                      cursor: 'pointer'
                     }}
                       onClick={() => onUserClick(u.id)}
                     // onClick={() => props.selectUser(u.id)}
                     >
                       {u.firstName} {u.lastName}
                     </Typography>
-                  </div>
+                  </Box>
 
                 </TableCell>
 
