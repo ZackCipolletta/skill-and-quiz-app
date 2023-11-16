@@ -1,12 +1,19 @@
 import '../Styles/Components.css';
 import React, { useState } from "react";
-import { Button, Box, Typography, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Button, Box, Typography, TextField,
+  FormControl, InputLabel, Select, MenuItem
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { BiUser } from 'react-icons/bi';
 import { LuMail } from 'react-icons/lu';
 import { PiSuitcase } from "react-icons/pi";
 import { FaChevronLeft } from "react-icons/fa";
+import DeleteUserModal from './DeleteUserModal';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setUserInfo, deleteUser } from "./redux/User";
 
 // imported into 'Admin'
 
@@ -18,10 +25,7 @@ const textFieldLabel = {
   lineHeight: '1.5rem', // 150%
 };
 
-
 // pass in from 'Admin' the 'selectedUser' info to then be pre-populated in name and email fields.
-
-
 
 const status = (
   < Box sx={{ marginTop: 3 }}>
@@ -60,6 +64,7 @@ const customStyle = {
 
 
 export default function UserDetails(props) {
+  const dispatch = useDispatch();
 
   const { selectedUser, toggleUserDetails } = props;
 
@@ -71,6 +76,9 @@ export default function UserDetails(props) {
   // const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
   const [focus, setFocus] = useState(false);
+  const [deleteUserModalState, setDeleteUserModalState] = useState(false);
+  // const [deleteUser, setDeleteUser] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState('');
 
   const handleFocus = () => {
     setFocus(true);
@@ -80,9 +88,19 @@ export default function UserDetails(props) {
     setFocus(false);
   };
 
-  // const handleRoleChange = (e) => {
-  //   setRole(e.target.value);
-  // };
+  const handleDeleteUserButtonClick = (event, id, user) => {
+    setDeleteUserModalState(!deleteUserModalState);
+    // setDeleteUser(user);
+    setSelectedUserId(selectedUser.id);
+  };
+
+  const handleDeleteConfirm = () => {
+    dispatch(deleteUser(selectedUserId));
+    setDeleteUserModalState(!deleteUserModalState);
+    toggleUserDetails();
+  };
+
+  const { userInfo } = useSelector((state) => state.userInfo);
 
   return (
 
@@ -153,7 +171,7 @@ export default function UserDetails(props) {
                   ) : null,
                   sx: { borderRadius: '0.375rem' },
                 }}
-                // onChange={(e) => setFirstName(e.target.value)}
+              // onChange={(e) => setFirstName(e.target.value)}
               />
 
             </Box> {/* first name box closes */}
@@ -179,7 +197,7 @@ export default function UserDetails(props) {
                   ) : null,
                   sx: { borderRadius: '0.375rem' }
                 }}
-                // onChange={(e) => setLastName(e.target.value)}
+              // onChange={(e) => setLastName(e.target.value)}
               />
             </Box>
 
@@ -214,7 +232,7 @@ export default function UserDetails(props) {
                 ) : null,
                 sx: { borderRadius: '0.375rem' }
               }}
-              // onChange={(e) => setEmail(e.target.value)}
+            // onChange={(e) => setEmail(e.target.value)}
             />
           </Box>
         </Box >
@@ -267,20 +285,28 @@ export default function UserDetails(props) {
 
       </Box>
       <Box sx={{ display: 'block', margin: '0 auto', mt: 5, display: 'flex', justifyContent: 'center' }}>
-        <Button 
+        <Button
           className="button-redButton"
-          // onClick={handleAddClick}
+          onClick={handleDeleteUserButtonClick}
           sx={{ mr: 5 }}
         >
           Delete User
         </Button>
-        <Button 
+        <Button
           className="button-mediumBlue"
         // onClick={handleAddClick}
         >
           Save Changes
         </Button>
       </Box>
+
+      <DeleteUserModal
+        toggleDeleteState={deleteUserModalState}
+        handleClose={handleDeleteUserButtonClick}
+        selectedUser={selectedUser}
+        handleDeleteConfirm={handleDeleteConfirm}
+      />
+
     </Box>
   );
 

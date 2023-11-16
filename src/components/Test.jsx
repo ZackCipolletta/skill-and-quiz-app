@@ -1,184 +1,131 @@
-import '../Styles/Components.css';
-import React from "react";
-import { Box, IconButton, TableRow, TableCell, Typography, TableBody, Checkbox, TextField } from '@mui/material';
-import { PiTrashThin, PiPencilLineLight, PiStar, PiStarFill } from 'react-icons/pi';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React, { useRef } from "react";
+import Papa from 'papaparse';
+import { FaFileCsv } from 'react-icons/fa';
+import {
+  Button, 
+  IconButton,
+} from '@mui/material';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import {
-  setOptions, decreaseOptions, setQuestion, setAnswersArr,
-  setQuestionToEdit, setSingleCorrect, setMultipleCorrect,
-  setWarn, setSelectedFile, setAnswerType, setIsFavorite, setQuestionAnswerArr, addQuestion
-} from "./redux/quizQuestions";
+  setQuestionAnswerArr} from "./redux/quizQuestions";
 
-export default function Test(props) {
+
+
+export default function FilePicker(props) {
+  const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const optionsArray = ['A', 'B', 'C', 'D'];
-
-  const quiz = {
-    "name": "testQuiz",
-    "tags": [
-      "tag1",
-      "tag2",
-      "tag3"
-    ],
-    "questions": [
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          2
-        ],
-        "question": "what?",
-        "answers": [
-          "asdfas",
-          "fasdfasdfa",
-          "dfasdfa"
-        ]
-      },
-      {
-        "type": "Single",
-        "favorite": false,
-        "correct": [
-          0
-        ],
-        "question": "ASDFSDF",
-        "answers": [
-          "ASDFAS",
-          "FASDFASDF"
-        ]
-      },
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          1
-        ],
-        "question": "DFASDFASDF",
-        "answers": [
-          "FASDFASD",
-          "FASDFAS",
-          "FASDFASDF"
-        ]
-      },
-      {
-        "type": "TypeIn",
-        "favorite": false,
-        "correct": [
-          1
-        ],
-        "question": "This is a write in question?",
-        "answers": []
-      },
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          1
-        ],
-        "question": "DFASDFASDF",
-        "answers": [
-          "FASDFASD",
-          "FASDFAS",
-          "FASDFASDF"
-        ]
-      },
-    ]
-  };
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
+  // const parseCSV = (file) => {
+  //   Papa.parse(file, {
+  //     complete: (result) => {
+  //       // The 'result' object now contains the CSV data as JSON objects
+  //       const jsonData = result.data;
+
+  //       // Helper function to split a field if it contains the delimiter
+  //       const splitIfContains = (field) => {
+  //         return field && field.includes(',') ? field.split(',') : field;
+  //       };
+
+  //       // Modify the jsonData to split fields with '|' delimiter
+  //       const modifiedData = jsonData.map((row) => ({
+  //         ...row,
+  //         correct: splitIfContains(row.correct),
+  //         answers: splitIfContains(row.answers),
+  //       }));
+
+
+  //       console.log(modifiedData);
+
+  //       // You can pass 'modifiedData' to your parent component via the 'onFileSelected' callback
+  //       // onFileSelected(modifiedData);
+
+  //       console.log('CSV to JSON conversion complete.');
+  //       addUploadedQuestions(modifiedData);
+  //     },
+  //     header: true, // Set to true if the CSV file has headers
+  //   });
+  // };
+
+
+  const printText = (data) => {
+    data.map(item => `${item.number} ${item.word}`);
+  }
+
+//   const transformedData = data.map(item => `${item.number} ${item.word}`);
+// console.log(transformedData);
+
+  const addUploadedQuestions = (upload) => {
+    const updatedQuestions = upload.map((obj) => {
+      return {
+        type: obj.type,
+        favorite: obj.favorite ? JSON.parse(obj.favorite) : false,
+        correct: Array.isArray(obj.correct)
+          ? obj.correct.map((str) => parseInt(str, 10))
+          : [parseInt(obj.correct)],
+        question: obj.question,
+        answers: obj.answers,
+      };
+    });
+  
+    const newQuestionAnswerArr = {
+      questions: [...questionAnswerArr.questions, ...updatedQuestions],
+    };
+  
+    dispatch(setQuestionAnswerArr(newQuestionAnswerArr));
+  };
+  
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    printText(file);
+    // parseCSV(file);
+    console.log(printText);
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
 
   return (
-    <Box sx={{ mt: 10 }}>
-      <TableBody>
-        {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
-        {quiz.questions.map((q, i) => (
-          <TableRow key={i}
-            sx={{
-              '&:hover': {
-                backgroundColor: '#f8fafe',
-                // border: '2px solid #3ea7f2 !important'
-              }
-            }}
-          >
-            <TableCell
-              sx={{
-                fontWeight: 'bold',
-                borderBottom: "none",
-                verticalAlign: 'top'
-              }}
-            >
-              {/* we use the index (i) to add number each question when it is displayed */}
-              {i + 1}
-            </TableCell>
+    <>
+      <Button
+        variant="outlined"
+        size='small'
+        id="importButton"
+        sx={{
+          p: 0,
+          pr: 1,
+          borderRadius: '10px',
+          color: '#a2a2a2',
+          borderColor: '#c4c4c4',
+          '&:hover': {
+            borderColor: 'black',
+            backgroundColor: 'white'
+          }
+        }}
+        onClick={handleButtonClick} // in order for the button to handle picking the CSV file, onClick we actaully
+      // have it call a function, which calls the file picker input. Which is a hidden 'input' component.
+      >
+        <IconButton>
+          <FaFileCsv color='green' />
+        </IconButton>
+        Import using CSV
+      </Button>
 
-            <TableCell
-              sx={{ width: 750, borderBottom: "none", verticalAlign: 'top' }}
-            >
 
-              {/* here we display the question */}
-              <Typography
-                style={{
-                  fontWeight: 'bold',
-                }}
-              >
-                {q.question}
-              </Typography>
-
-              {/* Then we map array of answers onto this template */}
-              <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
-                {q.type !== "TypeIn" ? (
-                  <>
-
-                    <Box>
-                      {q.answers.map((answer, index) => (
-                        <Typography
-                          key={index}
-                          style={{
-                            marginTop: !isMobile ? 10 : 5,
-                            border: '1.558px solid #488BFD',
-                            paddingLeft: 7,
-                            paddingRight: 7,
-                            marginRight: 5,
-                            borderRadius: '12px',
-                            color: '#488BFD',
-                            background: 'F6FFF6'
-                          }}
-                        >
-                          {optionsArray[index]}.{answer}
-                        </Typography>
-                      ))}
-                    </Box>
-
-                  </>
-                ) : (
-
-                  <TextField
-                    id="answer"
-                    placeholder="Enter your answer here"
-                    name="answer"
-                    size='small'
-                    sx={{
-                      width: 550,
-                      margin: 0,
-                    }}
-                    InputProps={{ sx: { borderRadius: 2 } }}
-                  />
-                )}
-              </Box>
-
-            </TableCell>
-
-          </TableRow>
-        ))
-        }
-      </TableBody >
-    </Box>
+      <input //Here 
+        type="file"
+        accept=".txt" // specify the file type to accept
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
+    </>
   );
-}
+};
+

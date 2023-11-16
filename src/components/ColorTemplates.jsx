@@ -15,7 +15,8 @@ export default function ColorTemplates(props) {
   const { quizColor } = useSelector((state) => state.quizColor);
 
   const handleChange = (color) => {
-    dispatch (setQuizColor(color) );
+    dispatch(setQuizColor(color));
+    props.selectColor(color)
   };
 
   const emptyRoundButtonStyle = {
