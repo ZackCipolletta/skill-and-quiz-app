@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-import { Box, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Button, Tabs, Tab, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSwipeable } from 'react-swipeable';
@@ -47,9 +47,6 @@ export default function Admin() {
   const [value, setValue] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
 
-
-
-
   const newInfoArr = [
     {
       firstName: 'FirstName1',
@@ -93,18 +90,22 @@ export default function Admin() {
     },
   ];
 
-  const { userInfo } = useSelector((state) => state.userInfo);
-  
-  useEffect(() => {
-    dispatch(setUserInfo({
-      users: newInfoArr,
-    })
-    );
-  }, []);
+  const { users } = useSelector((state) => state.userInfo);
+
+  // useEffect(() => {
+  //   dispatch(setUserInfo({
+  //     users: newInfoArr,
+  //   })
+  //   );
+  // }, []);
+
+  const loadUsers = () => {
+    dispatch(setUserInfo({ users: newInfoArr }));
+  };
 
   useEffect(() => {
-    console.log(userInfo)
-  }, [userInfo]);
+    console.log(users);
+  }, [users]);
 
 
   const theme = useTheme();
@@ -156,22 +157,21 @@ export default function Admin() {
   };
 
   const selectUser = (id) => {
-    const selectedUser = userInfo.users.find(user => user.id === id);
-    setSelectedUser(selectedUser);
+    const user = users.find(user => user.id === id);
+    console.log(id);
+    setSelectedUser(user);
   };
 
   useEffect(() => {
     console.log(selectedUser);
   }, [selectedUser]);
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
-
   return (
     <Box sx={{ marginTop: 5, marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
       <Box sx={{ width: '100%' }}>
-
+        <Button
+          onClick={loadUsers}
+        >Load Users</Button>
         <Box sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -204,7 +204,7 @@ export default function Admin() {
                 <UserBoard
                   toggleCreate={toggleCreate}
                   toggleUserDetails={toggleUserDetails}
-                  userInfo={userInfo}
+                  // userInfo={userInfo}
                   selectUser={selectUser}
                   selectedUser={selectedUser}
                 />

@@ -95,6 +95,7 @@ export default function UserDetails(props) {
   };
 
   const handleDeleteConfirm = () => {
+    console.log(selectedUserId)
     dispatch(deleteUser(selectedUserId));
     setDeleteUserModalState(!deleteUserModalState);
     toggleUserDetails();

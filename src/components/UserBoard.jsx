@@ -56,11 +56,15 @@ export default function UserBoard(props) {
 
   const onUserClick = (id) => {
     props.selectUser(id);
+    console.log('from inside UserBoard, user id: ' + id)
     props.toggleUserDetails();
   };
 
+  const printUsers = () => {
+    console.log(users);
+}
 
-  const { userInfo } = useSelector((state) => state.userInfo);
+  const { users } = useSelector((state) => state.userInfo);
 
   return (
     <Box style={{ marginTop: 25, paddingBottom: 5 }}>
@@ -74,6 +78,10 @@ export default function UserBoard(props) {
         <h1 className='darkBlue-text'>
           User Board  {/* Google web font 'Anton' */}
         </h1>
+
+        <Button
+          onClick={printUsers}
+        > print users </Button>
 
         <Box name="Search&Button" style={{
           display: !isMobile ? 'flex' : 'block',
@@ -130,7 +138,7 @@ export default function UserBoard(props) {
             {/* we sort userInfo by score high to low, then map onto this template. 
             The userInfo as a whole is represented by 'u' */}
             {/* because arrays in JS are immutable, we must first create a copy of the array so that we can sort it */}
-            {[...userInfo.users].sort((a, b) => b.score - a.score).map((u, i, arr) => (
+            {[...users].sort((a, b) => b.score - a.score).map((u, i, arr) => (
             // {props.userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
 
               <TableRow key={i}
