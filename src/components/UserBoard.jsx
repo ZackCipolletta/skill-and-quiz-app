@@ -67,7 +67,7 @@ export default function UserBoard(props) {
   const { users } = useSelector((state) => state.userInfo);
 
   return (
-    <Box style={{ marginTop: 25, paddingBottom: 5 }}>
+    <Box style={{ marginTop: '2rem', paddingBottom: '1rem' }}>
 
       <Box name="TopNav" style={{
         display: !isMobile ? 'flex' : 'block',

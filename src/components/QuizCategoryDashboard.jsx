@@ -1,7 +1,7 @@
 
 import '../Styles/Components.css';
 import React, { useState, useEffect } from 'react';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 import CreateNewCategoryModal from './CreateNewCategoryModal';
@@ -77,8 +77,8 @@ export default function QuizCategoryDashboard(props) {
 
   return (
     <>
-      <div style={{ marginTop: '20px' }} >
-        <div style={{
+      <Box style={{ marginTop: '2rem', paddingBottom: '1rem' }} >
+        <Box style={{
           display: !isMobile ? 'flex' : 'block',
           justifyContent: !isMobile ? 'space-between' : 'flex-start',
           alignItems: 'center'
@@ -88,7 +88,7 @@ export default function QuizCategoryDashboard(props) {
             Quiz Board  {/* Google web font 'Anton' */}
           </h1>
 
-          <div style={{
+          <Box style={{
             display: !isMobile ? 'flex' : 'block',
             alignItems: 'center'
           }}>
@@ -103,14 +103,14 @@ export default function QuizCategoryDashboard(props) {
               Create new category
             </Button>
 
-          </div>
-        </div>
+          </Box>
+        </Box>
         <CreateNewCategoryModal
           toggle={createModalState}
           handleCancel={handleCreateNewCategoryClick}
           handleAddNewCategory={addCategory}
         />
-      </div>
+      </Box>
       <QuizCategories
         categoriesArray={categoriesArray}
         deleteClick={handleDeleteButtonClick}

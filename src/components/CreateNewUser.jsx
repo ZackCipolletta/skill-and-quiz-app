@@ -58,12 +58,14 @@ export default function CreateNewUser(props) {
 
   return (
 
-    <Box style={{ mt: 25, pb: 5 }}>
+    <Box>
 
       <Box name="TopNav" style={{
         display: !isMobile ? 'flex' : 'block',
         justifyContent: !isMobile ? 'space-between' : 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: '2rem',
+        paddingBottom: '1rem'
       }}
       >
         <h1 className='darkBlue-text'>
