@@ -39,17 +39,13 @@ export default function Leaderboard() {
     ],
   });
 
-  const borders = {
-    borderRight: '1px solid #e0e0e0',
-    borderBottom: '1px solid #e0e0e0'
-  };
+  const borders = { borderRight: '1px solid #e0e0e0', borderBottom: '1px solid #e0e0e0' };
 
   return (
-    <Box
-      style={{ marginTop: 35, paddingBottom: 5 }}>
+    <Box style={{ marginTop: 35, paddingBottom: 5 }}>
 
       <Box sx={{ mt: 3, mb: 5 }}>
-        <TableContainer sx={{ border: '1px solid #E6E6E6', borderRadius: '0.9375rem', overflow: 'hidden' }}>
+        <TableContainer sx={{ border: '1px solid #E6E6E6', borderRadius: '0.9375rem' }}>
           <Table >
 
             <TableHead>
@@ -59,7 +55,8 @@ export default function Leaderboard() {
                 fontSize: '2rem',
                 fontStyle: 'normal',
                 fontWeight: 400,
-                lineHeight: '100%'
+                lineHeight: '100%',
+                minWidth: '2rem'
               }}>
                 <TableCell sx={{ ...borders }}>
                   <h2>#</h2>

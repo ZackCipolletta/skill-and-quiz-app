@@ -182,7 +182,6 @@ export default function UserDetails(props) {
               id="Email"
               placeholder="Enter email address here"
               name="Email"
-              autoFocus
               className='input-field'
               size='small'
               value={selectedUser ? selectedUser.email : ''}

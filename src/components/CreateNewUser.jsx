@@ -154,7 +154,6 @@ export default function CreateNewUser(props) {
               id="Email"
               placeholder="Enter email address here"
               name="Email"
-              autoFocus
               className='input-field'
               size='small'
               sx={{ ...customTextField }}

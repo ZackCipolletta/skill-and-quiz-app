@@ -5,8 +5,12 @@ import {
   Box, TableContainer, Table, TableHead, Typography,
   TableRow, TableCell, Paper
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function QuestionAnalysis() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [userInfo, setUserInfo] = useState({
     users: [
@@ -71,7 +75,6 @@ export default function QuestionAnalysis() {
         favorite: false,
         question: 'How many planets are there in the solar system?',
         answers: [],
-        correct: 99,
       }
     ],
   };
@@ -80,7 +83,7 @@ export default function QuestionAnalysis() {
     display: 'flex',
     borderLeft: '1.333px solid var(--connectlink-gray, #F1F6FC)',
     padding: 5,
-    width: 35,
+    width: !isMobile ? '2rem' : '1.45rem',
     background: '#D64751',
     borderRadius: '0rem 2.5rem 2.5rem 0rem',
     color: '#FFF',
@@ -151,7 +154,7 @@ export default function QuestionAnalysis() {
                 </TableCell>
 
                 <TableCell
-                  sx={{ width: 750, borderRight: '1px solid #e0e0e0', borderBottom: "none" }}
+                  sx={{ borderRight: '1px solid #e0e0e0', borderBottom: "none" }}
                 >
 
                   {/* here we display the question */}
@@ -186,7 +189,7 @@ export default function QuestionAnalysis() {
                               : 'rgba(103, 194, 124, .09)',
                         }}
                       >
-                        {optionsArray[index]}.  {answer}
+                        {optionsArray[index]}.{answer}
                       </Typography>
 
 
@@ -197,29 +200,36 @@ export default function QuestionAnalysis() {
                 <TableCell
                   sx={{
                     borderRight: '1px solid #e0e0e0',
-                    borderBottom: "none"
+                    borderBottom: "none",
+
                   }}>
 
                   <Box style={{ display: 'flex' }}>
-                    {/* first div (for q.correct) */}
-                    <Box
-                      style={{
-                        ...customBoxStyle,
-                        background: 'var(--connectlink-green, #67C27C)',
-                        borderRadius: '2.5rem 0rem 0rem 2.5rem',
-                        display: 'flex',
-                        alignItems: 'right',
-                        justifyContent: 'right',
-                        flex: `${q.correct}%`
-                      }}
-                    >
-                      {q.correct}%
-                    </Box>
+                    {q.correct ? (
+                      <>
+                        <Box
+                          style={{
+                            ...customBoxStyle,
+                            background: 'var(--connectlink-green, #67C27C)',
+                            borderRadius: '2.5rem 0rem 0rem 2.5rem',
+                            display: 'flex',
+                            alignItems: 'right',
+                            justifyContent: 'right',
+                            flex: `${q.correct}%`
+                          }}
+                        >
+                          {q.correct}%
+                        </Box>
 
-                    {/* second div (for 100 - q.correct) */}
-                    <Box style={{ ...customBoxStyle, flex: `${100 - q.correct}%` }}>
-                      {100 - q.correct}%
-                    </Box>
+
+                        <Box style={{ ...customBoxStyle, flex: `${100 - q.correct}%` }}>
+                          ${100 - q.correct}%
+                        </Box>
+                      </>
+                    ) : (
+                      <Typography> No Data</Typography>
+                    )}
+
                   </Box>
 
                 </TableCell>
