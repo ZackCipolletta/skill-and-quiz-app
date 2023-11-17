@@ -31,7 +31,7 @@ export default function CreateNewUser(props) {
 
   const customTextField = {
     background: '#FFF',
-    width: !isMobile ? '25rem' : '15rem',
+    width: !isMobile ? '25rem' : '18rem',
     height: '2.875rem',
     flexShrink: 0,
     marginTop: '.5rem'
@@ -61,29 +61,19 @@ export default function CreateNewUser(props) {
     <Box>
 
       <Box name="TopNav" style={{
-        display: !isMobile ? 'flex' : 'block',
+        display: 'flex',
         justifyContent: !isMobile ? 'space-between' : 'flex-start',
         alignItems: 'center',
         marginTop: '2rem',
-        paddingBottom: '1rem'
+        // paddingBottom: '1rem'
       }}
       >
         <h1 className='darkBlue-text'>
           User Board  {/* Google web font 'Anton' */}
         </h1>
 
-        <Box name="BackButton" style={{
-          display: !isMobile ? 'flex' : 'block', alignItems: 'center'
-        }}>
-
-          {/* 'ml' does not work here, we must use marginLeft */}
-          <Button
-            className='button-mediumBlue'
-            style={{
-              ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
-            }}
-            onClick={props.toggleCreate}
-          >
+        <Box name="BackButton" sx={{ marginLeft: isMobile ? '2rem' : null, marginRight: isMobile ? '-1.5rem' : null}} >
+          <Button className='button-mediumBlue' onClick={props.toggleCreate} >
             <FaChevronLeft />
             Back
           </Button>

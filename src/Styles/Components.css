@@ -17,18 +17,30 @@ Button.button-darkBlue {
     font-weight: 500;
     line-height: 1.5rem;
     display: flex;
-    height: 2.5rem;
-    padding: 0.8125rem 1rem;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     flex-shrink: 0;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     white-space: nowrap;
+}
 
-    &:hover {
-        background-color: var(--darkBlue);
-        /* color: white; */
+@media (min-width: 600px) {
+    Button.button-darkBlue {
+        height: 2.5rem;
+        padding: 0.8125rem 1rem;
+
+        &:hover {
+            background-color: var(--darkBlue);
+            /* color: white; */
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .button-darkBlue {
+        height: null;
+        padding: null;
     }
 }
 
@@ -97,13 +109,11 @@ Button.button-mediumBlue {
     font-weight: 500;
     line-height: 1.5rem;
     display: flex;
-    height: 2.5rem;
-    padding: 0.8125rem 1rem;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     flex-shrink: 0;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     white-space: nowrap;
 
     &:hover {
@@ -112,17 +122,29 @@ Button.button-mediumBlue {
     }
 }
 
+@media (min-width: 600px) {
+    Button.button-mediumBlue {
+        height: 2.5rem;
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .button-mediumBlue {
+        height: null;
+        padding: null;
+    }
+}
+
 Button.button-redButton {
     background-color: var(--warning);
     color: white;
-    
+
     font-size: 1rem;
     font-style: normal;
     font-weight: 500;
     line-height: 1.5rem;
     display: flex;
-    height: 2.5rem;
-    padding: 0.8125rem 1rem;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
@@ -133,6 +155,25 @@ Button.button-redButton {
     &:hover {
         background-color: var(--warning);
         color: white;
+    }
+}
+
+@media (min-width: 600px) {
+    Button.button-redButton {
+        height: 2.5rem;
+        padding: 0.8125rem 1rem;
+
+        &:hover {
+            background-color: var(--darkBlue);
+            /* color: white; */
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .button-redButton {
+        height: null;
+        padding: null;
     }
 }
 

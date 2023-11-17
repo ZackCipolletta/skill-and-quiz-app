@@ -91,7 +91,7 @@ export default function UserBoard(props) {
 
           {/* 'ml' does not work here, we must use marginLeft */}
           <Button
-            className='navButton button-mediumBlue'
+            className='button-mediumBlue'
             style={{
               ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
             }}

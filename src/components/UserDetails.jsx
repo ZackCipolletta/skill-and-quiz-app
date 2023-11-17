@@ -34,7 +34,7 @@ export default function UserDetails(props) {
   const [deleteUserModalState, setDeleteUserModalState] = useState(false);
   // const [deleteUser, setDeleteUser] = useState('');
   const [selectedUserId, setSelectedUserId] = useState('');
-  
+
   const textFieldLabel = {
     fontFamily: 'Inter',
     fontSize: '1rem',
@@ -42,10 +42,10 @@ export default function UserDetails(props) {
     fontWeight: 500,
     lineHeight: '1.5rem', // 150%
   };
-  
+
   const customTextField = {
     background: '#FFF',
-    width: !isMobile ? '25rem' : '15rem',
+    width: !isMobile ? '25rem' : '18rem',
     height: '2.875rem',
     flexShrink: 0,
     marginTop: '.5rem'
@@ -66,7 +66,7 @@ export default function UserDetails(props) {
   };
 
   const handleDeleteConfirm = () => {
-    console.log(selectedUserId)
+    console.log(selectedUserId);
     dispatch(deleteUser(selectedUserId));
     setDeleteUserModalState(!deleteUserModalState);
     toggleUserDetails();
@@ -79,28 +79,19 @@ export default function UserDetails(props) {
     <Box style={{ marginTop: '2rem', paddingBottom: '1rem' }}>
 
       <Box name="TopNav" style={{
-        display: !isMobile ? 'flex' : 'block',
+        display: 'flex',
         justifyContent: !isMobile ? 'space-between' : 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: '2rem',
+        // paddingBottom: '1rem'
       }}
       >
         <h1 className='darkBlue-text'>
           User Board  {/* Google web font 'Anton' */}
         </h1>
 
-        <Box name="BackButton" style={{
-          display: !isMobile ? 'flex' : 'block',
-          alignItems: 'center'
-        }}>
-
-          {/* 'ml' does not work here, we must use marginLeft */}
-          <Button
-            className='button-mediumBlue'
-            style={{
-              ...(!isMobile ? { marginLeft: '50px' } : { marginTop: 20 })
-            }}
-            onClick={toggleUserDetails}
-          >
+        <Box name="BackButton" sx={{ marginLeft: isMobile ? '2rem' : null, marginRight: isMobile ? '-1.5rem' : null }}>
+          <Button className='button-mediumBlue' onClick={toggleUserDetails} >
             <FaChevronLeft />
             Back
           </Button>
@@ -216,7 +207,7 @@ export default function UserDetails(props) {
           </Typography>
           <FormControl size='small'>
             <InputLabel id="SelectRole"
-              sx={{ color: "#a2a2a2", marginTop: '.5rem'  }}
+              sx={{ color: "#a2a2a2", marginTop: '.5rem' }}
             >
               {/* here we check to see if a role has been selected and if the input field is in focus. If the role
               does not have a value and the field is not in focus, we display the suitcase icon. Otherwise it disappears. */}
@@ -231,25 +222,28 @@ export default function UserDetails(props) {
                 </Box>)}
               Select Role
             </InputLabel>
-            <Box>
-              <Select
-                labelId='SelectRole'
-                id='SelectRole'
-                value={role}
-                // onChange={handleRoleChange}
-                onFocus={handleFocus}
-                // onBlur handles when an element loses focus 
-                onBlur={handleBlur}
-                label='SelectRole'
-                sx={{ ...customTextField, borderRadius: '.375rem', height: '2.65rem' }}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={'User'}>User</MenuItem>
-                <MenuItem value={'Creator'}>Creator</MenuItem>
-                <MenuItem value={'Admin'}>Admin</MenuItem>
-              </Select>
+
+            <Box >
+              <FormControl>
+                <Select
+                  labelId='SelectRole'
+                  id='SelectRole'
+                  value={role}
+                  // onChange={handleRoleChange}
+                  onFocus={handleFocus}
+                  // onBlur handles when an element loses focus 
+                  onBlur={handleBlur}
+                  label='SelectRole'
+                  sx={{ ...customTextField, borderRadius: '.375rem', height: '2.65rem' }}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={'User'}>User</MenuItem>
+                  <MenuItem value={'Creator'}>Creator</MenuItem>
+                  <MenuItem value={'Admin'}>Admin</MenuItem>
+                </Select>
+              </FormControl>
             </Box>
 
           </FormControl>

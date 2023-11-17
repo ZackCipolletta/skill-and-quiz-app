@@ -1,17 +1,14 @@
 
 import '../Styles/Components.css';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Box, Typography, TextField, Link } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { LiaEditSolid } from 'react-icons/lia';
-
+import { GoLock } from "react-icons/go";
 
 
 export default function Settings() {
-
-  const navigate = useNavigate();
 
   // const [deleteQuiz, setDeleteQuiz] = useState([]);
   const theme = useTheme();
@@ -19,11 +16,6 @@ export default function Settings() {
   const [password, setPassword] = useState('');
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
-
-
-  const handleCreateNewQuizClick = () => {
-    navigate('/newquiz');
-  };
 
   const textFieldLabel = {
     fontFamily: 'Inter',
@@ -33,33 +25,36 @@ export default function Settings() {
     lineHeight: '1.5rem', // 150%
   };
 
+  const textFieldStyle = {
+    width: !isMobile ? '20rem' : '95%'
+  };
+
   const handleChangePasswordclick = () => {
     setChangePassword(true);
   };
 
+  const adornmentStyle = {
+    color: '#a2a2a2',
+    marginRight: '0.5rem',
+    pt: '.25rem'
+  };
+
 
   const creationDate = (
-    <Box sx={{ marginTop: 5 }}>
+    <Box sx={{ mt: '2.5rem' }}>
       <Typography style={{ textFieldLabel }} >
         Creation Date
       </Typography>
       <Box name='CreationDate'
-        style=
-        {{
-          display: 'flex',
-          alignItems: 'center',
-        }}
+        style={{ display: 'flex', alignItems: 'center' }}
       >
         <TextField
           id="CreationDate"
           name="CreationDate"
-          autoFocus
           className='input-field'
           size='small'
-          sx={{
-            width: 350,
-          }}
-          InputProps={{ sx: { borderRadius: 2 } }}
+          sx={{ ...textFieldStyle }}
+          InputProps={{ sx: { borderRadius: '0.375rem' } }}
         />
       </Box>
     </Box>
@@ -67,85 +62,63 @@ export default function Settings() {
 
 
   const status = (
-    < Box sx={{ marginTop: 3 }}>
+    < Box sx={{ mt: '1.5rem' }}>
       <Typography style={{ textFieldLabel }} >
         Status
       </Typography>
       <Box name='Status'
-        style=
-        {{
-          display: 'flex',
-          alignItems: 'center',
-        }}
+        style={{ display: 'flex', alignItems: 'center' }}
       >
         <TextField
           id="Status"
           placeholder="Status"
           name="Status"
-          autoFocus
           className='input-field'
           size='small'
-          sx={{
-            width: 350,
-          }}
-          InputProps={{ sx: { borderRadius: 2 } }}
+          sx={{ ...textFieldStyle }}
+          InputProps={{ sx: { borderRadius: '0.375rem' } }}
         />
       </Box>
+      <Box sx={{ height: '3rem' }} />
     </Box >
   );
 
   return (
-    <Box style={!isMobile ? { marginTop: 20 } : { marginTop: 1 }} >
+    <Box style={{ marginTop: '2rem' }} >
 
-      <div style={{
+      <Box style={{
         display: !isMobile ? 'flex' : 'block',
-        justifyContent: !isMobile ? 'space-between' : 'flex-start',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
       }}
       >
         <h1 className='darkBlue-text'>
           Settings  {/* Google web font 'Anton' */}
         </h1>
 
-        <div style={{
-          display: !isMobile ? 'flex' : 'block',
-          alignItems: 'center'
-        }}>
+        <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem' }}>
 
           {/* 'ml' does not work here, we must use marginLeft */}
-          <Button
-            className='button-mediumBlue'
-            style={{
-              ...(isMobile ? { marginTop: 20 } : { marginLeft: 20 }),
-            }}
-          >
+          <Button className='button-mediumBlue' >
             Save Changes
           </Button>
-          <Button
-            className='button-darkBlue'
-            style={{
-              ...(isMobile ? { marginTop: 20 } : { marginLeft: 20 }),
-            }}
-          >
+          <Button className='button-darkBlue' >
             Logout
           </Button>
 
+        </Box>
 
-        </div>
-      </div>
+      </Box>
 
       <Box>
 
-        <Box sx={{ marginTop: 3 }}>
+        <Box sx={{ mt: '1.5rem' }}>
           <Typography style={{ textFieldLabel }} >
             Name
           </Typography>
           <Box name='name'
-            style=
-            {{
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            style={{ display: 'flex', alignItems: 'center' }}
           >
             <TextField
               id="userName"
@@ -153,11 +126,11 @@ export default function Settings() {
               name="userName"
               size='small'
               sx={{
-                width: 350,
+                ...textFieldStyle
               }}
               InputProps={{
                 endAdornment: (
-                  <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                  <Box sx={{ color: '#637381', mr: '0.5rem' }}>
                     <LiaEditSolid />
                   </Box>
                 ),
@@ -167,48 +140,38 @@ export default function Settings() {
           </Box>
         </Box>
 
-        <Box sx={{ marginTop: 3 }}>
+        <Box sx={{ mt: '1.5rem' }}>
           <Typography style={{ textFieldLabel }} >
             Email
           </Typography>
           <Box name='Email'
-            style=
-            {{
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            style={{ display: 'flex', alignItems: 'center' }}
           >
             <TextField
               id="Email"
               placeholder="User Email"
               name="Email"
-              autoFocus
               className='input-field'
               size='small'
               sx={{
-                width: 350,
+                ...textFieldStyle
               }}
               InputProps={{
                 endAdornment: (
-                  <Box sx={{ color: '#637381', marginRight: '0.5rem' }}>
+                  <Box sx={{ color: '#637381', mr: '0.5rem' }}>
                     <LiaEditSolid />
                   </Box>
                 ),
-                sx: { borderRadius: 2 }
+                sx: { borderRadius: '0.375rem' }
               }}
             />
           </Box>
         </Box>
 
-        <Box sx={{ marginTop: 3 }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ mt: '1.5rem' }}>
+          <div style={{ display: !isMobile ? 'flex' : null, alignItems: 'center' }}>
             <Box name='CurrentPassword'
-              style=
-              {{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'left',
-              }}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'left', }}
             >
               <Typography style={{ textFieldLabel }}>
                 Current Password
@@ -222,10 +185,17 @@ export default function Settings() {
                 size='small'
                 error={!isValidPassword && password !== ''}
                 helperText={!isValidPassword && password !== '' ? "Enter At Least 8 Characters Long" : ""}
-                sx={{
-                  width: 350,
-                  borderRadius: 2,
+                sx={{ ...textFieldStyle }}
+                InputProps={{
+                  // If we want to remove the lock icon when password is filled in or when user is typing, look at CreateNewUser
+                  // component, where we do something similar for first and last name
+                  startAdornment:
+                    <Box sx={{ ...adornmentStyle }}>
+                      <GoLock />
+                    </Box>,
+                  sx: { borderRadius: '0.375rem' },
                 }}
+
               />
               {!changePassword ?
                 <Link
@@ -248,7 +218,7 @@ export default function Settings() {
             </Box>
 
             {changePassword ?
-              <Box name='NewPassword' sx={{ ml: 10 }}>
+              <Box name='NewPassword' sx={{ ml: !isMobile ? 10 : null, mt: !isMobile ? null : '1.5rem' }}>
                 <Typography style={{ textFieldLabel }}>
                   New Password
                 </Typography>
@@ -261,9 +231,13 @@ export default function Settings() {
                   size='small'
                   error={!isValidPassword && password !== ''}
                   helperText={!isValidPassword && password !== '' ? "Enter At Least 8 Characters Long" : ""}
-                  sx={{
-                    width: 350,
-                    borderRadius: 2,
+                  sx={{ ...textFieldStyle }}
+                  InputProps={{
+                    startAdornment:
+                      <Box sx={{ ...adornmentStyle }}>
+                        <GoLock />
+                      </Box>,
+                    sx: { borderRadius: '0.375rem' },
                   }}
                 />
               </Box>
