@@ -16,7 +16,6 @@ export default function ColorTemplates(props) {
 
   const handleChange = (color) => {
     dispatch(setQuizColor(color));
-    props.selectColor(color)
   };
 
   const emptyRoundButtonStyle = {

@@ -1,15 +1,26 @@
 
 import '../Styles/Components.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button, Box, IconButton, TableContainer, Table, TableHead,
-  TableRow, TableCell, Paper} from '@mui/material';
+  TableRow, TableCell, Paper
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { LuAward } from 'react-icons/lu';
 import { PiTagChevron } from 'react-icons/pi';
 import QuestionsAndAnswers from './QuestionsAndAnswers';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setQuestionAnswerArr } from "./redux/quizQuestions";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Quiz() {
+  const dispatch = useDispatch();
+
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [options, setOptions] = useState(0);
   const [quizInfo, setQuizInfo] = useState({
@@ -44,7 +55,10 @@ export default function Quiz() {
         answers: [],
       }
     ],
-  })
+  });
+
+  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
+
 
   const handleRemoveQuestion = (i) => {
     // first we create a copy of the existing questions objects in questionAnswerArr array
@@ -59,6 +73,62 @@ export default function Quiz() {
   };
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+    dispatch(setQuestionAnswerArr({
+      questions: quizInfo.questions,
+    }));
+
+  }, [quizInfo]);
+
+  const buttons = (
+    <>
+      < IconButton className='button-lightGray'
+        style={{
+          marginTop: '.2rem',
+          marginRight: '1rem',
+          display: 'flex',
+          width: '2.6rem',
+          height: '2.083rem',
+          borderRadius: '0.5rem',
+          background: '#F1F6FC)',
+          transform: "rotate(90deg) scaleY(1.2)"
+
+        }
+        }>
+        <PiTagChevron />
+      </IconButton >
+
+      <IconButton className='button-lightGreen'
+        style={{
+          marginRight: '1rem',
+          display: 'flex',
+          width: '2.5rem',
+          height: '2.5rem',
+          borderRadius: '0.5rem',
+          background: '#F1F6FC)'
+        }}>
+        <LuAward />
+      </IconButton>
+
+      <Button
+        className='button-redButton'
+        sx={{ mr: '1rem', padding: 0 }}>
+        Delete
+      </Button>
+      <Button
+        className='button-mediumBlue'
+        sx={{ padding: 0 }}
+      >
+        Cancel
+      </Button>
+
+    </>
+  );
+
+
+
 
   return (
     <Box
@@ -94,43 +164,12 @@ export default function Quiz() {
           </h1>
         </Box> {/* quizImage&Name closes */}
 
-        <Box name='buttons'>
-          <IconButton className='button-lightGray'
-            style={{
-              borderRadius: 5,
-              mr: 5,
-              marginRight: 1,
-              paddingBottom: 0,
-              paddingTop: 0,
-              paddingLeft: 3,
-              paddingRight: 3,
-              transform: "rotate(90deg) scale(.8) scaleY(1.2)"
-            }}>
-            <PiTagChevron />
-          </IconButton>
+        <Box name='buttons' sx={{ display: 'flex' }}>
 
-          <IconButton className='button-lightGreen'
-            style={{
-              borderRadius: 5,
-              padding: 3,
-              // mr: 1,
-              transform: "scale(.8)"
-            }}>
-            <LuAward />
-          </IconButton>
+          {!isMobile ? buttons : null}
+          
+        </Box>{/* buttons closes */}
 
-          <Button
-            className='button-redButton'
-            sx={{ ml: 1, mr: 1, padding: 0 }}>
-            Delete
-          </Button>
-          <Button
-            className='button-mediumBlue'
-            sx={{ padding: 0 }}
-          >
-            Cancel
-          </Button>
-        </Box>
       </Box> {/* name&Buttons closes */}
 
       <Box name='tags'>
@@ -153,10 +192,12 @@ export default function Quiz() {
         ))}
       </Box>
 
-      <Box sx={{mt: 3, mb: 5}}>
+      <Box name='mobileButtons' sx={{ display: 'flex', mt: 3 }}> {isMobile ? buttons : null} </Box>
+
+      <Box sx={{ mt: 3, mb: 5 }}>
         <TableContainer component={Paper}>
           <Table
-            // size="small"
+          // size="small"
           >
             <TableHead>
               <TableRow>
@@ -171,7 +212,7 @@ export default function Quiz() {
               quizInfo={quizInfo}
               handleRemoveQuestion={handleRemoveQuestion}
             />
-            
+
           </Table>
         </TableContainer>
 

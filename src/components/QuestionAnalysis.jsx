@@ -83,7 +83,7 @@ export default function QuestionAnalysis() {
     display: 'flex',
     borderLeft: '1.333px solid var(--connectlink-gray, #F1F6FC)',
     padding: 5,
-    width: !isMobile ? '2rem' : '1.45rem',
+    width: !isMobile ? '2rem' : '1.55rem',
     background: '#D64751',
     borderRadius: '0rem 2.5rem 2.5rem 0rem',
     color: '#FFF',
