@@ -79,10 +79,6 @@ export default function UserBoard(props) {
           User Board  {/* Google web font 'Anton' */}
         </h1>
 
-        <Button
-          onClick={printUsers}
-        > print users </Button>
-
         <Box name="Search&Button" style={{
           display: !isMobile ? 'flex' : 'block',
           alignItems: 'center'

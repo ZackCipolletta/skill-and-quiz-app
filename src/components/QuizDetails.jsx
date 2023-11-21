@@ -13,7 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag } from "./redux/quizDetails";
+import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor } from "./redux/quizDetails";
 
 
 
@@ -26,56 +26,7 @@ export default function QuizDetails(props) {
   const { quizName } = useSelector((state) => state.quizName);
   const { quizTags } = useSelector((state) => state.quizTags);
   const { newTag } = useSelector((state) => state.newTag);
-
-  const quiz = {
-    "name": "testQuiz",
-    "color": "#f4bbc7",
-    "tags": [
-      "tag1",
-      "tag2",
-      "tag3"
-    ],
-    "questions": [
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          2
-        ],
-        "question": "what?",
-        "answers": [
-          "asdfas",
-          "fasdfasdfa",
-          "dfasdfa"
-        ]
-      },
-      {
-        "type": "Single",
-        "favorite": false,
-        "correct": [
-          0
-        ],
-        "question": "ASDFSDF",
-        "answers": [
-          "ASDFAS",
-          "FASDFASDF"
-        ]
-      },
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          1
-        ],
-        "question": "DFASDFASDF",
-        "answers": [
-          "FASDFASD",
-          "FASDFAS",
-          "FASDFASDF"
-        ]
-      }
-    ]
-  };
+  const { quizColor } = useSelector((state) => state.quizColor);
 
   const handleAddClick = () => {
 
@@ -102,6 +53,11 @@ export default function QuizDetails(props) {
 
   const changeQuizName = (e) => {
     dispatch(setQuizName(e.target.value));
+  };
+
+  const handleQuizColor = (color) => {
+    dispatch(setQuizColor(color));
+
   };
 
   const iconStyling = {
@@ -169,7 +125,10 @@ export default function QuizDetails(props) {
       <Typography sx={{ mb: '-10px' }}>
         Or here are some templates to help you get started
       </Typography>
-      <ColorTemplates />
+      <ColorTemplates
+        selectColor={handleQuizColor}
+        quizColor={quizColor}
+      />
 
       <Typography className='inputLabel' >
         Tags
@@ -231,3 +190,55 @@ export default function QuizDetails(props) {
     </Box >
   );
 }
+
+
+
+// const quiz = {
+//   "name": "testQuiz",
+//   "color": "#f4bbc7",
+//   "tags": [
+//     "tag1",
+//     "tag2",
+//     "tag3"
+//   ],
+//   "questions": [
+//     {
+//       "type": "Multiple",
+//       "favorite": false,
+//       "correct": [
+//         2
+//       ],
+//       "question": "what?",
+//       "answers": [
+//         "asdfas",
+//         "fasdfasdfa",
+//         "dfasdfa"
+//       ]
+//     },
+//     {
+//       "type": "Single",
+//       "favorite": false,
+//       "correct": [
+//         0
+//       ],
+//       "question": "ASDFSDF",
+//       "answers": [
+//         "ASDFAS",
+//         "FASDFASDF"
+//       ]
+//     },
+//     {
+//       "type": "Multiple",
+//       "favorite": false,
+//       "correct": [
+//         1
+//       ],
+//       "question": "DFASDFASDF",
+//       "answers": [
+//         "FASDFASD",
+//         "FASDFAS",
+//         "FASDFASDF"
+//       ]
+//     }
+//   ]
+// };

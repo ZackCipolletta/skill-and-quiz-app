@@ -39,9 +39,9 @@ export default function CreateNewCategoryModal(props) {
   const createCategory = () => {
     if (catName?.trim()) {
       if (catColor?.trim()) {
-        props.handleAddNewCategory({ Name: catName, Color: catColor, id: indexCounter });
+        props.handleAddNewCategory({ Name: catName, Color: catColor, id: indexCounter, Favorite: false });
       } else {
-        props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa', id: indexCounter });
+        props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa', id: indexCounter, Favorite: false });
       }
       setIndexCounter(indexCounter + 1);
       setCatColor("");

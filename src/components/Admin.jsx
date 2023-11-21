@@ -99,6 +99,10 @@ export default function Admin() {
   //   );
   // }, []);
 
+  useEffect(() => {
+    dispatch(setUserInfo({ users: newInfoArr }));
+  }, [])
+
   const loadUsers = () => {
     dispatch(setUserInfo({ users: newInfoArr }));
   };
@@ -171,9 +175,9 @@ export default function Admin() {
       // {...swipeHandlers}
     >
       <Box sx={{ width: '100%' }}>
-        <Button
+        {/* <Button
           onClick={loadUsers}
-        >Load Users</Button>
+        >Load Users</Button> */}
         <Box sx={{
           display: 'flex',
           justifyContent: 'space-between',

@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, IconButton } from '@mui/material';
 import '../Styles/Components.css';
 import { CgColorPicker } from 'react-icons/cg';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setQuizColor } from "./redux/quizDetails";
-
 
 
 
 export default function ColorTemplates(props) {
   const dispatch = useDispatch();
 
-  const { quizColor } = useSelector((state) => state.quizColor);
+  const [selectedColor, setSelectedColor] = useState(null);
 
-  const handleChange = (color) => {
-    dispatch(setQuizColor(color));
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
   };
+
+  useEffect(() => {
+    if (props.quizColor) {
+      setSelectedColor(props.quizColor);
+    }
+  }, []);
+
+  useEffect(() => {
+    props.selectColor(selectedColor);
+  }, [selectedColor]);
+
 
   const emptyRoundButtonStyle = {
     borderRadius: '50%', // Makes the button round
@@ -37,13 +46,13 @@ export default function ColorTemplates(props) {
           style={emptyRoundButtonStyle}
           sx={{
             backgroundColor: '#a7d7f9',
-            border: quizColor === '#a7d7f9' ? '2px solid #3ea7f2 !important' : 'transparent',
+            border: selectedColor === '#a7d7f9' ? '2px solid #3ea7f2 !important' : 'transparent',
             '&:hover': {
               backgroundColor: '#a7d7f9',
               border: '2px solid #3ea7f2 !important'
             }
           }}
-          onClick={() => handleChange('#a7d7f9')}
+          onClick={() => handleColorChange('#a7d7f9')}
         >
         </Button>
         <Button
@@ -51,13 +60,13 @@ export default function ColorTemplates(props) {
           style={emptyRoundButtonStyle}
           sx={{
             backgroundColor: '#cfd9fa',
-            border: quizColor === '#cfd9fa' ? '2px solid #5f81ee !important' : 'transparent',
+            border: selectedColor === '#cfd9fa' ? '2px solid #5f81ee !important' : 'transparent',
             '&:hover': {
               backgroundColor: '#cfd9fa',
               border: '2px solid #5f81ee !important'
             }
           }}
-          onClick={() => handleChange('#cfd9fa')}
+          onClick={() => handleColorChange('#cfd9fa')}
         >
         </Button>
 
@@ -66,13 +75,13 @@ export default function ColorTemplates(props) {
           style={emptyRoundButtonStyle}
           sx={{
             backgroundColor: '#f4bbc7',
-            border: quizColor === '#f4bbc7' ? '2px solid #e45775 !important' : 'transparent',
+            border: selectedColor === '#f4bbc7' ? '2px solid #e45775 !important' : 'transparent',
             '&:hover': {
               backgroundColor: '#f4bbc7',
               border: '2px solid #e45775 !important'
             }
           }}
-          onClick={() => handleChange('#f4bbc7')}
+          onClick={() => handleColorChange('#f4bbc7')}
         >
         </Button>
 
@@ -81,13 +90,13 @@ export default function ColorTemplates(props) {
           style={emptyRoundButtonStyle}
           sx={{
             backgroundColor: '#c0f889',
-            border: quizColor === '#c0f889' ? '2px solid #5fb60b !important' : 'transparent',
+            border: selectedColor === '#c0f889' ? '2px solid #5fb60b !important' : 'transparent',
             '&:hover': {
               backgroundColor: '#c0f889',
               border: '2px solid #5fb60b !important'
             }
           }}
-          onClick={() => handleChange('#c0f889')}
+          onClick={() => handleColorChange('#c0f889')}
         >
         </Button>
 

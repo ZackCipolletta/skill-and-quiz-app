@@ -17,7 +17,7 @@ export default function QuizzesDashboard() {
     { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
     { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false },
     { Name: "Quiz3", Color: '#cfd9fa', tags: ['TagB', 'TagC'], id: 3, Favorite: false },
-    { Name: "Quiz4", Color: '#cfd9fa', tags: [ 'TagC'], id: 4, Favorite: false },
+    { Name: "Quiz4", Color: '#cfd9fa', tags: ['TagC'], id: 4, Favorite: false },
     { Name: "Quiz5", Color: '#cfd9fa', tags: ['Tag2', 'TagC'], id: 5, Favorite: true }
   ];
   const navigate = useNavigate();
@@ -39,6 +39,16 @@ export default function QuizzesDashboard() {
   const handleCreateNewQuizClick = () => {
     navigate('/newquiz');
   };
+
+
+  const handleSearch = (searchValue) => {
+    const filtered = quizzesArray.filter((quiz) =>
+      searchValue && quiz.Name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredQuizzes(filtered);
+  };
+
+  const [filteredQuizzes, setFilteredQuizzes] = useState([...quizArr]);
 
   const handleDeleteButtonClick = (event, id, quiz) => {
     seDeleteModalState(!deleteModalState);
@@ -89,7 +99,13 @@ export default function QuizzesDashboard() {
           display: !isMobile ? 'flex' : 'block',
           alignItems: 'center'
         }}>
-          <SearchBar />
+          <SearchBar
+            value=""
+            onChange={handleSearch}
+            onSearch={handleSearch} 
+            placeholder={"Search quizzes..."}
+            options={quizzesArray.map((quiz) => quiz.Name)}
+          />
 
           {/* 'ml' does not work here, we must use marginLeft */}
           <Button
@@ -104,7 +120,7 @@ export default function QuizzesDashboard() {
 
       </Box> {/* TopNav closes */}
       <Quizzes
-        quizList={quizzesArray}
+        quizList={filteredQuizzes ? filteredQuizzes : quizzesArray}
         deleteClick={handleDeleteButtonClick}
         favorite={handleFavoriteButtonClick}
       />

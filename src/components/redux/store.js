@@ -5,6 +5,7 @@ import {
 } from "./quizQuestions";
 import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer } from "./quizDetails";
 import { userInfoReducer } from "./User";
+import { categoriesArrayReducer } from "./Categories";
 
 export default configureStore({
   reducer: {
@@ -27,5 +28,7 @@ export default configureStore({
     newTag: newTagReducer,
 
     userInfo: userInfoReducer,
+
+    categoriesArray: categoriesArrayReducer,
   }
 });

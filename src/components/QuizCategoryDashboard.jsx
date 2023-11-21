@@ -9,15 +9,19 @@ import QuizCategories from './QuizCategories';
 import DeleteModal from './DeleteModal';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setCategoriesArray, addCategory } from './redux/Categories';
 
 export default function QuizCategoryDashboard(props) {
+  const dispatch = useDispatch();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [createModalState, seCreateModalState] = useState(false);
-  const [deleteModalState, seDeleteModalState] = useState(false);
-  const [categoriesArray, setCategoriesArray] = useState([]);
+  const [createModalState, setCreateModalState] = useState(false);
+  const [deleteModalState, setDeleteModalState] = useState(false);
+  // const [categoriesArray, setCategoriesArray] = useState([]);
   const [deleteCategory, setDeleteCategory] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState([]);
 
@@ -30,16 +34,45 @@ export default function QuizCategoryDashboard(props) {
     { Name: "Cat6", Color: '#cfd9fa', id: 6, Favorite: true }
   ];
 
-  useEffect(() => {
-    setCategoriesArray([...catsArr]);
-  }, []);
 
-  const addCategory = (newCat) => {
-    setCategoriesArray([...categoriesArray, newCat]);
+  const categoriesArray = useSelector((state) => state.categoriesArray);
+
+
+
+  // useEffect(() => {
+  //   setCategoriesArray([...catsArr]);
+  // }, []);
+
+
+  const handleSearch = (searchValue) => {
+    const filtered = categoriesArray.filter((cat) =>
+      cat.Name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredCategories(filtered);
   };
 
+  const [filteredCategories, setFilteredCategories] = useState([...catsArr]);
+
+
+  // const addCategory = (newCat) => {
+  //   setCategoriesArray([...categoriesArray, newCat]);
+  // };
+
+  const addCat = (newCat) => {
+    dispatch(addCategory(newCat));
+  };
+
+  // dispatch(addQuestion(
+  //   {
+  //     type: answerType,
+  //     correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
+  //     question: question,
+  //     answers: answersArr,
+  //   },
+  // ));
+
   const handleCreateNewCategoryClick = () => {
-    seCreateModalState(!createModalState);
+    setCreateModalState(!createModalState);
   };
 
   const handleFavoriteButtonClick = (id) => {
@@ -50,14 +83,14 @@ export default function QuizCategoryDashboard(props) {
       const updatedCategoriesArray = [...categoriesArray];
       updatedCategoriesArray[index].Favorite = !updatedCategoriesArray[index].Favorite;
 
-      setCategoriesArray(updatedCategoriesArray);
+      // setCategoriesArray(updatedCategoriesArray);
     }
 
     reset();
   };
 
   const handleDeleteButtonClick = (event, id, cat) => {
-    seDeleteModalState(!deleteModalState);
+    setDeleteModalState(!deleteModalState);
     setDeleteCategory(cat);
     setSelectedCategoryId(id);
   };
@@ -68,8 +101,8 @@ export default function QuizCategoryDashboard(props) {
   };
 
   const handleDeleteConfirm = () => {
-    seDeleteModalState(!deleteModalState);
-    setCategoriesArray(categoriesArray.filter((cat) => cat.id !== selectedCategoryId));
+    setDeleteModalState(!deleteModalState);
+    // setCategoriesArray(categoriesArray.filter((cat) => cat.id !== selectedCategoryId));
 
     reset();
   };
@@ -92,7 +125,12 @@ export default function QuizCategoryDashboard(props) {
             display: !isMobile ? 'flex' : 'block',
             alignItems: 'center'
           }}>
-            <SearchBar />
+            <SearchBar
+              value=""
+              onChange={handleSearch}
+              placeholder={"Search categories..."}
+              options={categoriesArray.map((cat) => cat.Name)}
+            />
 
             <Button
               className='navButton button-mediumBlue'
@@ -108,7 +146,7 @@ export default function QuizCategoryDashboard(props) {
         <CreateNewCategoryModal
           toggle={createModalState}
           handleCancel={handleCreateNewCategoryClick}
-          handleAddNewCategory={addCategory}
+          handleAddNewCategory={addCat}
         />
       </Box>
       <QuizCategories
