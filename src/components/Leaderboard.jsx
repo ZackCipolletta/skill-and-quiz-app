@@ -76,11 +76,7 @@ export default function Leaderboard() {
             {[...userInfo.users].sort((a, b) => b.score - a.score).map((u, i) => (
               <TableRow key={i}
                 sx={{
-                  '&:hover': {
-                    backgroundColor: '#f8fafe',
-                    // border: '2px solid #3ea7f2 !important'
-                  },
-                  color: i < 3 ? (i === 0 ? '#FCD25C' : i === 1 ? '#9A8D8D' : '#A77272') : null
+                  backgroundColor: i === 0 ? 'rgba(0, 255, 0, 0.1)' : null,
                 }}
               >
                 <TableCell

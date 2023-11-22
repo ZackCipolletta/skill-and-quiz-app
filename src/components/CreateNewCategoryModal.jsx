@@ -20,7 +20,7 @@ export default function CreateNewCategoryModal(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [indexCounter, setIndexCounter] = useState(7); // ------------------------------DELETE THIS!!! -------------------------------------
+  const [indexCounter, setIndexCounter] = useState(29); // ------------------------------DELETE THIS!!! -------------------------------------
 
   const style = {
     position: 'absolute',

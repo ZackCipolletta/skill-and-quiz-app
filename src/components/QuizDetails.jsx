@@ -33,7 +33,9 @@ export default function QuizDetails(props) {
     if (newTag && newTag.trim() !== "") {
       const tagsArr = (newTag.split(','));
 
-      tagsArr.forEach(tag => {
+      const trimmedTags = tagsArr.map(tag => tag.trim()).filter(tag => tag !== "");
+
+      trimmedTags.forEach(tag => {
         dispatch(addQuizTag(tag));
       });
 

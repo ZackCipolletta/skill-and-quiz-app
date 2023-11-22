@@ -81,7 +81,7 @@ const Listbox = styled('ul')(() => ({
 }));
 
 const SearchBar = ({ value, width, onChange, placeholder, height,
-  onCancelResearch, onSearch, className, style, disabled, options,
+  onCancelResearch, onSearch, className, style, disabled, options, handleNoSearchValue
 }) => {
 
   const theme = useTheme();
@@ -131,6 +131,8 @@ const SearchBar = ({ value, width, onChange, placeholder, height,
       onSearch();
     } else if (e.keyCode === 27 || e.code === 'Escape') {
       handleCancel();
+    } else if (!internalValue) {
+      handleNoSearchValue();
     }
   };
 

@@ -1,12 +1,12 @@
 import '../Styles/Components.css';
-import React, { useState } from "react";
+import React from "react";
 import {
   Typography, Card, CardHeader, CardActions,
   CardActionArea, Box, IconButton, createTheme, ThemeProvider
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { PiTrashThin, PiTagChevron, PiTagChevronFill } from 'react-icons/pi';
-import PropTypes from "prop-types";
+import { PiTrashThin } from 'react-icons/pi';
+import { PiStar, PiStarFill } from 'react-icons/pi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -69,15 +69,13 @@ export default function Cards(props) {
               <IconButton sx={{
                 marginLeft: '5px',
                 marginRight: '-25px',
-                transform: "rotate(90deg) scale(.7) scaleY(1.2)"
+                transform: "scale(.7)"
               }}
                 onClick={(event) => props.favorite(cardInfo.id)}
               >
-
-
                 {cardInfo.Favorite ? (
-                  <PiTagChevronFill color='gold' />
-                ) : (<PiTagChevron color='black' />
+                  <PiStarFill color='gold' />
+                ) : (<PiStar color='black' />
                 )}
 
               </IconButton>

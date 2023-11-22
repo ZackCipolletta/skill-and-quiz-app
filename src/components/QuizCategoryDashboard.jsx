@@ -11,19 +11,19 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setCategoriesArray, addCategory } from './redux/Categories';
+import { setCategoriesArray, addCategory, favoriteCategory, deleteCategory, searchCategories, resetCategories } from './redux/Categories';
+import { deleteUser } from './redux/User';
 
 export default function QuizCategoryDashboard(props) {
   const dispatch = useDispatch();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [selectedCategoryId, setSelectedCategoryId] = useState([]);
+  const [categoryToDelete, setCategoryToDelete] = useState([]);
 
   const [createModalState, setCreateModalState] = useState(false);
   const [deleteModalState, setDeleteModalState] = useState(false);
-  // const [categoriesArray, setCategoriesArray] = useState([]);
-  const [deleteCategory, setDeleteCategory] = useState([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState([]);
 
   const catsArr = [
     { Name: "Science", Color: '#a7d7f9', id: 1, Favorite: true },
@@ -34,77 +34,60 @@ export default function QuizCategoryDashboard(props) {
     { Name: "Cat6", Color: '#cfd9fa', id: 6, Favorite: true }
   ];
 
-
   const categoriesArray = useSelector((state) => state.categoriesArray);
 
+  const [searchValue, setSearchValue] = useState(false);
+  const [filteredCategories, setFilteredCategories] = useState([...categoriesArray]);
 
-
-  // useEffect(() => {
-  //   setCategoriesArray([...catsArr]);
-  // }, []);
-
-
-  const handleSearch = (searchValue) => {
-    const filtered = categoriesArray.filter((cat) =>
-      cat.Name.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    setFilteredCategories(filtered);
+  const searching = (value) => {
+    if (value.trim()) {
+      setSearchValue(value);
+      console.log(value);
+      handleSearch(value);
+    } else {
+      setSearchValue(null);
+    }
   };
 
-  const [filteredCategories, setFilteredCategories] = useState([...catsArr]);
-
-
-  // const addCategory = (newCat) => {
-  //   setCategoriesArray([...categoriesArray, newCat]);
-  // };
+  const handleSearch = (searchValue) => {
+    // const filtered = categoriesArray.filter((cat) =>
+    //   cat.Name.toLowerCase().includes(searchValue.toLowerCase())
+    // );
+    // setFilteredCategories(filtered);
+    dispatch(searchCategories(searchValue));
+  };
 
   const addCat = (newCat) => {
     dispatch(addCategory(newCat));
   };
-
-  // dispatch(addQuestion(
-  //   {
-  //     type: answerType,
-  //     correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
-  //     question: question,
-  //     answers: answersArr,
-  //   },
-  // ));
 
   const handleCreateNewCategoryClick = () => {
     setCreateModalState(!createModalState);
   };
 
   const handleFavoriteButtonClick = (id) => {
-    console.log("Fav icon clicked. Id value is: " + id);
-    const index = categoriesArray.findIndex((category) => category.id === id);
-
-    if (index !== -1) {
-      const updatedCategoriesArray = [...categoriesArray];
-      updatedCategoriesArray[index].Favorite = !updatedCategoriesArray[index].Favorite;
-
-      // setCategoriesArray(updatedCategoriesArray);
-    }
-
-    reset();
+    dispatch(favoriteCategory(id));
   };
 
   const handleDeleteButtonClick = (event, id, cat) => {
     setDeleteModalState(!deleteModalState);
-    setDeleteCategory(cat);
+    setCategoryToDelete(cat);
     setSelectedCategoryId(id);
   };
 
   const reset = () => {
     setSelectedCategoryId([]);
-    setDeleteCategory([]);
+    setCategoryToDelete([]);
   };
 
   const handleDeleteConfirm = () => {
     setDeleteModalState(!deleteModalState);
-    // setCategoriesArray(categoriesArray.filter((cat) => cat.id !== selectedCategoryId));
-
+    dispatch(deleteCategory(selectedCategoryId));
     reset();
+  };
+
+  const handleNoSearchValue = () => {
+    dispatch(resetCategories());
   };
 
 
@@ -127,9 +110,11 @@ export default function QuizCategoryDashboard(props) {
           }}>
             <SearchBar
               value=""
-              onChange={handleSearch}
+              onChange={searching}
+              onSearch={handleSearch}
               placeholder={"Search categories..."}
               options={categoriesArray.map((cat) => cat.Name)}
+              handleNoSearchValue={handleNoSearchValue}
             />
 
             <Button
@@ -157,7 +142,7 @@ export default function QuizCategoryDashboard(props) {
       <DeleteModal
         toggle={deleteModalState}
         handleClose={handleDeleteButtonClick}
-        selectedCard={`"${deleteCategory}" category`}
+        selectedCard={`"${categoryToDelete}" category`}
         handleDeleteConfirm={handleDeleteConfirm}
       />
     </>

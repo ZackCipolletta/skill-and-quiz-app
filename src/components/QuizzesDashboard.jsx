@@ -14,11 +14,11 @@ import { Box } from '@mui/system';
 export default function QuizzesDashboard() {
 
   const quizArr = [
-    { Name: "Quiz1", Color: '#cfd9fa', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
-    { Name: "Quiz2", Color: '#cfd9fa', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false },
+    { Name: "Quiz1", Color: '#a7d7f9', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
+    { Name: "Quiz2", Color: '#67c27c', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false },
     { Name: "Quiz3", Color: '#cfd9fa', tags: ['TagB', 'TagC'], id: 3, Favorite: false },
-    { Name: "Quiz4", Color: '#cfd9fa', tags: ['TagC'], id: 4, Favorite: false },
-    { Name: "Quiz5", Color: '#cfd9fa', tags: ['Tag2', 'TagC'], id: 5, Favorite: true }
+    { Name: "Quiz4", Color: '#f4bbc7', tags: ['TagC'], id: 4, Favorite: false },
+    { Name: "Quiz5", Color: '#c0f889', tags: ['Tag2', 'TagC'], id: 5, Favorite: true }
   ];
   const navigate = useNavigate();
 
