@@ -7,7 +7,6 @@ import QuizSchedule from "./QuizSchedule";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-import { useSwipeable } from 'react-swipeable';
 import PublishModal from "./PublishModal";
 import { useNavigate } from 'react-router-dom';
 
@@ -65,25 +64,21 @@ export default function CreateNewQuiz() {
     setValue(newValue);
   };
 
-  const changeToNextTab = () => {
-    const nextTab = value + 1;
-    if (nextTab < 3) {
-      setValue(nextTab);
-    }
-    setShowIcons(false);
-  };
+  // const changeToNextTab = () => {
+  //   const nextTab = value + 1;
+  //   if (nextTab < 3) {
+  //     setValue(nextTab);
+  //   }
+  //   setShowIcons(false);
+  // };
 
-  const changeToPreviousTab = () => {
-    const nextTab = value - 1;
-    if (nextTab >= 0) {
-      setValue(nextTab);
-    }
-  };
+  // const changeToPreviousTab = () => {
+  //   const nextTab = value - 1;
+  //   if (nextTab >= 0) {
+  //     setValue(nextTab);
+  //   }
+  // };
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => changeToNextTab(),
-    onSwipedRight: () => changeToPreviousTab()
-  });
 
   const tabStyles = {
     textTransform: 'none',
@@ -98,10 +93,28 @@ export default function CreateNewQuiz() {
     navigate('/preview');
   };
 
+  const previewPublishButtons = (
+    value > 1 ? 
+    < Box sx={{ display: 'flex' }}>
+      <Button
+        className="button-darkMediumBlue"
+        onClick={handlePreviewClick}
+        sx={{ mr: 1 }}
+      >
+        Preview
+      </Button>
+      <Button
+        className="button-darkMediumBlue"
+        sx={{ mr: !isMobile ? 1 : null }}
+      >
+        Publish</Button>
+      </Box >
+      : null
 
+  );
 
   return (
-    <Paper sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
+    <Paper sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} >
       <Box sx={{ width: '100%' }}>
 
         <Box sx={{
@@ -111,22 +124,19 @@ export default function CreateNewQuiz() {
           borderBottom: 1,
           borderColor: 'divider'
         }} >
-          <Tabs value={value} onChange={handleChange}>
+          <Tabs value={value} onChange={handleChange}
+            style={{
+              textAlign: 'center', fontSize: !isMobile ? '1.5rem' : null,
+              fontStyle: 'normal', fontWeight: 500,
+            }}>
             <Tab label="Details" sx={tabStyles} />
             <Tab label="Questions" sx={tabStyles} />
             <Tab label="Schedule" sx={tabStyles} />
           </Tabs>
-          <Box sx={{ display: !isMobile ? 'block' : 'none' }}>
-            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}
-              onClick={(handlePreviewClick)}
-            >
-              Preview
-            </Button>
-            <Button className="button-darkMediumBlue" sx={{ mr: 1 }}
-              onClick={handlePublishButtonClick}
-            >
-              Publish
-            </Button>
+          <Box>
+            {isMobile ? null :
+              previewPublishButtons
+            }
           </Box>
         </Box>
 
@@ -142,24 +152,35 @@ export default function CreateNewQuiz() {
 
       </Box>
 
-      {!isMobile ? null :
-        <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+
+        <Box sx={{ display: 'flex' }}>
+          {value > 0 ? (
+            <Button
+              className="button-mediumBlue"
+              size="small"
+              sx={{ mr: 1 }}
+              onClick={(e) => handleChange(e, value - 1)}
+            >
+              Prev
+            </Button>
+          ) : null}
+
           <Button
-            className="button-darkMediumBlue"
             size="small"
-            sx={{ mr: 1 }}
-            onClick={handlePreviewClick}
+            className="button-mediumBlue"
+            onClick={(e) => handleChange(e, value + 1)}
           >
-            Preview
+            Next
           </Button>
-          <Button
-            size="small"
-            className="button-darkMediumBlue"
-            sx={{}}
-          >
-            Publish</Button>
         </Box>
-      }
+
+        {!isMobile ? null :
+          previewPublishButtons
+        }
+
+      </Box>
+
 
       <PublishModal
         publishModalState={publishModalState}
@@ -167,6 +188,6 @@ export default function CreateNewQuiz() {
         quizToPublish={quiz.title}
       />
 
-    </Paper>
+    </Paper >
   );
 }

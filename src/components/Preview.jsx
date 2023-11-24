@@ -21,6 +21,7 @@ export default function Preview(props) {
 
   const quiz = {
     "name": "testQuiz",
+    Color: '#a7d7f9',
     "tags": [
       "tag1",
       "tag2",
@@ -96,8 +97,51 @@ export default function Preview(props) {
 
 
   return (
-    <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column', alignItems: 'flex-end'  }}>
-      <Box name='switch'>
+    <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column' }}>
+
+        <Box name='quizImage&Name'
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: 5
+          }}>
+
+          <Box name='quizName'
+            style={{
+              backgroundColor: quiz.Color,
+              borderRadius: 50,
+              width: 65,
+              height: 65,
+              marginRight: 5
+            }}
+          />
+
+          <h1 className='darkBlue-text'>
+            {quiz.name}
+          </h1>
+        </Box> {/* quizImage&Name closes */}
+
+      <Box name='tags'>
+        {quiz.tags.map((tag, index) => (
+          <span
+            key={index}
+            style={{
+              border: '1px solid #67c27c',
+              padding: '1px',
+              paddingLeft: '7px',
+              paddingRight: '7px',
+              borderRadius: '15px',
+              color: '#67c27c',
+              background: 'rgba(103, 194, 124, .09)',
+              marginRight: 5, // Add marginRight to create spacing between tags
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </Box>
+
+      <Box name='switch' sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
         <Button
           className='button-darkMediumBlue'
           sx={{
@@ -106,7 +150,6 @@ export default function Preview(props) {
             fontWeight: 500,
             lineHeight: '100%',
             letterSpacing: '-0.05rem',
-            display: 'inline-flex',
             padding: ' 0.75rem 1.5rem',
             mb: 2
           }}

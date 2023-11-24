@@ -7,7 +7,6 @@ import {
 import ColorTemplates from './ColorTemplates';
 import '../Styles/Components.css';
 import { TfiClose } from 'react-icons/tfi';
-import { MdOutlineSwipe } from 'react-icons/md';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -108,16 +107,6 @@ export default function QuizDetails(props) {
           InputProps={{ sx: { borderRadius: "0.52069rem" } }}
         />
       </Box>
-
-      {isMobile && props.showIcons && (
-        <Box>
-          <MdOutlineSwipe style=
-            {{
-              ...iconStyling,
-              right: 185,
-            }} />
-        </Box>
-      )}
 
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture

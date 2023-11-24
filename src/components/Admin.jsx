@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Box, Button, Tabs, Tab, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useSwipeable } from 'react-swipeable';
 import { useNavigate } from 'react-router-dom';
 import QuizCategoryDashboard from "./QuizCategoryDashboard";
 import UserBoard from "./UserBoard";
@@ -119,25 +118,6 @@ export default function Admin() {
     setValue(newValue);
   };
 
-  // const changeToNextTab = () => {
-  //   const nextTab = value + 1;
-  //   if (nextTab < 3) {
-  //     setValue(nextTab);
-  //   }
-  // };
-
-  // const changeToPreviousTab = () => {
-  //   const nextTab = value - 1;
-  //   if (nextTab >= 0) {
-  //     setValue(nextTab);
-  //   }
-  // };
-
-  // const swipeHandlers = useSwipeable({
-  //   onSwipedLeft: () => changeToNextTab(),
-  //   onSwipedRight: () => changeToPreviousTab()
-  // });
-
   const tabStyles = {
     textTransform: 'none',
     fontWeight: 525,
@@ -172,7 +152,6 @@ export default function Admin() {
 
   return (
     <Box sx={{ marginTop: 5, marginLeft: -3, marginRight: -3 }}
-      // {...swipeHandlers}
     >
       <Box sx={{ width: '100%' }}>
         {/* <Button

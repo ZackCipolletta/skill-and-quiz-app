@@ -6,7 +6,6 @@ import QuizQuestions from "./QuizQuestions";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-import { useSwipeable } from 'react-swipeable';
 import Leaderboard from "./Leaderboard";
 import QuestionAnalysis from "./QuestionAnalysis";
 
@@ -145,20 +144,20 @@ export default function LeaderboardAndAnalysis() {
     setValue(newValue);
   };
 
-  const changeToNextTab = () => {
-    const nextTab = value + 1;
-    if (nextTab < 2) {
-      setValue(nextTab);
-    }
-    setShowIcons(false);
-  };
+  // const changeToNextTab = () => {
+  //   const nextTab = value + 1;
+  //   if (nextTab < 2) {
+  //     setValue(nextTab);
+  //   }
+  //   setShowIcons(false);
+  // };
 
-  const changeToPreviousTab = () => {
-    const nextTab = value - 1;
-    if (nextTab >= 0) {
-      setValue(nextTab);
-    }
-  };
+  // const changeToPreviousTab = () => {
+  //   const nextTab = value - 1;
+  //   if (nextTab >= 0) {
+  //     setValue(nextTab);
+  //   }
+  // };
 
   const tabStyles = {
     borderBottom: 'none', // or borderBottom: '0',
@@ -168,13 +167,9 @@ export default function LeaderboardAndAnalysis() {
     // fontSize: 'larger',
   };
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => changeToNextTab(),
-    onSwipedRight: () => changeToPreviousTab()
-  });
 
   return (
-    <Box sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }} {...swipeHandlers}>
+    <Box sx={{ marginTop: '50px', marginLeft: -3, marginRight: -3 }}>
 
       <Box name='name&Selection'
         style={{
