@@ -137,6 +137,8 @@ export default function CreateNewQuiz() {
             {isMobile ? null :
               previewPublishButtons
             }
+
+            {/* add a check for quiz title and questions. If no title or questions display error 'must enter title' or 'error must enter questions' when clicking preview/publish buttons. */}
           </Box>
         </Box>
 

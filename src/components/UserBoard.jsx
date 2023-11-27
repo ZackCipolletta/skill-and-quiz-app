@@ -106,14 +106,7 @@ export default function UserBoard(props) {
         <TableContainer sx={{ border: '1px solid #E6E6E6', borderRadius: '0.9375rem', overflow: 'hidden' }}>
           <Table>
             <TableHead>
-              <TableRow style={{
-                color: '#1E1E1E',
-                fontFamily: 'Anton',
-                fontSize: '2rem',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                lineHeight: '100%'
-              }}>
+              <TableRow style={{ color: '#1E1E1E', fontFamily: 'Anton', }}>
                 <TableCell
                   sx={{
                     borderRight: '1px solid #E6E6E6',
@@ -121,11 +114,12 @@ export default function UserBoard(props) {
                     width: 10,
                     textAlign: 'center'
                   }}
+                  size="small"
                 >
                   <h2>#</h2>
 
                 </TableCell>
-                <TableCell sx={{ borderBottom: '1px solid #E6E6E6', textAlign: 'center' }}>
+                <TableCell sx={{ borderBottom: '1px solid #E6E6E6', textAlign: 'center' }} size="small">
                   <h2>Name</h2>
                 </TableCell>
               </TableRow>

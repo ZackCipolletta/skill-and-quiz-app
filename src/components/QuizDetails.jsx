@@ -9,7 +9,7 @@ import '../Styles/Components.css';
 import { TfiClose } from 'react-icons/tfi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import ImagePicker from "./ImagePicker";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor } from "./redux/quizDetails";
@@ -110,6 +110,10 @@ export default function QuizDetails(props) {
 
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
+        <Box>
+          <ImagePicker />
+        </Box>
+        
       </Typography>
 
 

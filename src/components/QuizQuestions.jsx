@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-  Box, Button, Paper, Typography, InputLabel, Table, TableContainer,
+  Box, Button, Paper, Typography, InputLabel, Table, TableContainer, Link,
   TextField, FormControl, Select, MenuItem, IconButton, Checkbox,
 } from '@mui/material';
 import '../Styles/Components.css';
@@ -143,13 +143,13 @@ export default function QuizQuestions() {
     } else {
 
       dispatch(addQuestion(
-          {
-            type: answerType,
-            correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
-            question: question,
-            answers: answersArr,
-          },
-        ));
+        {
+          type: answerType,
+          correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
+          question: question,
+          answers: answersArr,
+        },
+      ));
 
       clearAll();
     }
@@ -173,7 +173,7 @@ export default function QuizQuestions() {
       answers: answersArr
     };
     // then we splice our updated question back into the at the same position the question we are editing originally was.
-    updatedQuestionAnswerArr.splice(questionToEdit, 1, updatedQuestion)
+    updatedQuestionAnswerArr.splice(questionToEdit, 1, updatedQuestion);
 
 
     dispatch(setQuestionAnswerArr({
@@ -287,10 +287,15 @@ export default function QuizQuestions() {
         setQuestionAnswerArr={setQuestionAnswerArr}
       />
       {selectedFile && (
-        <div>
+        <Box>
           <p>Selected File: {selectedFile.name}</p>
-        </div>
+        </Box>
       )}
+
+      <Link sx={{ marginLeft: '1rem' }}
+        href="https://docs.google.com/spreadsheets/d/1wpM2PH8hfInh9ajWW5g5XR7BRCWOb0PyT8sfx6inAYc/edit?usp=drive_link">
+        Example CSV
+      </Link>
 
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Questions

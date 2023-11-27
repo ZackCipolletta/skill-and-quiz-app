@@ -103,8 +103,8 @@ export default function CreateNewUser(props) {
                 sx={{ ...customTextField }}
                 InputProps={{
                   // here we check if the value of firstName has been set or not (or if the user has begun 
-                  // typing in the TextField), if not we show the BiUser icon, if so, it disappears 
-                  // (along with the placeholder text). The same is true for the remaining text fields
+                  // typing in the TextField), if not we show the BiUser icon, which disappears 
+                  // (along with the placeholder text) when the user starts typing. The same is true for the remaining text fields
                   startAdornment: firstName === '' ? (
                     <Box sx={{ ...adornmentStyle }}>
                       <BiUser />

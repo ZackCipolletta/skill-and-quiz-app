@@ -1,7 +1,7 @@
 import '../Styles/Components.css';
 import React, { useState } from "react";
 import {
-  Button, Box, Typography, TextField,
+  Button, Box, Typography, TextField, Table, TableContainer, TableHead, TableRow, TableCell,
   FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -87,7 +87,7 @@ export default function UserDetails(props) {
       }}
       >
         <h1 className='darkBlue-text'>
-          User Board  {/* Google web font 'Anton' */}
+          User Details  {/* Google web font 'Anton' */}
         </h1>
 
         <Box name="BackButton" sx={{ marginLeft: isMobile ? '2rem' : null, marginRight: isMobile ? '-1.5rem' : null }}>
@@ -99,6 +99,37 @@ export default function UserDetails(props) {
 
       </Box> {/* TopNav closes */}
 
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '3rem' }} name='container'>
+
+        <Box name="name">
+          {selectedUser.firstName} {selectedUser.lastName}
+        </Box>
+
+        <Box sx={{ display: 'flex', mt: '2rem' }} name="stats">
+
+          <Box name="createdAndAttempted">
+            <Box name="created">
+              Quizzes Created: 3
+            </Box>
+
+            <Box name="attempted">
+              Quizzes Attempted: 9
+            </Box>
+          </Box> {/* createdAndAttempted closes */}
+
+          <Box name="wonAndJoin" sx={{ ml: 10 }}>
+            <Box name="won">
+              Quizzes Won: 3
+            </Box>
+
+            <Box name="joined">
+              Join Date: 15/01/2024
+            </Box>
+          </Box> {/* wonAndJoin closes */}
+
+        </Box> {/* stats closes */}
+
+      </Box> {/* container closes */}
 
       <Box>
         <Box sx={{ marginTop: 3 }}>
@@ -125,8 +156,8 @@ export default function UserDetails(props) {
                 sx={{ ...customTextField }}
                 InputProps={{
                   // here we check if the value of firstName has been set or not (or if the user has begun 
-                  // typing in the TextField), if not we show the BiUser icon, if so, it disappears 
-                  // (along with the placeholder text). The same is true for the remaining text fields
+                  // typing in the TextField), if not we show the BiUser icon, which disappears 
+                  // (along with the placeholder text) when the user starts typing. The same is true for the remaining text fields
                   startAdornment: selectedUser && selectedUser.firstName === '' ? (
                     <Box sx={{ color: '#a2a2a2', marginRight: '0.5rem', pt: '.25rem' }}>
                       <BiUser />
@@ -250,6 +281,13 @@ export default function UserDetails(props) {
 
       </Box>
       <Box sx={{ display: 'block', margin: '0 auto', mt: 5, display: 'flex', justifyContent: 'center' }}>
+        <Button
+          className="button-redButton"
+          onClick={handleDeleteUserButtonClick}
+          sx={{ mr: 5 }}
+        >
+          Suspend User
+        </Button>
         <Button
           className="button-redButton"
           onClick={handleDeleteUserButtonClick}
