@@ -22,6 +22,8 @@ export default function QuizDetails(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [imgPreview, setImgPreview] = useState(null);
+
   const { quizName } = useSelector((state) => state.quizName);
   const { quizTags } = useSelector((state) => state.quizTags);
   const { newTag } = useSelector((state) => state.newTag);
@@ -111,9 +113,12 @@ export default function QuizDetails(props) {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
         <Box>
-          <ImagePicker />
+          <ImagePicker
+            setImgPreview={setImgPreview}
+          />
         </Box>
-        
+
+        <img src={imgPreview} />
       </Typography>
 
 
