@@ -81,6 +81,7 @@ export default function QuizDetails(props) {
     }),
   };
 
+
   return (
     <Box sx={{ width: '100%' }}>
       <Typography className='inputLabel' sx={{ mt: 1 }} >
@@ -114,11 +115,10 @@ export default function QuizDetails(props) {
         Select a quiz picture
         <Box>
           <ImagePicker
-            setImgPreview={setImgPreview}
           />
         </Box>
 
-        <img src={imgPreview} />
+        {/* <img src={imgPreview} /> */}
       </Typography>
 
 
