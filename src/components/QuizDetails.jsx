@@ -13,6 +13,7 @@ import ImagePicker from "./ImagePicker";
 import ImagePickerModal from "./ImagePickerModal";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
+import { RxImage } from "react-icons/rx";
 import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor } from "./redux/quizDetails";
 
 
@@ -25,6 +26,8 @@ export default function QuizDetails(props) {
 
   const [imgPreview, setImgPreview] = useState(null);
   const [selectImageModalState, setSelectImageModalState] = useState(false);
+  const [imageUrl, setImageUrl] = useState(false);
+
 
   const { quizName } = useSelector((state) => state.quizName);
   const { quizTags } = useSelector((state) => state.quizTags);
@@ -64,11 +67,16 @@ export default function QuizDetails(props) {
     dispatch(setQuizColor(color));
   };
 
-  const handleImageSelection = (event, id) => {
+  const handleSelectImage = (event, id) => {
     setSelectImageModalState(!selectImageModalState);
 
-    console.log("image selection button clicked")
+    console.log("image selection button clicked");
 
+  };
+
+  const selectImage = (img) => {
+    setImageUrl(img);
+    console.log(img);
   };
 
   const iconStyling = {
@@ -88,6 +96,33 @@ export default function QuizDetails(props) {
       easing: theme.transitions.easing.easeOut,
     }),
   };
+
+  const imagePickerButton = (
+    <Button
+      variant="outlined"
+      size='small'
+      id="importButton"
+      sx={{
+        height: '2rem',
+        padding: '0.8125rem 1rem',
+        borderRadius: '10px',
+        color: '#a2a2a2',
+        borderColor: '#c4c4c4',
+        '&:hover': {
+          borderColor: 'black',
+          backgroundColor: 'white'
+        },
+        mt: '1rem',
+        mb: '1rem'
+      }}
+      onClick={handleSelectImage}
+    >
+      <IconButton sx={{ ml: '-1rem' }}>
+        <RxImage color='909090' />
+      </IconButton>
+      Select an image
+    </Button>
+  );
 
 
   return (
@@ -122,17 +157,8 @@ export default function QuizDetails(props) {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
         <Box>
-          {/* <ImagePicker
-            onClick={handleImageSelection}
-          /> */}
-          <Button
-          onClick={handleImageSelection}
-          >
-            some button
-          </Button>
+          {imagePickerButton} {imageUrl ? <img src={imageUrl} /> : null}
         </Box>
-
-        {/* <img src={imgPreview} /> */}
       </Typography>
 
 
@@ -204,7 +230,8 @@ export default function QuizDetails(props) {
 
       <ImagePickerModal
         modalState={selectImageModalState}
-        onSelection={handleImageSelection}
+        toggle={handleSelectImage}
+        selectImage={selectImage}
       />
 
     </Box >

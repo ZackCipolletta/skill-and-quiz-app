@@ -49,7 +49,13 @@ export default function Cards(props) {
         {/* borderRadius controls how rounded the corners are */}
         <CardActionArea>
 
-          <CardHeader sx={{ backgroundColor: `${cardInfo.Color}`, height: cardHeight }} />
+          <CardHeader sx={{
+            backgroundImage: cardInfo.Image ? `url('${cardInfo.Image}')` : null,
+            background: cardInfo.Image ? null : cardInfo.Color,
+            height: cardHeight,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'
+          }} />
           <Box sx={{
             display: 'flex',
             alignItems: 'center',

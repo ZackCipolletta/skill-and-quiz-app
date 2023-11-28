@@ -34,7 +34,9 @@ export default function ImagePickerModal(props) {
   const modalState = props.modalState;
 
   function handleSelect(img) {
-    props.setImgPreview(img);
+    props.selectImage(img);
+    props.toggle();
+
   }
 
   const images = [
@@ -74,7 +76,7 @@ export default function ImagePickerModal(props) {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={modalState}
-        onClose={props.handleClose}
+        onClose={props.toggle}
 
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
