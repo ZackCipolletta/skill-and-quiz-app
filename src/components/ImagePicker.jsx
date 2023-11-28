@@ -60,8 +60,7 @@ export default function ImagePicker(props) {
           mt: '1rem',
           mb: '1rem'
         }}
-        onClick={handleButtonClick} // in order for the button to handle picking the CSV file, onClick we actaully
-      // have it call a function, which calls the file picker input. Which is a hidden 'input' component.
+        // onClick={handleButtonClick} 
       >
         <IconButton sx={{ ml: '-1rem' }}>
           <RxImage color='909090' />
@@ -70,13 +69,13 @@ export default function ImagePicker(props) {
       </Button>
 
 
-      <input //Here 
+      {/* <input
         type="file"
         accept="image/*" // specify the file type to accept
         ref={fileInputRef}
         style={{ display: 'none' }}
         onChange={handleFileChange}
-      />
+      /> */}
     </>
   );
 };

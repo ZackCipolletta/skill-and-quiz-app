@@ -10,6 +10,7 @@ import { TfiClose } from 'react-icons/tfi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ImagePicker from "./ImagePicker";
+import ImagePickerModal from "./ImagePickerModal";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor } from "./redux/quizDetails";
@@ -23,6 +24,7 @@ export default function QuizDetails(props) {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [imgPreview, setImgPreview] = useState(null);
+  const [selectImageModalState, setSelectImageModalState] = useState(false);
 
   const { quizName } = useSelector((state) => state.quizName);
   const { quizTags } = useSelector((state) => state.quizTags);
@@ -60,6 +62,12 @@ export default function QuizDetails(props) {
 
   const handleQuizColor = (color) => {
     dispatch(setQuizColor(color));
+  };
+
+  const handleImageSelection = (event, id) => {
+    setSelectImageModalState(!selectImageModalState);
+
+    console.log("image selection button clicked")
 
   };
 
@@ -114,8 +122,14 @@ export default function QuizDetails(props) {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
         <Box>
-          <ImagePicker
-          />
+          {/* <ImagePicker
+            onClick={handleImageSelection}
+          /> */}
+          <Button
+          onClick={handleImageSelection}
+          >
+            some button
+          </Button>
         </Box>
 
         {/* <img src={imgPreview} /> */}
@@ -187,6 +201,12 @@ export default function QuizDetails(props) {
         </span>
       ))
       }
+
+      <ImagePickerModal
+        modalState={selectImageModalState}
+        onSelection={handleImageSelection}
+      />
+
     </Box >
   );
 }
