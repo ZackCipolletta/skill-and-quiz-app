@@ -66,6 +66,39 @@ export default function UserBoard(props) {
 
   const { users } = useSelector((state) => state.userInfo);
 
+  const headerCellStyle = {
+    borderBottom: '1px solid #E6E6E6',
+    textAlign: 'center',
+    width: '15%'
+  };
+
+  const tableBodyCellStyle = {
+    width: "15%",
+    textAlign: 'center'
+  };
+
+  const textStyle = {
+    marginLeft: '1rem',
+    fontFamily: 'Inter',
+    fontSize: '1rem',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    lineHeight: '100%', // 1.75rem
+    cursor: 'pointer'
+  };
+
+  const formatDate = (dateString) => {
+    const parts = dateString.split('/');
+    const formattedDate = new Date(`${parts[1]}/${parts[0]}/${parts[2]}`);
+
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = monthNames[formattedDate.getMonth()];
+    const day = formattedDate.getDate();
+    const year = formattedDate.getFullYear();
+    return `${month} ${day}, ${year}`;
+  };
+
+
   return (
     <Box style={{ marginTop: '2rem', paddingBottom: '1rem' }}>
 
@@ -111,16 +144,35 @@ export default function UserBoard(props) {
                   sx={{
                     borderRight: '1px solid #E6E6E6',
                     borderBottom: '1px solid #E6E6E6',
-                    width: 10,
-                    textAlign: 'center'
+                    width: '5%',
+                    textAlign: 'left'
                   }}
                   size="small"
                 >
                   <h2>#</h2>
-
                 </TableCell>
-                <TableCell sx={{ borderBottom: '1px solid #E6E6E6', textAlign: 'center' }} size="small">
+
+                <TableCell sx={{
+                  paddingLeft: '2rem',
+                  borderBottom: '1px solid #E6E6E6',
+                  textAlign: 'left',
+                  width: '30%',
+                }}
+                  size="small"
+                >
                   <h2>Name</h2>
+                </TableCell>
+                <TableCell sx={{ ...headerCellStyle }} size="small">
+                  <h2>Quizzes Created</h2>
+                </TableCell>
+                <TableCell sx={{ ...headerCellStyle }} size="small">
+                  <h2>Quizzes Attempted</h2>
+                </TableCell>
+                <TableCell sx={{ ...headerCellStyle }} size="small">
+                  <h2>Quizzes Won</h2>
+                </TableCell>
+                <TableCell sx={{ ...headerCellStyle }} size="small">
+                  <h2>Join Date</h2>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -128,13 +180,14 @@ export default function UserBoard(props) {
             {/* we sort userInfo by score high to low, then map onto this template. 
             The userInfo as a whole is represented by 'u' */}
             {/* because arrays in JS are immutable, we must first create a copy of the array so that we can sort it */}
-            {[...users].sort((a, b) => b.score - a.score).map((u, i, arr) => (
+            {users.map((u, i, arr) => (
               // {props.userInfo.users.sort((a, b) => b.score - a.score).map((u, i, arr) => (
 
               <TableRow key={i}
                 sx={{ '&:hover': { backgroundColor: '#f8fafe' } }}>
                 <TableCell
                   sx={{
+                    width: '5%',
                     borderRight: '1px solid #E6E6E6',
                     fontWeight: 'bold',
                     textAlign: 'center',
@@ -150,33 +203,51 @@ export default function UserBoard(props) {
                 {/* here we display the users information */}
                 <TableCell
                   sx={{
-                    width: 750,
+                    textAlign: 'left',
+                    width: '20%',
                     marginTop: 0,
                     marginBottom: 0,
                     paddingTop: 0,
                     paddingBottom: 0,
-                    borderBottom: i === (arr.length - 1) ? 'none' : '1px solid #E6E6E6'
+                    borderBottom: i === (arr.length - 1) ? 'none' : '1px solid #E6E6E6',
                   }}
                 >
-                  <Box style={{ display: 'flex', alignItems: 'center', }}>
-                    {/* her is the username  */}
-                    <Typography style={{
-                      marginLeft: 10,
-                      fontFamily: 'Inter',
-                      fontSize: '1.75rem',
-                      fontStyle: 'normal',
-                      fontWeight: 500,
-                      lineHeight: '100%', // 1.75rem
-                      cursor: 'pointer'
-                    }}
+                  <Box>
+                    {/* here is the username  */}
+                    <Typography style={{ ...textStyle }}
                       onClick={() => onUserClick(u.id)}
                     // onClick={() => props.selectUser(u.id)}
                     >
                       {u.firstName} {u.lastName}
                     </Typography>
+                    <Typography style={{ ...textStyle, marginTop: '.25rem', color: 'rgba(0, 0, 0, 0.4)' }}>
+                      {u.email}
+                    </Typography>
                   </Box>
 
                 </TableCell>
+
+                <TableCell sx={{ ...tableBodyCellStyle }}>
+                  <Typography>
+                    {u.created}
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ ...tableBodyCellStyle }}>
+                  <Typography>
+                    {u.attempted}
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ ...tableBodyCellStyle }}>
+                  <Typography>
+                    {u.won}
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ ...tableBodyCellStyle }}>
+                  <Typography>
+                    {u.joinDate && formatDate(u.joinDate)}
+                  </Typography>
+                </TableCell>
+
 
               </TableRow>
             ))}
