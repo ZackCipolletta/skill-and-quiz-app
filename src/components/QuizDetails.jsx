@@ -14,7 +14,7 @@ import ImagePickerModal from "./ImagePickerModal";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { RxImage } from "react-icons/rx";
-import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor } from "./redux/quizDetails";
+import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor, setImageUrl } from "./redux/quizDetails";
 
 
 
@@ -26,13 +26,14 @@ export default function QuizDetails(props) {
 
   const [imgPreview, setImgPreview] = useState(null);
   const [selectImageModalState, setSelectImageModalState] = useState(false);
-  const [imageUrl, setImageUrl] = useState(false);
+  // const [imageUrl, setImageUrl] = useState(false);
 
 
   const { quizName } = useSelector((state) => state.quizName);
   const { quizTags } = useSelector((state) => state.quizTags);
   const { newTag } = useSelector((state) => state.newTag);
   const { quizColor } = useSelector((state) => state.quizColor);
+  const { imageUrl } = useSelector((state) => state.imageUrl);
 
   const handleAddClick = () => {
 
@@ -75,7 +76,7 @@ export default function QuizDetails(props) {
   };
 
   const selectImage = (img) => {
-    setImageUrl(img);
+    dispatch(setImageUrl(img));
     console.log(img);
   };
 
@@ -157,7 +158,13 @@ export default function QuizDetails(props) {
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Select a quiz picture
         <Box>
-          {imagePickerButton} {imageUrl ? <img src={imageUrl} /> : null}
+          {imagePickerButton} {imageUrl ? <img src={imageUrl} alt="quizImg"
+            style={{
+              maxWidth: '128px',
+              maxHeight: '128px',
+              height: 'auto',
+              width: 'auto'
+            }} /> : null}
         </Box>
       </Typography>
 

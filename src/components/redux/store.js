@@ -3,7 +3,7 @@ import {
   optionsReducer, questionReducer, answersArrReducer, questionToEditReducer, singleCorrectReducer,
   multipleCorrectReducer, warnReducer, selectedFileReducer, answerTypeReducer, questionAnswerArrReducer, isFavoriteReducer,
 } from "./quizQuestions";
-import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer } from "./quizDetails";
+import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer, imageUrlReducer } from "./quizDetails";
 import { userInfoReducer } from "./User";
 import { categoriesArrayReducer } from "./Categories";
 
@@ -26,6 +26,7 @@ export default configureStore({
     quizColor: quizColorReducer,
     quizTags: quizTagsReducer,
     newTag: newTagReducer,
+    imageUrl: imageUrlReducer,
 
     userInfo: userInfoReducer,
 

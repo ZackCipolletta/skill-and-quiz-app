@@ -90,3 +90,24 @@ export const { setNewTag } = newTagSlice.actions;
 
 // Export the options reducer
 export const newTagReducer = newTagSlice.reducer;
+
+
+
+// imageUrl Slice
+export const imageUrlSlice = createSlice({
+  name: 'imageUrl',
+  initialState: {
+    imageUrl: null,
+  },
+  reducers: {
+    setImageUrl: (state, action) => {
+      state.imageUrl = action.payload;
+    },
+  },
+});
+
+// Export action creators for the options slice
+export const { setImageUrl } = imageUrlSlice.actions;
+
+// Export the options reducer
+export const imageUrlReducer = imageUrlSlice.reducer;

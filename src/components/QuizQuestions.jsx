@@ -293,7 +293,10 @@ export default function QuizQuestions() {
       )}
 
       <Link sx={{ marginLeft: '1rem' }}
-        href="https://docs.google.com/spreadsheets/d/1wpM2PH8hfInh9ajWW5g5XR7BRCWOb0PyT8sfx6inAYc/edit?usp=drive_link">
+        href="https://docs.google.com/spreadsheets/d/1wpM2PH8hfInh9ajWW5g5XR7BRCWOb0PyT8sfx6inAYc/edit?usp=drive_link"
+        target="_blank" // indicates that the link should open in a new tab or window
+        rel="noopener noreferrer" // recommended security measure when opening links in a new tab
+      >
         Example CSV
       </Link>
 
