@@ -82,13 +82,13 @@ export default function QuestionsAndAnswers(props) {
     // sets the questionAnswerArr position that will be edited so we can edit and update the correct question while also telling handleAddClick that we are editing and not creating a new question.
     dispatch(setQuestionToEdit(i));
   };
-
+  const quizInfo = props.quizInfo || questionAnswerArr ;
 
 
   return (
     <TableBody>
       {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
-      {questionAnswerArr.questions.map((q, i) => (
+      {quizInfo.questions.map((q, i) => (
         <TableRow key={i}
           sx={{
             '&:hover': {

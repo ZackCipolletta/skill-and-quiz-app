@@ -87,6 +87,7 @@ export default function Quiz() {
 
   // }, [quizInfo]);
 
+
   const buttons = (
     <>
       < IconButton className='button-lightGray'
@@ -144,8 +145,6 @@ export default function Quiz() {
           alignItems: 'center',
           marginBottom: 5
         }}>
-
-        <Typography>Hello</Typography>;
         <Box name='quizImage&Name'
           style={{
             display: 'flex',
