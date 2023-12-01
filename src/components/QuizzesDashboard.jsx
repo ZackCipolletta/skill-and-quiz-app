@@ -10,11 +10,15 @@ import Quizzes from './Quizzes';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box } from '@mui/system';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setQuizzesArray, favoriteQuiz, deleteQuiz, searchQuizzes, resetQuizzes } from './redux/quizzes';
 
 export default function QuizzesDashboard() {
+  const dispatch = useDispatch();
 
   const quizArr = [
-    { Name: "Quiz1", Image: '/CategoryImages/Beakers.jpg',Color: '#a7d7f9', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
+    { Name: "Quiz44", Image: '/CategoryImages/Beakers.jpg', Color: '#a7d7f9', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
     { Name: "Quiz2", Color: '#67c27c', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false },
     { Name: "Quiz3", Color: '#cfd9fa', tags: ['TagB', 'TagC'], id: 3, Favorite: false },
     { Name: "Quiz4", Color: '#f4bbc7', tags: ['TagC'], id: 4, Favorite: false },
@@ -23,7 +27,7 @@ export default function QuizzesDashboard() {
   const navigate = useNavigate();
 
   // const [deleteQuiz, setDeleteQuiz] = useState([]);
-  const [quizzesArray, setQuizzesArray] = useState([]);
+  // const [quizzesArray, setQuizzesArray] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState([]);
   const [idOfQuizToDelete, setIdOfQuizToDelete] = useState([]);
   const [deleteModalState, seDeleteModalState] = useState(false);
@@ -32,9 +36,7 @@ export default function QuizzesDashboard() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 
-  useEffect(() => {
-    setQuizzesArray([...quizArr]);
-  }, []);
+  const quizzesArray = useSelector((state) => state.quizzesArray);
 
   const handleCreateNewQuizClick = () => {
     navigate('/newquiz');
@@ -62,9 +64,8 @@ export default function QuizzesDashboard() {
   };
 
   const handleDeleteConfirm = () => {
-    console.log("The quiz id to delete is: " + idOfQuizToDelete);
     seDeleteModalState(!deleteModalState);
-    setQuizzesArray(quizzesArray.filter((quiz) => quiz.id !== idOfQuizToDelete));
+    dispatch(deleteQuiz(idOfQuizToDelete))
 
     reset();
   };
@@ -81,6 +82,10 @@ export default function QuizzesDashboard() {
     }
 
     reset();
+  };
+
+  const handleNoSearchValue = () => {
+    dispatch(resetQuizzes());
   };
 
   return (
@@ -102,9 +107,10 @@ export default function QuizzesDashboard() {
           <SearchBar
             value=""
             onChange={handleSearch}
-            onSearch={handleSearch} 
+            onSearch={handleSearch}
             placeholder={"Search quizzes..."}
             options={quizzesArray.map((quiz) => quiz.Name)}
+            handleNoSearchValue={handleNoSearchValue}
           />
 
           {/* 'ml' does not work here, we must use marginLeft */}
@@ -120,7 +126,6 @@ export default function QuizzesDashboard() {
 
       </Box> {/* TopNav closes */}
       <Quizzes
-        quizList={filteredQuizzes ? filteredQuizzes : quizzesArray}
         deleteClick={handleDeleteButtonClick}
         favorite={handleFavoriteButtonClick}
       />

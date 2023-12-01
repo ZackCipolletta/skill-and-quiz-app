@@ -30,7 +30,7 @@ root.render(
             <Route path="/quizzes" element={<Control page="quizzes" />} />
             <Route path="/categories" element={<Control page="categories" />} />
             <Route path="/newquiz" element={<Control page="newquiz" />} />
-            <Route path="/quiz" element={<Control page="quiz" />} />
+            <Route path="/quiz/:quizId" element={<Control page="quiz" />} />
             <Route path="/preview" element={<Control page="preview" />} />
             <Route path="/leaderboard" element={<Control page="leaderboard" />} />
             <Route path="/settings" element={<Control page="settings" />} />

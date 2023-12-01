@@ -4,10 +4,11 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import Cards from './Cards';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function QuizCategories(props) {
 
-  const categoriesList = props.categoriesArray;
+  const categoriesList = useSelector((state) => state.categoriesArray);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

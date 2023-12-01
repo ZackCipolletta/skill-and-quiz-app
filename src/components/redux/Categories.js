@@ -65,9 +65,9 @@ export const categoriesArraySlice = createSlice({
     searchCategories: (state, action) => {
       return state.filter(category => category.Name.toLowerCase().includes(action.payload.toLowerCase()));
     },
-    // resetCategories: (state) => {
-    //   return [...catsArray];
-    // },
+    resetCategories: (state) => {
+      return [...catsArray];
+    },
   },
 });
 

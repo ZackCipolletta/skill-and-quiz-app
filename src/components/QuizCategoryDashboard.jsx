@@ -11,8 +11,10 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setCategoriesArray, addCategory, favoriteCategory, deleteCategory, searchCategories, resetCategories } from './redux/Categories';
-import { deleteUser } from './redux/User';
+import {
+  setCategoriesArray, addCategory, favoriteCategory, deleteCategory,
+  searchCategories, resetCategories
+} from './redux/Categories';
 
 export default function QuizCategoryDashboard(props) {
   const dispatch = useDispatch();
@@ -25,14 +27,6 @@ export default function QuizCategoryDashboard(props) {
   const [createModalState, setCreateModalState] = useState(false);
   const [deleteModalState, setDeleteModalState] = useState(false);
 
-  const catsArr = [
-    { Name: "Science", Color: '#a7d7f9', id: 1, Favorite: true },
-    { Name: "Maths", Color: '#67c27c', id: 2, Favorite: false },
-    { Name: "English", Color: '#cfd9fa', id: 3, Favorite: true },
-    { Name: "Cat4", Color: '#f4bbc7', id: 4, Favorite: false },
-    { Name: "Cat5", Color: '#c0f889', id: 5, Favorite: false },
-    { Name: "Cat6", Color: '#cfd9fa', id: 6, Favorite: true }
-  ];
 
   const categoriesArray = useSelector((state) => state.categoriesArray);
 
@@ -135,7 +129,6 @@ export default function QuizCategoryDashboard(props) {
         />
       </Box>
       <QuizCategories
-        categoriesArray={categoriesArray}
         deleteClick={handleDeleteButtonClick}
         favorite={handleFavoriteButtonClick}
       />

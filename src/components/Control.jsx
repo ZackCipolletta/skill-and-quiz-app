@@ -41,7 +41,7 @@ export default function Control({ page }) {
         <QuizCategoryDashboard />;
       break;
 
-    case 'quiz':
+    case 'quiz/:quizId':
       content =
         <Quiz />;
       break;

@@ -47,8 +47,8 @@ export default function Cards(props) {
         id={props.id}
       >
         {/* borderRadius controls how rounded the corners are */}
-        <CardActionArea>
-
+        <CardActionArea onClick={() => props.onClickEvent()}>
+          
           <CardHeader sx={{
             backgroundImage: cardInfo.Image ? `url('${cardInfo.Image}')` : null,
             background: cardInfo.Image ? null : cardInfo.Color,

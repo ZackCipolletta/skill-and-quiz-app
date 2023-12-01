@@ -3,9 +3,9 @@ import '../Styles/Components.css';
 import React, { useState, useEffect } from "react";
 import {
   Button, Box, IconButton, TableContainer, Table, TableHead,
-  TableRow, TableCell, Paper
+  TableRow, TableCell, Paper, Typography
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { LuAward } from 'react-icons/lu';
 import { PiTagChevron } from 'react-icons/pi';
 import QuestionsAndAnswers from './QuestionsAndAnswers';
@@ -18,69 +18,74 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 export default function Quiz() {
   const dispatch = useDispatch();
 
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [options, setOptions] = useState(0);
-  const [quizInfo, setQuizInfo] = useState({
 
-    Name: "Quiz1",
-    Color: '#a7d7f9',
-    tags: ['Tag1', 'Tag2', 'Tag3'],
-    id: 1,
-    Favorite: false,
-    questions: [
-      {
-        id: 0,
-        type: 'Single',
-        favorite: true,
-        correct: 0,
-        question: 'What is the fastest route of all time?',
-        answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
-      },
-      {
-        id: 1,
-        type: 'Single',
-        favorite: false,
-        correct: [1, 2],
-        question: 'How many planets are there in the solar system?',
-        answers: ['1', '8', '9'],
-      },
-      {
-        id: 2,
-        type: 'Type',
-        favorite: false,
-        question: 'How many planets are there in the solar system?',
-        answers: [],
-      }
-    ],
-  });
+  const { quizId } = useParams();
+  const numericQuizId = parseInt(quizId, 10);
+  // const [quizInfo, setQuizInfo] = useState({
+
+  //   Name: "Quiz1",
+  //   Color: '#a7d7f9',
+  //   tags: ['Tag1', 'Tag2', 'Tag3'],
+  //   id: 1,
+  //   Favorite: false,
+  //   questions: [
+  //     {
+  //       id: 0,
+  //       type: 'Single',
+  //       favorite: true,
+  //       correct: 0,
+  //       question: 'What is the fastest route of all time?',
+  //       answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
+  //     },
+  //     {
+  //       id: 1,
+  //       type: 'Single',
+  //       favorite: false,
+  //       correct: [1, 2],
+  //       question: 'How many planets are there in the solar system?',
+  //       answers: ['1', '8', '9'],
+  //     },
+  //     {
+  //       id: 2,
+  //       type: 'Type',
+  //       favorite: false,
+  //       question: 'How many planets are there in the solar system?',
+  //       answers: [],
+  //     }
+  //   ],
+  // });
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
+  const quizzesArray = useSelector((state) => state.quizzesArray);
 
-  const handleRemoveQuestion = (i) => {
-    // first we create a copy of the existing questions objects in questionAnswerArr array
-    const updatedQuestionAnswerArr = [...quizInfo.questions];
-    // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
-    updatedQuestionAnswerArr.splice(i, 1);
-    // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
-    setQuizInfo({
-      ...quizInfo,
-      questions: updatedQuestionAnswerArr
-    });
-  };
+  const quizInfo = quizzesArray.find(quiz => quiz.id === numericQuizId);
+
+  // const handleRemoveQuestion = (i) => {
+  //   // first we create a copy of the existing questions objects in questionAnswerArr array
+  //   const updatedQuestionAnswerArr = [...quizInfo.questions];
+  //   // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
+  //   updatedQuestionAnswerArr.splice(i, 1);
+  //   // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
+  //   setQuizInfo({
+  //     ...quizInfo,
+  //     questions: updatedQuestionAnswerArr
+  //   });
+  // };
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    dispatch(setQuestionAnswerArr({
-      questions: quizInfo.questions,
-    }));
+  //   dispatch(setQuestionAnswerArr({
+  //     questions: quizInfo.questions,
+  //   }));
 
-  }, [quizInfo]);
+  // }, [quizInfo]);
 
   const buttons = (
     <>
@@ -128,8 +133,6 @@ export default function Quiz() {
   );
 
 
-
-
   return (
     <Box
       style={{ marginTop: 35, paddingBottom: 5 }}>
@@ -142,6 +145,7 @@ export default function Quiz() {
           marginBottom: 5
         }}>
 
+        <Typography>Hello</Typography>;
         <Box name='quizImage&Name'
           style={{
             display: 'flex',
@@ -167,7 +171,7 @@ export default function Quiz() {
         <Box name='buttons' sx={{ display: 'flex' }}>
 
           {!isMobile ? buttons : null}
-          
+
         </Box>{/* buttons closes */}
 
       </Box> {/* name&Buttons closes */}
@@ -210,7 +214,7 @@ export default function Quiz() {
 
             <QuestionsAndAnswers
               quizInfo={quizInfo}
-              handleRemoveQuestion={handleRemoveQuestion}
+            // handleRemoveQuestion={handleRemoveQuestion}
             />
 
           </Table>

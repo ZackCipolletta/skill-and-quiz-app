@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
 // import QuizCard from './QuizCard';
 import Cards from './Cards';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function Quizzes(props) {
-  const { quizList } = props;
+  const navigate = useNavigate();
+  const quizList = useSelector((state) => state.quizzesArray);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -17,6 +20,12 @@ export default function Quizzes(props) {
     gridTemplateColumns: 'repeat(4, 1fr)', // Three columns with equal width
     gap: 25, // Adjust the spacing between cards
     paddingTop: !isMobile ? 50 : 25,
+  };
+
+  const handleCardClick = (quizId) => {
+    // Handle the click event here, e.g., navigate to a new page or show more details
+    console.log(`Card clicked with ID: ${quizId}`);
+    navigate(`/quiz/${quizId}`);
   };
 
   return (
@@ -29,6 +38,7 @@ export default function Quizzes(props) {
           height={100}
           favorite={props.favorite}
           deleteClick={props.deleteClick}
+          onClickEvent={() => handleCardClick(quiz.id)}
         />
       ))}
     </div >
