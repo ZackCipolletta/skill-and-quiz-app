@@ -86,7 +86,7 @@ export default function CreateNewQuiz() {
 
 
   const newQuiz = {
-    Name: quizName, Image: imageUrl, Color: quizColor, tags: quizTags, id: uuidv4(), Favorite: false, questions: [questionAnswerArr]
+    Name: quizName, Image: imageUrl, Color: quizColor, tags: quizTags, id: 7, Favorite: false, questions: [questionAnswerArr]
   };
 
 

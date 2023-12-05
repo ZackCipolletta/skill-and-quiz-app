@@ -77,6 +77,16 @@ export default function Quiz() {
   //   });
   // };
 
+  // useEffect(() => {
+  //   console.log('this is quizInfo: ', quizInfo)
+  // }, [quizInfo]);
+
+
+
+  // useEffect(() => {
+  //   console.log('these are the questions: ', quizInfo.questions)
+  // }, [quizInfo]);
+
   const navigate = useNavigate();
 
   // useEffect(() => {
