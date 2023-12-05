@@ -1,69 +1,55 @@
-import React from "react";
-import { Backdrop, Box, Modal, Fade, Button, Typography } from '@mui/material';
-import '../Styles/Components.css';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400, // Increased width to fit 4 images
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-  borderRadius: '10px',
-  display: 'flex',
-  flexDirection: 'row', // Changed flexDirection to row
-  flexWrap: 'wrap', // Allow wrapping to next line
-  justifyContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center',
-};
-
-const imageStyle = {
-  width: '90%', // Adjusted width of each image
-  height: 'auto',
-  margin: '5px', // Added margin between images
-  cursor: 'pointer',
-};
-
-export default function ImagePickerModal(props) {
-  const modalState = props.modalState;
-
-  function handleSelect(img) {
-    props.setImgPreview(img);
-  }
-
-  const images = [
-    '/CategoryImages/Beakers.jpg',
-    '/CategoryImages/Beakers2.png',
-    '/CategoryImages/Biology.jpg',
-    '/CategoryImages/Einstein.jpg',
-    '/CategoryImages/Rocket.jpg',
-    '/CategoryImages/Science_Chemistry.png',
-    '/CategoryImages/Scientist.png',
-    '/CategoryImages/Scientist2.png',
-  ];
-
-  return (
-    <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={modalState}
-        onClose={props.handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{ backdrop: { timeout: 500 } }}
-      >
-        <Fade in={modalState}>
-          <Box sx={style}>
-            {images.map((img) => (
-              <img key={img} src={img} style={imageStyle} onClick={() => handleSelect(img)} />
-            ))}
-          </Box>
-        </Fade>
-      </Modal>
-    </div>
-  );
-}
+const quizArr = [
+  {
+    Name: "Quiz1", Image: '/CategoryImages/Beakers.jpg', Color: '#a7d7f9', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false, questions: [
+      {
+        id: 0,
+        type: 'Single',
+        favorite: true,
+        correct: 0,
+        question: 'What is the fastest route of all time?',
+        answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
+      },
+      {
+        id: 1,
+        type: 'Single',
+        favorite: false,
+        correct: [1, 2],
+        question: 'How many planets are there in the solar system?',
+        answers: ['1', '8', '9'],
+      },
+      {
+        id: 2,
+        type: 'Type',
+        favorite: false,
+        question: 'How many planets are there in the solar system?',
+        answers: [],
+      }
+    ],
+  },
+  {
+    Name: "Quiz2", Color: '#67c27c', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false, questions: [
+      {
+        id: 0,
+        type: 'Single',
+        favorite: true,
+        correct: 1,
+        question: 'What month is it?',
+        answers: ['November', 'December', 'January', 'Match'],
+      },
+      {
+        id: 1,
+        type: 'Single',
+        favorite: false,
+        correct: [0],
+        question: 'How many days in a year?',
+        answers: ['365', '366', '364'],
+      },
+      {
+        id: 2,
+        type: 'Type',
+        favorite: false,
+        question: 'What is the name of Eath\'s only natural satellite?',
+        answers: [],
+      }
+    ],
+  },

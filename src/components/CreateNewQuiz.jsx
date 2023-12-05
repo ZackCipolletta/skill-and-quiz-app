@@ -9,6 +9,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import PublishModal from "./PublishModal";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
+import { addQuiz } from "./redux/quizzes";
 
 
 function CustomTabPanel(props) {
@@ -36,6 +40,8 @@ CustomTabPanel.propTypes = {
 };
 
 export default function CreateNewQuiz() {
+  const dispatch = useDispatch();
+
   const [value, setValue] = useState(0);
   const [showIcons, setShowIcons] = useState(true);
 
@@ -50,7 +56,12 @@ export default function CreateNewQuiz() {
   };
 
   const handlePublishButtonClick = () => {
-    toggle();
+    // toggle();
+    // quizzesArray.push({ ...newQuiz });
+    dispatch(addQuiz(newQuiz));
+    console.log('Adding new quiz:', newQuiz);
+    console.log('quizzes array: ', quizzesArray);
+    navigate('/quizzes');
   };
 
   const quiz = {
@@ -63,6 +74,21 @@ export default function CreateNewQuiz() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
+  const { quizName } = useSelector((state) => state.quizName);
+  const { quizTags } = useSelector((state) => state.quizTags);
+  const { quizColor } = useSelector((state) => state.quizColor);
+  const { imageUrl } = useSelector((state) => state.imageUrl);
+
+
+  const quizzesArray = useSelector((state) => state.quizzesArray);
+
+
+  const newQuiz = {
+    Name: quizName, Image: imageUrl, Color: quizColor, tags: quizTags, id: uuidv4(), Favorite: false, questions: [questionAnswerArr]
+  };
+
 
   // const changeToNextTab = () => {
   //   const nextTab = value + 1;
@@ -90,24 +116,31 @@ export default function CreateNewQuiz() {
   const navigate = useNavigate();
 
   const handlePreviewClick = () => {
+
     navigate('/preview');
+    console.log('the new quiz is: ' + newQuiz);
+
+    console.log('the quiz array is: ' + quizzesArray);
   };
 
+  // have publish button take questionAnswerArrSlice and combine with name, color, imgageURL, tags and add an ID to create a 'quiz' then append thew newly created quiz to the array of quizzes.
+
   const previewPublishButtons = (
-    value > 1 ? 
-    < Box sx={{ display: 'flex' }}>
-      <Button
-        className="button-darkMediumBlue"
-        onClick={handlePreviewClick}
-        sx={{ mr: 1 }}
-      >
-        Preview
-      </Button>
-      <Button
-        className="button-darkMediumBlue"
-        sx={{ mr: !isMobile ? 1 : null }}
-      >
-        Publish</Button>
+    value > 1 ?
+      < Box sx={{ display: 'flex' }}>
+        <Button
+          className="button-darkMediumBlue"
+          onClick={handlePreviewClick}
+          sx={{ mr: 1 }}
+        >
+          Preview
+        </Button>
+        <Button
+          className="button-darkMediumBlue"
+          sx={{ mr: !isMobile ? 1 : null }}
+          onClick={handlePublishButtonClick}
+        >
+          Publish</Button>
       </Box >
       : null
 

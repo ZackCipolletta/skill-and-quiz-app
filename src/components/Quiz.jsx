@@ -154,7 +154,11 @@ export default function Quiz() {
 
           <Box name='quizName'
             style={{
-              backgroundColor: quizInfo.Color,
+
+              backgroundImage: quizInfo.Image ? `url('${quizInfo.Image}')` : null,
+              backgroundColor: !quizInfo.Image ? quizInfo.Color : null,
+
+
               borderRadius: 50,
               width: 65,
               height: 65,
