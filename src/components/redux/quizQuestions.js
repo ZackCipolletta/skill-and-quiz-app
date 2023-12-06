@@ -17,7 +17,8 @@ export const optionsSlice = createSlice({
       state.options = action.payload;
     },
     resetOptions: (state) => {
-      return optionsSlice.initialState;
+      console.log('Resetting options state');
+      state.options = 0;
     },
   },
 });
@@ -42,7 +43,8 @@ export const questionSlice = createSlice({
       state.question = action.payload;
     },
     resetQuestion: (state) => {
-      return questionSlice.initialState;
+      console.log('Resetting question state');
+      state.question = '';
     },
   },
 });
@@ -67,7 +69,8 @@ export const answersArrSlice = createSlice({
       state.answersArr = action.payload;
     },
     resetAnswersArr: (state) => {
-      return answersArrSlice.initialState;
+      console.log('Resetting answersArr state');
+      state.answersArr = [];
     },
   },
 });
@@ -92,7 +95,8 @@ export const questionToEditSlice = createSlice({
       state.questionToEdit = action.payload;
     },
     resetQuestionToEdit: (state) => {
-      return questionToEditSlice.initialState;
+      console.log('Resetting questionToEdit state');
+      state.questionToEdit = null;
     },
   },
 });
@@ -117,7 +121,8 @@ export const singleCorrectSlice = createSlice({
       state.singleCorrect = action.payload;
     },
     resetSingleCorrect: (state) => {
-      return singleCorrectSlice.initialState;
+      console.log('Resetting singleCorrect state');
+      state.singleCorrect = null;
     },
   },
 });
@@ -142,7 +147,8 @@ export const multipleCorrectSlice = createSlice({
       state.multipleCorrect = action.payload;
     },
     resetMultipleCorrect: (state) => {
-      return multipleCorrectSlice.initialState;
+      console.log('Resetting multipleCorrect state');
+      state.multipleCorrect = [];
     },
   },
 });
@@ -167,7 +173,8 @@ export const warnSlice = createSlice({
       state.warn = action.payload;
     },
     resetWarn: (state) => {
-      return warnSlice.initialState;
+      console.log('Resetting warn state');
+      state.warn = false;
     },
   },
 });
@@ -192,7 +199,8 @@ export const selectedFileSlice = createSlice({
       state.selectedFile = action.payload;
     },
     resetSelectedFile: (state) => {
-      return selectedFileSlice.initialState;
+      console.log('Resetting selectedFile state');
+      state.selectedFile = null;
     },
   },
 });
@@ -217,7 +225,8 @@ export const answerTypeSlice = createSlice({
       state.answerType = action.payload;
     },
     resetAnswerType: (state) => {
-      return answerTypeSlice.initialState;
+      console.log('Resetting Multiple state');
+      state.answerType = 'Multiple';
     },
   },
 });
@@ -242,7 +251,8 @@ export const isFavoriteSlice = createSlice({
       state.isFavorite = action.payload;
     },
     resetIsFavorite: (state) => {
-      return isFavoriteSlice.initialState;
+      console.log('Resetting isFavorite state');
+      state.isFavorite = false;
     },
   },
 });
@@ -270,7 +280,8 @@ export const questionAnswerArrSlice = createSlice({
       state.questions.push(action.payload);
     },
     resetQuestionAnswerArr: (state) => {
-      return questionAnswerArrSlice.initialState;
+      console.log('Resetting questionAnswerArr state');
+      state.questions = [];
     },
   },
 });

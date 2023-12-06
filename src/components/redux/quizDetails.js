@@ -11,7 +11,8 @@ export const quizNameSlice = createSlice({
       state.quizName = action.payload;
     },
     resetQuizName: (state) => {
-      return quizNameSlice.initialState;
+      console.log('Resetting quiz name state');
+      state.quizName = null;
     },
   },
 });
@@ -36,7 +37,8 @@ export const quizColorSlice = createSlice({
       state.quizColor = action.payload;
     },
     resetQuizColor: (state) => {
-      return quizColorSlice.initialState;
+      console.log('Resetting quiz color state');
+      state.quizColor = null;
     },
   },
 });
@@ -67,7 +69,8 @@ export const quizTagsSlice = createSlice({
       state.quizTags = action.payload;
     },
     resetQuizTags: (state) => {
-      return quizTagsSlice.initialState;
+      console.log('Resetting quiz tags state');
+      state.quizTags= [];
     },
   },
 });
@@ -92,7 +95,8 @@ export const newTagSlice = createSlice({
       state.newTag = action.payload;
     },
     resetNewTag: (state) => {
-      return newTagSlice.initialState;
+      console.log('Resetting new tag state');
+      state.newTag = null;
     },
   },
 });
@@ -116,7 +120,8 @@ export const imageUrlSlice = createSlice({
       state.imageUrl = action.payload;
     },
     resetImageUrl: (state) => {
-      return imageUrlSlice.initialState;
+      console.log('Resetting imageURL state');
+      state.imageUrl = null;
     },
   },
 });
