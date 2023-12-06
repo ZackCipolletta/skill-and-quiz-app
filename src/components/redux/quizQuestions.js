@@ -16,11 +16,14 @@ export const optionsSlice = createSlice({
     setOptions: (state, action) => {
       state.options = action.payload;
     },
+    resetOptions: (state) => {
+      return optionsSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the options slice
-export const { increaseOptions, decreaseOptions, setOptions } = optionsSlice.actions;
+export const { increaseOptions, decreaseOptions, setOptions, resetOptions } = optionsSlice.actions;
 
 // Export the options reducer
 export const optionsReducer = optionsSlice.reducer;
@@ -38,11 +41,14 @@ export const questionSlice = createSlice({
     setQuestion: (state, action) => {
       state.question = action.payload;
     },
+    resetQuestion: (state) => {
+      return questionSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the question slice
-export const { setQuestion } = questionSlice.actions;
+export const { setQuestion, resetQuestion } = questionSlice.actions;
 
 // Export the question reducer
 export const questionReducer = questionSlice.reducer;
@@ -60,11 +66,14 @@ export const answersArrSlice = createSlice({
     setAnswersArr: (state, action) => {
       state.answersArr = action.payload;
     },
+    resetAnswersArr: (state) => {
+      return answersArrSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the answersArr slice
-export const { setAnswersArr } = answersArrSlice.actions;
+export const { setAnswersArr, resetAnswersArr } = answersArrSlice.actions;
 
 // Export the answersArr reducer
 export const answersArrReducer = answersArrSlice.reducer;
@@ -82,11 +91,14 @@ export const questionToEditSlice = createSlice({
     setQuestionToEdit: (state, action) => {
       state.questionToEdit = action.payload;
     },
+    resetQuestionToEdit: (state) => {
+      return questionToEditSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the questionToEdit slice
-export const { setQuestionToEdit } = questionToEditSlice.actions;
+export const { setQuestionToEdit, resetQuestionToEdit } = questionToEditSlice.actions;
 
 // Export the questionToEdit reducer
 export const questionToEditReducer = questionToEditSlice.reducer;
@@ -104,11 +116,14 @@ export const singleCorrectSlice = createSlice({
     setSingleCorrect: (state, action) => {
       state.singleCorrect = action.payload;
     },
+    resetSingleCorrect: (state) => {
+      return singleCorrectSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the singleCorrect slice
-export const { setSingleCorrect } = singleCorrectSlice.actions;
+export const { setSingleCorrect, resetSingleCorrect } = singleCorrectSlice.actions;
 
 // Export the singleCorrect reducer
 export const singleCorrectReducer = singleCorrectSlice.reducer;
@@ -126,11 +141,14 @@ export const multipleCorrectSlice = createSlice({
     setMultipleCorrect: (state, action) => {
       state.multipleCorrect = action.payload;
     },
+    resetMultipleCorrect: (state) => {
+      return multipleCorrectSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the multipleCorrect slice
-export const { setMultipleCorrect } = multipleCorrectSlice.actions;
+export const { setMultipleCorrect, resetMultipleCorrect } = multipleCorrectSlice.actions;
 
 // Export the multipleCorrect reducer
 export const multipleCorrectReducer = multipleCorrectSlice.reducer;
@@ -148,11 +166,14 @@ export const warnSlice = createSlice({
     setWarn: (state, action) => {
       state.warn = action.payload;
     },
+    resetWarn: (state) => {
+      return warnSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the warn slice
-export const { setWarn } = warnSlice.actions;
+export const { setWarn, resetWarn } = warnSlice.actions;
 
 // Export the warn reducer
 export const warnReducer = warnSlice.reducer;
@@ -170,11 +191,14 @@ export const selectedFileSlice = createSlice({
     setSelectedFile: (state, action) => {
       state.selectedFile = action.payload;
     },
+    resetSelectedFile: (state) => {
+      return selectedFileSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the selectedFile slice
-export const { setSelectedFile } = selectedFileSlice.actions;
+export const { setSelectedFile, resetSelectedFile } = selectedFileSlice.actions;
 
 // Export the selectedFile reducer
 export const selectedFileReducer = selectedFileSlice.reducer;
@@ -192,11 +216,14 @@ export const answerTypeSlice = createSlice({
     setAnswerType: (state, action) => {
       state.answerType = action.payload;
     },
+    resetAnswerType: (state) => {
+      return answerTypeSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the answerType slice
-export const { setAnswerType } = answerTypeSlice.actions;
+export const { setAnswerType, resetAnswerType } = answerTypeSlice.actions;
 
 // Export the answerType reducer
 export const answerTypeReducer = answerTypeSlice.reducer;
@@ -214,11 +241,14 @@ export const isFavoriteSlice = createSlice({
     setIsFavorite: (state, action) => {
       state.isFavorite = action.payload;
     },
+    resetIsFavorite: (state) => {
+      return isFavoriteSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the isFavorite slice
-export const { setIsFavorite } = isFavoriteSlice.actions;
+export const { setIsFavorite, resetIsFavorite } = isFavoriteSlice.actions;
 
 // Export the isFavorite reducer
 export const isFavoriteReducer = isFavoriteSlice.reducer;
@@ -239,11 +269,14 @@ export const questionAnswerArrSlice = createSlice({
     addQuestion: (state, action) => {
       state.questions.push(action.payload);
     },
+    resetQuestionAnswerArr: (state) => {
+      return questionAnswerArrSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the questionAnswerArr slice
-export const { setQuestionAnswerArr, addQuestion } = questionAnswerArrSlice.actions;
+export const { setQuestionAnswerArr, addQuestion, resetQuestionAnswerArr } = questionAnswerArrSlice.actions;
 
 // Export the questionAnswerArr reducer
 export const questionAnswerArrReducer = questionAnswerArrSlice.reducer;

@@ -10,11 +10,14 @@ export const quizNameSlice = createSlice({
     setQuizName: (state, action) => {
       state.quizName = action.payload;
     },
+    resetQuizName: (state) => {
+      return quizNameSlice.initialState;
+    },
   },
 });
 
 // Export action creators for the quizName slice
-export const { setQuizName } = quizNameSlice.actions;
+export const { setQuizName, resetQuizName } = quizNameSlice.actions;
 
 // Export the quizName reducer
 export const quizNameReducer = quizNameSlice.reducer;
@@ -32,13 +35,16 @@ export const quizColorSlice = createSlice({
     setQuizColor: (state, action) => {
       state.quizColor = action.payload;
     },
+    resetQuizColor: (state) => {
+      return quizColorSlice.initialState;
+    },
   },
 });
 
-// Export action creators for the options slice
-export const { setQuizColor } = quizColorSlice.actions;
+// Export action creators for the quizColor slice
+export const { setQuizColor, resetQuizColor } = quizColorSlice.actions;
 
-// Export the options reducer
+// Export the quizColor reducer
 export const quizColorReducer = quizColorSlice.reducer;
 
 
@@ -60,13 +66,16 @@ export const quizTagsSlice = createSlice({
     setQuizTags: (state, action) => {
       state.quizTags = action.payload;
     },
+    resetQuizTags: (state) => {
+      return quizTagsSlice.initialState;
+    },
   },
 });
 
-// Export action creators for the options slice
-export const { addQuizTag, removeQuizTag, setQuizTags } = quizTagsSlice.actions;
+// Export action creators for the quizTags slice
+export const { addQuizTag, removeQuizTag, setQuizTags, resetQuizTags } = quizTagsSlice.actions;
 
-// Export the options reducer
+// Export the quizTags reducer
 export const quizTagsReducer = quizTagsSlice.reducer;
 
 
@@ -82,13 +91,16 @@ export const newTagSlice = createSlice({
     setNewTag: (state, action) => {
       state.newTag = action.payload;
     },
+    resetNewTag: (state) => {
+      return newTagSlice.initialState;
+    },
   },
 });
 
-// Export action creators for the options slice
-export const { setNewTag } = newTagSlice.actions;
+// Export action creators for the newTag slice
+export const { setNewTag, resetNewTag } = newTagSlice.actions;
 
-// Export the options reducer
+// Export the newTag reducer
 export const newTagReducer = newTagSlice.reducer;
 
 
@@ -103,11 +115,14 @@ export const imageUrlSlice = createSlice({
     setImageUrl: (state, action) => {
       state.imageUrl = action.payload;
     },
+    resetImageUrl: (state) => {
+      return imageUrlSlice.initialState;
+    },
   },
 });
 
-// Export action creators for the options slice
-export const { setImageUrl } = imageUrlSlice.actions;
+// Export action creators for the imageUrl slice
+export const { setImageUrl, resetImageUrl } = imageUrlSlice.actions;
 
-// Export the options reducer
+// Export the imageUrl reducer
 export const imageUrlReducer = imageUrlSlice.reducer;

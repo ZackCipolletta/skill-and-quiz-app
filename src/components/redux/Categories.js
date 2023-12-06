@@ -82,3 +82,29 @@ export const { setCategoriesArray, addCategory, favoriteCategory, deleteCategory
 
 // Export the categoriesArray reducer
 export const categoriesArrayReducer = categoriesArraySlice.reducer;
+
+
+
+// Name: "Quiz4", Category: 'Maths', Color: '#f4bbc7', tags: ['TagC'], id: uuidv4(), Favorite: false, questions: [
+
+// quiz Category Slice
+export const quizCategorySlice = createSlice({
+  name: 'quizCategory',
+  initialState: {
+    quizCategory: null,
+  },
+  reducers: {
+    setQuizCategory: (state, action) => {
+      state.quizCategory = action.payload;
+    },
+    resetQuizCategory: (state) => {
+      return quizCategorySlice.initialState;
+    },
+  },
+});
+
+// Export action creators for the quizCategory slice
+export const { setQuizCategory, resetQuizCategory } = quizCategorySlice.actions;
+
+// Export the quizCategory reducer
+export const quizCategoryReducer = quizCategorySlice.reducer;

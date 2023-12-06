@@ -13,6 +13,7 @@ import { Box } from '@mui/system';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { setQuizzesArray, favoriteQuiz, deleteQuiz, searchQuizzes, resetQuizzes } from './redux/quizzes';
+import { setQuizCategory } from './redux/quizDetails';
 
 export default function QuizzesDashboard() {
   const dispatch = useDispatch();
@@ -26,8 +27,6 @@ export default function QuizzesDashboard() {
   ];
   const navigate = useNavigate();
 
-  // const [deleteQuiz, setDeleteQuiz] = useState([]);
-  // const [quizzesArray, setQuizzesArray] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState([]);
   const [idOfQuizToDelete, setIdOfQuizToDelete] = useState([]);
   const [deleteModalState, seDeleteModalState] = useState(false);
@@ -37,11 +36,17 @@ export default function QuizzesDashboard() {
 
 
   const quizzesArray = useSelector((state) => state.quizzesArray);
+  
+  const { setQuizCategory } = useSelector((state) => state.quizCategory);
+
+  // const { catName } = useParams();
+
+  const catName = 'Science';
 
   const handleCreateNewQuizClick = () => {
+    dispatch(setQuizCategory(catName));
     navigate('/newquiz');
   };
-
 
   const handleSearch = (searchValue) => {
     const filtered = quizzesArray.filter((quiz) =>
@@ -65,7 +70,7 @@ export default function QuizzesDashboard() {
 
   const handleDeleteConfirm = () => {
     seDeleteModalState(!deleteModalState);
-    dispatch(deleteQuiz(idOfQuizToDelete))
+    dispatch(deleteQuiz(idOfQuizToDelete));
 
     reset();
   };
