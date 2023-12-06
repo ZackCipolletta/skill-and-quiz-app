@@ -27,7 +27,7 @@ root.render(
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/password-recovery" element={<PasswordRecovery />} />
-            <Route path="/quizzes" element={<Control page="quizzes" />} />
+            <Route path="/quizzes/:catName" element={<Control page="quizzes" />} />
             <Route path="/categories" element={<Control page="categories" />} />
             <Route path="/newquiz" element={<Control page="newquiz" />} />
             <Route path="/quiz/:quizId" element={<Control page="quiz" />} />

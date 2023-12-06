@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DeleteModal from './DeleteModal';
 import Quizzes from './Quizzes';
 import { useTheme } from '@mui/material/styles';

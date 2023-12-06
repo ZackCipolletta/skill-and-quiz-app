@@ -2,11 +2,13 @@ import '../Styles/Components.css';
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
 import Cards from './Cards';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function QuizCategories(props) {
+  const navigate = useNavigate();
 
   const categoriesList = useSelector((state) => state.categoriesArray);
 
@@ -21,6 +23,12 @@ export default function QuizCategories(props) {
     paddingTop: !isMobile ? 50 : 25,
   };
 
+  const handleCardClick = (quizId) => {
+    // Handle the click event here, e.g., navigate to a new page or show more details
+    console.log(`Card clicked with ID: ${quizId}`);
+    navigate(`/quizzes/${quizId}`);
+  };
+
   return (
     <div style={gridStyle}>
       {categoriesList.map((category, index) => (
@@ -31,6 +39,7 @@ export default function QuizCategories(props) {
           deleteClick={props.deleteClick}
           favorite={props.favorite}
           height={50}
+          onClickEvent={() => handleCardClick(category.Name)}
         />
       ))}
     </div >

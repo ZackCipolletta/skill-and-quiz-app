@@ -24,10 +24,6 @@ export default function Quiz() {
   const [options, setOptions] = useState(0);
 
   const { quizId } = useParams();
-  const numericQuizId = parseInt(quizId, 10);
-  // const [quizInfo, setQuizInfo] = useState({
-
-
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
@@ -36,16 +32,7 @@ export default function Quiz() {
   const quizInfo = quizzesArray.find(quiz => quiz.id === quizId);
 
 
-
   const navigate = useNavigate();
-
-  // useEffect(() => {
-
-  //   dispatch(setQuestionAnswerArr({
-  //     questions: quizInfo.questions,
-  //   }));
-
-  // }, [quizInfo]);
 
 
   const buttons = (

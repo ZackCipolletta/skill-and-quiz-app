@@ -1,16 +1,29 @@
 import '../Styles/Components.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from '@mui/material';
 // import QuizCard from './QuizCard';
 import Cards from './Cards';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function Quizzes(props) {
   const navigate = useNavigate();
-  const quizList = useSelector((state) => state.quizzesArray);
+
+  
+  const { catName } = useParams();
+
+  useEffect(() => {
+    console.log('the category to be filtered is: ', catName);
+  }, []);
+
+  const quizList = useSelector((state) => state.quizzesArray.filter(
+    (quiz) => catName && quiz.Category.toLowerCase().includes(catName.toLowerCase())
+  )
+  );
+
+
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

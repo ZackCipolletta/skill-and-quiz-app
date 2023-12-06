@@ -27,9 +27,7 @@ export default function Control({ page }) {
   switch (page) {
     case 'quizzes':
       content =
-        <>
           <QuizzesDashboard />
-        </>;
 
       break;
     case 'newquiz':
