@@ -19,6 +19,7 @@ import {
   setQuestionToEdit, setSingleCorrect, setMultipleCorrect,
   setWarn, setSelectedFile, setAnswerType, setIsFavorite, setQuestionAnswerArr, addQuestion
 } from "./redux/quizQuestions";
+import { setQuizCategory } from "./redux/Categories";
 
 
 export default function QuizQuestions() {
@@ -36,8 +37,16 @@ export default function QuizQuestions() {
   const { answerType } = useSelector((state) => state.answerType);
   const { isFavorite } = useSelector((state) => state.isFavorite);
 
+  const { quizCategory } = useSelector((state) => state.quizCategory);
+
+  const test = () => {
+    dispatch(setQuizCategory("green"))
+  }
+
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
+
+
 
   const quiz = {
     questions: [

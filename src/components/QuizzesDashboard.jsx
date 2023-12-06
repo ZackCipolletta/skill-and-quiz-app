@@ -13,7 +13,7 @@ import { Box } from '@mui/system';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { setQuizzesArray, favoriteQuiz, deleteQuiz, searchQuizzes, resetQuizzes } from './redux/quizzes';
-import { setQuizCategory } from './redux/quizDetails';
+import { setQuizCategory } from './redux/Categories';
 
 export default function QuizzesDashboard() {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ export default function QuizzesDashboard() {
 
   const quizzesArray = useSelector((state) => state.quizzesArray);
   
-  const { setQuizCategory } = useSelector((state) => state.quizCategory);
+  const { quizCategory } = useSelector((state) => state.quizCategory);
 
   // const { catName } = useParams();
 

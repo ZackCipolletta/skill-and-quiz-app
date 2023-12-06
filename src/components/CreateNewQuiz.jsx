@@ -17,7 +17,9 @@ import {
   resetOptions, resetQuestion, resetAnswersArr, resetQuestionToEdit, resetSingleCorrect, resetMultipleCorrect,
   resetWarn, resetSelectedFile, resetAnswerType, resetIsFavorite, resetQuestionAnswerArr,
 } from "./redux/quizQuestions";
-import { resetQuizName, resetQuizColor, resetQuizTags, resetNewTag, resetImageUrl, setQuizCategory } from "./redux/quizDetails";
+import { resetQuizName, resetQuizColor, resetQuizTags, resetNewTag, resetImageUrl } from "./redux/quizDetails";
+import { resetQuizCategory, setQuizCategory } from "./redux/Categories";
+
 
 function CustomTabPanel(props) {
   const { children, value, index } = props;
@@ -51,6 +53,17 @@ export default function CreateNewQuiz() {
 
   const [publishModalState, setPublishModalState] = useState(false);
 
+  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
+  const { quizName } = useSelector((state) => state.quizName);
+  const { quizTags } = useSelector((state) => state.quizTags);
+  const { quizColor } = useSelector((state) => state.quizColor);
+  const { imageUrl } = useSelector((state) => state.imageUrl);
+
+  const { quizCategory } = useSelector((state) => state.quizCategory);
+
+
+  const quizzesArray = useSelector((state) => state.quizzesArray);
+
   const handleCancelButtonClick = () => {
     toggle();
   };
@@ -60,11 +73,9 @@ export default function CreateNewQuiz() {
   };
 
   const handlePublishButtonClick = () => {
-    // toggle();
-    // quizzesArray.push({ ...newQuiz });
     dispatch(addQuiz(newQuiz));
+    navigate(`/quizzes/${quizCategory}`);
     reset();
-    navigate('/quizzes');
   };
 
   const reset = () => {
@@ -84,6 +95,8 @@ export default function CreateNewQuiz() {
     dispatch(resetQuizTags());
     dispatch(resetNewTag());
     dispatch(resetImageUrl());
+    dispatch(resetQuizCategory());
+
   };
 
   const quiz = {
@@ -96,19 +109,6 @@ export default function CreateNewQuiz() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
-  const { quizName } = useSelector((state) => state.quizName);
-  const { quizTags } = useSelector((state) => state.quizTags);
-  const { quizColor } = useSelector((state) => state.quizColor);
-  const { imageUrl } = useSelector((state) => state.imageUrl);
-
-  const { quizCategory } = useSelector((state) => state.quizCategory);
-
-
-  const quizzesArray = useSelector((state) => state.quizzesArray);
-
-
 
 
   const newQuiz = {
