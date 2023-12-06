@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const quizArr = [
   {
-    Name: "Quiz1", Image: '/CategoryImages/Beakers.jpg', Color: '#a7d7f9', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false, questions: [
+    Name: "Quiz1", Image: '/CategoryImages/Beakers.jpg', Color: '#a7d7f9', tags: ['Tag1', 'Tag2', 'Tag3',], id: uuidv4(), Favorite: false, questions: [
       {
         id: 0,
         type: 'Single',
@@ -29,7 +30,7 @@ const quizArr = [
     ],
   },
   {
-    Name: "Quiz2", Color: '#67c27c', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false, questions: [
+    Name: "Quiz2", Color: '#67c27c', tags: ['TagA', 'TagB', 'TagC'], id: uuidv4(), Favorite: false, questions: [
       {
         id: 0,
         type: 'Single',
@@ -56,7 +57,7 @@ const quizArr = [
     ],
   },
   {
-    Name: "Quiz3", Color: '#cfd9fa', tags: ['TagB', 'TagC'], id: 3, Favorite: false, questions: [
+    Name: "Quiz3", Color: '#cfd9fa', tags: ['TagB', 'TagC'], id: uuidv4(), Favorite: false, questions: [
       {
         id: 0,
         type: 'Single',
@@ -83,7 +84,7 @@ const quizArr = [
     ],
   },
   {
-    Name: "Quiz4", Color: '#f4bbc7', tags: ['TagC'], id: 4, Favorite: false, questions: [
+    Name: "Quiz4", Color: '#f4bbc7', tags: ['TagC'], id: uuidv4(), Favorite: false, questions: [
       {
         id: 0,
         type: 'Single',
@@ -110,7 +111,7 @@ const quizArr = [
     ],
   },
   {
-    Name: "Quiz5", Color: '#c0f889', tags: ['Tag2', 'TagC'], id: 5, Favorite: true, questions: [
+    Name: "Quiz5", Color: '#c0f889', tags: ['Tag2', 'TagC'], id: uuidv4(), Favorite: true, questions: [
       {
         id: 0,
         type: 'Single',
@@ -137,7 +138,7 @@ const quizArr = [
     ],
   },
   {
-    Name: "Science Quiz", Image: '/CategoryImages/Scientist.png', Color: '#c0f889', tags: ['Tag2', 'TagC'], id: 6, Favorite: true, questions: [
+    Name: "Science Quiz", Image: '/CategoryImages/Scientist.png', Color: '#c0f889', tags: ['Tag2', 'TagC'], id: uuidv4(), Favorite: true, questions: [
       {
         id: 0,
         type: 'Single',

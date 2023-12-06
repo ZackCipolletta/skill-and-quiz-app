@@ -44,6 +44,7 @@ export default function CreateNewQuiz() {
 
   const [value, setValue] = useState(0);
   const [showIcons, setShowIcons] = useState(true);
+  const [id, setId] = useState(7);
 
   const [publishModalState, setPublishModalState] = useState(false);
 
@@ -59,8 +60,7 @@ export default function CreateNewQuiz() {
     // toggle();
     // quizzesArray.push({ ...newQuiz });
     dispatch(addQuiz(newQuiz));
-    console.log('Adding new quiz:', newQuiz);
-    console.log('quizzes array: ', quizzesArray);
+    setId(id + 1);
     navigate('/quizzes');
   };
 
@@ -86,7 +86,7 @@ export default function CreateNewQuiz() {
 
 
   const newQuiz = {
-    Name: quizName, Image: imageUrl, Color: quizColor, tags: quizTags, id: 7, Favorite: false, questions: [questionAnswerArr]
+    Name: quizName, Image: imageUrl, Color: quizColor, tags: quizTags, id: uuidv4(), Favorite: false, questions: questionAnswerArr.questions
   };
 
 

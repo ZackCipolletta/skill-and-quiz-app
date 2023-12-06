@@ -92,113 +92,111 @@ export default function QuestionsAndAnswers(props) {
   return (
     <TableBody>
       {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
-      {quizInfo && quizInfo.questions && Array.isArray(quizInfo.questions) &&
-        quizInfo.questions.map((q, i) => (
-          <TableRow key={i}
-            sx={{
-              '&:hover': {
-                backgroundColor: '#f8fafe',
-                // border: '2px solid #3ea7f2 !important'
-              }
-            }}
+      {quizInfo.questions.map((q, i) => (
+        <TableRow key={i}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#f8fafe',
+              // border: '2px solid #3ea7f2 !important'
+            }
+          }}
+        >
+          <TableCell
+            sx={{ borderRight: '1px solid #e0e0e0', fontWeight: 'bold', borderBottom: "none", verticalAlign: 'top' }}
           >
-            <TableCell
-              sx={{ borderRight: '1px solid #e0e0e0', fontWeight: 'bold', borderBottom: "none", verticalAlign: 'top' }}
+            {/* we use the index (i) to add number each question when it is displayed */}
+            {i + 1}
+          </TableCell>
+
+          <TableCell
+            sx={{ width: 750, borderRight: '1px solid #e0e0e0', borderBottom: "none", verticalAlign: 'top' }}
+          >
+
+            {/* here we display the question */}
+            <Typography
+              style={{
+                fontWeight: 'bold',
+              }}
             >
-              {/* we use the index (i) to add number each question when it is displayed */}
-              {i + 1}
-            </TableCell>
-  
-            <TableCell
-              sx={{ width: 750, borderRight: '1px solid #e0e0e0', borderBottom: "none", verticalAlign: 'top' }}
-            >
-  
-              {/* here we display the question */}
-              <Typography
-                style={{
-                  fontWeight: 'bold',
-                }}
-              >
-                {q && q.question}
-              </Typography>
-  
-              {/* Then we map array of answers onto this template */}
-              <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
-  
-                <Box>
-                  {q && q.answers && Array.isArray(q.answers) &&
-                    q.answers.map((answer, index) => (
-                      <Typography
-                        key={index}
-                        style={{
-                          marginTop: !isMobile ? 10 : 5,
-                          border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-                            '1px solid #67C27C'
-                            : '1px solid #488BFD',
-                          paddingLeft: 7,
-                          paddingRight: 7,
-                          borderRadius: '12px',
-                          color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-                            '#67C27C' : '#488BFD',
-                          background: '#F6FFF6'
-                        }}
-                      >
-                        {optionsArray[index]}.{answer}
-                      </Typography>
-                    ))
-                  }
-                </Box>
-  
+              {q.question}
+            </Typography>
+
+            {/* Then we map array of answers onto this template */}
+            <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
+
+              <Box>
+                {
+                  q && q.answers && Array.isArray(q.answers) && 
+                  q.answers.map((answer, index) => (
+                  <Typography
+                    key={index}
+                    style={{
+                      marginTop: !isMobile ? 10 : 5,
+                      border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                        '1px solid #67C27C'
+                        : '1px solid #488BFD',
+                      paddingLeft: 7,
+                      paddingRight: 7,
+                      borderRadius: '12px',
+                      color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                        '#67C27C' : '#488BFD',
+                      background: '#F6FFF6'
+                    }}
+                  >
+                    {optionsArray[index]}.{answer}
+                  </Typography>
+                ))}
               </Box>
-            </TableCell>
-  
-            <TableCell
-              sx={{ borderRight: '1px solid #e0e0e0', borderBottom: "none" }}
-            >
-  
-              <Checkbox sx={{
-                // marginLeft: !isMobile ? -1 : -4,
-                // marginRight: -4,
-                // transform: "scale(.7)"
-              }}
-                icon={<PiStar color='black' />}
-                checkedIcon={<PiStarFill color='gold' />}
-                checked={q && q.favorite}
-  
-                onChange={() => handleFavorite(i)}
+
+            </Box>
+          </TableCell>
+
+          <TableCell
+            sx={{ borderRight: '1px solid #e0e0e0', borderBottom: "none" }}
+          >
+
+            <Checkbox sx={{
+              // marginLeft: !isMobile ? -1 : -4,
+              // marginRight: -4,
+              // transform: "scale(.7)"
+            }}
+              icon={<PiStar color='black' />}
+              checkedIcon={<PiStarFill color='gold' />}
+              checked={q.favorite}
+
+              onChange={() => handleFavorite(i)}
+            />
+
+          </TableCell>
+
+          <TableCell
+            sx={{ minWidth: 100, borderBottom: "none", paddingRight: 0 }}
+          >
+
+            <IconButton sx={{
+              // marginLeft: !isMobile ? -4 : -4,
+              // marginRight: -1,
+              transform: "scale(.7) scaleY(1.2)"
+            }}>
+              <PiPencilLineLight color='black'
+                onClick={() => handleEditQuestion(i)}
               />
-  
-            </TableCell>
-  
-            <TableCell
-              sx={{ minWidth: 100, borderBottom: "none", paddingRight: 0 }}
+            </IconButton>
+
+            <IconButton sx={{
+              marginRight: !isMobile ? 0 : -3,
+              transform: "scale(.7) scaleY(1.2)"
+            }}
+              onClick={() => handleRemoveQuestion(i)}
             >
-  
-              <IconButton sx={{
-                // marginLeft: !isMobile ? -4 : -4,
-                // marginRight: -1,
-                transform: "scale(.7) scaleY(1.2)"
-              }}>
-                <PiPencilLineLight color='black'
-                  onClick={() => handleEditQuestion(i)}
-                />
-              </IconButton>
-  
-              <IconButton sx={{
-                marginRight: !isMobile ? 0 : -3,
-                transform: "scale(.7) scaleY(1.2)"
-              }}
-                onClick={() => handleRemoveQuestion(i)}
-              >
-  
-                <PiTrashThin color='red' />
-              </IconButton>
-  
-            </TableCell>
-          </TableRow>
-        ))
+
+              <PiTrashThin color='red' />
+            </IconButton>
+
+          </TableCell>
+        </TableRow>
+      ))
       }
-    </TableBody>
+    </TableBody >
   );
-  
 }

@@ -27,65 +27,15 @@ export default function Quiz() {
   const numericQuizId = parseInt(quizId, 10);
   // const [quizInfo, setQuizInfo] = useState({
 
-  //   Name: "Quiz1",
-  //   Color: '#a7d7f9',
-  //   tags: ['Tag1', 'Tag2', 'Tag3'],
-  //   id: 1,
-  //   Favorite: false,
-  //   questions: [
-  //     {
-  //       id: 0,
-  //       type: 'Single',
-  //       favorite: true,
-  //       correct: 0,
-  //       question: 'What is the fastest route of all time?',
-  //       answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
-  //     },
-  //     {
-  //       id: 1,
-  //       type: 'Single',
-  //       favorite: false,
-  //       correct: [1, 2],
-  //       question: 'How many planets are there in the solar system?',
-  //       answers: ['1', '8', '9'],
-  //     },
-  //     {
-  //       id: 2,
-  //       type: 'Type',
-  //       favorite: false,
-  //       question: 'How many planets are there in the solar system?',
-  //       answers: [],
-  //     }
-  //   ],
-  // });
+
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
 
   const quizzesArray = useSelector((state) => state.quizzesArray);
 
-  const quizInfo = quizzesArray.find(quiz => quiz.id === numericQuizId);
-
-  // const handleRemoveQuestion = (i) => {
-  //   // first we create a copy of the existing questions objects in questionAnswerArr array
-  //   const updatedQuestionAnswerArr = [...quizInfo.questions];
-  //   // then we remove 1 of the objects at position 'i' of the array (removing both the question and the answers)
-  //   updatedQuestionAnswerArr.splice(i, 1);
-  //   // then we set questionAnswerArr equal to updatedQuestionAnswerArr which no longer contains the targeted object in the array
-  //   setQuizInfo({
-  //     ...quizInfo,
-  //     questions: updatedQuestionAnswerArr
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   console.log('this is quizInfo: ', quizInfo)
-  // }, [quizInfo]);
+  const quizInfo = quizzesArray.find(quiz => quiz.id === quizId);
 
 
-
-  // useEffect(() => {
-  //   console.log('these are the questions: ', quizInfo.questions)
-  // }, [quizInfo]);
 
   const navigate = useNavigate();
 
