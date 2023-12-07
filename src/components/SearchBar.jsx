@@ -113,9 +113,9 @@ const SearchBar = ({ value, width, onChange, placeholder, height,
 
   const handleCancel = () => {
     setInternalValue('');
-    if (onCancelResearch) {
-      onCancelResearch(internalValue);
-    }
+    // if (onCancelResearch) {
+    //   onCancelResearch(internalValue);
+    // }
   };
 
   const handleClickOption = e => {
