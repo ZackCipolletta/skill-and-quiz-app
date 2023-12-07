@@ -31,7 +31,8 @@ export default function QuizCategories(props) {
 
   return (
     <div style={gridStyle}>
-      {categoriesList.map((category, index) => (
+      {/* {categoriesList.map((category, index) => ( */}
+      {props.cats.map((category, index) => (
 
         <Cards
           key={index}

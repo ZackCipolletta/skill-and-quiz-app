@@ -15,8 +15,21 @@ import {
   setCategoriesArray, addCategory, favoriteCategory, deleteCategory,
   searchCategories, resetCategories
 } from './redux/Categories';
+import { db } from "../firebase";
+import {
+  doc, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
+  serverTimestamp, getDocs, query, where, orderBy, limit,
+} from 'firebase/firestore';
+
+
+
 
 export default function QuizCategoryDashboard(props) {
+  // const db = getFirestore();
+  // const docRef = doc(db, 'categories', 'f5hBjv3s8caO8Gn3qZPx');
+  // const docSnap = await getDoc(docRef);
+  const colletionRef = collection(db, 'categories');
+
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -31,7 +44,31 @@ export default function QuizCategoryDashboard(props) {
   const categoriesArray = useSelector((state) => state.categoriesArray);
 
   const [searchValue, setSearchValue] = useState(false);
-  const [filteredCategories, setFilteredCategories] = useState([...categoriesArray]);
+
+  const [categories, setCategories] = useState([]);
+
+
+  useEffect(() => {
+    const unsub = onSnapshot(colletionRef, (querySnapshot) => {
+      const categories = [];
+      querySnapshot.forEach((doc) => {
+        categories.push(doc.data());
+      });
+      setCategories(categories);
+    });
+    return () => {
+      unsub();
+    };
+
+    // eslint-disable-next-line
+  }, []);
+
+
+
+
+
+
+
 
   const searching = (value) => {
     if (value.trim()) {
@@ -131,6 +168,7 @@ export default function QuizCategoryDashboard(props) {
       <QuizCategories
         deleteClick={handleDeleteButtonClick}
         favorite={handleFavoriteButtonClick}
+        cats={categories}
       />
       <DeleteModal
         toggle={deleteModalState}
