@@ -18,13 +18,6 @@ import { setQuizCategory } from './redux/Categories';
 export default function QuizzesDashboard() {
   const dispatch = useDispatch();
 
-  const quizArr = [
-    { Name: "Quiz44", Image: '/CategoryImages/Beakers.jpg', Color: '#a7d7f9', tags: ['Tag1', 'Tag2', 'Tag3',], id: 1, Favorite: false },
-    { Name: "Quiz2", Color: '#67c27c', tags: ['TagA', 'TagB', 'TagC'], id: 2, Favorite: false },
-    { Name: "Quiz3", Color: '#cfd9fa', tags: ['TagB', 'TagC'], id: 3, Favorite: false },
-    { Name: "Quiz4", Color: '#f4bbc7', tags: ['TagC'], id: 4, Favorite: false },
-    { Name: "Quiz5", Color: '#c0f889', tags: ['Tag2', 'TagC'], id: 5, Favorite: true }
-  ];
   const navigate = useNavigate();
 
   const [selectedQuiz, setSelectedQuiz] = useState([]);
@@ -39,23 +32,22 @@ export default function QuizzesDashboard() {
   
   const { quizCategory } = useSelector((state) => state.quizCategory);
 
-  // const { catName } = useParams();
+  const { catName } = useParams();
 
-  const catName = 'Science';
 
   const handleCreateNewQuizClick = () => {
     dispatch(setQuizCategory(catName));
     navigate('/newquiz');
   };
 
-  const handleSearch = (searchValue) => {
-    const filtered = quizzesArray.filter((quiz) =>
-      searchValue && quiz.Name.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    setFilteredQuizzes(filtered);
-  };
 
-  const [filteredQuizzes, setFilteredQuizzes] = useState([...quizArr]);
+  const handleSearch = (searchValue) => {
+    // in order to search the complete list each time the search query is modified (ex: French > F should search the entire list containing 'f', not just the list containing 'french'), because the list is modified and then returned to us upon each search, we must reset the list. 
+    dispatch(resetQuizzes());
+
+    // we have created a reducer which searches through the list of quizzes
+    dispatch(searchQuizzes(searchValue));
+  };
 
   const handleDeleteButtonClick = (event, id, quiz) => {
     seDeleteModalState(!deleteModalState);

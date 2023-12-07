@@ -44,10 +44,10 @@ export default function QuizCategoryDashboard(props) {
   };
 
   const handleSearch = (searchValue) => {
-    // const filtered = categoriesArray.filter((cat) =>
-    //   cat.Name.toLowerCase().includes(searchValue.toLowerCase())
-    // );
-    // setFilteredCategories(filtered);
+    // in order to search the complete list of categories each time the search query is modified (ex: French > F should search all categories containing 'f', not just the list of categories containing 'french'), because the list of categories is modified and then returned to us upon each search, we must reset the list of categories. 
+    dispatch(resetCategories());
+
+    // we have created a reducer which searches through the list of categories
     dispatch(searchCategories(searchValue));
   };
 

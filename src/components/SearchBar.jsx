@@ -113,9 +113,7 @@ const SearchBar = ({ value, width, onChange, placeholder, height,
 
   const handleCancel = () => {
     setInternalValue('');
-    // if (onCancelResearch) {
-    //   onCancelResearch(internalValue);
-    // }
+    handleNoSearchValue();
   };
 
   const handleClickOption = e => {
@@ -127,9 +125,7 @@ const SearchBar = ({ value, width, onChange, placeholder, height,
   };
 
   const handleKeyUp = e => {
-    if (e.keyCode === 13 || (e.code === 'Enter' && onSearch)) {
-      onSearch();
-    } else if (e.keyCode === 27 || e.code === 'Escape') {
+    if (e.keyCode === 27 || e.code === 'Escape') {
       handleCancel();
     } else if (!internalValue) {
       handleNoSearchValue();
