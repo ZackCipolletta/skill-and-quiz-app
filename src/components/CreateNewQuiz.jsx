@@ -19,6 +19,11 @@ import {
 } from "./redux/quizQuestions";
 import { resetQuizName, resetQuizColor, resetQuizTags, resetNewTag, resetImageUrl } from "./redux/quizDetails";
 import { resetQuizCategory, setQuizCategory } from "./redux/Categories";
+import { db } from "../firebase";
+import {
+  addDoc, doc, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
+  serverTimestamp, getDocs, query, where, orderBy, limit,
+} from 'firebase/firestore';
 
 
 function CustomTabPanel(props) {
@@ -46,6 +51,8 @@ CustomTabPanel.propTypes = {
 };
 
 export default function CreateNewQuiz() {
+  const colletionRef = collection(db, 'categories');
+
   const dispatch = useDispatch();
 
   const [value, setValue] = useState(0);
@@ -72,8 +79,12 @@ export default function CreateNewQuiz() {
     setPublishModalState(!publishModalState);
   };
 
+  const handleAddNewQuiz = async (newQuiz) => {
+    await addDoc(collection(db, "quizzes"), newQuiz);
+  };
+
   const handlePublishButtonClick = () => {
-    dispatch(addQuiz(newQuiz));
+    handleAddNewQuiz(newQuiz);
     navigate(`/quizzes/${quizCategory}`);
     reset();
   };

@@ -12,10 +12,18 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box } from '@mui/system';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setQuizzesArray, favoriteQuiz, deleteQuiz, searchQuizzes, resetQuizzes } from './redux/quizzes';
+import { setQuizzesArray, favoriteQuiz, deleteQuiz, searchQuizzes, resetQuizzes, addQuiz } from './redux/quizzes';
 import { setQuizCategory } from './redux/Categories';
+import { db } from "../firebase";
+import {
+  doc, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
+  serverTimestamp, getDocs, query, where, orderBy, limit,
+} from 'firebase/firestore';
+
 
 export default function QuizzesDashboard() {
+  const colletionRef = collection(db, 'quizzes');
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -29,10 +37,34 @@ export default function QuizzesDashboard() {
 
 
   const quizzesArray = useSelector((state) => state.quizzesArray);
-  
+
   const { quizCategory } = useSelector((state) => state.quizCategory);
 
   const { catName } = useParams();
+
+
+
+
+  const [quizzes, setQuizzes] = useState([]);
+
+
+  useEffect(() => {
+    const unsub = onSnapshot(colletionRef, (querySnapshot) => {
+      const quizzes = [];
+      querySnapshot.forEach((doc) => {
+        quizzes.push(doc.data());
+      });
+      dispatch(addQuiz(quizzes));
+    });
+    return () => {
+      unsub();
+    };
+  }, []);
+
+
+
+
+
 
 
   const handleCreateNewQuizClick = () => {

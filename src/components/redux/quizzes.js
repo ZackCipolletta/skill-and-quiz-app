@@ -171,13 +171,13 @@ const quizArr = [
 export const quizzesArraySlice = createSlice({
 
   name: 'quizzesArray',
-  initialState: [...quizArr],
+  initialState: [],
   reducers: {
     setQuizzesArray: (state, action) => {
       return action.payload;
     },
     addQuiz: (state, action) => {
-      state.push(action.payload);
+      state.push(action.payload[0]);
     },
     favoriteQuiz: (state, action) => {
       // here we pass in an id of a selected quiz and then find that quiz in the array 

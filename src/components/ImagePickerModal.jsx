@@ -48,6 +48,7 @@ export default function ImagePickerModal(props) {
     '/CategoryImages/Science_Chemistry.png',
     '/CategoryImages/Scientist.png',
     '/CategoryImages/Scientist2.png',
+    '/CategoryImages/SEO.png',
 
     '/CategoryImages/Beakers - Copy.jpg',
     '/CategoryImages/Beakers2 - Copy.png',

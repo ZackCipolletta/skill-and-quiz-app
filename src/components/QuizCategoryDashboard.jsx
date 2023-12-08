@@ -59,8 +59,6 @@ export default function QuizCategoryDashboard(props) {
     return () => {
       unsub();
     };
-
-    // eslint-disable-next-line
   }, []);
 
 
