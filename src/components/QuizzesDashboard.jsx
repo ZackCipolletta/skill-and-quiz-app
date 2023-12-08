@@ -43,8 +43,6 @@ export default function QuizzesDashboard() {
   const { catName } = useParams();
 
 
-
-
   const [quizzes, setQuizzes] = useState([]);
 
 
@@ -66,11 +64,6 @@ export default function QuizzesDashboard() {
     unsub();
   };
 }, []);
-
-
-
-
-
 
 
 const handleCreateNewQuizClick = () => {
@@ -105,22 +98,7 @@ const handleDeleteConfirm = () => {
   reset();
 };
 
-// const handleFavoriteButtonClick = (id) => {
-//   console.log("Fav icon clicked. Id value is: " + id);
-//   const index = quizzesArray.findIndex((quiz) => quiz.id === id);
 
-//   if (index !== -1) {
-//     const updatedQuizzesArray = [...quizzesArray];
-//     updatedQuizzesArray[index].Favorite = !updatedQuizzesArray[index].Favorite;
-
-//     setQuizzesArray(updatedQuizzesArray);
-//   }
-
-//   reset();
-//   };
-  
-
-  
 const handleFavoriteButtonClick = async (quizId) => {
   // first we query the database and filter the 'quizzes' collection for any quiz 
   // with an id field that matches 'quizId'.
@@ -143,11 +121,6 @@ const handleFavoriteButtonClick = async (quizId) => {
     await updateDoc(quizRef, { Favorite: !Favorite });
   }
 };
-
-
-
-
-
 
 
 const handleNoSearchValue = () => {

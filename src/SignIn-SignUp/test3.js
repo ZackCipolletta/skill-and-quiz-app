@@ -1,18 +1,25 @@
-const handleFavoriteButtonClick = async (categoryId) => {
-  const categoryRef = doc(db, "categories", categoryId);
+import { query, collection, orderBy, startAt, getDocs } from 'firebase/firestore';
+
+const handleSearch = async (searchValue) => {
+  // Convert the search term to lowercase for a case-insensitive search
+  const searchTermLower = searchValue.toLowerCase();
+
+  // Construct a query to fetch documents where the lowercase 'Name' field contains the lowercase search term
+  const searchQuery = query(
+    collection(db, 'categories'),
+    orderBy('Name'),
+    startAt(searchTermLower)
+  );
 
   try {
-    const docSnapshot = await getDoc(categoryRef);
+    // Execute the query
+    const querySnapshot = await getDocs(searchQuery);
 
-    if (docSnapshot.exists()) {
-      const currentFavoriteValue = docSnapshot.data().Favorite;
+    // Extract the data from the query snapshot
+    const searchedCategories = querySnapshot.docs.map(doc => doc.data());
 
-      // Toggle the 'Favorite' property
-      await updateDoc(categoryRef, { Favorite: !currentFavoriteValue });
-    } else {
-      console.error("Document with ID does not exist:", categoryId);
-    }
+    setCategories(searchedCategories);
   } catch (error) {
-    console.error("Error updating document:", error);
+    console.error('Error searching categories in Firestore:', error);
   }
 };

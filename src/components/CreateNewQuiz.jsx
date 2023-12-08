@@ -80,6 +80,7 @@ export default function CreateNewQuiz() {
   };
 
   const handleAddNewQuiz = async (newQuiz) => {
+    dispatch(addQuiz(newQuiz));
     await addDoc(collection(db, "quizzes"), newQuiz);
   };
 
