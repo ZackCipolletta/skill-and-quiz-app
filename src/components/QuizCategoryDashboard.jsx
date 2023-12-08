@@ -17,8 +17,8 @@ import {
 } from './redux/Categories';
 import { db } from "../firebase";
 import {
-  doc, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
-  serverTimestamp, getDocs, query, where, orderBy, limit,
+  addDoc, doc, getDocs, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
+  serverTimestamp, getDoc, query, where, orderBy, limit,
 } from 'firebase/firestore';
 
 
@@ -62,12 +62,6 @@ export default function QuizCategoryDashboard(props) {
   }, []);
 
 
-
-
-
-
-
-
   const searching = (value) => {
     if (value.trim()) {
       setSearchValue(value);
@@ -90,90 +84,135 @@ export default function QuizCategoryDashboard(props) {
     dispatch(addCategory(newCat));
   };
 
+  const handleAddNewCategory = async (newCat) => {
+    await addDoc(collection(db, "categories"), newCat);
+  };
+
   const handleCreateNewCategoryClick = () => {
     setCreateModalState(!createModalState);
   };
 
-  const handleFavoriteButtonClick = (id) => {
-    dispatch(favoriteCategory(id));
+  // const handleFavoriteButtonClick = (id) => {
+  //   dispatch(favoriteCategory(id));
+  // };
+
+
+
+
+  const handleFavoriteButtonClick = async (categoryId) => {
+    // first we query the database and filter the 'categories' collection for any category 
+    // with an id field that matches 'categoryId'.
+    const categoryQuery = query(collection(db, "categories"), where("id", "==", categoryId));
+    // then we get a snapshot of the corresponding doc
+    const querySnapshot = await getDocs(categoryQuery);
+  
+    // check if the snapshot exists (is not empty)
+    if (!querySnapshot.empty) {
+
+      // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+      const categoryDoc = querySnapshot.docs[0];
+      // we then assign the favorite property of the categoryDoc to a variable so we can update it
+      const { Favorite } = categoryDoc.data();
+      
+      // Use categoryDoc.id as the actual document ID
+      const categoryRef = doc(db, "categories", categoryDoc.id);
+      
+      //we then update the document with the id of the categoryDoc
+      await updateDoc(categoryRef, { Favorite: !Favorite });
+    }
   };
+  
 
-  const handleDeleteButtonClick = (event, id, cat) => {
-    setDeleteModalState(!deleteModalState);
-    setCategoryToDelete(cat);
-    setSelectedCategoryId(id);
-  };
-
-  const reset = () => {
-    setSelectedCategoryId([]);
-    setCategoryToDelete([]);
-  };
-
-  const handleDeleteConfirm = () => {
-    setDeleteModalState(!deleteModalState);
-    dispatch(deleteCategory(selectedCategoryId));
-    reset();
-  };
-
-  const handleNoSearchValue = () => {
-    dispatch(resetCategories());
-  };
+// favoriteCategory: (state, action) => {
+//   // here we pass in an id of a selected category and then find that category in the array 
+//   // of all categories and assign it to the variable 'categoryFavToggle'
+//   const categoryFavToggle = state.find(category => category.id === action.payload);
+//   if (categoryFavToggle) {
+//     // we then toggle the 'Favorite' attribute to the opposite of whatever value it was assigned (true or false);
+//     categoryFavToggle.Favorite = !categoryFavToggle.Favorite;
+//   }
+// },
 
 
-  return (
-    <>
-      <Box style={{ marginTop: '2rem', paddingBottom: '1rem' }} >
+
+
+const handleDeleteButtonClick = (event, id, cat) => {
+  setDeleteModalState(!deleteModalState);
+  setCategoryToDelete(cat);
+  setSelectedCategoryId(id);
+};
+
+const reset = () => {
+  setSelectedCategoryId([]);
+  setCategoryToDelete([]);
+};
+
+const handleDeleteConfirm = () => {
+  setDeleteModalState(!deleteModalState);
+  dispatch(deleteCategory(selectedCategoryId));
+  reset();
+};
+
+const handleNoSearchValue = () => {
+  dispatch(resetCategories());
+};
+
+
+return (
+  <>
+    <Box style={{ marginTop: '2rem', paddingBottom: '1rem' }} >
+      <Box style={{
+        display: !isMobile ? 'flex' : 'block',
+        justifyContent: !isMobile ? 'space-between' : 'flex-start',
+        alignItems: 'center'
+      }}
+      >
+        <h1 className='darkBlue-text'>
+          Quiz Board  {/* Google web font 'Anton' */}
+        </h1>
+
         <Box style={{
           display: !isMobile ? 'flex' : 'block',
-          justifyContent: !isMobile ? 'space-between' : 'flex-start',
           alignItems: 'center'
-        }}
-        >
-          <h1 className='darkBlue-text'>
-            Quiz Board  {/* Google web font 'Anton' */}
-          </h1>
+        }}>
+          <SearchBar
+            value=""
+            onChange={searching}
+            onSearch={handleSearch}
+            placeholder={"Search categories..."}
+            options={categoriesArray.map((cat) => cat.Name)}
+            handleNoSearchValue={handleNoSearchValue}
+          />
 
-          <Box style={{
-            display: !isMobile ? 'flex' : 'block',
-            alignItems: 'center'
-          }}>
-            <SearchBar
-              value=""
-              onChange={searching}
-              onSearch={handleSearch}
-              placeholder={"Search categories..."}
-              options={categoriesArray.map((cat) => cat.Name)}
-              handleNoSearchValue={handleNoSearchValue}
-            />
+          <Button
+            className='navButton button-mediumBlue'
+            style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
+            onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
+          >
+            <AddIcon />
+            Create new category
+          </Button>
 
-            <Button
-              className='navButton button-mediumBlue'
-              style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
-              onClick={(event) => handleCreateNewCategoryClick(event, 'delete')}
-            >
-              <AddIcon />
-              Create new category
-            </Button>
-
-          </Box>
         </Box>
-        <CreateNewCategoryModal
-          toggle={createModalState}
-          handleCancel={handleCreateNewCategoryClick}
-          handleAddNewCategory={addCat}
-        />
       </Box>
-      <QuizCategories
-        deleteClick={handleDeleteButtonClick}
-        favorite={handleFavoriteButtonClick}
-        cats={categories}
+      <CreateNewCategoryModal
+        toggle={createModalState}
+        handleCancel={handleCreateNewCategoryClick}
+        // handleAddNewCategory={addCat}
+        handleAddNewCategory={handleAddNewCategory}
       />
-      <DeleteModal
-        toggle={deleteModalState}
-        handleClose={handleDeleteButtonClick}
-        selectedCard={`"${categoryToDelete}" category`}
-        handleDeleteConfirm={handleDeleteConfirm}
-      />
-    </>
-  );
-}
+    </Box>
+    <QuizCategories
+      deleteClick={handleDeleteButtonClick}
+      favorite={handleFavoriteButtonClick}
+      cats={categories}
+    />
+    <DeleteModal
+      toggle={deleteModalState}
+      handleClose={handleDeleteButtonClick}
+      selectedCard={`"${categoryToDelete}" category`}
+      handleDeleteConfirm={handleDeleteConfirm}
+    />
+  </>
+);
+};

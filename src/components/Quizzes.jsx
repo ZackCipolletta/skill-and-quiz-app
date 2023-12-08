@@ -20,12 +20,14 @@ export default function Quizzes(props) {
     console.log('the category to be filtered is: ', catName);
   }, []);
 
+  // may want to convert this to server side filtering instead?
+
   const catNameLower = catName.toLowerCase();
   const quizList = useSelector((state) => state.quizzesArray.filter(
     (quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower)
   )
   );
-  
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 

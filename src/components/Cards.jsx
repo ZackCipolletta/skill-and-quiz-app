@@ -34,6 +34,12 @@ export default function Cards(props) {
     props.deleteClick(e, id, cardName);
   };
 
+  const handleFavoriteButtonClick = (e, id) => {
+    e.stopPropagation();
+    props.favorite(id);
+  };
+
+
   return (
     <ThemeProvider theme={cardTheme}>
       <Card sx={{
@@ -48,7 +54,7 @@ export default function Cards(props) {
       >
         {/* borderRadius controls how rounded the corners are */}
         <CardActionArea onClick={() => props.onClickEvent()}>
-          
+
           <CardHeader sx={{
             backgroundImage: cardInfo.Image ? `url('${cardInfo.Image}')` : null,
             background: cardInfo.Image ? null : cardInfo.Color,
@@ -77,7 +83,7 @@ export default function Cards(props) {
                 marginRight: '-25px',
                 transform: "scale(.7)"
               }}
-                onClick={(event) => props.favorite(cardInfo.id)}
+                onClick={(event) => handleFavoriteButtonClick(event, cardInfo.id)}
               >
                 {cardInfo.Favorite ? (
                   <PiStarFill color='gold' />

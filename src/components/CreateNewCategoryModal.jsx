@@ -7,7 +7,7 @@ import '../Styles/Components.css';
 import { TfiClose } from 'react-icons/tfi';
 import ColorTemplates from "./ColorTemplates";
 import PropTypes from "prop-types";
-
+import { v4 as uuidv4 } from 'uuid';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -20,7 +20,6 @@ export default function CreateNewCategoryModal(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [indexCounter, setIndexCounter] = useState(29); // ------------------------------DELETE THIS!!! -------------------------------------
 
   const style = {
     position: 'absolute',
@@ -39,11 +38,10 @@ export default function CreateNewCategoryModal(props) {
   const createCategory = () => {
     if (catName?.trim()) {
       if (catColor?.trim()) {
-        props.handleAddNewCategory({ Name: catName, Color: catColor, id: indexCounter, Favorite: false });
+        props.handleAddNewCategory({ Name: catName, Color: catColor, id: uuidv4(), Favorite: false });
       } else {
-        props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa', id: indexCounter, Favorite: false });
+        props.handleAddNewCategory({ Name: catName, Color: '#cfd9fa', id: uuidv4(), Favorite: false });
       }
-      setIndexCounter(indexCounter + 1);
       setCatColor("");
     }
     close();

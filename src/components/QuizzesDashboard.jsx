@@ -105,19 +105,50 @@ const handleDeleteConfirm = () => {
   reset();
 };
 
-const handleFavoriteButtonClick = (id) => {
-  console.log("Fav icon clicked. Id value is: " + id);
-  const index = quizzesArray.findIndex((quiz) => quiz.id === id);
+// const handleFavoriteButtonClick = (id) => {
+//   console.log("Fav icon clicked. Id value is: " + id);
+//   const index = quizzesArray.findIndex((quiz) => quiz.id === id);
 
-  if (index !== -1) {
-    const updatedQuizzesArray = [...quizzesArray];
-    updatedQuizzesArray[index].Favorite = !updatedQuizzesArray[index].Favorite;
+//   if (index !== -1) {
+//     const updatedQuizzesArray = [...quizzesArray];
+//     updatedQuizzesArray[index].Favorite = !updatedQuizzesArray[index].Favorite;
 
-    setQuizzesArray(updatedQuizzesArray);
+//     setQuizzesArray(updatedQuizzesArray);
+//   }
+
+//   reset();
+//   };
+  
+
+  
+const handleFavoriteButtonClick = async (quizId) => {
+  // first we query the database and filter the 'quizzes' collection for any quiz 
+  // with an id field that matches 'quizId'.
+  const quizQuery = query(collection(db, "quizzes"), where("id", "==", quizId));
+  // then we get a snapshot of the corresponding doc
+  const querySnapshot = await getDocs(quizQuery);
+
+  // check if the snapshot exists (is not empty)
+  if (!querySnapshot.empty) {
+
+    // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+    const quizDoc = querySnapshot.docs[0];
+    // we then assign the favorite property of the quizDoc to a variable so we can update it
+    const { Favorite } = quizDoc.data();
+    
+    // Use quizDoc.id as the actual document ID
+    const quizRef = doc(db, "quizzes", quizDoc.id);
+    
+    //we then update the document with the id of the quizDoc
+    await updateDoc(quizRef, { Favorite: !Favorite });
   }
-
-  reset();
 };
+
+
+
+
+
+
 
 const handleNoSearchValue = () => {
   dispatch(resetQuizzes());
