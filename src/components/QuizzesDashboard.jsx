@@ -39,7 +39,7 @@ export default function QuizzesDashboard() {
   const quizzesArray = useSelector((state) => state.quizzesArray);
 
   const { quizCategory } = useSelector((state) => state.quizCategory);
-
+  const [searchValue, setSearchValue] = useState(false);
   const { catName } = useParams();
 
 
@@ -54,6 +54,7 @@ export default function QuizzesDashboard() {
         quizzes.push(doc.data());
       });
       dispatch(setQuizzesArray(quizzes));
+      setQuizzes(quizzes)
     };
 
   // Subscribe to the snapshot listener
@@ -73,13 +74,27 @@ const handleCreateNewQuizClick = () => {
 
 
 const handleSearch = (searchValue) => {
-  // in order to search the complete list each time the search query is modified (ex: French > F should search the entire list containing 'f', not just the list containing 'french'), because the list is modified and then returned to us upon each search, we must reset the list. 
-  dispatch(resetQuizzes());
+  // in order to search the complete list of categories each time the search query is modified (ex: French > F should search all categories containing 'f', not just the list of categories containing 'french'), we use local state 
+  // and Redux state. Redux state stores the the full list of all categories, we then filter for the 
+  // search term using Redux as the master list. Each time the search query is changed, we filter the 
+  // main list from Redux, then the resulting filtered list is assigned to local state, which we then use to display
+  // the filtered list.
+  const searchTerm = searchValue.toLowerCase();
+  const searchedCategories = quizzesArray.filter(quiz => quiz.Name.toLowerCase().includes(searchTerm));
 
-  // we have created a reducer which searches through the list of quizzes
-  dispatch(searchQuizzes(searchValue));
+  setQuizzes(searchedCategories);
 };
 
+const searching = (value) => {
+  if (value.trim()) {
+    setSearchValue(value);
+    console.log(value);
+    handleSearch(value);
+  } else {
+    setSearchValue(null);
+  }
+};
+  
 const handleDeleteButtonClick = (event, id, quiz) => {
   seDeleteModalState(!deleteModalState);
   setSelectedQuiz(quiz);
@@ -124,9 +139,10 @@ const handleFavoriteButtonClick = async (quizId) => {
 
 
 const handleNoSearchValue = () => {
-  dispatch(resetQuizzes());
-};
-
+  setQuizzes(quizzesArray);
+  };
+  
+  
 return (
   <Box style={!isMobile ? { marginTop: 20 } : { marginTop: 1 }} >
     <Box name="TopNav" style={{
@@ -145,7 +161,7 @@ return (
       }}>
         <SearchBar
           value=""
-          onChange={handleSearch}
+          onChange={searching}
           onSearch={handleSearch}
           placeholder={"Search quizzes..."}
           options={quizzesArray.map((quiz) => quiz.Name)}
@@ -167,6 +183,7 @@ return (
     <Quizzes
       deleteClick={handleDeleteButtonClick}
       favorite={handleFavoriteButtonClick}
+      quizList={quizzes}
     />
     <DeleteModal
       toggle={deleteModalState}

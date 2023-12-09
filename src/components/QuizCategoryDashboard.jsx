@@ -72,43 +72,23 @@ export default function QuizCategoryDashboard(props) {
     }
   };
 
-  // const resetCategories = async () => {
-  //   try {
-  //     const querySnapshot = await getDocs(collectionRef);
-  //     const categories = [];
 
-  //     querySnapshot.forEach((doc) => {
-  //       categories.push(doc.data());
-  //     });
+  // search currently enabled with client side filtering as Firebase does not support case insensitive search.
+  // only other option is paid service or possibly free tier if usage is low enough.
+  // https://firebase.google.com/docs/firestore/solutions/search?provider=elastic
 
-  //     dispatch(setCategoriesArray(categories));
-  //     setCategories(categories);
+  // Alternatively we can convert all names to lowercase when adding to the db, then convert to title case when
+  // displaying them. This will enable server side search.
+  const handleSearch = (searchValue) => {
+    // in order to search the complete list of categories each time the search query is modified (ex: French > F should search all categories containing 'f', not just the list of categories containing 'french'), we use local state 
+    // and Redux state. Redux state stores the the full list of all categories, we then filter for the 
+    // search term using Redux as the master list. Each time the search query is changed, we filter the 
+    // main list from Redux, then the resulting filtered list is assigned to local state, which we then use to display
+    // the filtered list.
+    const searchTerm = searchValue.toLowerCase();
+    const searchedCategories = categoriesArray.filter(category => category.Name.toLowerCase().includes(searchTerm));
 
-  //   } catch (error) {
-  //     console.error("Error fetching categories from Firestore: ", error);
-  //   }
-  // };
-
-  const handleSearch = async (searchValue) => {
-
-    const searchVal = searchValue.toLowerCase()
-    const searchQuery = query(
-      collection(db, 'categories'),
-      where('Name', '>=', searchVal),
-      where('Name', '<=', searchVal + '\uf8ff')
-    );
-    // trying to solve issue with server side searching
-
-    try {
-
-      const querySnapshot = await getDocs(searchQuery);
-
-      const searchedCategories = querySnapshot.docs.map(doc => doc.data());
-
-      setCategories(searchedCategories);
-    } catch (error) {
-      console.log('Error searching categories in Firestore:', error);
-    }
+    setCategories(searchedCategories);
   };
 
 
@@ -225,7 +205,7 @@ export default function QuizCategoryDashboard(props) {
       <QuizCategories
         deleteClick={handleDeleteButtonClick}
         favorite={handleFavoriteButtonClick}
-      cats={categories}
+        cats={categories}
       />
       <DeleteModal
         toggle={deleteModalState}

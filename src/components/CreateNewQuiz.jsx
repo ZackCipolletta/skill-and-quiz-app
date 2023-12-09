@@ -89,6 +89,7 @@ export default function CreateNewQuiz() {
     navigate(`/quizzes/${quizCategory}`);
     reset();
   };
+  // currently trying to render the new quiz in the quizzes page before it is available (in state or db). must handle with conditional or asynchronous loading or something.
 
   const reset = () => {
     dispatch(resetOptions());

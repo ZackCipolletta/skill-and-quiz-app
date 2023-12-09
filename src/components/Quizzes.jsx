@@ -23,10 +23,12 @@ export default function Quizzes(props) {
   // may want to convert this to server side filtering instead?
 
   const catNameLower = catName.toLowerCase();
-  const quizList = useSelector((state) => state.quizzesArray.filter(
-    (quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower)
-  )
-  );
+  // const quizList = useSelector((state) => state.quizzesArray.filter(
+  //   (quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower)
+  // )
+  // )
+
+  const quizList = props.quizList.filter((quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower));
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -46,6 +48,7 @@ export default function Quizzes(props) {
 
   return (
     <div style={gridStyle}>
+      {/* {quizList.map((quiz, index) => ( */}
       {quizList.map((quiz, index) => (
 
         <Cards
