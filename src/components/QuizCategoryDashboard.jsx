@@ -43,7 +43,6 @@ export default function QuizCategoryDashboard(props) {
   const categoriesArray = useSelector((state) => state.categoriesArray);
 
   const [searchValue, setSearchValue] = useState(false);
-
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -90,7 +89,6 @@ export default function QuizCategoryDashboard(props) {
 
     setCategories(searchedCategories);
   };
-
 
 
   const addCat = (newCat) => {
@@ -147,16 +145,30 @@ export default function QuizCategoryDashboard(props) {
     setCategoryToDelete([]);
   };
 
-  const handleDeleteConfirm = () => {
-    setDeleteModalState(!deleteModalState);
-    dispatch(deleteCategory(selectedCategoryId));
-    reset();
+  const handleDeleteConfirm = async () => {
+    try {
+  
+      //first we find the specific category with the id
+      const querySnapshot = await getDocs(query(collection(db, 'categories'), where('id', '==', selectedCategoryId)));
+  
+      //a querySnapshot is a collection, so for each item with the selected id (which should be only 1), we delete the doc.
+      querySnapshot.forEach((doc) => {
+        deleteDoc(doc.ref);
+      });
+  
+      // we then close the modal
+      setDeleteModalState(!deleteModalState);
+      // and reset selectedCategoryId and categoryToDelete
+      reset();
+    } catch (error) {
+      console.error("Error deleting category from Firestore: ", error);
+    }
   };
+    
 
   const handleNoSearchValue = () => {
     setCategories(categoriesArray);
   };
-
 
   return (
     <>
