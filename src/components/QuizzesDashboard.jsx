@@ -106,12 +106,33 @@ const reset = () => {
   setSelectedQuiz([]);
 };
 
-const handleDeleteConfirm = () => {
-  seDeleteModalState(!deleteModalState);
-  dispatch(deleteQuiz(idOfQuizToDelete));
+// const handleDeleteConfirm = () => {
+//   seDeleteModalState(!deleteModalState);
+//   dispatch(deleteQuiz(idOfQuizToDelete));
 
-  reset();
-};
+//   reset();
+//   };
+  
+  const handleDeleteConfirm = async () => {
+    try {
+  
+      //first we find the specific category with the id
+      const querySnapshot = await getDocs(query(collection(db, 'quizzes'), where('id', '==', idOfQuizToDelete)));
+  
+      //a querySnapshot is a collection, so for each item with the selected id (which should be only 1), we delete the doc.
+      querySnapshot.forEach((doc) => {
+        deleteDoc(doc.ref);
+      });
+  
+      // we then close the modal
+      seDeleteModalState(!deleteModalState);
+      dispatch(deleteQuiz(idOfQuizToDelete));
+      // and reset selectedCategoryId and categoryToDelete
+      reset();
+    } catch (error) {
+      console.error("Error deleting category from Firestore: ", error);
+    }
+  };
 
 
 const handleFavoriteButtonClick = async (quizId) => {
