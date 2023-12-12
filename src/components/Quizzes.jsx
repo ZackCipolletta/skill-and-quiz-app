@@ -27,8 +27,11 @@ export default function Quizzes(props) {
   //   (quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower)
   // )
   // )
+  const quizzesArray = useSelector((state) => state.quizzesArray);
 
-  const quizList = props.quizList.filter((quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower));
+  const listOfQuizzes = props.quizList || quizzesArray;
+
+  const quizList = listOfQuizzes.filter((quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower));
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
