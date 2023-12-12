@@ -82,6 +82,7 @@ export default function QuestionsAndAnswers(props) {
     // sets the questionAnswerArr position that will be edited so we can edit and update the correct question while also telling handleAddClick that we are editing and not creating a new question.
     dispatch(setQuestionToEdit(i));
   };
+  
   const quizInfo = props.quizInfo || questionAnswerArr;
 
   useEffect(() => {

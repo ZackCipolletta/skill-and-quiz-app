@@ -26,14 +26,10 @@ export default function Quiz() {
   const { quizId } = useParams();
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
-
   const quizzesArray = useSelector((state) => state.quizzesArray);
-
   const quizInfo = quizzesArray.find(quiz => quiz.id === quizId);
 
-
   const navigate = useNavigate();
-
 
   const buttons = (
     <>
@@ -79,6 +75,10 @@ export default function Quiz() {
 
     </>
   );
+
+
+  // to handle edit function, update handleEditQuestion in QuestionsAndAnswers.jsx
+  // also handle the favorite and delete buttons in QuestionsAndAnswers in QuestionAndAnswers.jsx, possibly passing in a function from here.
 
 
   return (

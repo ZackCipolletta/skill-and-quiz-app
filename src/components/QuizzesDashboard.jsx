@@ -80,9 +80,9 @@ const handleSearch = (searchValue) => {
   // main list from Redux, then the resulting filtered list is assigned to local state, which we then use to display
   // the filtered list.
   const searchTerm = searchValue.toLowerCase();
-  const searchedCategories = quizzesArray.filter(quiz => quiz.Name.toLowerCase().includes(searchTerm));
+  const searchedQuizzes = quizzesArray.filter(quiz => quiz.Name.toLowerCase().includes(searchTerm));
 
-  setQuizzes(searchedCategories);
+  setQuizzes(searchedQuizzes);
 };
 
 const searching = (value) => {
