@@ -67,8 +67,6 @@ export default function CreateNewQuiz() {
   const { imageUrl } = useSelector((state) => state.imageUrl);
 
   const { quizCategory } = useSelector((state) => state.quizCategory);
-
-
   const quizzesArray = useSelector((state) => state.quizzesArray);
 
   const handleCancelButtonClick = () => {

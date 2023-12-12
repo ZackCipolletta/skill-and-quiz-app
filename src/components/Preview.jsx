@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setQuestionAnswerArr } from "./redux/quizQuestions";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Preview(props) {
 
   const dispatch = useDispatch();
@@ -17,79 +18,15 @@ export default function Preview(props) {
   const optionsArray = ['A', 'B', 'C', 'D'];
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
+
+  const { quizName } = useSelector((state) => state.quizName);
+  const { quizColor } = useSelector((state) => state.quizColor);
+  const { quizTags } = useSelector((state) => state.quizTags);
+  const { imageUrl } = useSelector((state) => state.imageUrl);
+
   const navigate = useNavigate();
 
-  const quiz = {
-    "name": "testQuiz",
-    Color: '#a7d7f9',
-    "tags": [
-      "tag1",
-      "tag2",
-      "tag3"
-    ],
-    "questions": [
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          2
-        ],
-        "question": "what?",
-        "answers": [
-          "asdfas",
-          "fasdfasdfa",
-          "dfasdfa"
-        ]
-      },
-      {
-        "type": "Single",
-        "favorite": false,
-        "correct": [
-          0
-        ],
-        "question": "ASDFSDF",
-        "answers": [
-          "ASDFAS",
-          "FASDFASDF"
-        ]
-      },
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          1
-        ],
-        "question": "DFASDFASDF",
-        "answers": [
-          "FASDFASD",
-          "FASDFAS",
-          "FASDFASDF"
-        ]
-      },
-      {
-        "type": "TypeIn",
-        "favorite": false,
-        "correct": [
-          1
-        ],
-        "question": "This is a write in question?",
-        "answers": []
-      },
-      {
-        "type": "Multiple",
-        "favorite": false,
-        "correct": [
-          1
-        ],
-        "question": "DFASDFASDF",
-        "answers": [
-          "FASDFASD",
-          "FASDFAS",
-          "FASDFASDF"
-        ]
-      },
-    ]
-  };
+
 
   const switchBack = () => {
     navigate(-1);
@@ -99,30 +36,30 @@ export default function Preview(props) {
   return (
     <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column' }}>
 
-        <Box name='quizImage&Name'
+      <Box name='quizImage&Name'
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: 5
+        }}>
+
+        <Box name='quizName'
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: 5
-          }}>
+            backgroundColor: quizColor,
+            borderRadius: 50,
+            width: 65,
+            height: 65,
+            marginRight: 5
+          }}
+        />
 
-          <Box name='quizName'
-            style={{
-              backgroundColor: quiz.Color,
-              borderRadius: 50,
-              width: 65,
-              height: 65,
-              marginRight: 5
-            }}
-          />
-
-          <h1 className='darkBlue-text'>
-            {quiz.name}
-          </h1>
-        </Box> {/* quizImage&Name closes */}
+        <h1 className='darkBlue-text'>
+          {quizName}
+        </h1>
+      </Box> {/* quizImage&Name closes */}
 
       <Box name='tags'>
-        {quiz.tags.map((tag, index) => (
+        {quizTags.map((tag, index) => (
           <span
             key={index}
             style={{
@@ -141,7 +78,7 @@ export default function Preview(props) {
         ))}
       </Box>
 
-      <Box name='switch' sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
+      <Box name='switch' sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
         <Button
           className='button-darkMediumBlue'
           sx={{
