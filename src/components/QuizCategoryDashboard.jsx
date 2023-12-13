@@ -42,6 +42,8 @@ export default function QuizCategoryDashboard(props) {
 
   const categoriesArray = useSelector((state) => state.categoriesArray);
 
+  const loggedInUserEmail = useSelector((state) => state.loggedInUserEmail);
+
   const [searchValue, setSearchValue] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -147,15 +149,15 @@ export default function QuizCategoryDashboard(props) {
 
   const handleDeleteConfirm = async () => {
     try {
-  
+
       //first we find the specific category with the id
       const querySnapshot = await getDocs(query(collection(db, 'categories'), where('id', '==', selectedCategoryId)));
-  
+
       //a querySnapshot is a collection, so for each item with the selected id (which should be only 1), we delete the doc.
       querySnapshot.forEach((doc) => {
         deleteDoc(doc.ref);
       });
-  
+
       // we then close the modal
       setDeleteModalState(!deleteModalState);
       // and reset selectedCategoryId and categoryToDelete
@@ -164,11 +166,26 @@ export default function QuizCategoryDashboard(props) {
       console.error("Error deleting category from Firestore: ", error);
     }
   };
-    
+
 
   const handleNoSearchValue = () => {
     setCategories(categoriesArray);
   };
+
+  const printUserInfo = () => {
+    console.log(loggedInUserEmail);
+  };
+
+  const printUserButton = (
+    <Box>
+      < Button
+        className='button-mediumBlue'
+        onClick={printUserInfo}
+      >
+        Print User Info
+      </Button >
+    </Box>
+  );
 
   return (
     <>
@@ -182,6 +199,8 @@ export default function QuizCategoryDashboard(props) {
           <h1 className='darkBlue-text'>
             Quiz Board  {/* Google web font 'Anton' */}
           </h1>
+
+          {printUserButton}
 
           <Box style={{
             display: !isMobile ? 'flex' : 'block',

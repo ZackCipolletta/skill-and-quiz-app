@@ -111,13 +111,6 @@ export default function Admin() {
 
   const { users } = useSelector((state) => state.userInfo);
 
-  // useEffect(() => {
-  //   dispatch(setUserInfo({
-  //     users: newInfoArr,
-  //   })
-  //   );
-  // }, []);
-
   useEffect(() => {
     dispatch(setUserInfo({ users: newInfoArr }));
   }, [])

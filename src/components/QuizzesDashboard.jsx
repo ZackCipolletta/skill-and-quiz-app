@@ -12,12 +12,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box } from '@mui/system';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setQuizzesArray, favoriteQuiz, deleteQuiz, searchQuizzes, resetQuizzes, addQuiz } from './redux/quizzes';
+import { setQuizzesArray, deleteQuiz } from './redux/quizzes';
 import { setQuizCategory } from './redux/Categories';
 import { db } from "../firebase";
 import {
-  doc, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
-  serverTimestamp, getDocs, query, where, orderBy, limit,
+  doc, onSnapshot, updateDoc, deleteDoc, collection,
+  getDocs, query, where,
 } from 'firebase/firestore';
 
 

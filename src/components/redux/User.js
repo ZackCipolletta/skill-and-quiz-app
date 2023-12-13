@@ -16,8 +16,30 @@ export const userInfoSlice = createSlice({
   },
 });
 
-// Export action creators for the quizName slice
+// Export action creators for the userInfo slice
 export const { deleteUser, setUserInfo } = userInfoSlice.actions;
 
-// Export the quizName reducer
+// Export the userInfo reducer
 export const userInfoReducer = userInfoSlice.reducer;
+
+
+
+
+// loggedInUserEmail Slice
+export const loggedInUserEmailSlice = createSlice({
+  name: 'loggedInUserEmail',
+  initialState: {
+    user: null,
+  },
+  reducers: {
+    setLoggedInUserEmail: (state, action) => {
+      state.user = action.payload;
+    },
+  },
+});
+
+// Export action creators for the currentUser slice
+export const { setLoggedInUserEmail } = loggedInUserEmailSlice.actions;
+
+// Export the currentUser reducer
+export const loggedInUserEmailReducer = loggedInUserEmailSlice.reducer;

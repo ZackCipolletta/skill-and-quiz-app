@@ -68,6 +68,7 @@ export default function CreateNewQuiz() {
 
   const { quizCategory } = useSelector((state) => state.quizCategory);
   const quizzesArray = useSelector((state) => state.quizzesArray);
+  const currentUser = useSelector((state) => state.loggedInUserEmail);
 
   const handleCancelButtonClick = () => {
     toggle();
@@ -107,7 +108,6 @@ export default function CreateNewQuiz() {
     dispatch(resetNewTag());
     dispatch(resetImageUrl());
     dispatch(resetQuizCategory());
-
   };
 
   const quiz = {
@@ -123,7 +123,8 @@ export default function CreateNewQuiz() {
 
 
   const newQuiz = {
-    Name: quizName, Category: quizCategory, Image: imageUrl, Color: quizColor, tags: quizTags, id: uuidv4(), Favorite: false, questions: questionAnswerArr.questions
+    Creator: currentUser, Name: quizName, Category: quizCategory, Image: imageUrl, Color: quizColor || '#cfd9fa',
+    tags: quizTags, id: uuidv4(), Favorite: false, questions: questionAnswerArr.questions
   };
 
 

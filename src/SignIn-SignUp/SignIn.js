@@ -10,10 +10,15 @@ import isEmail from 'validator/lib/isEmail';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setLoggedInUserEmail } from '../components/redux/User';
 
 
 export default function SignIn() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,8 +53,10 @@ export default function SignIn() {
       .then((userCredential) => {
         // setSignInSuccess(`You've successfully signed in as ${userCredential.user.email}!`);
         // props.onSignInSuccess(userCredential.user);
-        // navigate('/categories');
+
+        navigate('/categories');
         console.log(userCredential)
+        dispatch(setLoggedInUserEmail(userCredential.user.email))
 
         // onSuccess store the userCredential or just email & displayName in redux state to be verified against the db of quizzes and
         // categories, providing edit and delete options if user created them or if admin

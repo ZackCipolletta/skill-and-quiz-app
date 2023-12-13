@@ -4,10 +4,9 @@ import {
   multipleCorrectReducer, warnReducer, selectedFileReducer, answerTypeReducer, questionAnswerArrReducer, isFavoriteReducer,
 } from "./quizQuestions";
 import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer, imageUrlReducer } from "./quizDetails";
-import { userInfoReducer } from "./User";
-import { categoriesArrayReducer } from "./Categories";
+import { userInfoReducer, loggedInUserEmailReducer } from "./User";
+import { categoriesArrayReducer, quizCategoryReducer } from "./Categories";
 import { quizzesArrayReducer } from "./quizzes";
-import { quizCategoryReducer } from "./Categories";
 
 export default configureStore({
   reducer: {
@@ -32,6 +31,7 @@ export default configureStore({
     quizCategory: quizCategoryReducer,
 
     userInfo: userInfoReducer,
+    loggedInUserEmail: loggedInUserEmailReducer,
 
     categoriesArray: categoriesArrayReducer,
 
