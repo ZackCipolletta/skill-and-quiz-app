@@ -7,9 +7,16 @@ import {
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import isEmail from 'validator/lib/isEmail';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function SignIn() {
+    const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
 
   const handleEmailChange = (event) => {
@@ -19,6 +26,11 @@ export default function SignIn() {
     setIsValidEmail(isEmail(inputEmail));
   };
 
+  const handlePasswordChange = (event) => {
+    const inputPassword = event.target.value;
+    setPassword(inputPassword);
+  };
+
   const theme = createTheme({
     palette: {
       valid: {
@@ -26,6 +38,29 @@ export default function SignIn() {
       }
     },
   });
+
+  const handleButtonClick = () => {
+    doSignIn();
+  }
+
+  function doSignIn() {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // setSignInSuccess(`You've successfully signed in as ${userCredential.user.email}!`);
+        // props.onSignInSuccess(userCredential.user);
+        // navigate('/categories');
+        console.log(userCredential)
+
+        // onSuccess store the userCredential or just email & displayName in redux state to be verified against the db of quizzes and
+        // categories, providing edit and delete options if user created them or if admin
+        // also to display under account info and when updating userName or password
+      })
+      .catch((error) => {
+        // setSignInSuccess(`There was an error signing in: ${error.message}!`);
+      });
+  }
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -147,6 +182,8 @@ export default function SignIn() {
                     autoComplete="current-password"
                     sx={{ mb: -1, mt: -1 }}
                     className='input-field'
+                    value={password}
+                    onChange={handlePasswordChange}
                   />
                   <div style={{ textAlign: 'left' }}>
                     <Link
@@ -160,20 +197,22 @@ export default function SignIn() {
                   </div>
 
                   <Button
-                    type="Continue"
+                    type="Button"
                     fullWidth
                     className='button-black'
                     sx={{ mt: 3, mb: 1 }}
+                    onClick={handleButtonClick}
                   >
                     Continue
                   </Button>
 
                   <Button
-                    type="Continue"
+                    type="Button"
                     fullWidth
                     className='button-mediumBlue'
                     // color='blue'
                     sx={{ mt: 0, mb: 6 }}
+                    
                   >
                     Sign in with LinkedIn (replace w/LI API)
                   </Button>

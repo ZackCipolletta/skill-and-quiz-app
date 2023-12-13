@@ -6,9 +6,12 @@ import {
 } from '@mui/material';
 import isEmail from 'validator/lib/isEmail';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -16,7 +19,7 @@ function SignIn() {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [tosAgreement, setTosAgreement] = useState(false);
   const [displayTosWarning, setDisplayTosWarning] = useState(false);
-
+  const [signUpSuccess, setSignUpSuccess] = useState(null);
 
   const handleEmailChange = (event) => {
     const inputEmail = event.target.value;
@@ -47,12 +50,24 @@ function SignIn() {
     if (tosAgreement) {
       //proceed to next page, send info to server, etc
       setDisplayTosWarning(false);
+      doSignUp();
     } else {
       setDisplayTosWarning(true);
     }
 
   };
 
+  function doSignUp() {
+    // event.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setSignUpSuccess(`You've successfully signed up, ${userCredential.user.email}!`);
+        navigate('/categories');
+      })
+      .catch((error) => {
+        setSignUpSuccess(`There was an error signing up: ${error.message}!`);
+      });
+  }
 
   return (
     <ThemeProvider theme={theme}>
