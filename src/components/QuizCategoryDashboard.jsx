@@ -200,7 +200,7 @@ export default function QuizCategoryDashboard(props) {
             Quiz Board  {/* Google web font 'Anton' */}
           </h1>
 
-          {printUserButton}
+          {/* {printUserButton} */}
 
           <Box style={{
             display: !isMobile ? 'flex' : 'block',
