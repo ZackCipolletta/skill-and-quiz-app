@@ -61,6 +61,7 @@ export default function Quizzes(props) {
           favorite={props.favorite}
           deleteClick={props.deleteClick}
           onClickEvent={() => handleCardClick(quiz.id)}
+          cardType="quiz"
         />
       ))}
     </div >

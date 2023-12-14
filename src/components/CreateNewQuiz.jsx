@@ -68,7 +68,7 @@ export default function CreateNewQuiz() {
 
   const { quizCategory } = useSelector((state) => state.quizCategory);
   const quizzesArray = useSelector((state) => state.quizzesArray);
-  const currentUser = useSelector((state) => state.loggedInUserEmail);
+  const currentUser = useSelector((state) => state.loggedInUserEmail.user);
 
   const handleCancelButtonClick = () => {
     toggle();

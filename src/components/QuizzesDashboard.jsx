@@ -1,7 +1,7 @@
 
 import '../Styles/Components.css';
 import React, { useState, useEffect } from "react";
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import SearchBar from './SearchBar';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -40,8 +40,8 @@ export default function QuizzesDashboard() {
   const [searchOptions, setSearchOptions] = useState([]);
 
   const { catName } = useParams();
-  const { quizCategory } = useSelector((state) => state.quizCategory);
   const quizzesArray = useSelector((state) => state.quizzesArray);
+  const user = useSelector((state) => state.loggedInUserEmail.user);
 
 
   useEffect(() => {
@@ -191,14 +191,20 @@ export default function QuizzesDashboard() {
           />
 
           {/* 'ml' does not work here, we must use marginLeft */}
-          <Button
-            className='navButton button-mediumBlue'
-            style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
-            onClick={(event) => handleCreateNewQuizClick()}
-          >
-            <AddIcon />
-            Create new quiz
-          </Button>
+          <Box>
+            {user ? (
+              <Button
+                className='navButton button-mediumBlue'
+                style={!isMobile ? { marginLeft: '50px' } : { marginTop: 20 }}
+                onClick={(event) => handleCreateNewQuizClick()}
+              >
+                <AddIcon />
+                Create new quiz
+              </Button>
+            ) : null
+            }
+          </Box>
+
         </Box> {/* Search&Button closes */}
 
       </Box> {/* TopNav closes */}

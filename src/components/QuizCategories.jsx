@@ -41,6 +41,7 @@ export default function QuizCategories(props) {
           favorite={props.favorite}
           height={50}
           onClickEvent={() => handleCardClick(category.Name)}
+          cardType="category"
         />
       ))}
     </div >

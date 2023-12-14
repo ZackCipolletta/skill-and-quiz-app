@@ -42,7 +42,7 @@ export default function QuizCategoryDashboard(props) {
 
   const categoriesArray = useSelector((state) => state.categoriesArray);
 
-  const loggedInUserEmail = useSelector((state) => state.loggedInUserEmail);
+  const loggedInUserEmail = useSelector((state) => state.loggedInUserEmail.user);
 
   const [searchValue, setSearchValue] = useState(false);
   const [categories, setCategories] = useState([]);

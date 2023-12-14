@@ -9,9 +9,10 @@ import { PiTrashThin } from 'react-icons/pi';
 import { PiStar, PiStarFill } from 'react-icons/pi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function Cards(props) {
-  const { cardInfo } = props;
+  const { cardInfo, cardType } = props;
 
   const cardTheme = createTheme({
     palette: {
@@ -24,10 +25,9 @@ export default function Cards(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const history = useNavigate();
+  const user = useSelector((state) => state.loggedInUserEmail.user);
 
   const cardHeight = props.height;
-
   const handleDeleteButtonClick = (e, id, cardName) => {
     // Prevent the click event from propagating to the CardActionArea
     e.stopPropagation();
@@ -39,6 +39,26 @@ export default function Cards(props) {
     props.favorite(id);
   };
 
+  const trashButton = (
+    <IconButton sx={{
+      marginRight: '-5px',
+      transform: "scale(.7) scaleY(1.2)"
+    }}
+      onClick={(event) => handleDeleteButtonClick(event, cardInfo.id, cardInfo.Name)}
+    >
+      <PiTrashThin color='red' />
+    </IconButton>
+  );
+
+  const displayTrash = (creator) => {
+    if (cardType === "quiz" && user === creator) {
+      return true;
+    } else if (cardType === "category" && user) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <ThemeProvider theme={cardTheme}>
@@ -80,7 +100,8 @@ export default function Cards(props) {
               {/* scale enlarges the icons in both X and Y directions, ScaleY stretches left right  */}
               <IconButton sx={{
                 marginLeft: '5px',
-                marginRight: '-25px',
+                // we need to check if the trash icon is displayed to set the margin properly for the favorite icon
+                marginRight: displayTrash(cardInfo.Creator) ? '-25px': null,
                 transform: "scale(.7)"
               }}
                 onClick={(event) => handleFavoriteButtonClick(event, cardInfo.id)}
@@ -91,16 +112,12 @@ export default function Cards(props) {
                 )}
 
               </IconButton>
-              <IconButton sx={{
-                marginRight: '-5px',
-                transform: "scale(.7) scaleY(1.2)"
-              }}
-                // onClick={(event) => handleDeleteButtonClick(event, props.id)}
-                onClick={(event) => handleDeleteButtonClick(event, cardInfo.id, cardInfo.Name)}
-              >
-                <PiTrashThin color='red' />
 
-              </IconButton>
+              { // we check to see if the creator of the quiz matches the logged in user
+                // if so we give them the option to delete the quiz
+                displayTrash(cardInfo.Creator) ? trashButton : null
+              }
+
             </CardActions>
             {/* </div> */}
           </Box>

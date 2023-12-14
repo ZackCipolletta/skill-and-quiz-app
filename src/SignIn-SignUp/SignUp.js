@@ -62,7 +62,7 @@ function SignIn() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setSignUpSuccess(`You've successfully signed up, ${userCredential.user.email}!`);
-        navigate('/categories');
+        navigate('/');
       })
       .catch((error) => {
         setSignUpSuccess(`There was an error signing up: ${error.message}!`);
