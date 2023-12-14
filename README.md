@@ -1,18 +1,14 @@
 This is currently a work in progress.
 
-At the moment navigation has not been fully implemented.
+At the moment navigation has not been fully implemented, but I am continuing to flesh out more each day.
 
 Try navigating to:
 
-https://skillquiz-ad813.web.app/quizzes
-
 https://skillquiz-ad813.web.app/categories
-
-https://skillquiz-ad813.web.app/newquiz
 
 https://skillquiz-ad813.web.app/admin
 
 https://skillquiz-ad813.web.app/leaderboard
 
 
-for an idea of how things are progressing at the moment.
+Currently implementing authorization and authentication.

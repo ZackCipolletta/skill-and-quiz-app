@@ -1,41 +1,33 @@
-<CardActions style={{ all: "initial" }}>
-  {/* scale enlarges the icons in both X and Y directions, ScaleY stretches left right  */}
-  <IconButton
-    sx={{
-      marginLeft: '5px',
-      marginRight: '-25px',
-      transform: "scale(.7)"
-    }}
-    onClick={(event) => handleFavoriteButtonClick(event, cardInfo.id)}
-  >
-    {cardInfo.Favorite ? (
-      <PiStarFill color='gold' />
-    ) : (
-      <PiStar color='black' />
-    )}
-  </IconButton>
+{
+  "user": {
+    "uid": "863QS6odElZaoQokldP2YcZyRwO2",
+      "email": "zack@mail.com",
+        "emailVerified": false,
+          "isAnonymous": false,
+            "providerData": [
+              {
+                "providerId": "password",
+                "uid": "zack@mail.com",
+                "displayName": null,
+                "email": "zack@mail.com",
+                "phoneNumber": null,
+                "photoURL": null
+              }
+            ],
+              "createdAt": "1702502196816",
+                "lastLoginAt": "1702503194159",
+                  "apiKey": "AIzaSyDk2Gg7OroNgKtQiYRD9s_oefahQ95QSKo",
+                    "appName": "[DEFAULT]";
+  },
+  "providerId": null,
+    "_tokenResponse": {
+    "kind": "identitytoolkit#VerifyPasswordResponse",
+      "localId": "863QS6odElZaoQokldP2YcZyRwO2",
+        "email": "zack@mail.com",
+          "displayName": "",
+            "registered": true,
 
-  {cardType === "quiz" && (
-    user === cardInfo.Creator ? (
-      <IconButton
-        sx={{
-          marginRight: '-5px',
-          transform: "scale(.7) scaleY(1.2)"
-        }}
-        onClick={(event) => handleDeleteButtonClick(event, cardInfo.id, cardInfo.Name)}
-      >
-        <PiTrashThin color='red' />
-      </IconButton>
-    ) : user && (
-      <IconButton
-        sx={{
-          marginRight: '-5px',
-          transform: "scale(.7) scaleY(1.2)"
-        }}
-        onClick={(event) => handleDeleteButtonClick(event, cardInfo.id, cardInfo.Name)}
-      >
-        <PiTrashThin color='red' />
-      </IconButton>
-    )
-  )}
-</CardActions>
+              "expiresIn": "3600";
+  },
+  "operationType": "signIn";
+}

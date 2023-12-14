@@ -20,6 +20,7 @@ import {
   addDoc, doc, getDocs, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
   serverTimestamp, getDoc, query, where, orderBy, limit, startAt,
 } from 'firebase/firestore';
+import { getAuth, updateProfile } from "firebase/auth";
 
 
 
@@ -172,9 +173,45 @@ export default function QuizCategoryDashboard(props) {
     setCategories(categoriesArray);
   };
 
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  const updateUserName = () => {
+    updateProfile(auth.currentUser, {
+      displayName: "Jon Weinerman"
+    }).then(() => {
+      // Profile updated!
+      console.log("Profile updated!");
+    }).catch((error) => {
+      // An error occurred
+      console.log("An error occurred: " + error);
+    });
+  };
+
+  const updateUserButton = (
+    <Box>
+      < Button
+        className='button-mediumBlue'
+        onClick={updateUserName}
+      >
+        Update User Info
+      </Button >
+    </Box>
+  );
+
+
+
   const printUserInfo = () => {
     console.log(loggedInUserEmail);
+    if (user !== null) {
+      user.providerData.forEach((profile) => {
+        console.log("  Provider-specific UID: " + profile.uid);
+        console.log("  Name: " + profile.displayName);
+        console.log("  Email: " + profile.email);
+      });
+    }
   };
+
 
   const printUserButton = (
     <Box>
@@ -200,7 +237,8 @@ export default function QuizCategoryDashboard(props) {
             Quiz Board  {/* Google web font 'Anton' */}
           </h1>
 
-          {/* {printUserButton} */}
+          {/* {printUserButton}
+          {updateUserButton} */}
 
           <Box style={{
             display: !isMobile ? 'flex' : 'block',
