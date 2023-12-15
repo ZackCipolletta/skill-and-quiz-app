@@ -21,7 +21,7 @@ import {
   serverTimestamp, getDoc, query, where, orderBy, limit, startAt,
 } from 'firebase/firestore';
 import { getAuth, updateProfile } from "firebase/auth";
-
+const { initializeApp } = require('firebase-admin/app');
 
 
 
@@ -199,6 +199,35 @@ export default function QuizCategoryDashboard(props) {
     </Box>
   );
 
+  const listAllUsers = (nextPageToken) => {
+    // List batch of users, 1000 at a time.
+    getAuth()
+      .listUsers(1000, nextPageToken)
+      .then((listUsersResult) => {
+        listUsersResult.users.forEach((userRecord) => {
+          console.log('user', userRecord.toJSON());
+        });
+        if (listUsersResult.pageToken) {
+          // List next batch of users.
+          listAllUsers(listUsersResult.pageToken);
+        }
+      })
+      .catch((error) => {
+        console.log('Error listing users:', error);
+      });
+  };
+  // Start listing users from the beginning, 1000 at a time.
+  const listUserButton = (
+    <Box>
+      < Button
+        className='button-mediumBlue'
+        onClick={listAllUsers}
+      >
+        List all users
+      </Button >
+    </Box>
+  );
+
 
 
   const printUserInfo = () => {
@@ -239,6 +268,7 @@ export default function QuizCategoryDashboard(props) {
 
           {printUserButton}
           {updateUserButton}
+          {listUserButton}
 
           <Box style={{
             display: !isMobile ? 'flex' : 'block',
