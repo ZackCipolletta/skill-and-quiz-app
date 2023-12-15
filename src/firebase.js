@@ -21,18 +21,17 @@ const firebaseConfig = {
 
 
 
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
-// export const auth = getAuth();
+const admin = require("firebase-admin");
 
-// const analytics = getAnalytics(app);
+const serviceAccount = require("path/to/serviceAccountKey.json");
 
-// export default getFirestore(app);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { db, storage, auth };
+export { db, storage, auth, admin, serviceAccount };
