@@ -1,13 +1,10 @@
 import '../Styles/Components.css';
-import React, { useState, useEffect } from "react";
-import { createTheme, ThemeProvider } from '@mui/material';
-// import QuizCard from './QuizCard';
+import React, { useEffect } from "react";
 import Cards from './Cards';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { v4 as uuidv4 } from 'uuid';
 
 
 export default function Quizzes(props) {

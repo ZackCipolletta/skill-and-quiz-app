@@ -7,12 +7,13 @@ import {
 import isEmail from 'validator/lib/isEmail';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
   const navigate = useNavigate();
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [password, setPassword] = useState('');
@@ -43,6 +44,13 @@ function SignIn() {
     setIsValidPassword(isPassword(inputPassword));
   };
 
+  const handleNameChange = (event) => {
+    const inputName = event.target.value;
+    setName(inputName);
+
+    // setIsValidPassword(isPassword(inputPassword));  // use to check value of name
+  };
+
 
   const isPassword = (str) => str.length >= 8;
 
@@ -61,13 +69,32 @@ function SignIn() {
     // event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setSignUpSuccess(`You've successfully signed up, ${userCredential.user.email}!`);
+        return updateProfile(userCredential.user, {
+          displayName: `${name}`
+        });
+      })
+      .then(() => {
+        setSignUpSuccess(`You've successfully signed up, ${name}!`);
         navigate('/');
       })
       .catch((error) => {
         setSignUpSuccess(`There was an error signing up: ${error.message}!`);
+        console.log(signUpSuccess);
       });
   }
+
+
+  //   function doSignUp() {
+  //   // event.preventDefault();
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       setSignUpSuccess(`You've successfully signed up, ${userCredential.user.email}!`);
+  //       navigate('/');
+  //     })
+  //     .catch((error) => {
+  //       setSignUpSuccess(`There was an error signing up: ${error.message}!`);
+  //     });
+  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -128,6 +155,8 @@ function SignIn() {
                     name="name"
                     autoFocus
                     className='input-field'
+                    value={name}
+                    onChange={handleNameChange}
                   />
 
                   <div style={{

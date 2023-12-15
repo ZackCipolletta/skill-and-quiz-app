@@ -229,12 +229,17 @@ Button.button-darkMediumBlue {
 
 .SignUp-SignIn {
     text-align: center;
-    background-image: url('../../public/img/SignUp-SignIn-bg.png');
+    background-image: url('../../public/img/login.png');
     background-size: contain;
-    background-repeat: no-repeat;
+    background-repeat: repeat repeat;
     background-position: center;
+    
     min-width: 300px;
     min-height: 250px;
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+    border: 0; /* Reset border */
+    box-sizing: border-box;
 }
 
 @media (max-width: 600px) {
