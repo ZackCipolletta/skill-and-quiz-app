@@ -52,6 +52,18 @@ function SignIn() {
   };
 
 
+
+
+  // the best thing to do is to create a 'users' document which stores the user data on sign up and then set up
+  // authentication / authorization to allow only users with 'admin' role to access the doc.
+
+  // then in the doc I can also assign roles and update the doc when a user is deleted or changes there name.
+  
+  // read documentation on how to Define Cloud Firestore security rules to restrict read/write access to the list.
+  // Allow read access only for users with the "admin" claim.
+  // Allow write access only for authorized users to update their own data or for admins to manage user data.
+
+
   const isPassword = (str) => str.length >= 8;
 
   const handleButtonClick = () => {
