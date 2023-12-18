@@ -9,6 +9,14 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { db } from "../firebase";
+import {
+  addDoc, doc, getDocs, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
+  serverTimestamp, getDoc, query, where, orderBy, limit, startAt,
+} from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 function SignIn() {
   const navigate = useNavigate();
@@ -58,7 +66,7 @@ function SignIn() {
   // authentication / authorization to allow only users with 'admin' role to access the doc.
 
   // then in the doc I can also assign roles and update the doc when a user is deleted or changes there name.
-  
+
   // read documentation on how to Define Cloud Firestore security rules to restrict read/write access to the list.
   // Allow read access only for users with the "admin" claim.
   // Allow write access only for authorized users to update their own data or for admins to manage user data.
@@ -77,6 +85,17 @@ function SignIn() {
 
   };
 
+  const currentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // Months are zero-indexed, so add 1
+    const day = currentDate.getDate();
+    const formattedDate = `${day}/${month}/${year}`;
+
+    return formattedDate;
+  };
+
+
   function doSignUp() {
     // event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
@@ -84,6 +103,9 @@ function SignIn() {
         return updateProfile(userCredential.user, {
           displayName: `${name}`
         });
+      })
+      .then(() => {
+        handleAddNewuser(email);
       })
       .then(() => {
         setSignUpSuccess(`You've successfully signed up, ${name}!`);
@@ -95,18 +117,18 @@ function SignIn() {
       });
   }
 
+  const handleAddNewuser = async (email) => {
+    const newUser = {
+      displayName: `${name}`, email: email, joinDate: currentDate(), quizzesAttempted: 0,
+      quizzesCreated: 0, quizzesWon: 0, role: null, id: uuidv4(),
+    };
+    try {
+      await addDoc(collection(db, "users"), newUser);
 
-  //   function doSignUp() {
-  //   // event.preventDefault();
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       setSignUpSuccess(`You've successfully signed up, ${userCredential.user.email}!`);
-  //       navigate('/');
-  //     })
-  //     .catch((error) => {
-  //       setSignUpSuccess(`There was an error signing up: ${error.message}!`);
-  //     });
-  // }
+    } catch (error) {
+      console.error("error adding new quiz to Firestore: ", error);
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
