@@ -11,6 +11,11 @@ import UserDetails from "./UserDetails";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "./redux/User";
+import { db } from "../firebase";
+import {
+  addDoc, doc, getDocs, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
+  serverTimestamp, getDoc, query, where, orderBy, limit, startAt,
+} from 'firebase/firestore';
 
 
 function CustomTabPanel(props) {
@@ -46,82 +51,98 @@ export default function Admin() {
   const [value, setValue] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const newInfoArr = [
-    {
-      firstName: 'FirstName1',
-      lastName: 'LastName1',
-      userImage: 'Single',
-      email: 'firstEmail@mail.com',
-      created: '4',
-      attempted: '24',
-      won: '19',
-      joinDate: '01/11/2024',
-      score: 700,
-      id: 9
-    },
-    {
-      firstName: 'FirstName2',
-      lastName: 'LastName2',
-      userImage: 'Single',
-      email: 'secondEmail@mail.com',
-      created: '2',
-      attempted: '15',
-      won: '11',
-      joinDate: '19/02/2024',
-      score: 500,
-      id: 8
-    },
-    {
-      firstName: 'FirstName3',
-      lastName: 'LastName3',
-      userImage: 'Single',
-      email: 'thirdEmail@mail.com',
-      created: '1',
-      attempted: '7',
-      won: '5',
-      joinDate: '22/01/2024',
-      score: 800,
-      id: 7
-    },
-    {
-      firstName: 'FirstName4',
-      lastName: 'LastName4',
-      userImage: 'Single',
-      email: 'fourthEmail@mail.com',
-      created: '5',
-      attempted: '12',
-      won: '8',
-      joinDate: '17/03/2024',
-      score: 900,
-      id: 6
-    },
-    {
-      firstName: 'FirstName5',
-      lastName: 'LastName5',
-      userImage: 'Single',
-      email: 'fifthEmail@mail.com',
-      created: '4',
-      attempted: '24',
-      won: '17',
-      joinDate: '12/02/2024',
-      score: 600,
-      id: 5
-    },
-  ];
+  const collectionRef = collection(db, 'users');
+  const [usersArray, setUsersArray] = useState([]);
+
+  useEffect(() => {
+    const unsub = onSnapshot(collectionRef, (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((doc) => {
+        users.push(doc.data());
+      });
+      setUsersArray(users);
+    });
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  // const newInfoArr = [
+  //   {
+  //     firstName: 'FirstName1',
+  //     lastName: 'LastName1',
+  //     userImage: 'Single',
+  //     email: 'firstEmail@mail.com',
+  //     created: '4',
+  //     attempted: '24',
+  //     won: '19',
+  //     joinDate: '01/11/2024',
+  //     score: 700,
+  //     id: 9
+  //   },
+  //   {
+  //     firstName: 'FirstName2',
+  //     lastName: 'LastName2',
+  //     userImage: 'Single',
+  //     email: 'secondEmail@mail.com',
+  //     created: '2',
+  //     attempted: '15',
+  //     won: '11',
+  //     joinDate: '19/02/2024',
+  //     score: 500,
+  //     id: 8
+  //   },
+  //   {
+  //     firstName: 'FirstName3',
+  //     lastName: 'LastName3',
+  //     userImage: 'Single',
+  //     email: 'thirdEmail@mail.com',
+  //     created: '1',
+  //     attempted: '7',
+  //     won: '5',
+  //     joinDate: '22/01/2024',
+  //     score: 800,
+  //     id: 7
+  //   },
+  //   {
+  //     firstName: 'FirstName4',
+  //     lastName: 'LastName4',
+  //     userImage: 'Single',
+  //     email: 'fourthEmail@mail.com',
+  //     created: '5',
+  //     attempted: '12',
+  //     won: '8',
+  //     joinDate: '17/03/2024',
+  //     score: 900,
+  //     id: 6
+  //   },
+  //   {
+  //     firstName: 'FirstName5',
+  //     lastName: 'LastName5',
+  //     userImage: 'Single',
+  //     email: 'fifthEmail@mail.com',
+  //     created: '4',
+  //     attempted: '24',
+  //     won: '17',
+  //     joinDate: '12/02/2024',
+  //     score: 600,
+  //     id: 5
+  //   },
+  // ];
 
   const { users } = useSelector((state) => state.userInfo);
 
-  useEffect(() => {
-    dispatch(setUserInfo({ users: newInfoArr }));
-  }, [])
+  // useEffect(() => {
+  //   dispatch(setUserInfo({ users: newInfoArr }));
+  // }, [])
 
-  const loadUsers = () => {
-    dispatch(setUserInfo({ users: newInfoArr }));
-  };
+  // const loadUsers = () => {
+  //   dispatch(setUserInfo({ users: newInfoArr }));
+  // };
 
   useEffect(() => {
-    console.log(users);
-  }, [users]);
+    console.log(usersArray);
+  }, [usersArray]);
 
 
   const theme = useTheme();
@@ -202,7 +223,7 @@ export default function Admin() {
                 <UserBoard
                   toggleCreate={toggleCreate}
                   toggleUserDetails={toggleUserDetails}
-                  // userInfo={userInfo}
+                  userInfo={usersArray}
                   selectUser={selectUser}
                   selectedUser={selectedUser}
                 />

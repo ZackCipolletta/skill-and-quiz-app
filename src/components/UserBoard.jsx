@@ -64,7 +64,10 @@ export default function UserBoard(props) {
     console.log(users);
   };
 
-  const { users } = useSelector((state) => state.userInfo);
+  // const { users } = useSelector((state) => state.userInfo);
+
+  console.log(props.userInfo);
+  const users = props.userInfo;
 
   const headerCellStyle = {
     borderBottom: '1px solid #E6E6E6',
@@ -100,7 +103,7 @@ export default function UserBoard(props) {
 
 
   return (
-    <Box style={{ marginTop: '2rem', paddingBottom: '1rem' }}>
+    <Box style={{ marginTop: '2rem', paddingBottom: '1rem',  }}>
 
       <Box name="TopNav" style={{
         display: !isMobile ? 'flex' : 'block',
@@ -136,7 +139,7 @@ export default function UserBoard(props) {
 
 
       <Box sx={{ mt: 3, mb: 5 }}>
-        <TableContainer sx={{ border: '1px solid #E6E6E6', borderRadius: '0.9375rem', overflow: 'hidden' }}>
+        <TableContainer sx={{ border: '1px solid #E6E6E6', borderRadius: '0.9375rem', overflow: 'auto' }}>
           <Table>
             <TableHead>
               <TableRow style={{ color: '#1E1E1E', fontFamily: 'Anton', }}>
@@ -218,7 +221,7 @@ export default function UserBoard(props) {
                       onClick={() => onUserClick(u.id)}
                     // onClick={() => props.selectUser(u.id)}
                     >
-                      {u.firstName} {u.lastName}
+                      {u.firstName} {u.lastName} {u.displayName}
                     </Typography>
                     <Typography style={{ ...textStyle, marginTop: '.25rem', color: 'rgba(0, 0, 0, 0.4)' }}>
                       {u.email}
@@ -229,17 +232,17 @@ export default function UserBoard(props) {
 
                 <TableCell sx={{ ...tableBodyCellStyle }}>
                   <Typography>
-                    {u.created}
+                    {u.quizzesCreated}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ ...tableBodyCellStyle }}>
                   <Typography>
-                    {u.attempted}
+                    {u.quizzesAttempted}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ ...tableBodyCellStyle }}>
                   <Typography>
-                    {u.won}
+                    {u.quizzesWon}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ ...tableBodyCellStyle }}>

@@ -132,7 +132,7 @@ export default function CreateNewCategoryModal(props) {
 }
 
 CreateNewCategoryModal.propTypes = {
-  handleClose: PropTypes.func.isRequired,
+  // handleClose: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
   handleAddNewCategory: PropTypes.func.isRequired,
   toggle: PropTypes.bool.isRequired,
