@@ -24,6 +24,7 @@ import {
   addDoc, doc, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
   serverTimestamp, getDocs, query, where, orderBy, limit,
 } from 'firebase/firestore';
+import { getAuth, updateProfile } from "firebase/auth";
 
 
 function CustomTabPanel(props) {
@@ -69,6 +70,9 @@ export default function CreateNewQuiz() {
   const { quizCategory } = useSelector((state) => state.quizCategory);
   const quizzesArray = useSelector((state) => state.quizzesArray);
   const currentUser = useSelector((state) => state.loggedInUserEmail.user);
+
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   const handleCancelButtonClick = () => {
     toggle();
@@ -123,7 +127,7 @@ export default function CreateNewQuiz() {
 
 
   const newQuiz = {
-    Creator: currentUser, Name: quizName, Category: quizCategory, Image: imageUrl, Color: quizColor || '#cfd9fa',
+    Creator: user.uid, Name: quizName, Category: quizCategory, Image: imageUrl, Color: quizColor || '#cfd9fa',
     tags: quizTags, id: uuidv4(), Favorite: false, questions: questionAnswerArr.questions
   };
 

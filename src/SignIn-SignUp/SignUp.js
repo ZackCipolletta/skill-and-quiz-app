@@ -11,10 +11,8 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { db } from "../firebase";
 import {
-  addDoc, doc, getDocs, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
-  serverTimestamp, getDoc, query, where, orderBy, limit, startAt,
+  addDoc, collection,
 } from 'firebase/firestore';
-import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -104,7 +102,6 @@ function SignIn() {
       .then((userCredential) => {
         // Update user profile
         userId = userCredential.user.uid;
-        console.log(userId);
         return updateProfile(userCredential.user, {
           displayName: `${name}`
         });
@@ -112,13 +109,15 @@ function SignIn() {
       })
       .then(() => {
         // Handle additional user-related tasks
+        // here we get the uid (the userId variable) from Firebase and use it to assign the id of the user in the database. This way, 
+        //even if a user updates there email or displayName, we can still use the uid to search and update the 
+        // database as well as Firebase authentication because it will never change.
         return handleAddNewUser(email, userId);
       })
       .then(() => {
         // Set sign-up success message
         signUpSuccess = `You've successfully signed up, ${name}!`;
-        // Navigate or perform additional actions here
-        // navigate('/');
+        navigate('/');
       })
       .catch((error) => {
         // Handle errors
@@ -126,21 +125,8 @@ function SignIn() {
       })
       .finally(() => {
         console.log(signUpSuccess);
-        console.log("once again the id is: " + userId);
       });
   }
-
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-  // const printUserInfo = () => {
-  //   if (user !== null) {
-  //     user.providerData.forEach((profile) => {
-  //       console.log("  Name: " + profile.displayName);
-  //       console.log("  Email: " + profile.email);
-  //     });
-  //     console.log("id = " + user.uid);
-  //   }
-  // };
 
 
   const handleAddNewUser = async (email, userId) => {

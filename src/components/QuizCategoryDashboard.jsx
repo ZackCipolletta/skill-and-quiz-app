@@ -183,7 +183,6 @@ export default function QuizCategoryDashboard(props) {
     }).then(() => {
       // Profile updated!
       console.log("Profile updated!");
-      console.log("Profile updated!");
     }).catch((error) => {
       // An error occurred
       console.log("An error occurred: " + error);
