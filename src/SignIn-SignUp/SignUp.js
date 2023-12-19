@@ -28,7 +28,7 @@ function SignIn() {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [tosAgreement, setTosAgreement] = useState(false);
   const [displayTosWarning, setDisplayTosWarning] = useState(false);
-  const [signUpSuccess, setSignUpSuccess] = useState(null);
+  // const [signUpSuccess, setSignUpSuccess] = useState(null);
 
   const handleEmailChange = (event) => {
     const inputEmail = event.target.value;
@@ -97,36 +97,62 @@ function SignIn() {
 
 
   function doSignUp() {
+    let signUpSuccess;
+    let userId;
     // event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        // Update user profile
+        userId = userCredential.user.uid;
+        console.log(userId);
         return updateProfile(userCredential.user, {
           displayName: `${name}`
         });
+
       })
       .then(() => {
-        handleAddNewuser(email);
+        // Handle additional user-related tasks
+        return handleAddNewUser(email, userId);
       })
       .then(() => {
-        setSignUpSuccess(`You've successfully signed up, ${name}!`);
-        navigate('/');
+        // Set sign-up success message
+        signUpSuccess = `You've successfully signed up, ${name}!`;
+        // Navigate or perform additional actions here
+        // navigate('/');
       })
       .catch((error) => {
-        setSignUpSuccess(`There was an error signing up: ${error.message}!`);
+        // Handle errors
+        signUpSuccess = `There was an error signing up: ${error.message}!`;
+      })
+      .finally(() => {
         console.log(signUpSuccess);
+        console.log("once again the id is: " + userId);
       });
   }
 
-  const handleAddNewuser = async (email) => {
+  // const auth = getAuth();
+  // const user = auth.currentUser;
+  // const printUserInfo = () => {
+  //   if (user !== null) {
+  //     user.providerData.forEach((profile) => {
+  //       console.log("  Name: " + profile.displayName);
+  //       console.log("  Email: " + profile.email);
+  //     });
+  //     console.log("id = " + user.uid);
+  //   }
+  // };
+
+
+  const handleAddNewUser = async (email, userId) => {
     const newUser = {
       displayName: `${name}`, email: email, joinDate: currentDate(), quizzesAttempted: 0,
-      quizzesCreated: 0, quizzesWon: 0, role: null, id: uuidv4(),
+      quizzesCreated: 0, quizzesWon: 0, role: null, id: userId,
     };
     try {
-      await addDoc(collection(db, "users"), newUser);
-
+      return await addDoc(collection(db, "users"), newUser);
     } catch (error) {
       console.error("error adding new quiz to Firestore: ", error);
+      throw error;
     }
   };
 

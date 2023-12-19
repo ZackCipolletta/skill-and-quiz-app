@@ -178,15 +178,41 @@ export default function QuizCategoryDashboard(props) {
 
   const updateUserName = () => {
     updateProfile(auth.currentUser, {
-      displayName: "Jon Weinerman"
+      displayName: "Updated displayName"
+
     }).then(() => {
       // Profile updated!
+      console.log("Profile updated!");
       console.log("Profile updated!");
     }).catch((error) => {
       // An error occurred
       console.log("An error occurred: " + error);
     });
   };
+
+  const handleUpdateUserName = async (categoryId) => {
+    // first we query the database and filter the 'categories' collection for any category 
+    // with an id field that matches 'categoryId'.
+    const categoryQuery = query(collection(db, "users"), where("id", "==", categoryId));
+    // then we get a snapshot of the corresponding doc
+    const querySnapshot = await getDocs(categoryQuery);
+
+    // check if the snapshot exists (is not empty)
+    if (!querySnapshot.empty) {
+
+      // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+      const categoryDoc = querySnapshot.docs[0];
+      // we then assign the favorite property of the categoryDoc to a variable so we can update it
+      const { Favorite } = categoryDoc.data();
+
+      // Use categoryDoc.id as the actual document ID
+      const categoryRef = doc(db, "categories", categoryDoc.id);
+
+      //we then update the document with the id of the categoryDoc
+      await updateDoc(categoryRef, { Favorite: !Favorite });
+    }
+  };
+
 
   const updateUserButton = (
     <Box>
@@ -200,18 +226,15 @@ export default function QuizCategoryDashboard(props) {
   );
 
 
-
   const printUserInfo = () => {
-    console.log(loggedInUserEmail);
     if (user !== null) {
       user.providerData.forEach((profile) => {
-        console.log("  Provider-specific UID: " + profile.uid);
         console.log("  Name: " + profile.displayName);
         console.log("  Email: " + profile.email);
       });
+      console.log("id = " + user.uid);
     }
   };
-
 
   const printUserButton = (
     <Box>

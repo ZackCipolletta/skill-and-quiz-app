@@ -1,12 +1,12 @@
 
 import '../Styles/Components.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Box, Typography, TextField, Link } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { LiaEditSolid } from 'react-icons/lia';
 import { GoLock } from "react-icons/go";
-
+import { getAuth, updateProfile } from "firebase/auth";
 
 export default function Settings() {
 
@@ -16,6 +16,8 @@ export default function Settings() {
   const [password, setPassword] = useState('');
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [userName, setUserName] = useState(null);
+  const [email, setEmail] = useState(null);
 
   const textFieldLabel = {
     fontFamily: 'Inter',
@@ -38,6 +40,19 @@ export default function Settings() {
     marginRight: '0.5rem',
     pt: '.25rem'
   };
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    if (user !== null) {
+      user.providerData.forEach((profile) => {
+        setUserName(profile.displayName);
+        setEmail(profile.email);
+        console.log("  Email: " + profile.email);
+      });
+    }
+  }, []);
 
 
   const creationDate = (
@@ -125,6 +140,7 @@ export default function Settings() {
               placeholder="User Name"
               name="userName"
               size='small'
+              value={userName}
               sx={{
                 ...textFieldStyle
               }}
@@ -153,6 +169,7 @@ export default function Settings() {
               name="Email"
               className='input-field'
               size='small'
+              value={email}
               sx={{
                 ...textFieldStyle
               }}
