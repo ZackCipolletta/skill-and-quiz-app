@@ -177,38 +177,53 @@ export default function QuizCategoryDashboard(props) {
   const user = auth.currentUser;
 
   const updateUserName = () => {
+    let disName = "Updated displayName";
     updateProfile(auth.currentUser, {
-      displayName: "Updated displayName"
-
+      displayName: disName
+    }).then(() => {
+      return handleUpdateUserName(disName);
     }).then(() => {
       // Profile updated!
       console.log("Profile updated!");
     }).catch((error) => {
       // An error occurred
-      console.log("An error occurred: " + error);
+      console.log("An error occurred: ", error);
     });
   };
 
-  const handleUpdateUserName = async (categoryId) => {
-    // first we query the database and filter the 'categories' collection for any category 
-    // with an id field that matches 'categoryId'.
-    const categoryQuery = query(collection(db, "users"), where("id", "==", categoryId));
-    // then we get a snapshot of the corresponding doc
-    const querySnapshot = await getDocs(categoryQuery);
+  const handleUpdateUserName = async (disName) => {
+    try {
+      // first we query the database and filter the 'categories' collection for any category 
+      // with an id field that matches 'categoryId'.
+      const userQuery = query(collection(db, "users"), where("id", "==", user.uid));
+      // then we get a snapshot of the corresponding doc
+      const querySnapshot = await getDocs(userQuery);
 
-    // check if the snapshot exists (is not empty)
-    if (!querySnapshot.empty) {
+      // check if the snapshot exists (is not empty)
+      if (!querySnapshot.empty) {
 
-      // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
-      const categoryDoc = querySnapshot.docs[0];
-      // we then assign the favorite property of the categoryDoc to a variable so we can update it
-      const { Favorite } = categoryDoc.data();
+        // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+        const userDoc = querySnapshot.docs[0];
 
-      // Use categoryDoc.id as the actual document ID
-      const categoryRef = doc(db, "categories", categoryDoc.id);
+        // we then assign the favorite property of the categoryDoc to a variable so we can update it
+        const { displayName } = userDoc.data();
 
-      //we then update the document with the id of the categoryDoc
-      await updateDoc(categoryRef, { Favorite: !Favorite });
+        // Use categoryDoc.id as the actual document ID
+        const userRef = doc(db, "users", userDoc.id);
+
+        //we then update the document with the id of the categoryDoc
+        try {
+          return await updateDoc(userRef, { displayName: disName });
+        } catch (error) {
+          console.error("Error updating user name/displayName: ", error);
+          throw error;
+        }
+      } else {
+        throw new Error("User not found");
+      }
+    } catch (error) {
+      console.error("Error updating user display name: ", error);
+      throw error;
     }
   };
 

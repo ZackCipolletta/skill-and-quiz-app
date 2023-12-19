@@ -125,7 +125,6 @@ export default function CreateNewQuiz() {
     setValue(newValue);
   };
 
-
   const newQuiz = {
     Creator: user.uid, Name: quizName, Category: quizCategory, Image: imageUrl, Color: quizColor || '#cfd9fa',
     tags: quizTags, id: uuidv4(), Favorite: false, questions: questionAnswerArr.questions
