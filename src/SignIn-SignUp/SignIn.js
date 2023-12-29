@@ -12,7 +12,7 @@ import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setLoggedInUserEmail } from '../components/redux/User';
+import { setLoggedInUserEmail, setLoggedInUserID } from '../components/redux/User';
 
 
 export default function SignIn() {
@@ -46,7 +46,7 @@ export default function SignIn() {
 
   const handleButtonClick = () => {
     doSignIn();
-  }
+  };
 
   function doSignIn() {
     signInWithEmailAndPassword(auth, email, password)
@@ -55,8 +55,9 @@ export default function SignIn() {
         // props.onSignInSuccess(userCredential.user);
 
         navigate('/categories');
-        console.log(userCredential)
-        dispatch(setLoggedInUserEmail(userCredential.user.email))
+        console.log(userCredential);
+        dispatch(setLoggedInUserEmail(userCredential.user.email));
+        dispatch(setLoggedInUserID(userCredential.user.uid));
 
         // onSuccess store the userCredential or just email & displayName in redux state to be verified against the db of quizzes and
         // categories, providing edit and delete options if user created them or if admin
@@ -219,7 +220,7 @@ export default function SignIn() {
                     className='button-mediumBlue'
                     // color='blue'
                     sx={{ mt: 0, mb: 6 }}
-                    
+
                   >
                     Sign in with LinkedIn (replace w/LI API)
                   </Button>

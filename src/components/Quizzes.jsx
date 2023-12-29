@@ -13,10 +13,6 @@ export default function Quizzes(props) {
 
   const { catName } = useParams();
 
-  useEffect(() => {
-    console.log('the category to be filtered is: ', catName);
-  }, []);
-
   // may want to convert this to server side filtering instead?
 
   const catNameLower = catName.toLowerCase();

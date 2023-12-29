@@ -22,7 +22,6 @@ export default function Control({ page }) {
   // const { page } = useParams();
 
   let content;
-  console.log("current page:", page);
 
   switch (page) {
     case 'quizzes':

@@ -85,10 +85,6 @@ export default function QuestionsAndAnswers(props) {
   
   const quizInfo = props.quizInfo || questionAnswerArr;
 
-  useEffect(() => {
-    console.log('this is quizInfo: ', quizInfo);
-  }, []);
-
 
   return (
     <TableBody>

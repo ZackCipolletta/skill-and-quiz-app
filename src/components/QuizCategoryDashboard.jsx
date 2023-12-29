@@ -24,7 +24,6 @@ import { getAuth, updateProfile } from "firebase/auth";
 
 
 
-
 export default function QuizCategoryDashboard(props) {
   // const db = getFirestore();
   // const docRef = doc(db, 'categories', 'f5hBjv3s8caO8Gn3qZPx');
@@ -37,16 +36,14 @@ export default function QuizCategoryDashboard(props) {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [selectedCategoryId, setSelectedCategoryId] = useState([]);
   const [categoryToDelete, setCategoryToDelete] = useState([]);
-
   const [createModalState, setCreateModalState] = useState(false);
   const [deleteModalState, setDeleteModalState] = useState(false);
-
-  const categoriesArray = useSelector((state) => state.categoriesArray);
-
-  const loggedInUserEmail = useSelector((state) => state.loggedInUserEmail.user);
-
   const [searchValue, setSearchValue] = useState(false);
   const [categories, setCategories] = useState([]);
+
+  const categoriesArray = useSelector((state) => state.categoriesArray);
+  const loggedInUserEmail = useSelector((state) => state.loggedInUserEmail.user);
+  const loggedInUserId = useSelector((state) => state.loggedInUserId);
 
   useEffect(() => {
     const unsub = onSnapshot(collectionRef, (querySnapshot) => {
@@ -62,7 +59,6 @@ export default function QuizCategoryDashboard(props) {
       unsub();
     };
   }, []);
-
 
   const searching = (value) => {
     if (value.trim()) {
@@ -113,28 +109,99 @@ export default function QuizCategoryDashboard(props) {
   };
 
 
+  // const handleFavoriteButtonClick = async (categoryId) => {
+  //   // first we query the database and filter the 'categories' collection for any category 
+  //   // with an id field that matches 'categoryId'.
+  //   const categoryQuery = query(collection(db, "categories"), where("id", "==", categoryId));
+  //   // then we get a snapshot of the corresponding doc
+  //   const querySnapshot = await getDocs(categoryQuery);
+
+  //   // check if the snapshot exists (is not empty)
+  //   if (!querySnapshot.empty) {
+
+  //     // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+  //     const categoryDoc = querySnapshot.docs[0];
+  //     // we then assign the favorite property of the categoryDoc to a variable so we can update it
+  //     const { Favorite } = categoryDoc.data();
+
+  //     // Use categoryDoc.id as the actual document ID
+  //     const categoryRef = doc(db, "categories", categoryDoc.id);
+
+  //     //we then update the document with the id of the categoryDoc
+  //     await updateDoc(categoryRef, { Favorite: !Favorite });
+  //   }
+  // };
+
+
+  // const handleFavoriteButtonClick = async (categoryId) => {
+  //   // first we query the database and filter the 'categories' collection for any category 
+  //   // with an id field that matches 'categoryId'.
+  //   const categoryQuery = query(collection(db, "categories"), where("id", "==", categoryId));
+  //   // then we get a snapshot of the corresponding doc
+  //   const querySnapshot = await getDocs(categoryQuery);
+
+  //   // check if the snapshot exists (is not empty)
+  //   if (!querySnapshot.empty) {
+
+  //     // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+  //     const categoryDoc = querySnapshot.docs[0];
+  //     // we then assign the favorite property of the categoryDoc to a variable so we can update it
+  //     const { Favorite } = categoryDoc.data();
+
+  //     // Use categoryDoc.id as the actual document ID
+  //     const categoryRef = doc(db, "categories", categoryDoc.id);
+
+  //     //we then update the document with the id of the categoryDoc
+  //     await updateDoc(categoryRef, { Favorite: !Favorite });
+  //   }
+  // };
+
   const handleFavoriteButtonClick = async (categoryId) => {
-    // first we query the database and filter the 'categories' collection for any category 
-    // with an id field that matches 'categoryId'.
-    const categoryQuery = query(collection(db, "categories"), where("id", "==", categoryId));
-    // then we get a snapshot of the corresponding doc
-    const querySnapshot = await getDocs(categoryQuery);
+    const auth = getAuth();
+    const user = auth.currentUser;
+    try {
+      // first we query the database and filter the 'users' collection for any user 
+      // with an id field that matches the id of the currently logged in user.
+      const userQuery = query(collection(db, "users"), where("id", "==", user.uid));
+      // then we get a snapshot of the corresponding doc
+      const querySnapshot = await getDocs(userQuery);
 
-    // check if the snapshot exists (is not empty)
-    if (!querySnapshot.empty) {
+      // check if the snapshot exists (is not empty)
+      if (!querySnapshot.empty) {
 
-      // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
-      const categoryDoc = querySnapshot.docs[0];
-      // we then assign the favorite property of the categoryDoc to a variable so we can update it
-      const { Favorite } = categoryDoc.data();
+        // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+        const userDoc = querySnapshot.docs[0];
 
-      // Use categoryDoc.id as the actual document ID
-      const categoryRef = doc(db, "categories", categoryDoc.id);
+        // we then assign the favorite property of the categoryDoc to a variable so we can update it
+        const { fav_Cats } = userDoc.data();
 
-      //we then update the document with the id of the categoryDoc
-      await updateDoc(categoryRef, { Favorite: !Favorite });
+        // Use categoryDoc.id as the actual document ID
+        const userRef = doc(db, "users", userDoc.id);
+
+        const updatedFavorites = [...fav_Cats, categoryId];
+        //we then update the document with the id of the categoryDoc
+        try {
+          return await updateDoc(userRef, { fav_Cats: updatedFavorites  });
+        } catch (error) {
+          console.error("Error adding favorite category: ", error);
+          throw error;
+        }
+      } else {
+        throw new Error("User not found");
+      }
+    } catch (error) {
+      console.error("Error updating favorite category: ", error);
+      throw error;
     }
   };
+
+
+
+
+
+
+
+
 
 
   const handleDeleteButtonClick = (event, id, cat) => {

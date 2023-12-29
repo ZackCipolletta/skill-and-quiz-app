@@ -43,3 +43,23 @@ export const { setLoggedInUserEmail } = loggedInUserEmailSlice.actions;
 
 // Export the currentUser reducer
 export const loggedInUserEmailReducer = loggedInUserEmailSlice.reducer;
+
+
+
+
+// loggedInUserID Slice
+export const loggedInUserIDSlice = createSlice({
+  name: 'loggedInUserID',
+  initialState: null,
+  reducers: {
+    setLoggedInUserID: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+
+// Export action creators for the loggedInUserID slice
+export const { setLoggedInUserID } = loggedInUserIDSlice.actions;
+
+// Export the loggedInUserID reducer
+export const loggedInUserIDReducer = loggedInUserIDSlice.reducer;

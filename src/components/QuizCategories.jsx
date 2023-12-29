@@ -26,6 +26,7 @@ export default function QuizCategories(props) {
   const handleCardClick = (quizId) => {
     // Handle the click event here, e.g., navigate to a new page or show more details
     console.log(`Card clicked with ID: ${quizId}`);
+    // console.log(`user id: ` + );
     navigate(`/quizzes/${quizId}`);
   };
 
