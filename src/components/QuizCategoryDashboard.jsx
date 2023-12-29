@@ -320,6 +320,7 @@ export default function QuizCategoryDashboard(props) {
       </Button >
     </Box>
   );
+  // use this method to pass the array of favs into Cards to display whether a category is a favorite or not.
 
 
   const printUserInfo = () => {

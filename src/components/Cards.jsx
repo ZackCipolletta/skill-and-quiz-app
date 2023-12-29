@@ -37,6 +37,8 @@ export default function Cards(props) {
   const user = useSelector((state) => state.loggedInUserEmail.user);
 
   const userFavs = useSelector((state) => state.loggedInUserFavCats);
+// update to use this ^ to check favorite status for categories, instead of cardInfo or move into quizCategoryDashboard and quizzesDashboard to be passed into cares.
+
 
   const cardHeight = props.height;
   const handleDeleteButtonClick = (e, id, cardName) => {
