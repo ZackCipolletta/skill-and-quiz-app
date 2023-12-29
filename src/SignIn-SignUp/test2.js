@@ -1,117 +1,59 @@
-{
-  "Name": "test title",
-    "Image": "/CategoryImages/Scientist2.png",
-      "Color": null,
-        "tags": [
-          "tags",
-          "tag2",
-          "tag3"
-        ],
-          "id": 7,
-            "Favorite": false,
-              "questions": [
-                {
-                  "questions": [
-                    {
-                      "type": "Single",
-                      "favorite": false,
-                      "correct": [
-                        2
-                      ],
-                      "question": "what month is it?",
-                      "answers": [
-                        "September",
-                        "October",
-                        "November"
-                      ]
-                    },
-                    {
-                      "type": "Single",
-                      "favorite": false,
-                      "correct": [
-                        1
-                      ],
-                      "question": "What color is the sky?",
-                      "answers": [
-                        "Black",
-                        "Blue"
-                      ]
-                    },
-                    {
-                      "type": "Multiple",
-                      "favorite": false,
-                      "correct": [
-                        0,
-                        1
-                      ],
-                      "question": "Which two things are colors?",
-                      "answers": [
-                        "Red",
-                        "Blue",
-                        "Left",
-                        "Right"
-                      ]
-                    }
-                  ]
-                }
-              ];
-}
+try {
+  // first we query the database and filter the 'users' collection for any user 
+  // with an id field that matches the id of the currently logged in user.
+  const userQuery = query(collection(db, "users"), where("id", "==", user.uid));
+  // then we get a snapshot of the corresponding doc
+  const querySnapshot = await getDocs(userQuery);
+
+  // check if the snapshot exists (is not empty)
+  if (!querySnapshot.empty) {
+
+    // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+    const userDoc = querySnapshot.docs[0];
+
+    // we then assign the favorite property of the categoryDoc to a variable so we can update it
+    const { fav_Cats } = userDoc.data();
 
 
 
 
-{
-  "Name": "Science Quiz",
-    "Image": "/CategoryImages/Scientist.png",
-      "Color": "#c0f889",
-        "tags": [
-          "Tag2",
-          "TagC"
-        ],
-          "id": 6,
-            "Favorite": true,
-              "questions": [
-                {
-                  "id": 0,
-                  "type": "Single",
-                  "favorite": true,
-                  "correct": 3,
-                  "question": "What spirit is used in making a Tom Collins?",
-                  "answers": [
-                    "Vodka",
-                    "Rum",
-                    "Whiskey",
-                    "Gin"
-                  ]
-                },
-                {
-                  "id": 1,
-                  "type": "Single",
-                  "favorite": false,
-                  "correct": [
-                    2
-                  ],
-                  "question": "Which app has the most total users?",
-                  "answers": [
-                    "TikTok",
-                    "Snapchat",
-                    "Instagram",
-                    "Facebook"
-                  ]
-                },
-                {
-                  "id": 2,
-                  "type": "Single",
-                  "favorite": false,
-                  "correct": [
-                    2
-                  ],
-                  "question": " What city hosted the 2002 Olympic Games?",
-                  "answers": [
-                    "Tokyo",
-                    "Beijing",
-                    "Sydney"
-                  ]
-                }
-              ];
-}
+
+
+
+    const handleFavoriteButtonClick = async (categoryId) => {
+
+      try {
+        // first we query the database and filter the 'users' collection for any user 
+        // with an id field that matches the id of the currently logged in user.
+        const userQuery = query(collection(db, "users"), where("id", "==", user.uid));
+        // then we get a snapshot of the corresponding doc
+        const querySnapshot = await getDocs(userQuery);
+    
+        // check if the snapshot exists (is not empty)
+        if (!querySnapshot.empty) {
+    
+          // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
+          const userDoc = querySnapshot.docs[0];
+    
+          // we then assign the favorite property of the categoryDoc to a variable so we can update it
+          const { fav_Cats } = userDoc.data();
+    
+          // Use categoryDoc.id as the actual document ID
+          const userRef = doc(db, "users", userDoc.id);
+    
+          const updatedFavorites = [...fav_Cats, categoryId];
+          //we then update the document with the id of the categoryDoc
+          try {
+            return await updateDoc(userRef, { fav_Cats: updatedFavorites  });
+          } catch (error) {
+            console.error("Error adding favorite category: ", error);
+            throw error;
+          }
+        } else {
+          throw new Error("User not found");
+        }
+      } catch (error) {
+        console.error("Error updating favorite category: ", error);
+        throw error;
+      }
+    };

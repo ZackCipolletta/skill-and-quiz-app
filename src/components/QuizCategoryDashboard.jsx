@@ -44,6 +44,7 @@ export default function QuizCategoryDashboard(props) {
   const categoriesArray = useSelector((state) => state.categoriesArray);
   const loggedInUserEmail = useSelector((state) => state.loggedInUserEmail.user);
   const loggedInUserId = useSelector((state) => state.loggedInUserId);
+  const userFavs = useSelector((state) => state.loggedInUserFavCats);
 
   useEffect(() => {
     const unsub = onSnapshot(collectionRef, (querySnapshot) => {
@@ -187,10 +188,10 @@ export default function QuizCategoryDashboard(props) {
           throw error;
         }
       } else {
-        throw new Error("User not found");
+        throw new Error("Unable tor find current user");
       }
     } catch (error) {
-      console.error("Error updating favorite category: ", error);
+      console.error("Error updating fav_Cats: ", error);
       throw error;
     }
   };
@@ -294,6 +295,9 @@ export default function QuizCategoryDashboard(props) {
     }
   };
 
+  const printFavs = () => {
+    console.log("favorite cats: " + userFavs)
+  }
 
   const updateUserButton = (
     <Box>
@@ -302,6 +306,17 @@ export default function QuizCategoryDashboard(props) {
         onClick={updateUserName}
       >
         Update User Info
+      </Button >
+    </Box>
+  );
+
+  const printFavsButton = (
+    <Box>
+      < Button
+        className='button-mediumBlue'
+        onClick={printFavs}
+      >
+        printFavs
       </Button >
     </Box>
   );
@@ -343,6 +358,7 @@ export default function QuizCategoryDashboard(props) {
 
           {printUserButton}
           {updateUserButton}
+          {printFavsButton}
 
           <Box style={{
             display: !isMobile ? 'flex' : 'block',

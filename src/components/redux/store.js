@@ -4,7 +4,7 @@ import {
   multipleCorrectReducer, warnReducer, selectedFileReducer, answerTypeReducer, questionAnswerArrReducer, isFavoriteReducer,
 } from "./quizQuestions";
 import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer, imageUrlReducer } from "./quizDetails";
-import { userInfoReducer, loggedInUserEmailReducer, loggedInUserIDReducer } from "./User";
+import { userInfoReducer, loggedInUserEmailReducer, loggedInUserIDReducer, loggedInUserFavCatsReducer } from "./User";
 import { categoriesArrayReducer, quizCategoryReducer } from "./Categories";
 import { quizzesArrayReducer } from "./quizzes";
 
@@ -33,6 +33,7 @@ export default configureStore({
     userInfo: userInfoReducer,
     loggedInUserEmail: loggedInUserEmailReducer,
     loggedInUserId: loggedInUserIDReducer,
+    loggedInUserFavCats: loggedInUserFavCatsReducer,
 
     categoriesArray: categoriesArrayReducer,
 

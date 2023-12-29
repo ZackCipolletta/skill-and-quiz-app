@@ -132,7 +132,7 @@ function SignIn() {
   const handleAddNewUser = async (email, userId) => {
     const newUser = {
       displayName: `${name}`, email: email, joinDate: currentDate(), quizzesAttempted: 0,
-      quizzesCreated: 0, quizzesWon: 0, role: null, id: userId,
+      quizzesCreated: 0, quizzesWon: 0, role: null, id: userId, fav_Cats: []
     };
     try {
       return await addDoc(collection(db, "users"), newUser);

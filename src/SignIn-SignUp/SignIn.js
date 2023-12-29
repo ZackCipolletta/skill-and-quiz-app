@@ -55,7 +55,6 @@ export default function SignIn() {
         // props.onSignInSuccess(userCredential.user);
 
         navigate('/categories');
-        console.log(userCredential);
         dispatch(setLoggedInUserEmail(userCredential.user.email));
         dispatch(setLoggedInUserID(userCredential.user.uid));
 

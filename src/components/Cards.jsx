@@ -1,5 +1,6 @@
 import '../Styles/Components.css';
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from "react-redux";
 import {
   Typography, Card, CardHeader, CardActions,
   CardActionArea, Box, IconButton, createTheme, ThemeProvider
@@ -10,9 +11,11 @@ import { PiStar, PiStarFill } from 'react-icons/pi';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { loadUserFavCats } from './redux/User';
 
 export default function Cards(props) {
   const { cardInfo, cardType } = props;
+  const dispatch = useDispatch();
 
   const cardTheme = createTheme({
     palette: {
@@ -22,10 +25,18 @@ export default function Cards(props) {
     },
   });
 
+  useEffect(() => {
+    dispatch(loadUserFavCats());
+    console.log("favorites are:" + userFavs)
+  }, [dispatch]);
+
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const user = useSelector((state) => state.loggedInUserEmail.user);
+
+  const userFavs = useSelector((state) => state.loggedInUserFavCats);
 
   const cardHeight = props.height;
   const handleDeleteButtonClick = (e, id, cardName) => {
@@ -101,7 +112,7 @@ export default function Cards(props) {
               <IconButton sx={{
                 marginLeft: '5px',
                 // we need to check if the trash icon is displayed to set the margin properly for the favorite icon
-                marginRight: displayTrash(cardInfo.Creator) ? '-25px': null,
+                marginRight: displayTrash(cardInfo.Creator) ? '-25px' : null,
                 transform: "scale(.7)"
               }}
                 onClick={(event) => handleFavoriteButtonClick(event, cardInfo.id)}
