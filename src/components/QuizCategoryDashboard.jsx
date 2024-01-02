@@ -43,7 +43,8 @@ export default function QuizCategoryDashboard(props) {
 
   const categoriesArray = useSelector((state) => state.categoriesArray);
   const loggedInUserEmail = useSelector((state) => state.loggedInUserEmail.user);
-  const loggedInUserId = useSelector((state) => state.loggedInUserId);
+  const loggedInUserId = useSelector((state) => state.loggedInUserID);
+
   const userFavs = useSelector((state) => state.loggedInUserFavCats);
 
   useEffect(() => {
@@ -182,7 +183,7 @@ export default function QuizCategoryDashboard(props) {
         const updatedFavorites = [...fav_Cats, categoryId];
         //we then update the document with the id of the categoryDoc
         try {
-          return await updateDoc(userRef, { fav_Cats: updatedFavorites  });
+          return await updateDoc(userRef, { fav_Cats: updatedFavorites });
         } catch (error) {
           console.error("Error adding favorite category: ", error);
           throw error;
@@ -296,8 +297,8 @@ export default function QuizCategoryDashboard(props) {
   };
 
   const printFavs = () => {
-    console.log("favorite cats: " + userFavs)
-  }
+    console.log("favorite cats: " + userFavs);
+  };
 
   const updateUserButton = (
     <Box>
@@ -330,6 +331,11 @@ export default function QuizCategoryDashboard(props) {
         console.log("  Email: " + profile.email);
       });
       console.log("id = " + user.uid);
+      // const userIdArray = Object.values(loggedInUserId);
+      // const userId = userIdArray.slice(0, userIdArray.length - 1).join('');
+      // console.log("stored in state:", userId);
+      console.log(loggedInUserId)
+
     }
   };
 

@@ -65,6 +65,35 @@ export const loggedInUserIDSlice = createSlice({
       return action.payload;
     },
   },
+
+  // during rehydration process the data gets transformed, so we are going to adjust it to the way we want to use it.
+  // transforms: {
+  //   in: (state) => {
+  //     console.log('Transforming in:', state);
+  //     // Check if state is an object and has a specific structure
+  //     if (typeof state === 'object' && state !== null && '_persist' in state) {
+  //       // we get the userIdArray slice of state and get a collection of all the values of the array from position 0 to the last value in the array (position -1);
+  //       const userIdArray = Object.values(state).slice(0, -1);
+  //       //we join all of the values of the collection with no spaces
+  //       const userId = userIdArray.join('');
+  //       // we return our newly joined collection
+  //       console.log('Transformed in:', userId);
+  //       return userId;
+  //     }
+  //     // Return unchanged state if it doesn't match the expected structure
+  //     return state;
+  //   },
+  //   out: (state) => {
+  //     console.log('Transforming out:', state);
+  //     // If the state is a string, return an object with that string
+  //     if (typeof state === 'string') {
+  //       console.log('Transformed out:', state);
+  //       return { 0: state, _persist: { version: -1, rehydrated: true } };
+  //     }
+  //     return state;
+  //   },
+  // },
+
 });
 
 // Export action creators for the loggedInUserID slice

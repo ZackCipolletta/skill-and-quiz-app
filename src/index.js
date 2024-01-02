@@ -10,8 +10,11 @@ import PasswordRecovery from './SignIn-SignUp/PasswordRecovery';
 import PageNotFound from './SignIn-SignUp/PageNotFound';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
-import configureStore from './components/redux/store'
+import configureStore from './components/redux/store';
 import { Provider } from 'react-redux';
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from './components/redux/store';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -20,29 +23,31 @@ const helmetContext = {};
 root.render(
   <HelmetProvider context={helmetContext}>
     <React.StrictMode>
-      <Provider store={configureStore}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/signUp" element={<SignUp />} />
-            <Route path="/signIn" element={<SignIn />} />
-            <Route path="/password-recovery" element={<PasswordRecovery />} />
-            <Route path="/quizzes/:catName" element={<Control page="quizzes" />} />
-            <Route path="/categories" element={<Control page="categories" />} />
-            <Route path="/newquiz" element={<Control page="newquiz" />} />
-            <Route path="/quiz/:quizId" element={<Control page="quiz" />} />
-            <Route path="/preview" element={<Control page="preview" />} />
-            <Route path="/leaderboard" element={<Control page="leaderboard" />} />
-            <Route path="/settings" element={<Control page="settings" />} />
-            <Route path="/admin" element={<Control page="admin" />} />
+      <Provider store={store}>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/signUp" element={<SignUp />} />
+              <Route path="/signIn" element={<SignIn />} />
+              <Route path="/password-recovery" element={<PasswordRecovery />} />
+              <Route path="/quizzes/:catName" element={<Control page="quizzes" />} />
+              <Route path="/categories" element={<Control page="categories" />} />
+              <Route path="/newquiz" element={<Control page="newquiz" />} />
+              <Route path="/quiz/:quizId" element={<Control page="quiz" />} />
+              <Route path="/preview" element={<Control page="preview" />} />
+              <Route path="/leaderboard" element={<Control page="leaderboard" />} />
+              <Route path="/settings" element={<Control page="settings" />} />
+              <Route path="/admin" element={<Control page="admin" />} />
 
-            
-            <Route path="/test" element={<Control page="test" />} />
 
-            
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
+              <Route path="/test" element={<Control page="test" />} />
+
+
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        {/* </PersistGate> */}
       </Provider>
     </React.StrictMode>
   </HelmetProvider>

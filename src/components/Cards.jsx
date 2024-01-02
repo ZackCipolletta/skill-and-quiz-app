@@ -12,6 +12,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { loadUserFavCats } from './redux/User';
+import { getAuth, updateProfile } from "firebase/auth";
 
 export default function Cards(props) {
   const { cardInfo, cardType } = props;
@@ -34,7 +35,11 @@ export default function Cards(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const user = useSelector((state) => state.loggedInUserEmail.user);
+  // const user = useSelector((state) => state.loggedInUserEmail.user);
+  // const user = useSelector((state) => state.loggedInUserId);
+
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   const userFavs = useSelector((state) => state.loggedInUserFavCats);
 // update to use this ^ to check favorite status for categories, instead of cardInfo or move into quizCategoryDashboard and quizzesDashboard to be passed into cares.
@@ -64,7 +69,7 @@ export default function Cards(props) {
   );
 
   const displayTrash = (creator) => {
-    if (cardType === "quiz" && user === creator) {
+    if (cardType === "quiz" && user.uid === creator) {
       return true;
     } else if (cardType === "category" && user) {
       return true;
