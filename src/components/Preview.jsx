@@ -5,7 +5,6 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setQuestionAnswerArr } from "./redux/quizQuestions";
 import { useNavigate } from "react-router-dom";
 
 

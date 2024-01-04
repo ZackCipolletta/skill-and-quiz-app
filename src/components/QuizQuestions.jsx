@@ -40,8 +40,8 @@ export default function QuizQuestions() {
   const { quizCategory } = useSelector((state) => state.quizCategory);
 
   const test = () => {
-    dispatch(setQuizCategory("green"))
-  }
+    dispatch(setQuizCategory("green"));
+  };
 
 
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
@@ -154,9 +154,9 @@ export default function QuizQuestions() {
       dispatch(addQuestion(
         {
           type: answerType,
-          correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
+          correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : [0],
           question: question,
-          answers: answersArr,
+          answers: answerType === 'TypeIn' ? [""] : answersArr,
         },
       ));
 
@@ -177,7 +177,7 @@ export default function QuizQuestions() {
     const updatedQuestion = {
       type: answerType,
       favorite: isFavorite,
-      correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : undefined,
+      correct: answerType !== 'TypeIn' ? (singleCorrect || multipleCorrect) : [0],
       question: question,
       answers: answersArr
     };

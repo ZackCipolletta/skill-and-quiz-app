@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Box, Button, Paper, Tabs, Tab, Typography, IconButton } from '@mui/material';
+import { Box, Button, Paper, Tabs, Tab, Typography } from '@mui/material';
 import QuizDetails from "./QuizDetails";
 import QuizQuestions from "./QuizQuestions";
 import QuizSchedule from "./QuizSchedule";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { AiOutlineArrowRight } from 'react-icons/ai';
 import PublishModal from "./PublishModal";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux/es/hooks/useSelector";
@@ -18,13 +17,12 @@ import {
   resetWarn, resetSelectedFile, resetAnswerType, resetIsFavorite, resetQuestionAnswerArr,
 } from "./redux/quizQuestions";
 import { resetQuizName, resetQuizColor, resetQuizTags, resetNewTag, resetImageUrl } from "./redux/quizDetails";
-import { resetQuizCategory, setQuizCategory } from "./redux/Categories";
+import { resetQuizCategory } from "./redux/Categories";
 import { db } from "../firebase";
 import {
-  addDoc, doc, onSnapshot, updateDoc, setDoc, deleteDoc, collection,
-  serverTimestamp, getDocs, query, where, orderBy, limit,
+  addDoc, collection,
 } from 'firebase/firestore';
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 
 function CustomTabPanel(props) {

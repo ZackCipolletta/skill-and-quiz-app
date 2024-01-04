@@ -1,17 +1,15 @@
 
 import '../Styles/Components.css';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button, Box, IconButton, TableContainer, Table, TableHead,
-  TableRow, TableCell, Paper, Typography
-} from '@mui/material';
+  TableRow, TableCell, Paper} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LuAward } from 'react-icons/lu';
 import { PiTagChevron } from 'react-icons/pi';
 import QuestionsAndAnswers from './QuestionsAndAnswers';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { setQuestionAnswerArr } from "./redux/quizQuestions";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 

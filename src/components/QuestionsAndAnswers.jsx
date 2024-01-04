@@ -1,5 +1,5 @@
 import '../Styles/Components.css';
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, IconButton, TableRow, TableCell, Typography, TableBody, Checkbox } from '@mui/material';
 import { PiTrashThin, PiPencilLineLight, PiStar, PiStarFill } from 'react-icons/pi';
 import { useTheme } from '@mui/material/styles';
@@ -7,10 +7,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import {
-  setOptions, decreaseOptions, setQuestion, setAnswersArr,
+  setOptions, setQuestion, setAnswersArr,
   setQuestionToEdit, setSingleCorrect, setMultipleCorrect,
-  setWarn, setSelectedFile, setAnswerType, setIsFavorite, setQuestionAnswerArr, addQuestion
-} from "./redux/quizQuestions";
+  setAnswerType, setIsFavorite, setQuestionAnswerArr} from "./redux/quizQuestions";
 
 
 export default function QuestionsAndAnswers(props) {
