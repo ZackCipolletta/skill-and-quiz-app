@@ -39,6 +39,7 @@ root.render(
               <Route path="/leaderboard" element={<Control page="leaderboard" />} />
               <Route path="/settings" element={<Control page="settings" />} />
               <Route path="/admin" element={<Control page="admin" />} />
+              <Route path="/activequiz/:quizId" element={<Control page="activequiz" />} />
 
 
               <Route path="/test" element={<Control page="test" />} />

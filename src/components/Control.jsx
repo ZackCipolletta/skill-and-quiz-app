@@ -12,6 +12,7 @@ import FavIcon from '../img/FavIcon.png';
 import LeaderboardAndAnalysis from './LeaderboardAndAnalysis';
 import Settings from './Settings';
 import Admin from './Admin';
+import ActiveQuiz from './ActiveQuiz';
 
 
 
@@ -66,6 +67,11 @@ export default function Control({ page }) {
     case 'admin':
       content =
         <Admin />;
+      break;
+    
+    case 'activequiz':
+      content =
+        <ActiveQuiz />;
       break;
     
     default:

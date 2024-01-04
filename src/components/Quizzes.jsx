@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { getAuth, updateProfile } from "firebase/auth";
 
 
 export default function Quizzes(props) {
@@ -36,11 +37,24 @@ export default function Quizzes(props) {
     paddingTop: !isMobile ? 50 : 25,
   };
 
-  const handleCardClick = (quizId) => {
+
+  const handleCardClick = (quiz) => {
     // Handle the click event here, e.g., navigate to a new page or show more details
-    console.log(`Card clicked with ID: ${quizId}`);
-    navigate(`/quiz/${quizId}`);
+    console.log(quiz);
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    console.log("logged in user uid = " + user.uid);
+
+    if (quiz.Creator === user.uid) {
+      navigate(`/quiz/${quiz.id}`);
+    } else {
+      navigate(`/activequiz/${quiz.id}`);
+    }
+
   };
+
 
   return (
     <div style={gridStyle}>
@@ -53,7 +67,7 @@ export default function Quizzes(props) {
           height={100}
           favorite={props.favorite}
           deleteClick={props.deleteClick}
-          onClickEvent={() => handleCardClick(quiz.id)}
+          onClickEvent={() => handleCardClick(quiz)}
           cardType="quiz"
         />
       ))}
