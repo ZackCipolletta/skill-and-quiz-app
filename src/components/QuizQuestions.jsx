@@ -48,25 +48,6 @@ export default function QuizQuestions() {
 
 
 
-  const quiz = {
-    questions: [
-      {
-        type: 'Single',
-        favorite: false,
-        correct: 2,
-        question: 'What is the fastest route of all time?',
-        answers: ['The Kessel run', 'qwerty', 'what?', 'qwerty'],
-      },
-      {
-        type: 'Multiple',
-        favorite: true,
-        correct: [1, 2],
-        question: 'How many planets are there in the solar system?',
-        answers: ['1', '8', '9'],
-      }
-    ]
-  };
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -283,10 +264,26 @@ export default function QuizQuestions() {
     return optionFields;
   };
 
+  const printQuestionAnswerArr = () => {
+    console.log(questionAnswerArr);
+  };
+
+  const printQuestionAnswerArrButton = (
+    <Box>
+      < Button
+        className='button-mediumBlue'
+        onClick={printQuestionAnswerArr}
+      >
+        print questionAnswerArr
+      </Button >
+    </Box>
+  );
+
 
   return (
 
     <Box sx={{ width: '100%' }}>
+      {printQuestionAnswerArrButton}
       <Typography className='inputLabel' sx={{ mt: 1 }} >
         Have Questions Already? Import them!
       </Typography>

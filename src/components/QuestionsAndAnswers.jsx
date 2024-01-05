@@ -9,7 +9,8 @@ import { useDispatch } from "react-redux";
 import {
   setOptions, setQuestion, setAnswersArr,
   setQuestionToEdit, setSingleCorrect, setMultipleCorrect,
-  setAnswerType, setIsFavorite, setQuestionAnswerArr} from "./redux/quizQuestions";
+  setAnswerType, setIsFavorite, setQuestionAnswerArr
+} from "./redux/quizQuestions";
 
 
 export default function QuestionsAndAnswers(props) {
@@ -55,6 +56,10 @@ export default function QuestionsAndAnswers(props) {
   };
 
   const handleEditQuestion = (i) => {
+    if (typeof props.handleEdit === 'function') {
+      props.handleEdit();
+      return;
+    }
     // we set 'question' in state equal to the selected value at position 'i' of the questionAnswerArr array.
     // setQuestion(questionAnswerArr.questions[i].question);
     dispatch(setQuestion(questionAnswerArr.questions[i].question));
@@ -81,6 +86,7 @@ export default function QuestionsAndAnswers(props) {
     // sets the questionAnswerArr position that will be edited so we can edit and update the correct question while also telling handleAddClick that we are editing and not creating a new question.
     dispatch(setQuestionToEdit(i));
   };
+
   
   const quizInfo = props.quizInfo || questionAnswerArr;
 
@@ -122,26 +128,26 @@ export default function QuestionsAndAnswers(props) {
 
               <Box>
                 {
-                  q && q.answers && Array.isArray(q.answers) && 
+                  q && q.answers && Array.isArray(q.answers) &&
                   q.answers.map((answer, index) => (
-                  <Typography
-                    key={index}
-                    style={{
-                      marginTop: !isMobile ? 10 : 5,
-                      border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-                        '1px solid #67C27C'
-                        : '1px solid #488BFD',
-                      paddingLeft: 7,
-                      paddingRight: 7,
-                      borderRadius: '12px',
-                      color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
-                        '#67C27C' : '#488BFD',
-                      background: '#F6FFF6'
-                    }}
-                  >
-                    {optionsArray[index]}.{answer}
-                  </Typography>
-                ))}
+                    <Typography
+                      key={index}
+                      style={{
+                        marginTop: !isMobile ? 10 : 5,
+                        border: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                          '1px solid #67C27C'
+                          : '1px solid #488BFD',
+                        paddingLeft: 7,
+                        paddingRight: 7,
+                        borderRadius: '12px',
+                        color: q.correct === index || (Array.isArray(q.correct) && q.correct.includes(index)) ?
+                          '#67C27C' : '#488BFD',
+                        background: '#F6FFF6'
+                      }}
+                    >
+                      {optionsArray[index]}.{answer}
+                    </Typography>
+                  ))}
               </Box>
 
             </Box>

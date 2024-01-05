@@ -1,9 +1,10 @@
 
 import '../Styles/Components.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button, Box, IconButton, TableContainer, Table, TableHead,
-  TableRow, TableCell, Paper} from '@mui/material';
+  TableRow, TableCell, Paper
+} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LuAward } from 'react-icons/lu';
 import { PiTagChevron } from 'react-icons/pi';
@@ -12,13 +13,15 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { setQuestionAnswerArr } from './redux/quizQuestions';
 
 export default function Quiz() {
   const dispatch = useDispatch();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
+  const [triggerRerender, setTriggerRerender] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
   const [options, setOptions] = useState(0);
 
   const { quizId } = useParams();
@@ -77,6 +80,34 @@ export default function Quiz() {
 
   // to handle edit function, update handleEditQuestion in QuestionsAndAnswers.jsx
   // also handle the favorite and delete buttons in QuestionsAndAnswers in QuestionAndAnswers.jsx, possibly passing in a function from here.
+
+  const handleEditQuizInDB = () => {
+    console.log(`We are going to add the quiz data to state`);
+
+    // console.log(quizInfo.questions)
+    const newQuestionAnswerArr = {
+      questions: [...quizInfo.questions],
+    };
+  
+    dispatch(setQuestionAnswerArr(newQuestionAnswerArr));
+
+    // Set a state to trigger a rerender
+    setTriggerRerender(prev => !prev);
+    setIsEdited(true);
+    // navigate(`/newquiz`);
+  };
+
+
+  // Using useEffect to log the state after component rerenders
+  useEffect(() => {
+    if (isEdited) {
+      console.log(`the following is the questionAnswerArr in redux state: `);
+      console.log(questionAnswerArr);
+      navigate(`/newquiz`);
+      setIsEdited(false);
+    }
+  }, [triggerRerender, questionAnswerArr, isEdited, navigate]);
+
 
 
   return (
@@ -162,7 +193,8 @@ export default function Quiz() {
 
             <QuestionsAndAnswers
               quizInfo={quizInfo}
-            // handleRemoveQuestion={handleRemoveQuestion}
+              // handleRemoveQuestion={handleRemoveQuestion}
+              handleEdit={handleEditQuizInDB}
             />
 
           </Table>

@@ -98,7 +98,7 @@ export default function FilePicker(props) {
             backgroundColor: 'white'
           }
         }}
-        onClick={handleButtonClick} // in order for the button to handle picking the CSV file, onClick we actaully
+        onClick={handleButtonClick} // in order for the button to handle picking the CSV file, onClick we actually
       // have it call a function, which calls the file picker input. Which is a hidden 'input' component.
       >
         <IconButton>
