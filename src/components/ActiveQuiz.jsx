@@ -6,30 +6,18 @@ import {
 } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useDispatch } from "react-redux";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function ActiveQuiz() {
-  const dispatch = useDispatch();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const [options, setOptions] = useState(0);
-
   const { quizId } = useParams();
-
-  const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
   const quizzesArray = useSelector((state) => state.quizzesArray);
   const quizInfo = quizzesArray.find(quiz => quiz.id === quizId);
-
   const navigate = useNavigate();
-
-
   const optionsArray = ['A', 'B', 'C', 'D'];
-
-
   const [selectedAnswers, setSelectedAnswers] = useState({});
 
   //questionIndex = the index of the current question
@@ -65,46 +53,38 @@ export default function ActiveQuiz() {
     });
   };
 
+  const submit = () => {
+    const category = quizInfo.Category;
+    navigate(`/quizzes/${category}`);
+  };
 
   return (
-    <Box
-      style={{ marginTop: 35, paddingBottom: 5 }}>
+    <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column', mb: 20 }}>
 
-      <Box name='name&Buttons'
+      <Box name='quizImage&Name'
         style={{
           display: 'flex',
-          justifyContent: 'space-between',
           alignItems: 'center',
           marginBottom: 5
         }}>
-        <Box name='quizImage&Name'
+
+        <Box name='quizName'
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: 5
-          }}>
 
-          <Box name='quizName'
-            style={{
+            backgroundImage: quizInfo.Image ? `url('${quizInfo.Image}')` : null,
+            backgroundColor: !quizInfo.Image ? quizInfo.Color : null,
 
-              backgroundImage: quizInfo.Image ? `url('${quizInfo.Image}')` : null,
-              backgroundColor: !quizInfo.Image ? quizInfo.Color : null,
+            borderRadius: 50,
+            width: 65,
+            height: 65,
+            marginRight: 5
+          }}
+        />
 
-
-              borderRadius: 50,
-              width: 65,
-              height: 65,
-              marginRight: 5
-            }}
-          />
-
-          <h1 className='darkBlue-text'>
-            {quizInfo.Name}
-          </h1>
-        </Box> {/* quizImage&Name closes */}
-
-
-      </Box> {/* name&Buttons closes */}
+        <h1 className='darkBlue-text'>
+          {quizInfo.Name}
+        </h1>
+      </Box> {/* quizImage&Name closes */}
 
       <Box name='tags'>
         {quizInfo.tags.map((tag, index) => (
@@ -126,123 +106,110 @@ export default function ActiveQuiz() {
         ))}
       </Box>
 
+      <Box name='submit' sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+        <Button
+          className='button-darkMediumBlue'
+          sx={{
+            fontSize: '1rem',
+            fontStyle: 'normal',
+            fontWeight: 500,
+            lineHeight: '100%',
+            letterSpacing: '-0.05rem',
+            padding: ' 0.75rem 1.5rem',
+            mb: 2
+          }}
+          onClick={submit}
+        >
+          Submit
+        </Button>
+      </Box>
 
-      <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column' }}>
-
-        <Box name='quizImage&Name'
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: 5
-          }}>
-
-        </Box> {/* quizImage&Name closes */}
-
-
-        <Box name='switch' sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-          <Button
-            className='button-darkMediumBlue'
+      <TableBody>
+        {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
+        {quizInfo.questions.map((question, qIndex) => (
+          <TableRow key={qIndex}
             sx={{
-              fontSize: '1rem',
-              fontStyle: 'normal',
-              fontWeight: 500,
-              lineHeight: '100%',
-              letterSpacing: '-0.05rem',
-              padding: ' 0.75rem 1.5rem',
-              mb: 2
+              '&:hover': {
+                backgroundColor: '#f8fafe',
+                // border: '2px solid #3ea7f2 !important'
+              }
             }}
-          // onClick={switchBack}
           >
-            Switch to Draft
-          </Button>
-        </Box>
-        <TableBody>
-          {/* we map quizInfo onto this template. The quiz as a whole is represented by 'q' */}
-          {quizInfo.questions.map((question, qIndex) => (
-            <TableRow key={qIndex}
+            <TableCell
               sx={{
-                '&:hover': {
-                  backgroundColor: '#f8fafe',
-                  // border: '2px solid #3ea7f2 !important'
-                }
+                fontWeight: 'bold',
+                borderBottom: "none",
+                verticalAlign: 'top'
               }}
             >
-              <TableCell
-                sx={{
+              {/* we use the index (i) to add number each question when it is displayed */}
+              {qIndex + 1}
+            </TableCell>
+
+            <TableCell
+              sx={{ width: 750, borderBottom: "none", verticalAlign: 'top' }}
+            >
+
+              {/* here we display the question */}
+              <Typography
+                style={{
                   fontWeight: 'bold',
-                  borderBottom: "none",
-                  verticalAlign: 'top'
                 }}
               >
-                {/* we use the index (i) to add number each question when it is displayed */}
-                {qIndex + 1}
-              </TableCell>
+                {question.question}
+              </Typography>
 
-              <TableCell
-                sx={{ width: 750, borderBottom: "none", verticalAlign: 'top' }}
-              >
+              {/* Then we map array of answers onto this template */}
+              <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
+                {question.type !== "TypeIn" ? (
+                  <>
 
-                {/* here we display the question */}
-                <Typography
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {question.question}
-                </Typography>
+                    <Box>
+                      {question.answers.map((answer, aIndex) => (
+                        <Typography
+                          key={aIndex}
+                          style={{
+                            marginTop: !isMobile ? 10 : 5,
+                            border: selectedAnswers[qIndex]?.includes(aIndex) ? '1.558px solid #67C27C' : '1.558px solid #488BFD',
+                            paddingLeft: 7,
+                            paddingRight: 7,
+                            marginRight: 5,
+                            borderRadius: '12px',
+                            // color: '#488BFD',
+                            color: selectedAnswers[qIndex]?.includes(aIndex) ? '#67C27C' : '#488BFD',
+                            background: '#F6FFF6',
+                            cursor: 'pointer',
+                          }}
+                          onClick={() => handleAnswerClick(qIndex, aIndex)}
+                        >
+                          {optionsArray[aIndex]}.{answer}
+                        </Typography>
+                      ))}
+                    </Box>
 
-                {/* Then we map array of answers onto this template */}
-                <Box name='answers' style={{ display: 'flex', flexWrap: 'wrap', gap: 2, marginTop: 5 }}>
-                  {question.type !== "TypeIn" ? (
-                    <>
+                  </>
+                ) : (
 
-                      <Box>
-                        {question.answers.map((answer, aIndex) => (
-                          <Typography
-                            key={aIndex}
-                            style={{
-                              marginTop: !isMobile ? 10 : 5,
-                              border: selectedAnswers[qIndex]?.includes(aIndex) ? '1.558px solid #67C27C' : '1.558px solid #488BFD',
-                              paddingLeft: 7,
-                              paddingRight: 7,
-                              marginRight: 5,
-                              borderRadius: '12px',
-                              // color: '#488BFD',
-                              color: selectedAnswers[qIndex]?.includes(aIndex) ? '#67C27C' : '#488BFD',
-                              background: '#F6FFF6',
-                              cursor: 'pointer',
-                            }}
-                            onClick={() => handleAnswerClick(qIndex, aIndex)}
-                          >
-                            {optionsArray[aIndex]}.{answer}
-                          </Typography>
-                        ))}
-                      </Box>
+                  <TextField
+                    id="answer"
+                    placeholder="Enter your answer here"
+                    name="answer"
+                    size='small'
+                    sx={{
+                      width: 550,
+                      margin: 0,
+                    }}
+                    InputProps={{ sx: { borderRadius: 2 } }}
+                  />
+                )}
+              </Box>
 
-                    </>
-                  ) : (
+            </TableCell>
 
-                    <TextField
-                      id="answer"
-                      placeholder="Enter your answer here"
-                      name="answer"
-                      size='small'
-                      sx={{
-                        width: 550,
-                        margin: 0,
-                      }}
-                      InputProps={{ sx: { borderRadius: 2 } }}
-                    />
-                  )}
-                </Box>
-
-              </TableCell>
-
-            </TableRow>
-          ))
-          }
-        </TableBody >
-      </Box>
+          </TableRow>
+        ))
+        }
+      </TableBody >
 
     </Box>
   );

@@ -25,8 +25,6 @@ export default function Preview(props) {
 
   const navigate = useNavigate();
 
-
-
   const switchBack = () => {
     navigate(-1);
   };
