@@ -23,11 +23,12 @@ export default function QuizCategories(props) {
     paddingTop: !isMobile ? 50 : 25,
   };
 
-  const handleCardClick = (quizId) => {
+  const handleCardClick = (quizName) => {
     // Handle the click event here, e.g., navigate to a new page or show more details
-    console.log(`Card clicked with ID: ${quizId}`);
-    // console.log(`user id: ` + );
-    navigate(`/quizzes/${quizId}`);
+    console.log(`Card clicked with name: ${quizName}`);
+    const quizNameLower = quizName.toLowerCase();
+
+    navigate(`/quizzes/${quizNameLower}`);
   };
 
   return (

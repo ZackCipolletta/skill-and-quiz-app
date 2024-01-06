@@ -124,25 +124,9 @@ export default function CreateNewQuiz() {
   };
 
   const newQuiz = {
-    Creator: user.uid, Name: quizName, Category: quizCategory, Image: imageUrl, Color: quizColor || '#cfd9fa',
+    Creator: user.uid || `Null`, Name: quizName || `No Name`, Category: quizCategory || `No Category`, Image: imageUrl, Color: quizColor || '#cfd9fa',
     tags: quizTags, id: uuidv4(), Favorite: false, questions: questionAnswerArr.questions
   };
-
-
-  // const changeToNextTab = () => {
-  //   const nextTab = value + 1;
-  //   if (nextTab < 3) {
-  //     setValue(nextTab);
-  //   }
-  //   setShowIcons(false);
-  // };
-
-  // const changeToPreviousTab = () => {
-  //   const nextTab = value - 1;
-  //   if (nextTab >= 0) {
-  //     setValue(nextTab);
-  //   }
-  // };
 
 
   const tabStyles = {
@@ -162,7 +146,8 @@ export default function CreateNewQuiz() {
     console.log('the quiz array is: ' + quizzesArray);
   };
 
-  // have publish button take questionAnswerArrSlice and combine with name, color, imgageURL, tags and add an ID to create a 'quiz' then append thew newly created quiz to the array of quizzes.
+  // have publish button take questionAnswerArrSlice and combine with name, color, imgageURL, 
+  // tags and add an ID to create a 'quiz' then append thew newly created quiz to the array of quizzes.
 
   const previewPublishButtons = (
     value > 1 ?
@@ -210,7 +195,8 @@ export default function CreateNewQuiz() {
               previewPublishButtons
             }
 
-            {/* add a check for quiz title and questions. If no title or questions display error 'must enter title' or 'error must enter questions' when clicking preview/publish buttons. */}
+            {/* add a check for quiz title and questions. If no title or questions display error 'must enter title' 
+            or 'error must enter questions' when clicking preview/publish buttons. */}
           </Box>
         </Box>
 

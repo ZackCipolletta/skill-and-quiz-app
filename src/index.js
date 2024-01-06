@@ -41,10 +41,6 @@ root.render(
               <Route path="/admin" element={<Control page="admin" />} />
               <Route path="/activequiz/:quizId" element={<Control page="activequiz" />} />
 
-
-              <Route path="/test" element={<Control page="test" />} />
-
-
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>

@@ -11,21 +11,15 @@ import { getAuth, updateProfile } from "firebase/auth";
 export default function Quizzes(props) {
   const navigate = useNavigate();
 
-
   const { catName } = useParams();
 
   // may want to convert this to server side filtering instead?
 
-  const catNameLower = catName.toLowerCase();
-  // const quizList = useSelector((state) => state.quizzesArray.filter(
-  //   (quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower)
-  // )
-  // )
   const quizzesArray = useSelector((state) => state.quizzesArray);
 
   const listOfQuizzes = props.quizList || quizzesArray;
 
-  const quizList = listOfQuizzes.filter((quiz) => catNameLower && quiz.Category.toLowerCase().includes(catNameLower));
+  const quizList = listOfQuizzes.filter((quiz) => catName && quiz.Category.toLowerCase().includes(catName));
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

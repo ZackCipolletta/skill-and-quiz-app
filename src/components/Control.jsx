@@ -5,7 +5,6 @@ import QuizCategoryDashboard from './QuizCategoryDashboard';
 import QuizzesDashboard from './QuizzesDashboard';
 import CreateNewQuiz from './CreateNewQuiz';
 import Quiz from './Quiz';
-import Test from './Test';
 import Preview from './Preview';
 import { Helmet } from 'react-helmet-async';
 import FavIcon from '../img/FavIcon.png';
@@ -44,11 +43,6 @@ export default function Control({ page }) {
         <Quiz />;
       break;
 
-    case 'test':
-      content =
-        <Test />;
-      break;
-    
     case 'preview':
       content =
         <Preview />;
