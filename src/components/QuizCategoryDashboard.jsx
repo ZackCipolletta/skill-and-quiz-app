@@ -198,14 +198,6 @@ export default function QuizCategoryDashboard(props) {
   };
 
 
-
-
-
-
-
-
-
-
   const handleDeleteButtonClick = (event, id, cat) => {
     setDeleteModalState(!deleteModalState);
     setCategoryToDelete(cat);
@@ -363,9 +355,9 @@ export default function QuizCategoryDashboard(props) {
             Quiz Board  {/* Google web font 'Anton' */}
           </h1>
 
-          {printUserButton}
+          {/* {printUserButton}
           {updateUserButton}
-          {printFavsButton}
+          {printFavsButton} */}
 
           <Box style={{
             display: !isMobile ? 'flex' : 'block',

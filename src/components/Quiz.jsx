@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { setQuestionAnswerArr } from './redux/quizQuestions';
+import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor, setImageUrl } from "./redux/quizDetails";
+import { setQuizCategory } from './redux/Categories';
 
 export default function Quiz() {
   const dispatch = useDispatch();
@@ -82,20 +84,34 @@ export default function Quiz() {
   // also handle the favorite and delete buttons in QuestionsAndAnswers in QuestionAndAnswers.jsx, possibly passing in a function from here.
 
   const handleEditQuizInDB = () => {
-    console.log(`We are going to add the quiz data to state`);
 
-    // console.log(quizInfo.questions)
     const newQuestionAnswerArr = {
       questions: [...quizInfo.questions],
     };
-  
+
     dispatch(setQuestionAnswerArr(newQuestionAnswerArr));
+    dispatch(setQuizName(quizInfo.Name));
+    dispatch(setQuizColor(quizInfo.Color));
+    dispatch(setImageUrl(quizInfo.Image));
+    dispatch(setQuizCategory(quizInfo.Category));
+    dispatch(setQuizTags(quizInfo.tags));
+
+
 
     // Set a state to trigger a rerender
     setTriggerRerender(prev => !prev);
     setIsEdited(true);
-    // navigate(`/newquiz`);
+    navigate(`/newquiz`);
   };
+
+
+  // const handleEditingProduct = async (productToEdit) => {
+  //   const productRef = doc(db, "products", productToEdit.id);
+  //   console.log("We've hit the handleEditing Product function");
+  //   await updateDoc(productRef, productToEdit);
+  //   setEditing(false);
+  //   setSelectedProduct(null);
+  // };
 
 
   // Using useEffect to log the state after component rerenders

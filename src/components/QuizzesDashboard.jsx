@@ -43,6 +43,12 @@ export default function QuizzesDashboard() {
   const quizzesArray = useSelector((state) => state.quizzesArray);
   const user = useSelector((state) => state.loggedInUserEmail.user);
 
+  // finish implementing edit functionality. currently sending question and answer info to newquiz to edit existing quiz on db
+  // must send name, image/color, tags as well to redux state.
+
+
+
+
 
   useEffect(() => {
     // Set up a snapshot listener for the 'quizzes' collection in Firebase
