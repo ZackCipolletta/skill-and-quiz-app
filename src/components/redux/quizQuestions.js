@@ -17,7 +17,6 @@ export const optionsSlice = createSlice({
       state.options = action.payload;
     },
     resetOptions: (state) => {
-      console.log('Resetting options state');
       state.options = 0;
     },
   },
@@ -43,7 +42,6 @@ export const questionSlice = createSlice({
       state.question = action.payload;
     },
     resetQuestion: (state) => {
-      console.log('Resetting question state');
       state.question = '';
     },
   },
@@ -69,7 +67,6 @@ export const answersArrSlice = createSlice({
       state.answersArr = action.payload;
     },
     resetAnswersArr: (state) => {
-      console.log('Resetting answersArr state');
       state.answersArr = [];
     },
   },
@@ -95,7 +92,6 @@ export const questionToEditSlice = createSlice({
       state.questionToEdit = action.payload;
     },
     resetQuestionToEdit: (state) => {
-      console.log('Resetting questionToEdit state');
       state.questionToEdit = null;
     },
   },
@@ -121,7 +117,6 @@ export const singleCorrectSlice = createSlice({
       state.singleCorrect = action.payload;
     },
     resetSingleCorrect: (state) => {
-      console.log('Resetting singleCorrect state');
       state.singleCorrect = null;
     },
   },
@@ -147,7 +142,6 @@ export const multipleCorrectSlice = createSlice({
       state.multipleCorrect = action.payload;
     },
     resetMultipleCorrect: (state) => {
-      console.log('Resetting multipleCorrect state');
       state.multipleCorrect = [];
     },
   },
@@ -173,7 +167,6 @@ export const warnSlice = createSlice({
       state.warn = action.payload;
     },
     resetWarn: (state) => {
-      console.log('Resetting warn state');
       state.warn = false;
     },
   },
@@ -199,7 +192,6 @@ export const selectedFileSlice = createSlice({
       state.selectedFile = action.payload;
     },
     resetSelectedFile: (state) => {
-      console.log('Resetting selectedFile state');
       state.selectedFile = null;
     },
   },
@@ -225,7 +217,6 @@ export const answerTypeSlice = createSlice({
       state.answerType = action.payload;
     },
     resetAnswerType: (state) => {
-      console.log('Resetting Multiple state');
       state.answerType = 'Multiple';
     },
   },
@@ -251,7 +242,6 @@ export const isFavoriteSlice = createSlice({
       state.isFavorite = action.payload;
     },
     resetIsFavorite: (state) => {
-      console.log('Resetting isFavorite state');
       state.isFavorite = false;
     },
   },
@@ -280,7 +270,6 @@ export const questionAnswerArrSlice = createSlice({
       state.questions.push(action.payload);
     },
     resetQuestionAnswerArr: (state) => {
-      console.log('Resetting questionAnswerArr state');
       state.questions = [];
     },
   },

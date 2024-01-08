@@ -16,6 +16,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { setQuestionAnswerArr } from './redux/quizQuestions';
 import { setQuizName, setQuizTags, addQuizTag, removeQuizTag, setNewTag, setQuizColor, setImageUrl } from "./redux/quizDetails";
 import { setQuizCategory } from './redux/Categories';
+import { setQuizID } from './redux/quizDetails';
 
 export default function Quiz() {
   const dispatch = useDispatch();
@@ -31,6 +32,11 @@ export default function Quiz() {
   const questionAnswerArr = useSelector((state) => state.questionAnswerArr);
   const quizzesArray = useSelector((state) => state.quizzesArray);
   const quizInfo = quizzesArray.find(quiz => quiz.id === quizId);
+
+
+  // const quizInfo = quizzesArray.find(quiz => quiz.id === quizId);
+  
+
 
   const navigate = useNavigate();
 
@@ -95,7 +101,7 @@ export default function Quiz() {
     dispatch(setImageUrl(quizInfo.Image));
     dispatch(setQuizCategory(quizInfo.Category));
     dispatch(setQuizTags(quizInfo.tags));
-
+    dispatch(setQuizID(quizInfo.id));
 
 
     // Set a state to trigger a rerender

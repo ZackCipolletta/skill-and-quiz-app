@@ -5,7 +5,7 @@ import {
   optionsReducer, questionReducer, answersArrReducer, questionToEditReducer, singleCorrectReducer,
   multipleCorrectReducer, warnReducer, selectedFileReducer, answerTypeReducer, questionAnswerArrReducer, isFavoriteReducer,
 } from "./quizQuestions";
-import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer, imageUrlReducer } from "./quizDetails";
+import { quizNameReducer, quizColorReducer, quizTagsReducer, newTagReducer, imageUrlReducer, quizIDReducer } from "./quizDetails";
 import { userInfoReducer, loggedInUserEmailReducer, loggedInUserIDReducer, loggedInUserFavCatsReducer, loggedInUserIDSlice } from "./User";
 import { categoriesArrayReducer, quizCategoryReducer } from "./Categories";
 import { quizzesArrayReducer } from "./quizzes";
@@ -49,6 +49,7 @@ const store = configureStore({
     newTag: newTagReducer,
     imageUrl: imageUrlReducer,
     quizCategory: quizCategoryReducer,
+    quizID: quizIDReducer,
 
     // userInfo: persistedUserInfoReducer,
     // loggedInUserEmail: persistedLoggedInUserEmailReducer,

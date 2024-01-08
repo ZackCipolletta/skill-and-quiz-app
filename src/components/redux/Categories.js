@@ -22,8 +22,6 @@ export const categoriesArraySlice = createSlice({
       }
     },
     deleteCategory: (state, action) => {
-      console.log('reached here');
-      console.log(action.payload);
       return state.filter(category => category.id !== action.payload);
     },
     searchCategories: (state, action) => {

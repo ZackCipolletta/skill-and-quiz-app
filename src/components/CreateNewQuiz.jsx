@@ -16,13 +16,12 @@ import {
   resetOptions, resetQuestion, resetAnswersArr, resetQuestionToEdit, resetSingleCorrect, resetMultipleCorrect,
   resetWarn, resetSelectedFile, resetAnswerType, resetIsFavorite, resetQuestionAnswerArr,
 } from "./redux/quizQuestions";
-import { resetQuizName, resetQuizColor, resetQuizTags, resetNewTag, resetImageUrl } from "./redux/quizDetails";
+import { resetQuizName, resetQuizColor, resetQuizTags, resetNewTag, resetImageUrl, resetQuizID } from "./redux/quizDetails";
 import { resetQuizCategory } from "./redux/Categories";
 import { db } from "../firebase";
-import {
-  addDoc, collection,
-} from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, onSnapshot, deleteDoc, getDoc, query, orderBy } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+
 
 
 function CustomTabPanel(props) {
@@ -64,6 +63,7 @@ export default function CreateNewQuiz() {
   const { quizTags } = useSelector((state) => state.quizTags);
   const { quizColor } = useSelector((state) => state.quizColor);
   const { imageUrl } = useSelector((state) => state.imageUrl);
+  const { quizID } = useSelector((state) => state.quizID);
 
   const { quizCategory } = useSelector((state) => state.quizCategory);
   const quizzesArray = useSelector((state) => state.quizzesArray);
@@ -86,11 +86,50 @@ export default function CreateNewQuiz() {
   };
 
   const handlePublishButtonClick = () => {
-    handleAddNewQuiz(newQuiz);
+    setPublishModalState(!publishModalState);
+  };
+
+
+  const handleConfirmPublishButtonClick = async() => {
+    if (quizID) {
+      console.log(`we are editing a quiz here, not creating a new quiz.`);
+      await handleEditingQuiz()
+    } else {
+      await handleAddNewQuiz(newQuiz);
+    }
+
     navigate(`/quizzes/${quizCategory}`);
     reset();
   };
   // currently trying to render the new quiz in the quizzes page before it is available (in state or db). must handle with conditional or asynchronous loading or something.
+
+
+  // const handleEditingQuiz = async (IDofQuizToEdit) => {
+  //   const productRef = doc(db, "quizzes", IDofQuizToEdit);
+  //   console.log("We've hit the handleEditing quiz function");
+  //   await updateDoc(productRef, newQuiz);
+  // };
+
+
+  const handleEditingQuiz = async (IDofQuizToEdit) => {
+    try {
+      const quizRef = doc(db, "quizzes", `6t0wVGYuS2uGKpk0PqzZ`);
+      const docSnap = await getDoc(quizRef);
+  
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        await updateDoc(quizRef, newQuiz);
+        console.log("Document successfully updated");
+      } else {
+        console.log("No such document!");
+      }
+    } catch (error) {
+      console.error("Error updating the quiz: ", error);
+      // Handle the error appropriately
+    }
+  };
+
+
 
   const reset = () => {
     dispatch(resetOptions());
@@ -110,6 +149,8 @@ export default function CreateNewQuiz() {
     dispatch(resetNewTag());
     dispatch(resetImageUrl());
     dispatch(resetQuizCategory());
+    dispatch(resetQuizID());
+
   };
 
   const quiz = {
@@ -125,7 +166,7 @@ export default function CreateNewQuiz() {
 
   const newQuiz = {
     Creator: user.uid || `Null`, Name: quizName || `No Name`, Category: quizCategory || `No Category`, Image: imageUrl, Color: quizColor || '#cfd9fa',
-    tags: quizTags, id: uuidv4(), Favorite: false, questions: questionAnswerArr.questions
+    tags: quizTags, id: quizID || uuidv4(), Favorite: false, questions: questionAnswerArr.questions
   };
 
 
@@ -164,7 +205,8 @@ export default function CreateNewQuiz() {
           sx={{ mr: !isMobile ? 1 : null }}
           onClick={handlePublishButtonClick}
         >
-          Publish</Button>
+          Publish
+        </Button>
       </Box >
       : null
 
@@ -244,6 +286,7 @@ export default function CreateNewQuiz() {
 
       <PublishModal
         publishModalState={publishModalState}
+        handleConfirmPublishButtonClick={handleConfirmPublishButtonClick}
         handleCancelButtonClick={handleCancelButtonClick}
         quizToPublish={quiz.title}
       />

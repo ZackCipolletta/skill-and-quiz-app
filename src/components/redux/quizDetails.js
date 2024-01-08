@@ -11,7 +11,6 @@ export const quizNameSlice = createSlice({
       state.quizName = action.payload;
     },
     resetQuizName: (state) => {
-      console.log('Resetting quiz name state');
       state.quizName = null;
     },
   },
@@ -37,7 +36,6 @@ export const quizColorSlice = createSlice({
       state.quizColor = action.payload;
     },
     resetQuizColor: (state) => {
-      console.log('Resetting quiz color state');
       state.quizColor = null;
     },
   },
@@ -69,7 +67,6 @@ export const quizTagsSlice = createSlice({
       state.quizTags = action.payload;
     },
     resetQuizTags: (state) => {
-      console.log('Resetting quiz tags state');
       state.quizTags= [];
     },
   },
@@ -95,7 +92,6 @@ export const newTagSlice = createSlice({
       state.newTag = action.payload;
     },
     resetNewTag: (state) => {
-      console.log('Resetting new tag state');
       state.newTag = null;
     },
   },
@@ -120,7 +116,6 @@ export const imageUrlSlice = createSlice({
       state.imageUrl = action.payload;
     },
     resetImageUrl: (state) => {
-      console.log('Resetting imageURL state');
       state.imageUrl = null;
     },
   },
@@ -131,3 +126,27 @@ export const { setImageUrl, resetImageUrl } = imageUrlSlice.actions;
 
 // Export the imageUrl reducer
 export const imageUrlReducer = imageUrlSlice.reducer;
+
+
+
+// quizID Slice
+export const quizIDSlice = createSlice({
+  name: 'quizID',
+  initialState: {
+    quizID: null,
+  },
+  reducers: {
+    setQuizID: (state, action) => {
+      state.quizID = action.payload;
+    },
+    resetQuizID: (state) => {
+      state.quizID = null;
+    },
+  },
+});
+
+// Export action creators for the quizID slice
+export const { setQuizID, resetQuizID } = quizIDSlice.actions;
+
+// Export the quizID reducer
+export const quizIDReducer = quizIDSlice.reducer;

@@ -24,7 +24,7 @@ const style = {
 
 export default function PublishModal(props) {
 
-  const { publishModalState, handleCancelButtonClick, quizToPublish } = props;
+  const { publishModalState, handleConfirmPublishButtonClick, handleCancelButtonClick, quizToPublish } = props;
 
 
   return (
@@ -52,7 +52,7 @@ export default function PublishModal(props) {
             <Box sx={{pt: 2 }}>
               <Button
                 className='button-redButton'
-                // onClick={props.handleDeleteConfirm}
+                onClick={handleConfirmPublishButtonClick}
                 sx={{ mr: 5 }}>
                 Publish
               </Button>
