@@ -93,7 +93,7 @@ export default function CreateNewQuiz() {
   const handleConfirmPublishButtonClick = async() => {
     if (quizID) {
       console.log(`we are editing a quiz here, not creating a new quiz.`);
-      await handleEditingQuiz()
+      await handleEditingQuiz(quizID)
     } else {
       await handleAddNewQuiz(newQuiz);
     }
@@ -104,16 +104,9 @@ export default function CreateNewQuiz() {
   // currently trying to render the new quiz in the quizzes page before it is available (in state or db). must handle with conditional or asynchronous loading or something.
 
 
-  // const handleEditingQuiz = async (IDofQuizToEdit) => {
-  //   const productRef = doc(db, "quizzes", IDofQuizToEdit);
-  //   console.log("We've hit the handleEditing quiz function");
-  //   await updateDoc(productRef, newQuiz);
-  // };
-
-
   const handleEditingQuiz = async (IDofQuizToEdit) => {
     try {
-      const quizRef = doc(db, "quizzes", `6t0wVGYuS2uGKpk0PqzZ`);
+      const quizRef = doc(db, "quizzes", IDofQuizToEdit);
       const docSnap = await getDoc(quizRef);
   
       if (docSnap.exists()) {
@@ -125,7 +118,6 @@ export default function CreateNewQuiz() {
       }
     } catch (error) {
       console.error("Error updating the quiz: ", error);
-      // Handle the error appropriately
     }
   };
 
@@ -150,7 +142,6 @@ export default function CreateNewQuiz() {
     dispatch(resetImageUrl());
     dispatch(resetQuizCategory());
     dispatch(resetQuizID());
-
   };
 
   const quiz = {
@@ -166,7 +157,7 @@ export default function CreateNewQuiz() {
 
   const newQuiz = {
     Creator: user.uid || `Null`, Name: quizName || `No Name`, Category: quizCategory || `No Category`, Image: imageUrl, Color: quizColor || '#cfd9fa',
-    tags: quizTags, id: quizID || uuidv4(), Favorite: false, questions: questionAnswerArr.questions
+    tags: quizTags, Favorite: false, questions: questionAnswerArr.questions
   };
 
 

@@ -15,8 +15,9 @@ export default function Quizzes(props) {
 
   // may want to convert this to server side filtering instead?
 
-  const quizzesArray = useSelector((state) => state.quizzesArray);
 
+  const quizzesArray = useSelector((state) => state.quizzesArray);
+  
   const listOfQuizzes = props.quizList || quizzesArray;
 
   const quizList = listOfQuizzes.filter((quiz) => catName && quiz.Category.toLowerCase().includes(catName));
@@ -33,11 +34,11 @@ export default function Quizzes(props) {
 
 
   const handleCardClick = (quiz) => {
-    // Handle the click event here, e.g., navigate to a new page or show more details
-    console.log(quiz);
 
     const auth = getAuth();
     const user = auth.currentUser;
+
+    console.log(quizList);
 
     console.log("logged in user uid = " + user.uid);
 

@@ -17,7 +17,7 @@ import { setQuizCategory } from './redux/Categories';
 import { db } from "../firebase";
 import {
   doc, onSnapshot, updateDoc, deleteDoc, collection,
-  getDocs, query, where,
+  getDocs, query, where, getDoc
 } from 'firebase/firestore';
 
 
@@ -55,7 +55,12 @@ export default function QuizzesDashboard() {
     const querySnapshotHandler = (querySnapshot) => {
       const quizzes = [];
       querySnapshot.forEach((doc) => {
-        quizzes.push(doc.data());
+
+        const quizWithId = {
+          id: doc.id,
+          ...doc.data()
+        };
+        quizzes.push(quizWithId);
       });
       dispatch(setQuizzesArray(quizzes));
       setListOfQuizzes(quizzes);
@@ -113,23 +118,15 @@ export default function QuizzesDashboard() {
     setSelectedQuiz([]);
   };
 
-  // const handleDeleteConfirm = () => {
-  //   seDeleteModalState(!deleteModalState);
-  //   dispatch(deleteQuiz(idOfQuizToDelete));
-
-  //   reset();
-  //   };
 
   const handleDeleteConfirm = async () => {
     try {
 
-      //first we find the specific category with the id
-      const querySnapshot = await getDocs(query(collection(db, 'quizzes'), where('id', '==', idOfQuizToDelete)));
+      // first we create a document reference to point to the document with the specified id (idOfQuizToDelete) in the 'quizzes' db.
+      const docRef = doc(db, 'quizzes', idOfQuizToDelete);
 
-      //a querySnapshot is a collection, so for each item with the selected id (which should be only 1), we delete the doc.
-      querySnapshot.forEach((doc) => {
-        deleteDoc(doc.ref);
-      });
+      // then we delete the document in question.
+      await deleteDoc(docRef);
 
       // we then close the modal
       seDeleteModalState(!deleteModalState);
@@ -143,25 +140,21 @@ export default function QuizzesDashboard() {
 
 
   const handleFavoriteButtonClick = async (quizId) => {
-    // first we query the database and filter the 'quizzes' collection for any quiz 
-    // with an id field that matches 'quizId'.
-    const quizQuery = query(collection(db, "quizzes"), where("id", "==", quizId));
-    // then we get a snapshot of the corresponding doc
-    const querySnapshot = await getDocs(quizQuery);
+    // Create a reference directly to the specified document using the quizId
+    const quizRef = doc(db, "quizzes", quizId);
 
-    // check if the snapshot exists (is not empty)
-    if (!querySnapshot.empty) {
+    // Then we get the current document
+    const quizDoc = await getDoc(quizRef);
 
-      // a querySnapshot is a collection, so we assign the first (and only) member of the collection to a variable
-      const quizDoc = querySnapshot.docs[0];
-      // we then assign the favorite property of the quizDoc to a variable so we can update it
-      const { Favorite } = quizDoc.data();
+    if (quizDoc.exists()) {
 
-      // Use quizDoc.id as the actual document ID
-      const quizRef = doc(db, "quizzes", quizDoc.id);
+      // We assign the current value of Favorite
+      const currentFavValue = quizDoc.data().Favorite;
 
-      //we then update the document with the id of the quizDoc
-      await updateDoc(quizRef, { Favorite: !Favorite });
+      //we then update the Favorite field with the new value
+      await updateDoc(quizRef, { Favorite: !currentFavValue });
+    } else {
+      console.log("Quiz does not exist");
     }
   };
 
