@@ -49,7 +49,7 @@ export default function PublishModal(props) {
             <Typography id="transition-modal-title" variant="h6" component="h2" >
               Do you want to publish {quizToPublish}?
             </Typography>
-            <Box sx={{pt: 2 }}>
+            <Box sx={{pt: 2, display: 'flex' }}>
               <Button
                 className='button-redButton'
                 onClick={handleConfirmPublishButtonClick}

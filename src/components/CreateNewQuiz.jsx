@@ -259,13 +259,15 @@ export default function CreateNewQuiz() {
             </Button>
           ) : null}
 
+          {value < 2 ? ( 
           <Button
             size="small"
             className="button-mediumBlue"
             onClick={(e) => handleChange(e, value + 1)}
           >
             Next
-          </Button>
+            </Button>
+          ) : null}
         </Box>
 
         {!isMobile ? null :
